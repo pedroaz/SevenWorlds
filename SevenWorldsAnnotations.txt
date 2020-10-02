@@ -1,0 +1,20 @@
+General
+	Avoid linking in inspector
+	Use events
+
+Services
+	Have Static "Object". Should be accessible from anywhere.
+	Do not depend on Scene Game Objects
+
+Managers
+	Should Be called via actions
+	Input Manager -> Certain Manager
+	
+Actions
+	Player perform actions on the world
+	Async
+	
+NetworkData
+	Has Time
+
+
