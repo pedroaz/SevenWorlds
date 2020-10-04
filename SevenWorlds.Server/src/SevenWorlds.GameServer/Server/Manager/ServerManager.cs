@@ -1,9 +1,13 @@
 ﻿using SevenWorlds.GameServer.Utils.Log;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.AspNet.SignalR;
+using Microsoft.Owin.Hosting;
+using Owin;
+using Microsoft.Owin.Cors;
 using System.Threading.Tasks;
+using SevenWorlds.Shared.Network;
+using Microsoft.AspNet.SignalR.Hubs;
+using SevenWorlds.Shared.Data;
 
 namespace SevenWorlds.GameServer.Server.Manager
 {
@@ -19,6 +23,28 @@ namespace SevenWorlds.GameServer.Server.Manager
         public async Task StartServer()
         {
             logService.Log("Starting the Game Server");
+            using (WebApp.Start(NetworkConstants.ServerUrl)) {
+                logService.Log($"Server running on {NetworkConstants.ServerUrl}");
+            }
+        }
+
+        class Startup
+        {
+            public void Configuration(IAppBuilder app)
+            {
+                app.UseCors(CorsOptions.AllowAll);
+                app.MapSignalR();
+            }
+        }
+
+        [HubName(NetworkConstants.MainHubName)]
+        public class MainHub : Hub
+        {
+            public void SendChatMessage(ChatMessageData data)
+            {
+                System.Diagnostics.Debug.WriteLine("Recieved Chat Message Command");
+                Clients.All.OnChatMessage(data);
+            }
         }
     }
 }

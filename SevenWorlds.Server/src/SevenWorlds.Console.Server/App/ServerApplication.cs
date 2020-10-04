@@ -26,8 +26,8 @@ namespace SevenWorlds.Console.Server.App
                 }
             }
 
-            System.Console.WriteLine("\nQ was pressed. Application will exit in 3 seconds");
-            Thread.Sleep(3000);
+            System.Console.WriteLine("\nQ was pressed. Application will exit in 1 seconds");
+            Thread.Sleep(1000);
         }
 
         private static async Task StartServer()
