@@ -16,9 +16,9 @@ namespace SevenWorlds.GameServer.Server.Manager
             this.logService = logService;
         }
 
-        public void StartServer()
+        public async Task StartServer()
         {
-            logService.Log("Starting the server");
+            logService.Log("Starting the Game Server");
         }
     }
 }

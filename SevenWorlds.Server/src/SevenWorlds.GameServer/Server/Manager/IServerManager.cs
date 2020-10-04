@@ -8,6 +8,6 @@ namespace SevenWorlds.GameServer.Server.Manager
 {
     public interface IServerManager
     {
-        void StartServer();
+        Task StartServer();
     }
 }
