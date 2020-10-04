@@ -49,10 +49,5 @@ namespace SevenWorlds.Console.Server.App
 
             Container = builder.Build();
         }
-
-        static void AsyncMain()
-        {
-
-        }
     }
 }

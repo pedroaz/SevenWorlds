@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SevenWorlds.Shared.Network;
 using Microsoft.AspNet.SignalR.Hubs;
 using SevenWorlds.Shared.Data;
+using System.Threading;
 
 namespace SevenWorlds.GameServer.Server.Manager
 {
@@ -22,13 +23,23 @@ namespace SevenWorlds.GameServer.Server.Manager
 
         public async Task StartServer()
         {
-            logService.Log("Starting the Game Server");
-            using (WebApp.Start(NetworkConstants.ServerUrl)) {
-                logService.Log($"Server running on {NetworkConstants.ServerUrl}");
+            try {
+                logService.Log("Starting the Game Server");
+                using (WebApp.Start(NetworkConstants.ServerUrl)) {
+                    logService.Log($"Server running on {NetworkConstants.ServerUrl}");
+                    Thread.Sleep(Timeout.Infinite);
+                }
+
             }
+            catch (Exception e) {
+                logService.Log(e.Message);
+                throw;
+            }
+
+            
         }
 
-        class Startup
+        public class Startup
         {
             public void Configuration(IAppBuilder app)
             {
