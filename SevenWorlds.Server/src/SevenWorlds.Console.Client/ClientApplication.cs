@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.ConsoleClient
 {
-    class Program
+    class ClientApplication
     {
         static void Main(string[] args)
         {

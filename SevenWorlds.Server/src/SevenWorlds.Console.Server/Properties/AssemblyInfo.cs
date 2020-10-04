@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SevenWorlds.GameServer")]
+[assembly: AssemblyTitle("SevenWorlds.Console.Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SevenWorlds.GameServer")]
+[assembly: AssemblyProduct("SevenWorlds.Console.Server")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8d590fbd-f0e4-4572-8cf7-5bdff6832eb5")]
+[assembly: Guid("8e00d0c8-3f69-4b18-b439-870f27f3675e")]
 
 // Version information for an assembly consists of the following four values:
 //
