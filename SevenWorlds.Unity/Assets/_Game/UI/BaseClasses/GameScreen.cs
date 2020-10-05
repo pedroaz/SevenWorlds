@@ -5,7 +5,11 @@ using UnityEngine;
 public enum ScreenId
 {
     Black,
-    Chat
+    Chat,
+    Login,
+    Universe,
+    World,
+    Area
 }
 
 public class GameScreen : MonoBehaviour

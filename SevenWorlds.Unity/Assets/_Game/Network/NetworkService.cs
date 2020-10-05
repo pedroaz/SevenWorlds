@@ -1,5 +1,7 @@
 ﻿using SevenWorlds.GameClient.Client;
 using SevenWorlds.Shared.Data.Chat;
+using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using UnityEngine;
 
@@ -27,7 +29,7 @@ public class NetworkService : MonoBehaviour
     {
         client.SetOnChatMessageHandler(
             (data) => {
-                NetworkEvents.FireChatMessageRecievedEvent(new ChatMessageRecievedArgs() {
+                NetworkEvents.FireChatMessageRecievedEvent(new NetworkArgs<ChatMessageData>() {
                     Data = data
                 });
             }
@@ -35,7 +37,15 @@ public class NetworkService : MonoBehaviour
 
         client.SetOnPingHandler(
             (data) => {
-                NetworkEvents.FirePingRecievedEvent(new PingRecievedArgs() {
+                NetworkEvents.FirePingRecievedEvent(new NetworkArgs<PingData>() {
+                    Data = data
+                });
+            }
+        );
+
+        client.SetOnAreaSync(
+            (data) => {
+                NetworkEvents.FireAreaSyncEvent(new NetworkArgs<AreaSyncData>() {
                     Data = data
                 });
             }

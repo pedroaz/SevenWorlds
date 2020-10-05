@@ -1,0 +1,1 @@
+start "Client 1" "..\src\SevenWorlds.Console.Client\bin\Debug\SevenWorlds.ConsoleClient.exe"

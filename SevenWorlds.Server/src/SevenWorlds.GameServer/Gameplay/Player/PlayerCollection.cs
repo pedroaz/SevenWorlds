@@ -46,7 +46,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             players.RemoveAll(x => x.Id == id);
         }
 
-        public List<PlayerData> GetAllPlayersFromArea(string areaId)
+        public List<PlayerData> FindAllPlayersByArea(string areaId)
         {
             return players.Where(x => x.AreaId == areaId).ToList();
         }

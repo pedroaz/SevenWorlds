@@ -1,0 +1,1 @@
+start "GameServer" "..\src\SevenWorlds.Console.Server\bin\Debug\SevenWorlds.Console.Server.exe"

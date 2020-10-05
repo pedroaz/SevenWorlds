@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using SevenWorlds.Shared.Data.Chat;
+using TMPro;
 using UnityEngine;
 
 public class ChatManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class ChatManager : MonoBehaviour
         NetworkEvents.OnChatMessageRecieved -= AddMessageToArea;
     }
 
-    public void AddMessageToArea(object sender, ChatMessageRecievedArgs args)
+    public void AddMessageToArea(object sender, NetworkArgs<ChatMessageData> args)
     {
         if (args.Data == null) return;
         ChatArea.AppendTextToNewLine(args.Data.Message);

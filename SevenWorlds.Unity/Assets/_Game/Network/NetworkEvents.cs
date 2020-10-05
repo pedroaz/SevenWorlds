@@ -1,32 +1,36 @@
 ﻿using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Sync;
 using System;
 
 public static class NetworkEvents
 {
-    public delegate void ChatMessageEventHandle(object sender, ChatMessageRecievedArgs e);
+    public delegate void ChatMessageEventHandle(object sender, NetworkArgs<ChatMessageData> e);
     public static event ChatMessageEventHandle OnChatMessageRecieved = delegate { };
-
-    public static void FireChatMessageRecievedEvent(ChatMessageRecievedArgs args)
+    public static void FireChatMessageRecievedEvent(NetworkArgs<ChatMessageData> args)
     {
         OnChatMessageRecieved(null, args);
     }
 
-    public delegate void PingEventHandle(object sender, PingRecievedArgs e);
+    public delegate void PingEventHandle(object sender, NetworkArgs<PingData> e);
     public static event PingEventHandle OnPingRecieved = delegate { };
-
-    public static void FirePingRecievedEvent(PingRecievedArgs args)
+    public static void FirePingRecievedEvent(NetworkArgs<PingData> args)
     {
         OnPingRecieved(null, args);
     }
+
+    public delegate void AreaSyncEventHandle(object sender, NetworkArgs<AreaSyncData> e);
+    public static event AreaSyncEventHandle OnAreaSyncRecieved = delegate { };
+    public static void FireAreaSyncEvent(NetworkArgs<AreaSyncData> args)
+    {
+        OnAreaSyncRecieved(null, args);
+    }
+
+
 }
 
-public class ChatMessageRecievedArgs : EventArgs
+public class NetworkArgs<T> : EventArgs
 {
-    public ChatMessageData Data;
+    public T Data;
 }
 
-public class PingRecievedArgs : EventArgs
-{
-    public PingData Data;
-}

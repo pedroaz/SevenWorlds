@@ -76,8 +76,8 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         {
             hubService.AreaSync(new AreaSyncData() {
                 Area = area,
-                Players = playerCollection.GetAllPlayersFromArea(area.Id),
-                Sections = sectionCollection.GetSectionsFromArea(area.Id)
+                Players = playerCollection.FindAllPlayersByArea(area.Id),
+                Sections = sectionCollection.FindAllSectionsByArea(area.Id)
             });
         }
     }

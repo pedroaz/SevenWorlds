@@ -10,6 +10,6 @@ namespace SevenWorlds.GameServer.Gameplay.Section
 {
     public interface ISectionCollection : IDataCollection<SectionData>
     {
-        List<SectionData> GetSectionsFromArea(string areaId);
+        List<SectionData> FindAllSectionsByArea(string areaId);
     }
 }

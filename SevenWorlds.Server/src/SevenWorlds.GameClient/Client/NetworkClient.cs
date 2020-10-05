@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Threading.Tasks;
@@ -36,6 +37,13 @@ namespace SevenWorlds.GameClient.Client
         public void SetOnPingHandler(Action<PingData> action)
         {
             hubProxy.On<PingData>(NetworkConstants.Event_OnPing, (data) => {
+                action(data);
+            });
+        }
+
+        public void SetOnAreaSync(Action<AreaSyncData> action)
+        {
+            hubProxy.On<AreaSyncData>(NetworkConstants.Event_OnAreaSync, (data) => {
                 action(data);
             });
         }

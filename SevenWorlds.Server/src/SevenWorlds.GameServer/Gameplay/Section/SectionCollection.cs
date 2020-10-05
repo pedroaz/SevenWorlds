@@ -39,7 +39,7 @@ namespace SevenWorlds.GameServer.Gameplay.Section
             return sections;
         }
 
-        public List<SectionData> GetSectionsFromArea(string areaId)
+        public List<SectionData> FindAllSectionsByArea(string areaId)
         {
             return sections.Where(x => x.AreaId == areaId).ToList();
         }
