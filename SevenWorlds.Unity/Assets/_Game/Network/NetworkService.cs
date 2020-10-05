@@ -3,6 +3,8 @@ using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class NetworkService : MonoBehaviour
@@ -18,11 +20,20 @@ public class NetworkService : MonoBehaviour
         client = new NetworkClient();
     }
 
-    // Start is called before the first frame update
-    async void Start()
+    public async Task<bool> ConnectToServer()
     {
-        await client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
-        SetEventHandlers();
+        try {
+            await client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
+            SetEventHandlers();
+            return true;
+        }
+        catch (Exception e) {
+
+            print("Wasn't able to connect to server because: ");
+            print(e.Message);
+            return false;
+        }
+        
     }
 
     private void SetEventHandlers()
@@ -60,5 +71,10 @@ public class NetworkService : MonoBehaviour
     public void SendChatMessage(ChatMessageData data)
     {
         client.SendChatMessage(data);
+    }
+
+    public async Task<UniverseSyncData> RequestUniverseSyncData()
+    {
+        return await client.RequestUniverseSync();
     }
 }

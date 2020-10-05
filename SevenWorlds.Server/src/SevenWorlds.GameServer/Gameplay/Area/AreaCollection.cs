@@ -34,6 +34,11 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas;
         }
 
+        public List<AreaData> GetAllAreasFromWorld(string worldId)
+        {
+            return areas.Where(x => x.WorldId == worldId).ToList();
+        }
+
         public void Remove(string id)
         {
             areas.RemoveAll(x => x.Id == id);

@@ -62,6 +62,21 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<bool>(NetworkConstants.Command_Login, data);
         }
 
+        public async Task<UniverseSyncData> RequestUniverseSync()
+        {
+            return await hubProxy.Invoke<UniverseSyncData>(NetworkConstants.Command_RequestUniverseSync);
+        }
+
+        public async Task<WorldSyncData> RequestWorldSync(string worldId)
+        {
+            return await hubProxy.Invoke<WorldSyncData>(NetworkConstants.Command_RequestWorldSync, worldId);
+        }
+
+        public async Task<AreaSyncData> RequestAreaSync(string areaId)
+        {
+            return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Command_RequestAreaSync, areaId);
+        }
+
         #endregion
     }
 }

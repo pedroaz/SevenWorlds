@@ -10,5 +10,6 @@ namespace SevenWorlds.GameServer.Gameplay.World
 {
     public interface IWorldCollection : IDataCollection<WorldData>
     {
+        List<WorldData> GetDefaultWorlds();
     }
 }

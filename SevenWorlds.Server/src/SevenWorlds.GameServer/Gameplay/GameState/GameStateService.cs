@@ -7,11 +7,6 @@ using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.GameState
 {
@@ -69,16 +64,32 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
                 hubService.RemovePlayerFromAreaGroup(player, area);
             }
             hubService.AddPlayerToAreaGroup(player, area);
-            AreaSync(area);
+            hubService.AreaSync(GetAreaSyncData(areaId));
         }
 
-        private void AreaSync(AreaData area)
+        public AreaSyncData GetAreaSyncData(string areaId)
         {
-            hubService.AreaSync(new AreaSyncData() {
-                Area = area,
-                Players = playerCollection.FindAllPlayersByArea(area.Id),
-                Sections = sectionCollection.FindAllSectionsByArea(area.Id)
-            });
+            return new AreaSyncData() {
+                Area = areaCollection.FindById(areaId),
+                Players = playerCollection.FindAllPlayersByArea(areaId),
+                Sections = sectionCollection.FindAllSectionsByArea(areaId)
+            };
+        }
+
+        public UniverseSyncData GetUniverseSyncData()
+        {
+            return new UniverseSyncData() {
+                Universe = universeCollection.GetDefaultUniverse(),
+                Worlds = worldCollection.GetDefaultWorlds()
+            };
+        }
+
+        public WorldSyncData GetWorldSyncData(string worldId)
+        {
+            return new WorldSyncData() {
+                World = worldCollection.FindById(worldId),
+                Areas = areaCollection.GetAllAreasFromWorld(worldId)
+            };
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
@@ -38,6 +39,11 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         public IEnumerable<UniverseData> GetAll()
         {
             return universes;
+        }
+
+        public UniverseData GetDefaultUniverse()
+        {
+            return universes.FirstOrDefault();
         }
     }
 }

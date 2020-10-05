@@ -2,8 +2,15 @@
 
 public class GameInitializer : MonoBehaviour
 {
-    void Start()
+    async void Start()
     {
-        ScreenChangerService.Object.ChangeScreen(ScreenId.Chat);
+        ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
+
+        var connected = await NetworkService.Object.ConnectToServer();
+
+        if (connected) {
+            var result = await NetworkService.Object.RequestUniverseSyncData();
+            print(result.Universe.Id);
+        }
     }
 }

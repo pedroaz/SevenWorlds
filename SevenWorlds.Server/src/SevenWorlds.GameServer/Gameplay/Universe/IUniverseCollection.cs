@@ -10,6 +10,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 {
     public interface IUniverseCollection : IDataCollection<UniverseData>
     {
-
+        UniverseData GetDefaultUniverse();
     }
 }

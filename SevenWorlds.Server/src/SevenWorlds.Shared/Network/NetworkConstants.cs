@@ -14,6 +14,9 @@ namespace SevenWorlds.Shared.Network
         // Commands - Clients call those commands on the server
         public const string Command_SendChatMessage = "SendChatMessage";
         public const string Command_Login = "Login";
+        public const string Command_RequestUniverseSync = "RequestUniverseSync";
+        public const string Command_RequestWorldSync = "RequestWorldSync";
+        public const string Command_RequestAreaSync = "RequestAreaSync";
 
         // Servers broadcast to clients
         public const string Event_OnChatMessage = "OnChatMessage";
