@@ -7,9 +7,6 @@ using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Server.Manager;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +26,6 @@ namespace SevenWorlds.Console.Server.App
                 System.Console.WriteLine(e.Message);
                 throw;
             }
-
         }
 
         private static void Start()
@@ -61,8 +57,6 @@ namespace SevenWorlds.Console.Server.App
                 System.Console.WriteLine(e.Message);
                 throw;
             }
-
-            
         }
 
         private static void SetupDependencies()

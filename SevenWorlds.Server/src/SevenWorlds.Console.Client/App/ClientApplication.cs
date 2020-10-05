@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.GameClient.Client;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Network;
+using System;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.ConsoleClient.App
@@ -20,6 +21,10 @@ namespace SevenWorlds.ConsoleClient.App
                 PlayerName = "Console",
                 Message = "Hi From the Console!"
             });
+            client.SetOnPingHandler((x) => {
+                Console.WriteLine("PING");
+            });
+            Console.ReadKey();
         }
     }
 }

@@ -33,5 +33,10 @@ namespace SevenWorlds.GameServer.Gameplay.Section
         {
             sections.RemoveAll(x => x.Id == id);
         }
+
+        public IEnumerable<SectionData> GetAll()
+        {
+            return sections;
+        }
     }
 }

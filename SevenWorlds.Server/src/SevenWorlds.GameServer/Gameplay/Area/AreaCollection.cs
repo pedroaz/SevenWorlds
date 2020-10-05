@@ -29,6 +29,11 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas.Find(x => x.Id == id);
         }
 
+        public IEnumerable<AreaData> GetAll()
+        {
+            return areas;
+        }
+
         public void Remove(int id)
         {
             areas.RemoveAll(x => x.Id == id);

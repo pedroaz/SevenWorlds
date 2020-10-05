@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.Owin.Cors;
-using Microsoft.Owin.Hosting;
-using Owin;
+﻿using Microsoft.Owin.Hosting;
 using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Threading.Tasks;
@@ -40,25 +35,6 @@ namespace SevenWorlds.GameServer.Server.Manager
             catch (Exception e) {
                 logService.Log(e.Message);
                 throw;
-            }
-        }
-
-        public class Startup
-        {
-            public void Configuration(IAppBuilder app)
-            {
-                app.UseCors(CorsOptions.AllowAll);
-                app.MapSignalR();
-            }
-        }
-
-        [HubName(NetworkConstants.MainHubName)]
-        public class MainHub : Hub
-        {
-            public void SendChatMessage(ChatMessageData data)
-            {
-                System.Diagnostics.Debug.WriteLine("Recieved Chat Message Command");
-                Clients.All.OnChatMessage(data);
             }
         }
     }

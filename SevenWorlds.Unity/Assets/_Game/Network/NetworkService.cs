@@ -1,5 +1,5 @@
 ﻿using SevenWorlds.GameClient.Client;
-using SevenWorlds.Shared.Data;
+using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Network;
 using UnityEngine;
 
@@ -28,6 +28,14 @@ public class NetworkService : MonoBehaviour
         client.SetOnChatMessageHandler(
             (data) => {
                 NetworkEvents.FireChatMessageRecievedEvent(new ChatMessageRecievedArgs() {
+                    Data = data
+                });
+            }
+        );
+
+        client.SetOnPingHandler(
+            (data) => {
+                NetworkEvents.FirePingRecievedEvent(new PingRecievedArgs() {
                     Data = data
                 });
             }

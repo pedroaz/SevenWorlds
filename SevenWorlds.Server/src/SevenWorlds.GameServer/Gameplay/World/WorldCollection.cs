@@ -33,5 +33,10 @@ namespace SevenWorlds.GameServer.Gameplay.World
         {
             worlds.RemoveAll(x => x.Id == id);
         }
+
+        public IEnumerable<WorldData> GetAll()
+        {
+            return worlds;
+        }
     }
 }

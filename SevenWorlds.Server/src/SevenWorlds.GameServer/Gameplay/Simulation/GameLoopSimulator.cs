@@ -1,5 +1,8 @@
-﻿using SevenWorlds.GameServer.Gameplay.Section;
+﻿using Microsoft.AspNet.SignalR;
+using SevenWorlds.GameServer.Gameplay.Section;
+using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Connection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +16,12 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
     {
         private ISectionCollection sectionCollection { get; }
         private ILogService logService { get; }
+        private IHubContext hubContext { get; }
 
         public GameLoopSimulator(ISectionCollection sectionCollection, ILogService logService)
         {
+            hubContext = GlobalHost.ConnectionManager.GetHubContext<MainHub>();
+
             this.sectionCollection = sectionCollection;
             this.logService = logService;
         }
@@ -24,8 +30,14 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         {
             while (true) {
                 logService.Log("Server Simulation Tick");
+                PingAllClients();
                 Thread.Sleep(1000);
             }
+        }
+
+        private void PingAllClients()
+        {
+            hubContext.Clients.All.OnPing(new PingData());
         }
     }
 }

@@ -34,5 +34,10 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         {
             logService.Log("Setting up universes with fake data");
         }
+
+        public IEnumerable<UniverseData> GetAll()
+        {
+            return universes;
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace SevenWorlds.Shared.Network
 
         // Servers broadcast to clients
         public const string Event_OnChatMessage = "OnChatMessage";
+        public const string Event_OnPing = "OnPing";
     }
 }

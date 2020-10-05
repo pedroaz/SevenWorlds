@@ -1,7 +1,4 @@
-﻿using SevenWorlds.Shared.Data;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SevenWorlds.Shared.Data.Chat;
 
 public class SendButton : GameButton
 {
@@ -14,7 +11,7 @@ public class SendButton : GameButton
 
     public override void OnClick()
     {
-        NetworkService.Object.SendChatMessage(new ChatMessageData(){
+        NetworkService.Object.SendChatMessage(new ChatMessageData() {
             PlayerName = "Unity Client",
             Message = chatManager.InputField.text
         });
