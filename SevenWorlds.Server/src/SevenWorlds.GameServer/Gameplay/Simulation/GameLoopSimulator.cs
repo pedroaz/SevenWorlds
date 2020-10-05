@@ -37,7 +37,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private void PingAllClients()
         {
-            hubContext.Clients.All.OnPing(new PingData());
+            var clients = hubContext.Clients.All.OnPing(new PingData());
         }
     }
 }
