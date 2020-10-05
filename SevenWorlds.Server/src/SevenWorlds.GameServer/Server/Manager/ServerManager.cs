@@ -1,24 +1,29 @@
-﻿using SevenWorlds.GameServer.Utils.Log;
-using System;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Hosting;
 using Owin;
-using Microsoft.Owin.Cors;
-using System.Threading.Tasks;
+using SevenWorlds.GameServer.Gameplay.Simulation;
+using SevenWorlds.GameServer.Gameplay.Universe;
+using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Network;
-using Microsoft.AspNet.SignalR.Hubs;
-using SevenWorlds.Shared.Data;
-using System.Threading;
+using System;
+using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Server.Manager
 {
     public class ServerManager : IServerManager
     {
         private ILogService logService { get; }
+        private IUniverseFactory universeFactory { get; }
+        private IGameLoopSimulator gameLoopSimulator { get; }
 
-        public ServerManager(ILogService logService)
+        public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, IUniverseFactory universeFactory)
         {
             this.logService = logService;
+            this.universeFactory = universeFactory;
+            this.gameLoopSimulator = gameLoopSimulator;
         }
 
         public async Task StartServer()
@@ -27,7 +32,8 @@ namespace SevenWorlds.GameServer.Server.Manager
                 logService.Log("Starting the Game Server");
                 using (WebApp.Start(NetworkConstants.ServerUrl)) {
                     logService.Log($"Server running on {NetworkConstants.ServerUrl}");
-                    Thread.Sleep(Timeout.Infinite);
+                    universeFactory.SetupFakeUniverses();
+                    gameLoopSimulator.StartSimulation();
                 }
 
             }
@@ -35,8 +41,6 @@ namespace SevenWorlds.GameServer.Server.Manager
                 logService.Log(e.Message);
                 throw;
             }
-
-            
         }
 
         public class Startup

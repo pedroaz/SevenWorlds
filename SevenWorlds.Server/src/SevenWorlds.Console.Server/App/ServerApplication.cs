@@ -1,4 +1,9 @@
 ﻿using Autofac;
+using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Section;
+using SevenWorlds.GameServer.Gameplay.Simulation;
+using SevenWorlds.GameServer.Gameplay.Universe;
+using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Server.Manager;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
@@ -16,12 +21,25 @@ namespace SevenWorlds.Console.Server.App
 
         static void Main(string[] args)
         {
+            try {
+                Start();
+            }
+            catch (Exception e) {
+
+                System.Console.WriteLine(e.Message);
+                throw;
+            }
+
+        }
+
+        private static void Start()
+        {
             System.Console.WriteLine("Starting the Server via Console");
             SetupDependencies();
             Task.Run(StartServer);
             while (true) {
                 var exitKey = System.Console.ReadKey();
-                if(exitKey.Key == ConsoleKey.Q) {
+                if (exitKey.Key == ConsoleKey.Q) {
                     break;
                 }
             }
@@ -32,20 +50,33 @@ namespace SevenWorlds.Console.Server.App
 
         private static async Task StartServer()
         {
-            using (var scope = Container.BeginLifetimeScope()) {
-                var serverManager = scope.Resolve<IServerManager>();
-                await serverManager.StartServer();
+            try {
+                using (var scope = Container.BeginLifetimeScope()) {
+                    var serverManager = scope.Resolve<IServerManager>();
+                    await serverManager.StartServer();
+                }
             }
+            catch (Exception e) {
+
+                System.Console.WriteLine(e.Message);
+                throw;
+            }
+
+            
         }
 
         private static void SetupDependencies()
         {
             var builder = new ContainerBuilder();
 
-            // Usually you're only interested in exposing the type
-            // via its interface:
             builder.RegisterType<ServerManager>().As<IServerManager>();
             builder.RegisterType<LogService>().As<ILogService>();
+            builder.RegisterType<UniverseCollection>().As<IUniverseCollection>();
+            builder.RegisterType<UniverseFactory>().As<IUniverseFactory>();
+            builder.RegisterType<WorldCollection>().As<IWorldCollection>();
+            builder.RegisterType<SectionCollection>().As<ISectionCollection>();
+            builder.RegisterType<AreaCollection>().As<IAreaCollection>();
+            builder.RegisterType<GameLoopSimulator>().As<IGameLoopSimulator>();
 
             Container = builder.Build();
         }

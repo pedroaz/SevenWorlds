@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.Shared.Data
+namespace SevenWorlds.GameServer.Gameplay.Simulation
 {
-    public class NetworkData
+    public interface IGameLoopSimulator
     {
-        public DateTime Time { get; set; } = DateTime.Now;
+        void StartSimulation();
     }
 }
