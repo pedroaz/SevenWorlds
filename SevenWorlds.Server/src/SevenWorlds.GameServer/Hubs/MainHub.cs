@@ -24,7 +24,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void SendChatMessage(ChatMessageData data)
         {
-            System.Diagnostics.Debug.WriteLine("Recieved Chat Message Command");
+            logService.Log("Recieved Chat Message Command");
             Clients.All.OnChatMessage(data);
         }
     }

@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Autofac.Integration.SignalR;
+using Microsoft.AspNet.SignalR;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Simulation;
@@ -7,6 +9,8 @@ using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Server.Manager;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +18,7 @@ namespace SevenWorlds.Console.Server.App
 {
     class ServerApplication
     {
-        private static IContainer Container { get; set; }
+        private static IContainer container { get; set; }
 
         static void Main(string[] args)
         {
@@ -47,7 +51,7 @@ namespace SevenWorlds.Console.Server.App
         private static async Task StartServer()
         {
             try {
-                using (var scope = Container.BeginLifetimeScope()) {
+                using (var scope = container.BeginLifetimeScope()) {
                     var serverManager = scope.Resolve<IServerManager>();
                     await serverManager.StartServer();
                 }
@@ -63,6 +67,9 @@ namespace SevenWorlds.Console.Server.App
         {
             var builder = new ContainerBuilder();
 
+            var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("GameServer")).FirstOrDefault();
+            builder.RegisterHubs(assembly);
+
             builder.RegisterType<ServerManager>().As<IServerManager>();
             builder.RegisterType<LogService>().As<ILogService>();
             builder.RegisterType<UniverseCollection>().As<IUniverseCollection>();
@@ -72,7 +79,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<AreaCollection>().As<IAreaCollection>();
             builder.RegisterType<GameLoopSimulator>().As<IGameLoopSimulator>();
 
-            Container = builder.Build();
+            container = builder.Build();
+            GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);
         }
     }
 }
