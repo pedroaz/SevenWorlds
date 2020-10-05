@@ -11,6 +11,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public string Name { get; set; }
         public SectionTypes SectionType { get; set; }
-        public int AreaId { get; set; }
+        public string AreaId { get; set; }
     }
 }

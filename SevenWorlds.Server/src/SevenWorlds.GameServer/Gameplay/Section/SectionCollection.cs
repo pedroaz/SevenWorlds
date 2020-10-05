@@ -24,12 +24,12 @@ namespace SevenWorlds.GameServer.Gameplay.Section
             sections.Add(data);
         }
 
-        public SectionData FindById(int id)
+        public SectionData FindById(string id)
         {
             return sections.Find(x => x.Id == id);
         }
 
-        public void Remove(int id)
+        public void Remove(string id)
         {
             sections.RemoveAll(x => x.Id == id);
         }
@@ -37,6 +37,11 @@ namespace SevenWorlds.GameServer.Gameplay.Section
         public IEnumerable<SectionData> GetAll()
         {
             return sections;
+        }
+
+        public List<SectionData> GetSectionsFromArea(string areaId)
+        {
+            return sections.Where(x => x.AreaId == areaId).ToList();
         }
     }
 }

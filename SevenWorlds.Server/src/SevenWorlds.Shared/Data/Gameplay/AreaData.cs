@@ -11,6 +11,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public string Name { get; set; }
         public WorldPosition Position { get; set; }
-        public int WorldId { get; set; }
+        public string WorldId { get; set; }
     }
 }

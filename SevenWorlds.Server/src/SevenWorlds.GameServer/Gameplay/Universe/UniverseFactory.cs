@@ -32,33 +32,34 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public void SetupFakeUniverses()
         {
-            universeCollection.Add(new UniverseData(){ 
-                Id = 0,
+            var universe = new UniverseData() {
                 Name = "First Universe"
-            });
+            };
 
-            worldCollection.Add(new WorldData(){ 
-                Id = 0,
+            var world = new WorldData() {
                 Name = "First World",
-                UniverseId = 0
-            });
+                UniverseId = universe.Id
+            };
 
-            areaCollection.Add(new AreaData() {
-                Id = 0,
+            var area = new AreaData() {
                 Name = "First Area",
                 Position = new WorldPosition() {
                     X = 0,
                     Y = 0
                 },
-                WorldId = 0
-            });
+                WorldId = world.Id
+            };
 
-            sectionCollection.Add(new SectionData(){
-                Id = 0,
+            var section = new SectionData() {
                 Name = "Poring Camp",
-                AreaId = 0,
+                AreaId = area.Id,
                 SectionType = SectionTypes.MonsterCamp
-            });
+            };
+
+            universeCollection.Add(universe);
+            worldCollection.Add(world);
+            areaCollection.Add(area);
+            sectionCollection.Add(section);
         }
     }
 }

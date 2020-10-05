@@ -2,15 +2,17 @@
 using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
+using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Server.Manager;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -70,14 +72,17 @@ namespace SevenWorlds.Console.Server.App
             var assembly = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("GameServer")).FirstOrDefault();
             builder.RegisterHubs(assembly);
 
-            builder.RegisterType<ServerManager>().As<IServerManager>();
-            builder.RegisterType<LogService>().As<ILogService>();
-            builder.RegisterType<UniverseCollection>().As<IUniverseCollection>();
-            builder.RegisterType<UniverseFactory>().As<IUniverseFactory>();
-            builder.RegisterType<WorldCollection>().As<IWorldCollection>();
-            builder.RegisterType<SectionCollection>().As<ISectionCollection>();
-            builder.RegisterType<AreaCollection>().As<IAreaCollection>();
-            builder.RegisterType<GameLoopSimulator>().As<IGameLoopSimulator>();
+            builder.RegisterType<ServerManager>().As<IServerManager>().SingleInstance();
+            builder.RegisterType<LogService>().As<ILogService>().SingleInstance();
+            builder.RegisterType<UniverseCollection>().As<IUniverseCollection>().SingleInstance();
+            builder.RegisterType<UniverseFactory>().As<IUniverseFactory>().SingleInstance();
+            builder.RegisterType<WorldCollection>().As<IWorldCollection>().SingleInstance();
+            builder.RegisterType<SectionCollection>().As<ISectionCollection>().SingleInstance();
+            builder.RegisterType<AreaCollection>().As<IAreaCollection>().SingleInstance();
+            builder.RegisterType<GameLoopSimulator>().As<IGameLoopSimulator>().SingleInstance();
+            builder.RegisterType<PlayerCollection>().As<IPlayerCollection>().SingleInstance();
+            builder.RegisterType<HubService>().As<IHubService>().SingleInstance();
+            builder.RegisterType<GameStateService>().As<IGameStateService>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

@@ -9,8 +9,8 @@ namespace SevenWorlds.GameServer.Utils.DataCollections
     public interface IDataCollection<T>
     {
         void Add(T data);
-        T FindById(int id);
-        void Remove(int id);
+        T FindById(string id);
+        void Remove(string id);
         IEnumerable<T> GetAll();
     }
 }

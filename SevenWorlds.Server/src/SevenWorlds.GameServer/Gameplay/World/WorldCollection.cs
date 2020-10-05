@@ -24,12 +24,12 @@ namespace SevenWorlds.GameServer.Gameplay.World
             worlds.Add(data);
         }
 
-        public WorldData FindById(int id)
+        public WorldData FindById(string id)
         {
             return worlds.Find(x => x.Id == id);
         }
 
-        public void Remove(int id)
+        public void Remove(string id)
         {
             worlds.RemoveAll(x => x.Id == id);
         }

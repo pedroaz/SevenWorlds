@@ -24,7 +24,7 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             areas.Add(data);
         }
 
-        public AreaData FindById(int id)
+        public AreaData FindById(string id)
         {
             return areas.Find(x => x.Id == id);
         }
@@ -34,7 +34,7 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas;
         }
 
-        public void Remove(int id)
+        public void Remove(string id)
         {
             areas.RemoveAll(x => x.Id == id);
         }

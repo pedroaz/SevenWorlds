@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.Shared.Data.Base
+namespace SevenWorlds.Shared.Data.Connection
 {
-    public class BaseData
+    public class LoginData
     {
-        public readonly string Id = Guid.NewGuid().ToString();
+        public string PlayerName { get; set; }
     }
 }

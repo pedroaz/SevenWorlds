@@ -49,6 +49,11 @@ namespace SevenWorlds.GameClient.Client
             hubProxy.Invoke(NetworkConstants.Command_SendChatMessage, data).Wait();
         }
 
+        public async Task<bool> Login(LoginData data)
+        {
+            return await hubProxy.Invoke<bool>(NetworkConstants.Command_Login, data);
+        }
+
         #endregion
     }
 }

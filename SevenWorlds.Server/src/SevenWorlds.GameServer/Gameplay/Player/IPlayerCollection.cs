@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Section
+namespace SevenWorlds.GameServer.Gameplay.Player
 {
-    public interface ISectionCollection : IDataCollection<SectionData>
+    public interface IPlayerCollection : IDataCollection<PlayerData>
     {
-        List<SectionData> GetSectionsFromArea(string areaId);
+        PlayerData FindByName(string name);
+        List<PlayerData> GetAllPlayersFromArea(string areaId);
     }
 }
