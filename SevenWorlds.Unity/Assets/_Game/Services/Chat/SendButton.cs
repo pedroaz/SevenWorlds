@@ -2,11 +2,11 @@
 
 public class SendButton : GameButton
 {
-    public ChatManager chatManager;
+    public ChatService chatManager;
 
     public override void AfterAwake()
     {
-        chatManager = FindObjectOfType<ChatManager>();
+        chatManager = FindObjectOfType<ChatService>();
     }
 
     public override void OnClick()

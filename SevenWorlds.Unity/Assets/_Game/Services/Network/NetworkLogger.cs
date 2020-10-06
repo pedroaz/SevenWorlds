@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class NetworkLogger : MonoBehaviour
 {
+    public bool logPing;
+
     private void Awake()
     {
         NetworkEvents.OnChatMessageRecieved += LogChatMessage;
@@ -30,6 +32,7 @@ public class NetworkLogger : MonoBehaviour
 
     public void LogPing(object sender, NetworkArgs<PingData> args)
     {
+        if (!logPing) return;
         print("Ping Recieved");
     }
 

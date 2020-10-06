@@ -2,13 +2,14 @@
 using TMPro;
 using UnityEngine;
 
-public class ChatManager : MonoBehaviour
+public class ChatService : GameService<ChatService>
 {
     public TMP_InputField InputField;
     public GameText ChatArea;
 
     private void Awake()
     {
+        Object = this;
         NetworkEvents.OnChatMessageRecieved += AddMessageToArea;
     }
 

@@ -7,11 +7,8 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class NetworkService : MonoBehaviour
+public class NetworkService : GameService<NetworkService>
 {
-    [HideInInspector]
-    public static NetworkService Object;
-
     private NetworkClient client;
 
     public void Awake()
@@ -76,5 +73,10 @@ public class NetworkService : MonoBehaviour
     public async Task<UniverseSyncData> RequestUniverseSyncData()
     {
         return await client.RequestUniverseSync();
+    }
+
+    public async Task Login(LoginData data)
+    {
+        await client.Login(data);
     }
 }

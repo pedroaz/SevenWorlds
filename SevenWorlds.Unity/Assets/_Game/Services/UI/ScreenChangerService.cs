@@ -2,10 +2,8 @@
 using System.Linq;
 using UnityEngine;
 
-public class ScreenChangerService : MonoBehaviour
+public class ScreenChangerService : GameService<ScreenChangerService>
 {
-    [HideInInspector]
-    public static ScreenChangerService Object;
     private List<GameScreen> screens;
 
     [HideInInspector]
