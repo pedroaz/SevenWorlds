@@ -12,7 +12,7 @@ public class GeneralRefresherService : GameService<GeneralRefresherService>
 
     public void Refresh()
     {
-        UIFinderService.Object.FindText(GameTextId.PlayerName).ForEach(x => x.SetText(GameState.Object.PlayerData.Name));
-        UIFinderService.Object.FindText(GameTextId.UniverseName).ForEach(x => x.SetText(GameState.Object.Universe.Name));
+        UIEvents.ChangeGameText(GameTextId.PlayerName, GameState.Object.PlayerData.Name);
+        UIEvents.ChangeGameText(GameTextId.UniverseName, GameState.Object.Universe.Name);
     }
 }
