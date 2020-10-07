@@ -33,5 +33,10 @@ namespace SevenWorlds.GameServer.Hubs
         {
             hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
         }
+
+        public void ReturnActionStatusToPlayer(string playerId, PlayerActionStatusData data)
+        {
+
+        }
     }
 }

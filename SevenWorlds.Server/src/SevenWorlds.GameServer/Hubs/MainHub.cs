@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 
@@ -14,13 +17,16 @@ namespace SevenWorlds.GameServer.Hubs
     {
         private readonly ILogService logService;
         private readonly IGameStateService gameStateService;
+        private readonly IPlayerActionQueue playerActionQueue;
 
         public MainHub(
             ILogService logService,
-            IGameStateService gameStateService)
+            IGameStateService gameStateService,
+            IPlayerActionQueue playerActionQueue)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
+            this.playerActionQueue = playerActionQueue;
         }
 
         public bool Login(LoginData data)
@@ -38,6 +44,11 @@ namespace SevenWorlds.GameServer.Hubs
         {
             logService.Log("Recieved Chat Message Command");
             Clients.All.OnChatMessage(data);
+        }
+
+        public PlayerActionStatusData DoPlayerAction(PlayerActionData playerActionData)
+        {
+            return playerActionQueue.AddToQueue(playerActionData);
         }
 
         public UniverseSyncData RequestUniverseSync()

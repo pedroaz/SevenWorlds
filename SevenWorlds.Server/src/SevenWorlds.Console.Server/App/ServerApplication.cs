@@ -83,6 +83,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<PlayerCollection>().As<IPlayerCollection>().SingleInstance();
             builder.RegisterType<HubService>().As<IHubService>().SingleInstance();
             builder.RegisterType<GameStateService>().As<IGameStateService>().SingleInstance();
+            builder.RegisterType<PlayerActionQueue>().As<IPlayerActionQueue>().SingleInstance();
+            builder.RegisterType<PlayerActionFactory>().As<IPlayerActionFactory>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);
