@@ -9,12 +9,10 @@ public class GameButton : MonoBehaviour
 {
     
     private Button button;
-    private TextMeshProUGUI textMeshPro;
 
     private void Awake()
     {
         button = GetComponentInChildren<Button>();
-        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
             _ = OnClick();

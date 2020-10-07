@@ -5,33 +5,32 @@ using UnityEngine;
 public class UIFinderService : GameService<UIFinderService>
 {
 
-    private Dictionary<GameTextId, GameText> gameTextDict = new Dictionary<GameTextId, GameText>();
+    private List<GameText> gameTextDict = new List<GameText>();
 
     private void Awake()
     {
         Object = this;
-        foreach (var gameText in FindObjectsOfType<GameText>()) {
+        GetAllGameTexts();
+    }
 
-            if(gameText.Id != GameTextId.None) {
-                gameTextDict.Add(gameText.Id, gameText);
+    private void GetAllGameTexts()
+    {
+        foreach (var gameText in Resources.FindObjectsOfTypeAll<GameText>()) {
+
+            if (gameText.Id != GameTextId.None) {
+                gameTextDict.Add(gameText);
             }
         }
     }
 
-    public GameText FindText(GameTextId id)
+    public List<GameText> FindText(GameTextId id)
     {
-        return gameTextDict[id];
+        return gameTextDict.FindAll(x => x.Id == id);
     }
 
-    public GameText SearchText(GameTextId id)
+    public List<GameText> SearchText(GameTextId id)
     {
-        foreach (var gameText in FindObjectsOfType<GameText>()) {
-
-            if (gameText.Id == id) {
-                return gameText;
-            }
-        }
-
-        return null;
+        GetAllGameTexts();
+        return FindText(id);
     }
 }

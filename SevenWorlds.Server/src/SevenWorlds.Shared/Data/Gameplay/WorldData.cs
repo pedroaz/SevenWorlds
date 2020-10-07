@@ -12,5 +12,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public string Name;
         public string UniverseId;
+        public int WorldIndex;
     }
 }

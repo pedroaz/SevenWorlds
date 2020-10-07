@@ -15,12 +15,10 @@ public class GameInitializer : MonoBehaviour
         var connected = await NetworkService.Object.ConnectToServer();
         if (connected) {
             print("Connection to server was ok!");
-            UIFinderService.Object.FindText(GameTextId.IsConnectedToServer).SetText("Connected to Server");
+            UIFinderService.Object.FindText(GameTextId.IsConnectedToServer).ForEach(x => x.SetText("Connected to the server"));
         }
         else {
-            UIFinderService.Object.FindText(GameTextId.IsConnectedToServer).SetText("Not Connected to Server");
+            UIFinderService.Object.FindText(GameTextId.IsConnectedToServer).ForEach(x => x.SetText("Not Connected to Server"));
         }
-
-        
     }
 }

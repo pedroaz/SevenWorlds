@@ -36,10 +36,49 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 Name = "First Universe"
             };
 
-            var world = new WorldData() {
-                Name = "First World",
-                UniverseId = universe.Id
+            var world0 = new WorldData() {
+                Name = "World 1",
+                UniverseId = universe.Id,
+                WorldIndex = 0
             };
+
+            var world1 = new WorldData() {
+                Name = "World 2",
+                UniverseId = universe.Id,
+                WorldIndex = 1
+            };
+
+            var world2 = new WorldData() {
+                Name = "World 3",
+                UniverseId = universe.Id,
+                WorldIndex = 2
+            };
+
+            var world3 = new WorldData() {
+                Name = "World 4",
+                UniverseId = universe.Id,
+                WorldIndex = 3
+            };
+
+            var world4 = new WorldData() {
+                Name = "World 5",
+                UniverseId = universe.Id,
+                WorldIndex = 4
+            };
+
+            var world5 = new WorldData() {
+                Name = "World 6",
+                UniverseId = universe.Id,
+                WorldIndex = 5
+            };
+
+            var world6 = new WorldData() {
+                Name = "World 7",
+                UniverseId = universe.Id,
+                WorldIndex = 6
+            };
+
+
 
             var firstArea = new AreaData() {
                 Name = "First Area",
@@ -47,7 +86,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 0,
                     Y = 0
                 },
-                WorldId = world.Id
+                WorldId = world0.Id
             };
 
             var secondArea = new AreaData() {
@@ -56,7 +95,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 1,
                     Y = 0
                 },
-                WorldId = world.Id
+                WorldId = world0.Id
             };
 
             var section = new SectionData() {
@@ -66,7 +105,13 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             };
 
             universeCollection.Add(universe);
-            worldCollection.Add(world);
+            worldCollection.Add(world0);
+            worldCollection.Add(world1);
+            worldCollection.Add(world2);
+            worldCollection.Add(world3);
+            worldCollection.Add(world4);
+            worldCollection.Add(world5);
+            worldCollection.Add(world6);
             areaCollection.Add(firstArea);
             areaCollection.Add(secondArea);
             sectionCollection.Add(section);

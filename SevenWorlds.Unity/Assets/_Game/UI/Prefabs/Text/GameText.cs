@@ -27,5 +27,7 @@ public class GameText : MonoBehaviour
 public enum GameTextId
 {
     None,
-    IsConnectedToServer
+    IsConnectedToServer,
+    PlayerName,
+    UniverseName
 }

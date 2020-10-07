@@ -7,8 +7,10 @@ public class GameState : GameService<GameState>
 {
     public PlayerData PlayerData;
     public UniverseData Universe;
-    public WorldData World;
-    public AreaData Area;
+    public List<WorldData> Worlds;
+    public WorldData CurrentWorld;
+    public List<AreaData> Areas;
+    public AreaData CurrentArea;
     public List<SectionData> Sections;
 
     private void Awake()

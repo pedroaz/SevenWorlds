@@ -4,12 +4,11 @@ public class LoginButton : GameButton
 {
     public override async Task OnClick()
     {
-        var response = await LoginService.Object.Login();
-        if (response.Success) {
-            GameState.Object.PlayerData = response.PlayerData;
-        }
-        else {
+        print("Trying to log in!");
 
-        }
+        var response = await LoginService.Object.Login();
+        LoginService.Object.ProcessLoginResponse(response);
     }
+
+   
 }

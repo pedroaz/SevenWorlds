@@ -9,6 +9,7 @@ using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
+using System.Threading;
 
 namespace SevenWorlds.GameServer.Hubs
 {
@@ -34,6 +35,7 @@ namespace SevenWorlds.GameServer.Hubs
             if (gameStateService.PlayerCollection.FindByName(data.PlayerName) == null) {
                 var playerData = gameStateService.AddPlayerToTheGame(data, Context.ConnectionId);
                 return new LoginResponseData() {
+                    UniverseSyncData = gameStateService.GetUniverseSyncData(),
                     PlayerData = playerData,
                     Success = true
                 };
