@@ -1,17 +1,44 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Hubs;
+using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 
 namespace SevenWorlds.GameServer.Gameplay.Player.Actions
 {
     public class PlayerMovementAction : PlayerAction
     {
-        public PlayerMovementAction(PlayerActionData data) : base(data)
+        private readonly PlayerMovementActionData data;
+
+        public PlayerMovementAction(PlayerMovementActionData data, IGameStateService gameStateService, IHubService hubService) : base(data, gameStateService, hubService)
+        {
+            this.data = data;
+        }
+
+        public override void OnStart()
         {
 
         }
+
+        public override void OnSimulate()
+        {
+            gameStateService.MovePlayerToArea(data.Id, data.ToAreaId);
+            Finish();
+        }
+
+        public override void OnFinish()
+        {
+            var player = gameStateService.PlayerCollection.FindById(data.PlayerId);
+            var area = gameStateService.AreaCollection.FindById(data.ToAreaId);
+
+            if (player.AreaId != null) {
+                hubService.RemovePlayerFromAreaGroup(player, area);
+            }
+            hubService.RemovePlayerFromAreaGroup(player, area);
+            hubService.AddPlayerToAreaGroup(player,area);
+        }
+
+
+
+
     }
 }

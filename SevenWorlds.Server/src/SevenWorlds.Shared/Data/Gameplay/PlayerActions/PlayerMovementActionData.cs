@@ -9,7 +9,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.PlayerActions
     public class PlayerMovementActionData : PlayerActionData
     {
         public string PlayerId { get; set; }
-        public WorldPosition FromPosition { get; set; }
-        public WorldPosition ToPosition { get; set; }
+        public string FromAreaId { get; set; }
+        public string ToAreaId{ get; set; }
     }
 }

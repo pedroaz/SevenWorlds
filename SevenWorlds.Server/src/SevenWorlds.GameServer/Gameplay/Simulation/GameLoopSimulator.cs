@@ -50,7 +50,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
                 // Player Actions
                 GetActionsFromQueue();
                 SimulateOngoingActions();
-                FinishActions();
+                RemoveFinishedActions();
 
                 // End
                 EndOfTheSimulation();
@@ -73,13 +73,11 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             }
         }
 
-        private void FinishActions()
+        private void RemoveFinishedActions()
         {
             // Iterate backwards so we can remove
             for (int i = ongoingActions.Count - 1; i >= 0; i--) {
                 if (ongoingActions[i].Status == PlayerActionStatus.Finished) {
-
-                    // Send result to all clients on areas?
                     ongoingActions.RemoveAt(i);
                 }
             }

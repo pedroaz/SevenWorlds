@@ -1,4 +1,6 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Hubs;
+using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,17 @@ namespace SevenWorlds.GameServer.Gameplay.Player
     {
         public PlayerActionStatus Status { get; set; }
         public string ActionId { get; set; }
+        internal IGameStateService gameStateService;
+        internal IHubService hubService;
 
-        public PlayerAction(PlayerActionData data)
+        public PlayerAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService)
         {
+            this.gameStateService = gameStateService;
+            this.hubService = hubService;
             Status = PlayerActionStatus.Started;
             ActionId = data.Id;
             OnStart();
         }
-
         public void Simulate()
         {
             Status = PlayerActionStatus.Ongoing;

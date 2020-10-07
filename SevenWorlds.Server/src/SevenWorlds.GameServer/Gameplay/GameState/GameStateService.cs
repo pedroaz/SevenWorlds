@@ -17,22 +17,19 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         private readonly IAreaCollection areaCollection;
         private readonly ISectionCollection sectionCollection;
         private readonly IPlayerCollection playerCollection;
-        private readonly IHubService hubService;
 
         public GameStateService(
             IUniverseCollection universeCollection,
             IWorldCollection worldCollection,
             IAreaCollection areaCollection,
             ISectionCollection sectionCollection,
-            IPlayerCollection playerCollection,
-            IHubService hubService)
+            IPlayerCollection playerCollection)
         {
             this.universeCollection = universeCollection;
             this.worldCollection = worldCollection;
             this.areaCollection = areaCollection;
             this.sectionCollection = sectionCollection;
             this.playerCollection = playerCollection;
-            this.hubService = hubService;
         }
 
         public IUniverseCollection UniverseCollection => universeCollection;
@@ -59,12 +56,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             var area = areaCollection.FindById(areaId);
 
             player.AreaId = areaId;
-
-            if (player.AreaId != null) {
-                hubService.RemovePlayerFromAreaGroup(player, area);
-            }
-            hubService.AddPlayerToAreaGroup(player, area);
-            hubService.AreaSync(GetAreaSyncData(areaId));
         }
 
         public AreaSyncData GetAreaSyncData(string areaId)
