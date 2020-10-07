@@ -9,19 +9,19 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerActionQueue : IPlayerActionQueue
     {
-        private Queue<PlayerActionData> playerActionDatas;
+        private Queue<PlayerActionData> playerActionQueue;
 
         private static object queueLock = new object();
 
         public PlayerActionQueue()
         {
-            playerActionDatas = new Queue<PlayerActionData>();
+            playerActionQueue = new Queue<PlayerActionData>();
         }
 
         public PlayerActionStatusData AddToQueue(PlayerActionData playerAction)
         {
             lock (queueLock) {
-                playerActionDatas.Enqueue(playerAction);
+                playerActionQueue.Enqueue(playerAction);
             }
 
             return new PlayerActionStatusData();
@@ -33,7 +33,13 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 
         public IEnumerable<PlayerActionData> GetAllFromQueue()
         {
-            return playerActionDatas;
+            lock (queueLock) {
+                var copy = new Queue<PlayerActionData>();
+                while(playerActionQueue.Count != 0) {
+                    copy.Enqueue(playerActionQueue.Dequeue());
+                }
+                return copy;
+            }
         }
     }
 }

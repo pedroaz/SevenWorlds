@@ -14,29 +14,32 @@ namespace SevenWorlds.GameServer.Hubs
             hubContext = GlobalHost.ConnectionManager.GetHubContext<MainHub>();
         }
 
-        public void PingAll()
+        #region Groups
+
+        public void AddPlayerToAreaGroup(string playerConnectionId, string areaId)
+        {
+            hubContext.Groups.Add(playerConnectionId, areaId);
+        }
+
+        public void RemovePlayerFromAreaGroup(string playerConnectionId, string areaId)
+        {
+            hubContext.Groups.Remove(playerConnectionId, areaId);
+        }
+
+        #endregion
+
+        #region Broadcasts
+
+        public void BroadcastPing()
         {
             hubContext.Clients.All.OnPing(new PingData());
         }
 
-        public void AddPlayerToAreaGroup(PlayerData playerData, AreaData areaData)
-        {
-            hubContext.Groups.Add(playerData.ConnectionId, areaData.Id);
-        }
-
-        public void RemovePlayerFromAreaGroup(PlayerData playerData, AreaData areaData)
-        {
-            hubContext.Groups.Remove(playerData.ConnectionId, areaData.Id);
-        }
-
-        public void AreaSync(AreaSyncData data)
+        public void BroadcastAreaSync(AreaSyncData data)
         {
             hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
         }
 
-        public void ReturnActionStatusToPlayer(string playerId, PlayerActionStatusData data)
-        {
-
-        }
+        #endregion
     }
 }

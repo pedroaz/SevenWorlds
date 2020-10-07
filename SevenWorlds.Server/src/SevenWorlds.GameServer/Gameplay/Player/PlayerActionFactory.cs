@@ -28,7 +28,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
                 case PlayerActionType.Movement:
                     return new PlayerMovementAction( (PlayerMovementActionData) data, gameStateService, hubService);
                 case PlayerActionType.Attack:
-                    return new PlayerAttackAction(data, gameStateService, hubService);
                 default:
                     return new PlayerAction(data, gameStateService, hubService);
             }

@@ -57,8 +57,6 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             }
         }
 
-        
-
         private void GetActionsFromQueue()
         {
             foreach (var actionData in playerActionQueue.GetAllFromQueue()) {
@@ -119,7 +117,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private void PingAllClients()
         {
-            hubService.PingAll();
+            hubService.BroadcastPing();
         }
     }
 }

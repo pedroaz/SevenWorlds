@@ -29,26 +29,28 @@ namespace SevenWorlds.GameServer.Hubs
             this.playerActionQueue = playerActionQueue;
         }
 
-        public bool Login(LoginData data)
+        public LoginResponseData RequestLogin(LoginData data)
         {
             if (gameStateService.PlayerCollection.FindByName(data.PlayerName) == null) {
-                gameStateService.AddPlayerToTheGame(data, Context.ConnectionId);
-                return true;
+                var playerData = gameStateService.AddPlayerToTheGame(data, Context.ConnectionId);
+                return new LoginResponseData() {
+                    PlayerData = playerData,
+                    Success = true
+                };
+
             }
             else {
-                return false;
+                return new LoginResponseData() {
+                    Success = false
+                };
             }
+
         }
 
-        public void SendChatMessage(ChatMessageData data)
+        public void RequestSendChatMessage(ChatMessageData data)
         {
             logService.Log("Recieved Chat Message Command");
             Clients.All.OnChatMessage(data);
-        }
-
-        public PlayerActionStatusData DoPlayerAction(PlayerActionData playerActionData)
-        {
-            return playerActionQueue.AddToQueue(playerActionData);
         }
 
         public UniverseSyncData RequestUniverseSync()
@@ -64,6 +66,11 @@ namespace SevenWorlds.GameServer.Hubs
         public AreaSyncData RequestAreaSync(string areaId)
         {
             return gameStateService.GetAreaSyncData(areaId);
+        }
+
+        public PlayerActionStatusData StartPlayerAction(PlayerActionData playerActionData)
+        {
+            return playerActionQueue.AddToQueue(playerActionData);
         }
     }
 }

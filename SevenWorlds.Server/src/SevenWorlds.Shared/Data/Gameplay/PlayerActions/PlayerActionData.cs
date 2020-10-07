@@ -8,6 +8,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
         Attack = 1
     }
 
+    
+
     public class PlayerActionData : NetworkData
     {
         public PlayerActionType ActionType { get; set; }

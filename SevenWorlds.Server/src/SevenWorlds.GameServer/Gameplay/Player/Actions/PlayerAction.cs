@@ -11,8 +11,16 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerAction
     {
+        public enum PlayerActionScale
+        {
+            Universe = 0,
+            World = 1,
+            Area = 2
+        }
+
         public PlayerActionStatus Status { get; set; }
         public string ActionId { get; set; }
+        public PlayerActionScale Scale { get; set; }
         internal IGameStateService gameStateService;
         internal IHubService hubService;
 
@@ -22,8 +30,8 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             this.hubService = hubService;
             Status = PlayerActionStatus.Started;
             ActionId = data.Id;
-            OnStart();
         }
+
         public void Simulate()
         {
             Status = PlayerActionStatus.Ongoing;
@@ -34,10 +42,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         {
             Status = PlayerActionStatus.Finished;
             OnFinish();
-        }
-
-        public virtual void OnStart()
-        {
         }
 
         public virtual void OnSimulate()

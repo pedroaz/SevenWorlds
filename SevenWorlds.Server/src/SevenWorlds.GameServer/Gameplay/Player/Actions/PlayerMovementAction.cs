@@ -9,14 +9,12 @@ namespace SevenWorlds.GameServer.Gameplay.Player.Actions
     {
         private readonly PlayerMovementActionData data;
 
-        public PlayerMovementAction(PlayerMovementActionData data, IGameStateService gameStateService, IHubService hubService) : base(data, gameStateService, hubService)
+        public PlayerMovementAction(PlayerMovementActionData data, 
+            IGameStateService gameStateService, IHubService hubService) : 
+            base(data, gameStateService, hubService)
         {
+            Scale = PlayerActionScale.Area;
             this.data = data;
-        }
-
-        public override void OnStart()
-        {
-
         }
 
         public override void OnSimulate()
@@ -31,14 +29,12 @@ namespace SevenWorlds.GameServer.Gameplay.Player.Actions
             var area = gameStateService.AreaCollection.FindById(data.ToAreaId);
 
             if (player.AreaId != null) {
-                hubService.RemovePlayerFromAreaGroup(player, area);
+                hubService.RemovePlayerFromAreaGroup(player.ConnectionId, area.Id);
             }
-            hubService.RemovePlayerFromAreaGroup(player, area);
-            hubService.AddPlayerToAreaGroup(player,area);
+            hubService.AddPlayerToAreaGroup(player.ConnectionId, area.Id);
+
+            hubService.BroadcastAreaSync(gameStateService.GetAreaSyncData(data.FromAreaId));
+            hubService.BroadcastAreaSync(gameStateService.GetAreaSyncData(data.ToAreaId));
         }
-
-
-
-
     }
 }

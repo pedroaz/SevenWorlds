@@ -41,7 +41,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 UniverseId = universe.Id
             };
 
-            var area = new AreaData() {
+            var firstArea = new AreaData() {
                 Name = "First Area",
                 Position = new WorldPosition() {
                     X = 0,
@@ -50,15 +50,25 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 WorldId = world.Id
             };
 
+            var secondArea = new AreaData() {
+                Name = "Second Area",
+                Position = new WorldPosition() {
+                    X = 1,
+                    Y = 0
+                },
+                WorldId = world.Id
+            };
+
             var section = new SectionData() {
                 Name = "Poring Camp",
-                AreaId = area.Id,
+                AreaId = firstArea.Id,
                 SectionType = SectionTypes.MonsterCamp
             };
 
             universeCollection.Add(universe);
             worldCollection.Add(world);
-            areaCollection.Add(area);
+            areaCollection.Add(firstArea);
+            areaCollection.Add(secondArea);
             sectionCollection.Add(section);
         }
     }

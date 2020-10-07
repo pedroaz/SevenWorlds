@@ -5,9 +5,9 @@ namespace SevenWorlds.GameServer.Hubs
 {
     public interface IHubService
     {
-        void PingAll();
-        void RemovePlayerFromAreaGroup(PlayerData playerData, AreaData areaData);
-        void AddPlayerToAreaGroup(PlayerData playerData, AreaData areaData);
-        void AreaSync(AreaSyncData data);
+        void BroadcastPing();
+        void RemovePlayerFromAreaGroup(string playerConnectionId, string areaId);
+        void AddPlayerToAreaGroup(string playerConnectionId, string areaId);
+        void BroadcastAreaSync(AreaSyncData data);
     }
 }

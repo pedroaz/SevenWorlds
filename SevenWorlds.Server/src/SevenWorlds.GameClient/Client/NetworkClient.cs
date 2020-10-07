@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
@@ -50,31 +51,36 @@ namespace SevenWorlds.GameClient.Client
 
         #endregion
 
-        #region Actions
+        #region Requests
 
-        public void SendChatMessage(ChatMessageData data)
+        public async Task<ChatMessageResponse> SendChatMessage(ChatMessageData data)
         {
-            hubProxy.Invoke(NetworkConstants.Command_SendChatMessage, data).Wait();
+            return await hubProxy.Invoke<ChatMessageResponse>(NetworkConstants.Request_SendChatMessage, data);
         }
 
-        public async Task<bool> Login(LoginData data)
+        public async Task<LoginResponseData> Login(LoginData data)
         {
-            return await hubProxy.Invoke<bool>(NetworkConstants.Command_Login, data);
+            return await hubProxy.Invoke<LoginResponseData>(NetworkConstants.Request_Login, data);
         }
 
         public async Task<UniverseSyncData> RequestUniverseSync()
         {
-            return await hubProxy.Invoke<UniverseSyncData>(NetworkConstants.Command_RequestUniverseSync);
+            return await hubProxy.Invoke<UniverseSyncData>(NetworkConstants.Request_UniverseSync);
         }
 
         public async Task<WorldSyncData> RequestWorldSync(string worldId)
         {
-            return await hubProxy.Invoke<WorldSyncData>(NetworkConstants.Command_RequestWorldSync, worldId);
+            return await hubProxy.Invoke<WorldSyncData>(NetworkConstants.Request_WorldSync, worldId);
         }
 
         public async Task<AreaSyncData> RequestAreaSync(string areaId)
         {
-            return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Command_RequestAreaSync, areaId);
+            return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Request_AreaSync, areaId);
+        }
+
+        public async Task<PlayerActionStatusData> RequestStartPlayerAction(PlayerActionData data)
+        {
+            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_StartPlayerAction, data);
         }
 
         #endregion

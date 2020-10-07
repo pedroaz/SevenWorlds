@@ -11,12 +11,13 @@ namespace SevenWorlds.Shared.Network
         public const string ServerUrl = @"https://localhost:44328/";
         public const string MainHubName = "MainHub";
 
-        // Commands - Clients call those commands on the server
-        public const string Command_SendChatMessage = "SendChatMessage";
-        public const string Command_Login = "Login";
-        public const string Command_RequestUniverseSync = "RequestUniverseSync";
-        public const string Command_RequestWorldSync = "RequestWorldSync";
-        public const string Command_RequestAreaSync = "RequestAreaSync";
+        // Requests - Clients call those commands on the server
+        public const string Request_SendChatMessage = "RequestSendChatMessage";
+        public const string Request_Login = "RequestLogin";
+        public const string Request_UniverseSync = "RequestUniverseSync";
+        public const string Request_WorldSync = "RequestWorldSync";
+        public const string Request_AreaSync = "RequestAreaSync";
+        public const string Request_StartPlayerAction = "RequestStartPlayerAction";
 
         // Servers broadcast to clients
         public const string Event_OnChatMessage = "OnChatMessage";
