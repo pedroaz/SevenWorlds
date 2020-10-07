@@ -1,9 +1,18 @@
-﻿using System.Collections;
+﻿using SevenWorlds.Shared.Data.Gameplay;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameState : ScriptableObject
+public class GameState : GameService<GameState>
 {
-    public string characterName;
-    public string password;
+    public PlayerData PlayerData;
+    public UniverseData Universe;
+    public WorldData World;
+    public AreaData Area;
+    public List<SectionData> Sections;
+
+    private void Awake()
+    {
+        Object = this;
+    }
 }

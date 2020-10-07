@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,11 +13,11 @@ public class GameButton : MonoBehaviour
 
     private void Awake()
     {
-        button = GetComponent<Button>();
-        textMeshPro = transform.GetChild(0)?.GetComponent<TextMeshProUGUI>();
+        button = GetComponentInChildren<Button>();
+        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
-            OnClick();
+            _ = OnClick();
         });
         AfterAwake();
     }
@@ -26,10 +27,8 @@ public class GameButton : MonoBehaviour
 
     }
 
-    public virtual void OnClick()
+    public virtual async Task OnClick()
     {
-        
+        await new Task(() => { });
     }
-
-    
 }

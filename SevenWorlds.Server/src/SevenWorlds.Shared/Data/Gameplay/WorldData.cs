@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    [System.Serializable]
     public class WorldData : NetworkData
     {
-        public string Name { get; set; }
-        public string UniverseId { get; set; }
+        public string Name;
+        public string UniverseId;
     }
 }

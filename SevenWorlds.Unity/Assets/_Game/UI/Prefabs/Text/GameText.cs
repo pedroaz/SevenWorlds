@@ -6,10 +6,11 @@ using UnityEngine;
 public class GameText : MonoBehaviour
 {
     private TextMeshProUGUI textMesh;
+    public GameTextId Id;
 
     private void Awake()
     {
-        textMesh = GetComponent<TextMeshProUGUI>();
+        textMesh = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void SetText(string t)
@@ -21,4 +22,10 @@ public class GameText : MonoBehaviour
     {
         textMesh.text += $"\n{t}";
     }
+}
+
+public enum GameTextId
+{
+    None,
+    IsConnectedToServer
 }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    [System.Serializable]
     public class WorldPosition
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X;
+        public int Y;
     }
 }

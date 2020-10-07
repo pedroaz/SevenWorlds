@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    [System.Serializable]
     public class SectionData : NetworkData
     {
-        public string Name { get; set; }
-        public SectionTypes SectionType { get; set; }
-        public string AreaId { get; set; }
+        public string Name;
+        public SectionTypes SectionType;
+        public string AreaId;
     }
 }

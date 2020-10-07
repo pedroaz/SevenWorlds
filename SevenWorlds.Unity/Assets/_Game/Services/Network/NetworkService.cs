@@ -65,9 +65,9 @@ public class NetworkService : GameService<NetworkService>
         client.Dispose();
     }
 
-    public void SendChatMessage(ChatMessageData data)
+    public async Task<ChatMessageResponse> SendChatMessage(ChatMessageData data)
     {
-        client.SendChatMessage(data);
+        return await client.SendChatMessage(data);
     }
 
     public async Task<UniverseSyncData> RequestUniverseSyncData()
@@ -75,8 +75,8 @@ public class NetworkService : GameService<NetworkService>
         return await client.RequestUniverseSync();
     }
 
-    public async Task Login(LoginData data)
+    public async Task<LoginResponseData> Login(LoginData data)
     {
-        await client.Login(data);
+        return await client.Login(data);
     }
 }

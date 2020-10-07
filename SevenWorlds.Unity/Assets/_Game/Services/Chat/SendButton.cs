@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Chat;
+using System.Threading.Tasks;
 
 public class SendButton : GameButton
 {
@@ -9,9 +10,9 @@ public class SendButton : GameButton
         chatManager = FindObjectOfType<ChatService>();
     }
 
-    public override void OnClick()
+    public override async Task OnClick()
     {
-        NetworkService.Object.SendChatMessage(new ChatMessageData() {
+        await NetworkService.Object.SendChatMessage(new ChatMessageData() {
             PlayerName = "Unity Client",
             Message = chatManager.InputField.text
         });

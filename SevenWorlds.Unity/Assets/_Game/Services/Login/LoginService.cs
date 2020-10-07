@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.Shared.Data.Connection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ public class LoginService : GameService<LoginService>
         Object = this;
     }
 
-    public async void Login()
+    public async Task<LoginResponseData> Login()
     {
-        await NetworkService.Object.Login(new LoginData() {
+        return await NetworkService.Object.Login(new LoginData() {
             PlayerName = InputField.text
         });
     }
