@@ -5,7 +5,7 @@ public class GameInitializer : MonoBehaviour
 {
     async void Start()
     {
-        ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
+        await ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
 
         await ConnectToServer();
     }

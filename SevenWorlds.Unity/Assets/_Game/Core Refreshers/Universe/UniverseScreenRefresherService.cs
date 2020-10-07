@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UniverseScreenRefresherService : GameService<UniverseScreenRefresherService>
@@ -13,8 +14,10 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
         buttons = FindObjectsOfType<SelectWorldButton>().ToList();
     }
 
-    public void Refresh()
+    public async Task Refresh()
     {
+        var universeData = await NetworkService.Object.RequestUniverseSyncData();
+
         var worlds = GameState.Object.Worlds;
 
         for (int i = 0; i < 7; i++) {

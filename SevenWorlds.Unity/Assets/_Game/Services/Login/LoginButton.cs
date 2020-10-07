@@ -7,7 +7,7 @@ public class LoginButton : GameButton
         print("Trying to log in!");
 
         var response = await LoginService.Object.Login();
-        LoginService.Object.ProcessLoginResponse(response);
+        await LoginService.Object.ProcessLoginResponse(response);
     }
 
    

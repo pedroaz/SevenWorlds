@@ -75,6 +75,11 @@ public class NetworkService : GameService<NetworkService>
         return await client.RequestUniverseSync();
     }
 
+    public async Task<WorldSyncData> RequestWorldSyncData(string worldId)
+    {
+        return await client.RequestWorldSync(worldId);
+    }
+
     public async Task<LoginResponseData> Login(LoginData data)
     {
         return await client.Login(data);

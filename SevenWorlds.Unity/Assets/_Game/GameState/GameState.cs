@@ -16,5 +16,6 @@ public class GameState : GameService<GameState>
     private void Awake()
     {
         Object = this;
+
     }
 }

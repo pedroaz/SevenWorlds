@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ScreenChangerService : GameService<ScreenChangerService>
@@ -20,7 +21,7 @@ public class ScreenChangerService : GameService<ScreenChangerService>
     }
 
 
-    public void ChangeScreen(ScreenId id)
+    public async Task ChangeScreen(ScreenId id)
     {
         switch (id) {
             case ScreenId.Black:
@@ -30,9 +31,10 @@ public class ScreenChangerService : GameService<ScreenChangerService>
             case ScreenId.Login:
                 break;
             case ScreenId.Universe:
-                UniverseScreenRefresherService.Object.Refresh();
+                await UniverseScreenRefresherService.Object.Refresh();
                 break;
             case ScreenId.World:
+                await WorldScreenRefresherService.Object.Refresh();
                 break;
             case ScreenId.Area:
                 break;

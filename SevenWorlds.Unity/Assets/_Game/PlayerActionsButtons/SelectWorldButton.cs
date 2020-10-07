@@ -16,9 +16,10 @@ public class SelectWorldButton : GameButton
         btnText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public override Task OnClick()
+    public override async Task OnClick()
     {
-        return base.OnClick();
+        GameState.Object.CurrentWorld = GameState.Object.Worlds.Find(x => x.WorldIndex == WorldIndex);
+        await ScreenChangerService.Object.ChangeScreen(ScreenId.World);
     }
 
     public void Refresh(WorldData data)

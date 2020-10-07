@@ -21,7 +21,7 @@ public class LoginService : GameService<LoginService>
         });
     }
 
-    public void ProcessLoginResponse(LoginResponseData response)
+    public async Task ProcessLoginResponse(LoginResponseData response)
     {
         if (response.Success) {
             print("Log in was success!");
@@ -29,7 +29,7 @@ public class LoginService : GameService<LoginService>
             GameState.Object.Universe = response.UniverseSyncData.Universe;
             GameState.Object.Worlds = response.UniverseSyncData.Worlds;
             GeneralRefresherService.Object.Refresh();
-            ScreenChangerService.Object.ChangeScreen(ScreenId.Universe);
+            await ScreenChangerService.Object.ChangeScreen(ScreenId.Universe);
         }
         else {
             print("Log failed");
