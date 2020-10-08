@@ -103,7 +103,7 @@ namespace SevenWorlds.ConsoleClient.App
             });
             if (response.Success) {
                 playerData = response.PlayerData;
-                var startingArea = await client.RequestAreaSync(response.PlayerData.AreaId);
+                var startingArea = await client.RequestAreaSync(response.PlayerData.AreaId, playerData.Id);
                 print($"Client was logged and is currently on area: { startingArea.Area.Name }");
             }
             else {

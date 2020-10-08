@@ -1,12 +1,11 @@
 ﻿using SevenWorlds.Shared.Data.Gameplay;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public class SelectWorldButton : GameButton
 {
+    [HideInInspector]
     public int WorldIndex;
 
     private TextMeshProUGUI btnText;

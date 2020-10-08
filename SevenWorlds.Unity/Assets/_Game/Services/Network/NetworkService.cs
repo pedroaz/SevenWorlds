@@ -75,6 +75,11 @@ public class NetworkService : GameService<NetworkService>
         return await client.RequestUniverseSync();
     }
 
+    public async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
+    {
+        return await client.RequestAreaSync(areaId, playerId);
+    }
+
     public async Task<WorldSyncData> RequestWorldSyncData(string worldId)
     {
         return await client.RequestWorldSync(worldId);
@@ -84,4 +89,6 @@ public class NetworkService : GameService<NetworkService>
     {
         return await client.Login(data);
     }
+
+
 }

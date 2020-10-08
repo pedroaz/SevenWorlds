@@ -37,6 +37,7 @@ public class ScreenChangerService : GameService<ScreenChangerService>
                 await WorldScreenRefresherService.Object.Refresh();
                 break;
             case ScreenId.Area:
+                await AreaScreenRefresherService.Object.Refresh();
                 break;
         }
 
