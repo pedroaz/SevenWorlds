@@ -19,7 +19,6 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private readonly IPlayerActionQueue playerActionQueue;
         private readonly IPlayerActionFactory playerActionFactory;
         private Stopwatch stopwatch;
-        private List<PlayerAction> ongoingActions = new List<PlayerAction>();
 
         public GameLoopSimulator(
             ILogService logService,
@@ -48,36 +47,17 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
                 PrintWhoIsLogged();
 
                 // Player Actions
-                GetActionsFromQueue();
-                SimulateOngoingActions();
-                RemoveFinishedActions();
+                SimulatePlayerActions();
 
                 // End
                 EndOfTheSimulation();
             }
         }
 
-        private void GetActionsFromQueue()
+        private void SimulatePlayerActions()
         {
-            foreach (var actionData in playerActionQueue.GetAllFromQueue()) {
-                ongoingActions.Add(playerActionFactory.GenerateAction(actionData));
-            }
-        }
-
-        private void SimulateOngoingActions()
-        {
-            foreach (var playerAction in ongoingActions) {
-                playerAction.Simulate();
-            }
-        }
-
-        private void RemoveFinishedActions()
-        {
-            // Iterate backwards so we can remove
-            for (int i = ongoingActions.Count - 1; i >= 0; i--) {
-                if (ongoingActions[i].Status == PlayerActionStatus.Finished) {
-                    ongoingActions.RemoveAt(i);
-                }
+            foreach (var playerActionData in playerActionQueue.GetAllFromQueue()) {
+                playerActionFactory.GenerateAction(playerActionData).Simulate();
             }
         }
 

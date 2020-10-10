@@ -18,6 +18,7 @@ public class SelectWorldButton : GameButton
     public override async Task OnClick()
     {
         GameState.Object.CurrentWorld = GameState.Object.Worlds.Find(x => x.WorldIndex == WorldIndex);
+        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.Object.CurrentWorld.Name);
         await ScreenChangerService.Object.ChangeScreen(ScreenId.World);
     }
 

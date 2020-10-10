@@ -38,5 +38,6 @@ public enum GameTextId
     None,
     IsConnectedToServer,
     PlayerName,
-    UniverseName
+    UniverseName,
+    WorldName
 }

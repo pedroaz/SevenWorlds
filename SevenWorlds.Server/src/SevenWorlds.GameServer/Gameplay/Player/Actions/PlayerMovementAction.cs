@@ -17,13 +17,12 @@ namespace SevenWorlds.GameServer.Gameplay.Player.Actions
             this.data = data;
         }
 
-        public override void OnSimulate()
+        public override void Simulate()
         {
             gameStateService.MovePlayerToArea(data.Id, data.ToAreaId);
-            Finish();
         }
 
-        public override void OnFinish()
+        public override void End()
         {
             var player = gameStateService.PlayerCollection.FindById(data.PlayerId);
             var area = gameStateService.AreaCollection.FindById(data.ToAreaId);

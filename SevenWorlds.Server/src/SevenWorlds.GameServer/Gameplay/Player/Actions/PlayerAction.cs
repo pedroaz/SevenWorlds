@@ -18,7 +18,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             Area = 2
         }
 
-        public PlayerActionStatus Status { get; set; }
         public string ActionId { get; set; }
         public PlayerActionScale Scale { get; set; }
         internal IGameStateService gameStateService;
@@ -28,27 +27,15 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         {
             this.gameStateService = gameStateService;
             this.hubService = hubService;
-            Status = PlayerActionStatus.Started;
             ActionId = data.Id;
         }
 
-        public void Simulate()
+        public virtual void Simulate()
         {
-            Status = PlayerActionStatus.Ongoing;
-            OnSimulate();
+
         }
 
-        public void Finish()
-        {
-            Status = PlayerActionStatus.Finished;
-            OnFinish();
-        }
-
-        public virtual void OnSimulate()
-        {
-        }
-
-        public virtual void OnFinish()
+        public virtual void End()
         {
         }
     }
