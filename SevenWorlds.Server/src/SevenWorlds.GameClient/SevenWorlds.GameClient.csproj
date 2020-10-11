@@ -62,6 +62,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(ProjectDir)$(OutDir)$(TargetFileName) $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>copy /Y $(ProjectDir)$(OutDir)$(TargetFileName) $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\$(TargetFileName)
+copy /Y $(ProjectDir)$(OutDir)Microsoft.AspNet.SignalR.Client.dll $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\Microsoft.AspNet.SignalR.Client.dll
+copy /Y $(ProjectDir)$(OutDir)Newtonsoft.Json.dll $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\Newtonsoft.Json.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>
