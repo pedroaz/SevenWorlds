@@ -79,8 +79,6 @@ namespace SevenWorlds.ConsoleClient.App
             });
         }
 
-        
-
         private static async void Chat()
         {
             if(playerData == null) {
@@ -103,8 +101,6 @@ namespace SevenWorlds.ConsoleClient.App
             });
             if (response.Success) {
                 playerData = response.PlayerData;
-                var startingArea = await client.RequestAreaSync(response.PlayerData.AreaId, playerData.Id);
-                print($"Client was logged and is currently on area: { startingArea.Area.Name }");
             }
             else {
                 print("Client wasn't able to log");

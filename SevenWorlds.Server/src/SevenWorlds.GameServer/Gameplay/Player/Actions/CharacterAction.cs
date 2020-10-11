@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Player
 {
-    public class PlayerAction
+    public class CharacterAction
     {
         public enum PlayerActionScale
         {
@@ -23,20 +23,16 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         internal IGameStateService gameStateService;
         internal IHubService hubService;
 
-        public PlayerAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService)
+        public CharacterAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService)
         {
             this.gameStateService = gameStateService;
             this.hubService = hubService;
             ActionId = data.Id;
         }
 
-        public virtual void Simulate()
+        public virtual void Execute()
         {
 
-        }
-
-        public virtual void End()
-        {
         }
     }
 }

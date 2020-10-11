@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
+using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -85,6 +86,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<GameStateService>().As<IGameStateService>().SingleInstance();
             builder.RegisterType<PlayerActionQueue>().As<IPlayerActionQueue>().SingleInstance();
             builder.RegisterType<PlayerActionFactory>().As<IPlayerActionFactory>().SingleInstance();
+            builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

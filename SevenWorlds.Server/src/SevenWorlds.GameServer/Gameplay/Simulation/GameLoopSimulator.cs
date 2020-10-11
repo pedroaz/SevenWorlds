@@ -57,7 +57,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private void SimulatePlayerActions()
         {
             foreach (var playerActionData in playerActionQueue.GetAllFromQueue()) {
-                playerActionFactory.GenerateAction(playerActionData).Simulate();
+                playerActionFactory.GenerateAction(playerActionData).Execute();
             }
         }
 

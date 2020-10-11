@@ -22,14 +22,14 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             this.hubService = hubService;
         }
 
-        public PlayerAction GenerateAction(PlayerActionData data)
+        public CharacterAction GenerateAction(PlayerActionData data)
         {
             switch (data.ActionType) {
                 case PlayerActionType.Movement:
                     return new PlayerMovementAction( (PlayerMovementActionData) data, gameStateService, hubService);
                 case PlayerActionType.Attack:
                 default:
-                    return new PlayerAction(data, gameStateService, hubService);
+                    return new CharacterAction(data, gameStateService, hubService);
             }
         }
     }

@@ -48,7 +48,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             var playerData = new PlayerData() {
                 Name = data.PlayerName,
                 ConnectionId = connectionId,
-                AreaId = areaCollection.GetAll().FirstOrDefault().Id
             };
             playerCollection.Add(playerData);
             return playerData;
@@ -56,17 +55,12 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
         public void MovePlayerToArea(string playerId, string areaId)
         {
-            var player = playerCollection.FindById(playerId);
-
-            player.AreaId = areaId;
         }
 
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
-                Area = areaCollection.FindById(areaId),
-                Players = playerCollection.FindAllPlayersByArea(areaId),
-                Sections = sectionCollection.FindAllSectionsByArea(areaId)
+                
             };
         }
 

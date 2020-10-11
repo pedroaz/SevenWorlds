@@ -6,7 +6,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class PlayerData : NetworkData
     {
         public string Name;
-        public string AreaId;
         public string ConnectionId;
     }
 }

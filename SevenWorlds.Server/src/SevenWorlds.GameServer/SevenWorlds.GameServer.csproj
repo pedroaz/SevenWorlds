@@ -97,14 +97,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountService.cs" />
+    <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Gameplay\Area\AreaCollection.cs" />
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
+    <Compile Include="Gameplay\Character\CharacterCollection.cs" />
+    <Compile Include="Gameplay\Character\ICharacterCollection.cs" />
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
     <Compile Include="Gameplay\GameState\IGameStateService.cs" />
     <Compile Include="Gameplay\Player\Actions\PlayerMovementAction.cs" />
     <Compile Include="Gameplay\Player\IPlayerActionFactory.cs" />
     <Compile Include="Gameplay\Player\IPlayerActionQueue.cs" />
-    <Compile Include="Gameplay\Player\Actions\PlayerAction.cs" />
+    <Compile Include="Gameplay\Player\Actions\CharacterAction.cs" />
     <Compile Include="Gameplay\Player\IPlayerCollection.cs" />
     <Compile Include="Gameplay\Player\PlayerActionFactory.cs" />
     <Compile Include="Gameplay\Player\PlayerActionQueue.cs" />
@@ -140,6 +144,5 @@
       <Name>SevenWorlds.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

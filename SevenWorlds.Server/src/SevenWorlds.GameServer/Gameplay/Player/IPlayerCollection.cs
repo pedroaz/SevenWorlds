@@ -11,6 +11,5 @@ namespace SevenWorlds.GameServer.Gameplay.Player
     public interface IPlayerCollection : IDataCollection<PlayerData>
     {
         PlayerData FindByName(string name);
-        List<PlayerData> FindAllPlayersByArea(string areaId);
     }
 }

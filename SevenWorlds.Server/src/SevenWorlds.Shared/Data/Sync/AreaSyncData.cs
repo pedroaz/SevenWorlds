@@ -11,7 +11,7 @@ namespace SevenWorlds.Shared.Data.Sync
     public class AreaSyncData : NetworkData
     {
         public AreaData Area { get; set; }
-        public List<PlayerData> Players { get; set; }
+        public List<CharacterData> Characters { get; set; }
         public List<SectionData> Sections { get; set; }
     }
 }
