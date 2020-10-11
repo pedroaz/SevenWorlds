@@ -52,7 +52,6 @@ crashlytics-build.properties
 ########## Server #########
 ###########################
 
-!/SevenWorlds.Server/src/SevenWorlds.Shared/UnityEngine.dll
 
 #############################################################
 
@@ -134,3 +133,5 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+
+!/SevenWorlds.Server/src/SevenWorlds.Shared/UnityEngine.dll
