@@ -83,6 +83,11 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_StartPlayerAction, data);
         }
 
+        public async Task<RegisterAccountResponse> RequestRegister(RegisterAccountData data)
+        {
+            return await hubProxy.Invoke<RegisterAccountResponse>(NetworkConstants.Request_RequestRegisterAccount, data);
+        }
+
         #endregion
     }
 }

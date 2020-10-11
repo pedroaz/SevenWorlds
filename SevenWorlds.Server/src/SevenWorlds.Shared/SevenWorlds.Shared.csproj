@@ -52,6 +52,8 @@
     <Compile Include="Data\Connection\LoginData.cs" />
     <Compile Include="Data\Connection\LoginResponseData.cs" />
     <Compile Include="Data\Connection\PingData.cs" />
+    <Compile Include="Data\Connection\RegisterAccountData.cs" />
+    <Compile Include="Data\Connection\RegisterAccountResponse.cs" />
     <Compile Include="Data\Gameplay\AreaData.cs" />
     <Compile Include="Data\Gameplay\EncounterData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />

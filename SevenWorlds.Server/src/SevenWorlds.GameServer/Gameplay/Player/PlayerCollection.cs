@@ -38,7 +38,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 
         public PlayerData FindByName(string name)
         {
-            return players.Find(x => x.Name == name);
+            return players.Find(x => x.PlayerName == name);
         }
 
         public void Remove(string id)

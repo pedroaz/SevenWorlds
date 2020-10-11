@@ -1,4 +1,5 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,34 @@ namespace SevenWorlds.GameServer.Account
 {
     public class AccountService : IAccountService
     {
-        public bool CheckLogin(string username, string password)
+        private readonly IDatabaseService databaseService;
+
+        public AccountService(IDatabaseService databaseService)
+        {
+            this.databaseService = databaseService;
+        }
+
+        public async Task<bool> CheckLogin(string username, string password)
         {
             throw new NotImplementedException();
         }
 
-        public PlayerData Login(string username)
+        public async Task<PlayerData> Login(string username)
         {
             throw new NotImplementedException();
         }
 
-        public bool UsernameExists(string username)
+        public Task<bool> PlayerNameExists(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RegisterAccount(string username, string response, string playerName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> UsernameExists(string username)
         {
             throw new NotImplementedException();
         }

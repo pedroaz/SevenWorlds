@@ -16,7 +16,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         IAreaCollection AreaCollection { get; }
         ISectionCollection SectionCollection { get; }
         IPlayerCollection PlayerCollection { get; }
-        PlayerData AddPlayerToTheGame(LoginData data, string connectionId);
+        void AddPlayerToTheGame(string playerId, string connectionId);
         void MovePlayerToArea(string playerId, string areaId);
         UniverseSyncData GetUniverseSyncData();
         WorldSyncData GetWorldSyncData(string worldId);

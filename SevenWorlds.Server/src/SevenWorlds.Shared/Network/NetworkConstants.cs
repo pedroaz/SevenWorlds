@@ -18,6 +18,7 @@ namespace SevenWorlds.Shared.Network
         public const string Request_WorldSync = "RequestWorldSync";
         public const string Request_AreaSync = "RequestAreaSync";
         public const string Request_StartPlayerAction = "RequestStartPlayerAction";
+        public const string Request_RequestRegisterAccount = "RequestRegisterAccount";
 
         // Servers broadcast to clients
         public const string Event_OnChatMessage = "OnChatMessage";

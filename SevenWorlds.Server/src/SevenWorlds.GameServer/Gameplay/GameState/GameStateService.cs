@@ -43,14 +43,14 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
         public IPlayerCollection PlayerCollection => playerCollection;
 
-        public PlayerData AddPlayerToTheGame(LoginData data, string connectionId)
+        public void AddPlayerToTheGame(string playerId, string connectionId)
         {
-            var playerData = new PlayerData() {
-                Name = data.PlayerName,
-                ConnectionId = connectionId,
-            };
-            playerCollection.Add(playerData);
-            return playerData;
+            
+        }
+
+        public void AddCharacterToWorld(string playerId, string connectionId)
+        {
+
         }
 
         public void MovePlayerToArea(string playerId, string areaId)

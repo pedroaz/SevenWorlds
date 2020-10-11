@@ -5,7 +5,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
     [System.Serializable]
     public class PlayerData : NetworkData
     {
-        public string Name;
+        public string PlayerName;
         public string ConnectionId;
     }
 }

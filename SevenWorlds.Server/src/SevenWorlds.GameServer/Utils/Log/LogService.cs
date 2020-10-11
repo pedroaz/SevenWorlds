@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Core;
+using SevenWorlds.GameServer.Utils.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,15 @@ namespace SevenWorlds.GameServer.Utils.Log
     public class LogService : ILogService
     {
         Logger logger;
+        private readonly IConfigurator configurator;
 
-        public LogService()
+        public LogService(IConfigurator configurator)
         {
+            this.configurator = configurator;
+
             logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.File(@"c:\Users\Pedro\Desktop\dev\MMO\SevenWorlds\SevenWorlds.Server\log\ServerLog.txt")
+                .WriteTo.File(configurator.GetLogFilePath())
                 .CreateLogger();
         }
 

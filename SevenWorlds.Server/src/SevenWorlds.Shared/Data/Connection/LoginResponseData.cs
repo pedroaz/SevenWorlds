@@ -4,10 +4,17 @@ using SevenWorlds.Shared.Data.Sync;
 
 namespace SevenWorlds.Shared.Data.Connection
 {
+    public enum LoginResponseType
+    {
+        Success,
+        UsernameNotFound,
+        PasswordIncorrect
+    }
+
     public class LoginResponseData : NetworkData
     {
         public PlayerData PlayerData{ get; set; }
-        public bool Success { get; set; }
+        public LoginResponseType ResponseType { get; set; }
         public UniverseSyncData UniverseSyncData { get; set; }
     }
 }

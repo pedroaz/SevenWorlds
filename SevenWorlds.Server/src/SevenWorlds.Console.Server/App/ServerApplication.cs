@@ -2,6 +2,7 @@
 using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
 using SevenWorlds.GameServer.Account;
+using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -11,6 +12,7 @@ using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Server.Manager;
+using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace SevenWorlds.Console.Server.App
         static void Main(string[] args)
         {
             try {
-                Start();
+                Start(args);
             }
             catch (Exception e) {
 
@@ -35,11 +37,16 @@ namespace SevenWorlds.Console.Server.App
             }
         }
 
-        private static void Start()
+        private static async void Start(string[] args)
         {
             System.Console.WriteLine("Starting the Server via Console");
+            if (args.Length != 1) {
+                System.Console.WriteLine("The args did not have Length == 1. The ServerConfigurations.json file must be passed to the server ");
+                return;
+            }
+
             SetupDependencies();
-            Task.Run(StartServer);
+            await StartServer(args[0]);
             while (true) {
                 var exitKey = System.Console.ReadKey();
                 if (exitKey.Key == ConsoleKey.Q) {
@@ -51,10 +58,12 @@ namespace SevenWorlds.Console.Server.App
             Thread.Sleep(1000);
         }
 
-        private static async Task StartServer()
+        private static async Task StartServer(string configPath)
         {
             try {
                 using (var scope = container.BeginLifetimeScope()) {
+                    var configurator = scope.Resolve<IConfigurator>();
+                    configurator.ReadConfigurations(configPath);
                     var serverManager = scope.Resolve<IServerManager>();
                     await serverManager.StartServer();
                 }
@@ -87,6 +96,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<PlayerActionQueue>().As<IPlayerActionQueue>().SingleInstance();
             builder.RegisterType<PlayerActionFactory>().As<IPlayerActionFactory>().SingleInstance();
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance();
+            builder.RegisterType<Configurator>().As<IConfigurator>().SingleInstance();
+            builder.RegisterType<DatabaseService>().As<IDatabaseService>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

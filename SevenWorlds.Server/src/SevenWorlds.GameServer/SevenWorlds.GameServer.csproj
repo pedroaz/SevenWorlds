@@ -108,6 +108,8 @@
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Account\IAccountService.cs" />
+    <Compile Include="Database\DatabaseService.cs" />
+    <Compile Include="Database\IDatabaseService.cs" />
     <Compile Include="Gameplay\Area\AreaCollection.cs" />
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Character\CharacterCollection.cs" />
@@ -139,6 +141,9 @@
     <Compile Include="Server\Manager\IServerManager.cs" />
     <Compile Include="Server\Manager\ServerManager.cs" />
     <Compile Include="Startups\Startup.cs" />
+    <Compile Include="Utils\Config\Configurator.cs" />
+    <Compile Include="Utils\Config\IConfigurator.cs" />
+    <Compile Include="Utils\Config\ServerConfigurations.cs" />
     <Compile Include="Utils\DataCollections\IDataCollection.cs" />
     <Compile Include="Utils\Log\ILogService.cs" />
     <Compile Include="Utils\Log\LogService.cs" />
@@ -153,5 +158,6 @@
       <Name>SevenWorlds.Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

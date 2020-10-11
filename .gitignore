@@ -53,6 +53,7 @@ crashlytics-build.properties
 ###########################
 
 ServerLog.txt
+ServerConfigurations.json
 #############################################################
 
 

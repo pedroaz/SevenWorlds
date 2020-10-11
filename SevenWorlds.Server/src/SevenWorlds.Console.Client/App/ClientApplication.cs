@@ -38,6 +38,7 @@ namespace SevenWorlds.ConsoleClient.App
                 while (command != "quit") {
                     print("Welcome to the console client");
                     print("Type help for commands");
+                    Register();
                     var line = Console.ReadLine().ToLower();
                     switch (line) {
                         case "help":
@@ -55,7 +56,9 @@ namespace SevenWorlds.ConsoleClient.App
                         case "move":
                             Move();
                             break;
-
+                        case "register":
+                            Register();
+                            break;
                     }
                 }
             }
@@ -64,6 +67,16 @@ namespace SevenWorlds.ConsoleClient.App
                 throw;
             }
         }
+
+        
+
+        private static void ShowHelp()
+        {
+            print("[set_ping_handler] - Log if the client is recieving pings");
+            print("[login] - Login to the server");
+            print("[register] - Register the account");
+        }
+
 
         private static void SetDefaultHandlers()
         {
@@ -94,17 +107,29 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Login()
         {
-            print("Type player name");
-            var playerName = Console.ReadLine();
+            print("Type username");
+            var username = Console.ReadLine();
+            print("Type password");
+            var password = Console.ReadLine();
             var response = await client.Login(new LoginData() {
-                PlayerName = playerName
+                Username = username,
+                Password = password
             });
-            if (response.Success) {
+            if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
             }
             else {
                 print("Client wasn't able to log");
             }
+        }
+
+        private static async void Register()
+        {
+            await client.RequestRegister(new RegisterAccountData(){ 
+                Username = "Test",
+                Password = "123",
+                PlayerName = "Eu"
+            });
         }
 
         private static void SetPingHandler()
@@ -114,12 +139,7 @@ namespace SevenWorlds.ConsoleClient.App
             });
         }
 
-        private static void ShowHelp()
-        {
-            print("[set_ping_handler] - Log if the client is recieving pings");
-            print("[login] - Login to the server");
-        }
-
+        
         private static async Task Connect()
         {
             client = new NetworkClient();

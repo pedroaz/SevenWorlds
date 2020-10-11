@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Connection
 {
-    public class LoginData
+    public class RegisterAccountData
     {
         public string Username { get; set; }
         public string Password { get; set; }
+        public string PlayerName { get; set; }
     }
 }

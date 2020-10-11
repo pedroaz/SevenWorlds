@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Hubs
 {
@@ -19,35 +19,69 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly ILogService logService;
         private readonly IGameStateService gameStateService;
         private readonly IPlayerActionQueue playerActionQueue;
+        private readonly IAccountService accountService;
 
         public MainHub(
             ILogService logService,
             IGameStateService gameStateService,
-            IPlayerActionQueue playerActionQueue)
+            IPlayerActionQueue playerActionQueue,
+            IAccountService accountService)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
+            this.accountService = accountService;
         }
 
-        public LoginResponseData RequestLogin(LoginData data)
+        public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
-            if (gameStateService.PlayerCollection.FindByName(data.PlayerName) == null) {
-                var playerData = gameStateService.AddPlayerToTheGame(data, Context.ConnectionId);
-                return new LoginResponseData() {
-                    UniverseSyncData = gameStateService.GetUniverseSyncData(),
-                    PlayerData = playerData,
-                    Success = true
-                };
+            if (!await accountService.UsernameExists(data.Username)) {
 
-            }
-            else {
                 return new LoginResponseData() {
-                    Success = false
+                    ResponseType = LoginResponseType.UsernameNotFound
                 };
             }
+
+            if (!await accountService.CheckLogin(data.Username, data.Password)) {
+
+                return new LoginResponseData() {
+                    ResponseType = LoginResponseType.PasswordIncorrect
+                };
+            }
+
+            return new LoginResponseData() {
+                UniverseSyncData = gameStateService.GetUniverseSyncData(),
+                PlayerData = await accountService.Login(data.Username),
+                ResponseType = LoginResponseType.PasswordIncorrect
+            };
+        }
+
+        public async Task<RegisterAccountResponse> RequestRegisterAccount(RegisterAccountData data)
+        {
+            if (await accountService.UsernameExists(data.Username)) {
+                return new RegisterAccountResponse() {
+                    response = RegisterAccountResponseType.UserNameAlreadyExists
+                };
+            }
+
+            if (await accountService.PlayerNameExists(data.Username)) {
+                return new RegisterAccountResponse() {
+                    response = RegisterAccountResponseType.PlayerNameAlreadyExists
+                };
+            }
+
+            await accountService.RegisterAccount(data.Username, data.Password, data.PlayerName);
+
+            return new RegisterAccountResponse() {
+                response = RegisterAccountResponseType.Success
+            };
+        }
+
+        public void RequestAddCharacterToWorld()
+        {
 
         }
+
 
         public void RequestSendChatMessage(ChatMessageData data)
         {
@@ -70,7 +104,7 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.GetAreaSyncData(areaId);
         }
 
-        public PlayerActionStatusData StartPlayerAction(PlayerActionData playerActionData)
+        public PlayerActionStatusData RequestStartPlayerAction(PlayerActionData playerActionData)
         {
             return playerActionQueue.AddToQueue(playerActionData);
         }
