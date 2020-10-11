@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWorlds.Console.Client", "src\SevenWorlds.Console.Client\SevenWorlds.Console.Client.csproj", "{3EA91CA0-E14F-4DE1-B08A-3CD72A3ACB4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWorlds.Console.Server", "src\SevenWorlds.Console.Server\SevenWorlds.Console.Server.csproj", "{8E00D0C8-3F69-4B18-B439-870F27F3675E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWorlds.GameClient", "src\SevenWorlds.GameClient\SevenWorlds.GameClient.csproj", "{B5DDD57D-CC7A-4382-BDDE-8F58F48E7E74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWorlds.GameServer", "src\SevenWorlds.GameServer\SevenWorlds.GameServer.csproj", "{8D590FBD-F0E4-4572-8CF7-5BDFF6832EB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWorlds.Shared", "src\SevenWorlds.Shared\SevenWorlds.Shared.csproj", "{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EA91CA0-E14F-4DE1-B08A-3CD72A3ACB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EA91CA0-E14F-4DE1-B08A-3CD72A3ACB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EA91CA0-E14F-4DE1-B08A-3CD72A3ACB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EA91CA0-E14F-4DE1-B08A-3CD72A3ACB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E00D0C8-3F69-4B18-B439-870F27F3675E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E00D0C8-3F69-4B18-B439-870F27F3675E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E00D0C8-3F69-4B18-B439-870F27F3675E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E00D0C8-3F69-4B18-B439-870F27F3675E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DDD57D-CC7A-4382-BDDE-8F58F48E7E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DDD57D-CC7A-4382-BDDE-8F58F48E7E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DDD57D-CC7A-4382-BDDE-8F58F48E7E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DDD57D-CC7A-4382-BDDE-8F58F48E7E74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D590FBD-F0E4-4572-8CF7-5BDFF6832EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D590FBD-F0E4-4572-8CF7-5BDFF6832EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D590FBD-F0E4-4572-8CF7-5BDFF6832EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D590FBD-F0E4-4572-8CF7-5BDFF6832EB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7B24C47-8150-477B-86AF-8C78BD142E6A}
+	EndGlobalSection
+EndGlobal

@@ -15,7 +15,13 @@ public enum ScreenId
 public class GameScreen : MonoBehaviour
 {
     public ScreenId Id;
+    [HideInInspector]
     public GameObject contianer;
+
+    private void Awake()
+    {
+        contianer = transform.GetChild(0).gameObject;
+    }
 
     public void Show()
     {

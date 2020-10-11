@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB513725-68F6-4934-BCC8-A5DDD2B74FF5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SevenWorlds.Shared</RootNamespace>
+    <AssemblyName>SevenWorlds.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>.\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Base\BaseData.cs" />
+    <Compile Include="Data\Chat\ChatMessageData.cs" />
+    <Compile Include="Data\Base\NetworkData.cs" />
+    <Compile Include="Data\Chat\ChatMessageResponse.cs" />
+    <Compile Include="Data\Connection\LoginData.cs" />
+    <Compile Include="Data\Connection\LoginResponseData.cs" />
+    <Compile Include="Data\Connection\PingData.cs" />
+    <Compile Include="Data\Gameplay\AreaData.cs" />
+    <Compile Include="Data\Gameplay\EncounterData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\PlayerActionStatusData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\PlayerMovementActionData.cs" />
+    <Compile Include="Data\Gameplay\PlayerData.cs" />
+    <Compile Include="Data\Gameplay\SectionData.cs" />
+    <Compile Include="Data\Gameplay\UniverseData.cs" />
+    <Compile Include="Data\Gameplay\WorldData.cs" />
+    <Compile Include="Data\Gameplay\WorldPosition.cs" />
+    <Compile Include="Data\Sync\AreaSyncData.cs" />
+    <Compile Include="Data\Sync\UniverseSyncData.cs" />
+    <Compile Include="Data\Sync\WorldSyncData.cs" />
+    <Compile Include="Network\NetworkConstants.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\SectionTypes.cs" />
+    <Compile Include="UnityLog\LOG.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y $(ProjectDir)$(OutDir)$(TargetFileName) $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\$(TargetFileName)</PostBuildEvent>
+  </PropertyGroup>
+</Project>
