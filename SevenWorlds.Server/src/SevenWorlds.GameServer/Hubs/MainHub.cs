@@ -101,7 +101,6 @@ namespace SevenWorlds.GameServer.Hubs
 
         }
 
-
         public void RequestSendChatMessage(ChatMessageData data)
         {
             logService.Log("Recieved Chat Message Command");

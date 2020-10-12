@@ -64,7 +64,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private void PingTickCount()
         {
-            if(tickCount % 10 == 0) {
+            if(tickCount % 60 == 0) {
                 logService.Log($"Tick count: {tickCount}");
             }
         }
