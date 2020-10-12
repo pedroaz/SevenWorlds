@@ -12,5 +12,6 @@ namespace SevenWorlds.GameServer.Utils.Config
         public string ServerId { get; set; }
         public string MongoDbKey { get; set; }
         public string LogFilePath { get; set; }
+        public string MasterDataDumpFolder { get; set; }
     }
 }

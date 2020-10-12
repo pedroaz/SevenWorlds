@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Utils.Config;
+using SevenWorlds.GameServer.Utils.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +14,35 @@ namespace SevenWorlds.GameServer.Database
     public class DatabaseService : IDatabaseService
     {
         private readonly IConfigurator configurator;
+        private readonly ILogService logService;
+        private IMongoDatabase database;
+        private IMongoCollection<AccountModel> accountsCollection;
+        private IMongoCollection<MasterDataModel> serverMasterDataCollection;
 
-        public DatabaseService(IConfigurator configurator)
+        public DatabaseService(IConfigurator configurator, ILogService logService)
         {
             this.configurator = configurator;
-
-            var client = new MongoClient(
+            this.logService = logService;
+            database = new MongoClient(
                 configurator.GetMongoDbKey()
-            );
-            var database = client.GetDatabase("SevenWorldsTestDatabase");
-            //var accountsCollection = database.GetCollection<AccountModel>("Accounts");
-            //var accounts = accountsCollection.Find(x => true).ToList();
+            ).GetDatabase("SevenWorldsTestDatabase");
 
+            accountsCollection = database.GetCollection<AccountModel>("Accounts");
+            serverMasterDataCollection = database.GetCollection<MasterDataModel>("ServerMasterDatas");
         }
 
-        public ServerMasterData GetServerMasterData(string serverId)
+        public async Task<MasterDataModel> GetMasterData(string serverId)
         {
-            return new ServerMasterData();
+            logService.Log($"Getting Master Data from Database with ServerId: {serverId}");
+            MasterDataModel masterData = new MasterDataModel();
+            try {
+                 masterData = await serverMasterDataCollection.Find(x => x.ServerId == serverId).FirstOrDefaultAsync();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+            return masterData;
         }
     }
 }

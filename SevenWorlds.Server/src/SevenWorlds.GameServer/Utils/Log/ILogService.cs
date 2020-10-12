@@ -9,5 +9,6 @@ namespace SevenWorlds.GameServer.Utils.Log
     public interface ILogService
     {
         void Log(string message);
+        void Log(Exception e);
     }
 }

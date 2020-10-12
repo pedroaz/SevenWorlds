@@ -28,5 +28,11 @@ namespace SevenWorlds.GameServer.Utils.Log
         {
             logger.Information(message);
         }
+
+        public void Log(Exception e)
+        {
+            logger.Information("EXCEPTION!!!");
+            logger.Warning(e.Message);
+        }
     }
 }

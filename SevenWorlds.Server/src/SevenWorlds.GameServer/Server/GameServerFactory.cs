@@ -3,6 +3,7 @@ using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
+using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
     public class GameServerFactory : IGameServerFactory
     {
         private readonly IDatabaseService databaseService;
+        private readonly ILogService logService;
         private readonly IUniverseCollection universeCollection;
         private readonly IWorldCollection worldCollection;
         private readonly IAreaCollection areaCollection;
@@ -25,13 +27,15 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             IWorldCollection worldCollection, 
             IAreaCollection areaCollection, 
             ISectionCollection sectionCollection,
-            IDatabaseService databaseService)
+            IDatabaseService databaseService,
+            ILogService logService)
         {
             this.universeCollection = universeCollection;
             this.worldCollection = worldCollection;
             this.areaCollection = areaCollection;
             this.sectionCollection = sectionCollection;
             this.databaseService = databaseService;
+            this.logService = logService;
         }
 
         public void SetupGameServerUsingFakeData()
@@ -126,7 +130,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public async Task SetupGameServer(string serverId)
         {
-            
+            logService.Log($"Setting up Game Server with id: {serverId}");
+            MasterDataModel masterData = await databaseService.GetMasterData(serverId);
         }
     }
 }

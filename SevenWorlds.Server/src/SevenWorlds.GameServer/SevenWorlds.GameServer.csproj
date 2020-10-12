@@ -169,9 +169,10 @@
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Database\CollectionsSchemas\AccountModel.cs" />
+    <Compile Include="Database\CollectionsSchemas\BaseModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />
-    <Compile Include="Database\ServerMasterData.cs" />
+    <Compile Include="Database\CollectionsSchemas\MasterDataModel.cs" />
     <Compile Include="Gameplay\Area\AreaCollection.cs" />
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Character\CharacterCollection.cs" />

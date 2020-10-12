@@ -28,16 +28,19 @@ namespace SevenWorlds.Console.Server.App
         static void Main(string[] args)
         {
             try {
-                Start(args);
+                Task mainTask = Start(args);
+                mainTask.Wait();
             }
             catch (Exception e) {
-
+                System.Console.WriteLine("Exception! :(");
                 System.Console.WriteLine(e.Message);
                 throw;
             }
+
+            Thread.Sleep(Timeout.Infinite);
         }
 
-        private static async void Start(string[] args)
+        private static async Task Start(string[] args)
         {
             System.Console.WriteLine("----- Starting the Server via Console -----");
             if (args.Length != 1) {
@@ -46,15 +49,7 @@ namespace SevenWorlds.Console.Server.App
             }
 
             SetupDependencies();
-            try {
-                await StartServer(args[0]);
-            }
-            catch (Exception e) {
-                System.Console.WriteLine("Exception! :(");
-                System.Console.WriteLine(e.Message);
-                throw;
-            }
-            Thread.Sleep(Timeout.Infinite);
+            await StartServer(args[0]);
         }
 
         private static async Task StartServer(string configPath)
