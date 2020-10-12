@@ -7,7 +7,7 @@ namespace SevenWorlds.GameServer.Database
     public class MasterDataModel : BaseModel
     {
         public string ServerId { get; set; }
-        //private List<UniverseData> UniverseCollection { get; set; }
-        //private List<WorldData> WorldCollection { get; set; }
+        public List<UniverseData> UniverseCollection { get; set; }
+        public List<WorldData> WorldCollection { get; set; }
     }
 }

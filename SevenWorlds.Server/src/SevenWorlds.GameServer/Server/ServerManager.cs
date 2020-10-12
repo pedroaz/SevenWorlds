@@ -5,6 +5,7 @@ using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Network;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Server
@@ -55,6 +56,7 @@ namespace SevenWorlds.GameServer.Server
         {
             logService.Log($"Starting game server with serverId: {serverId}");
             await gameFactory.SetupGameServer(serverId);
+            gameFactory.DumpMasterData();
             gameLoopSimulator.StartSimulation();
         }
 

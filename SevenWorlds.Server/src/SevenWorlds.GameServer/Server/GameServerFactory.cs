@@ -1,12 +1,15 @@
-﻿using SevenWorlds.GameServer.Database;
+﻿using Newtonsoft.Json;
+using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
+using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +20,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
     {
         private readonly IDatabaseService databaseService;
         private readonly ILogService logService;
+        private readonly IConfigurator configurator;
         private readonly IUniverseCollection universeCollection;
         private readonly IWorldCollection worldCollection;
         private readonly IAreaCollection areaCollection;
@@ -28,7 +32,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             IAreaCollection areaCollection, 
             ISectionCollection sectionCollection,
             IDatabaseService databaseService,
-            ILogService logService)
+            ILogService logService,
+            IConfigurator configurator)
         {
             this.universeCollection = universeCollection;
             this.worldCollection = worldCollection;
@@ -36,6 +41,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             this.sectionCollection = sectionCollection;
             this.databaseService = databaseService;
             this.logService = logService;
+            this.configurator = configurator;
         }
 
         public void SetupGameServerUsingFakeData()
@@ -125,7 +131,28 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public void DumpMasterData()
         {
-            throw new NotImplementedException();
+            if (configurator.GetMasterDataDumpFoler().Equals(string.Empty)) {
+                logService.Log("Dump will no be done because dump folder isn't valid");
+            }
+
+            MasterDataModel masterData = new MasterDataModel(){ 
+                ServerId = "123"
+            };
+
+            var jsonText = JsonConvert.SerializeObject(masterData, Formatting.Indented);
+            var fileName = Path.Combine(configurator.GetMasterDataDumpFoler(),$"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
+
+            logService.Log($"Dumping master data to file: {fileName}");
+
+            try {
+                File.WriteAllText(fileName, jsonText);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+
+            logService.Log($"Finishded dumping to file: {fileName}");
         }
 
         public async Task SetupGameServer(string serverId)

@@ -21,7 +21,7 @@ namespace SevenWorlds.GameServer.Utils.Config
 
         public string GetMasterDataDumpFoler()
         {
-            throw new NotImplementedException();
+            return config.MasterDataDumpFolder;
         }
 
         public string GetMongoDbKey()

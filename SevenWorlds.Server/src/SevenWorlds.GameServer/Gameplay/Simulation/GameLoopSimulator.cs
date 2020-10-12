@@ -20,6 +20,8 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private readonly IPlayerActionFactory playerActionFactory;
         private Stopwatch stopwatch;
 
+        private int tickCount;
+
         public GameLoopSimulator(
             ILogService logService,
             IHubService hubService,
@@ -33,14 +35,20 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
             this.playerActionFactory = playerActionFactory;
+
+            tickCount = 0;
         }
 
         public void StartSimulation()
         {
+            logService.Log("Starting Game Simulation");
+
             while (true) {
 
                 // Start
                 BeforeStart();
+
+                PingTickCount();
 
                 // Fluff
                 PingAllClients();
@@ -54,6 +62,13 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             }
         }
 
+        private void PingTickCount()
+        {
+            if(tickCount % 10 == 0) {
+                logService.Log($"Tick count: {tickCount}");
+            }
+        }
+
         private void SimulatePlayerActions()
         {
             foreach (var playerActionData in playerActionQueue.GetAllFromQueue()) {
@@ -63,7 +78,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private Stopwatch BeforeStart()
         {
-            logService.Log("----- Start of Server Simulation Tick -----");
+            logService.Log("----- Start of Server Simulation Tick -----", LogDestination.File);
             stopwatch = Stopwatch.StartNew();
             return stopwatch;
         }
@@ -72,13 +87,14 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         {
             stopwatch.Stop();
             LogInsideTick($"Loop took {stopwatch.ElapsedMilliseconds} miliseconds");
-            logService.Log("----- End of Server Simulation Tick -----");
+            logService.Log("----- End of Server Simulation Tick -----", LogDestination.File);
+            tickCount++;
             Thread.Sleep(1000);
         }
 
         private void LogInsideTick(string message)
         {
-            logService.Log($"    {message}");
+            logService.Log($"    {message}", LogDestination.File);
         }
 
         private void PrintWhoIsLogged()

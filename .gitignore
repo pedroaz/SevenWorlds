@@ -54,6 +54,7 @@ crashlytics-build.properties
 
 ServerLog.txt
 ServerConfigurations.json
+/SevenWorlds.Server/dumps
 #############################################################
 
 

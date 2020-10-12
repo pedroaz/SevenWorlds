@@ -10,5 +10,6 @@ namespace SevenWorlds.GameServer.Utils.Log
     {
         void Log(string message);
         void Log(Exception e);
+        void Log(string message, LogDestination destination);
     }
 }
