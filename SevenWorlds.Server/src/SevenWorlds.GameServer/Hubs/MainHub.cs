@@ -33,6 +33,25 @@ namespace SevenWorlds.GameServer.Hubs
             this.accountService = accountService;
         }
 
+        #region Admin
+
+        public void StartGameServer()
+        {
+            
+        }
+
+        public void StopGameServer()
+        {
+
+        }
+
+
+
+        #endregion
+
+
+        #region Client Requests
+
         public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
             if (!await accountService.UsernameExists(data.Username)) {
@@ -108,5 +127,9 @@ namespace SevenWorlds.GameServer.Hubs
         {
             return playerActionQueue.AddToQueue(playerActionData);
         }
+
+        #endregion
+
+
     }
 }

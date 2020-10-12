@@ -9,6 +9,8 @@ namespace SevenWorlds.GameServer.Utils.Config
     public interface IConfigurator
     {
         void ReadConfigurations(string configFilePath);
+        bool ShouldAutoStart();
+        string GetServerId();
         string GetMongoDbKey();
         string GetLogFilePath();
     }

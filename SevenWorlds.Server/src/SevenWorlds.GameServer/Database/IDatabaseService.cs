@@ -8,5 +8,6 @@ namespace SevenWorlds.GameServer.Database
 {
     public interface IDatabaseService
     {
+        ServerMasterData GetServerMasterData(string serverId);
     }
 }

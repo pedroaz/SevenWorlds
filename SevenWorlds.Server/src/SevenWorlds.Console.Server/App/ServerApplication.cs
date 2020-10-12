@@ -11,7 +11,7 @@ using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Hubs;
-using SevenWorlds.GameServer.Server.Manager;
+using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using System;
@@ -39,23 +39,22 @@ namespace SevenWorlds.Console.Server.App
 
         private static async void Start(string[] args)
         {
-            System.Console.WriteLine("Starting the Server via Console");
+            System.Console.WriteLine("----- Starting the Server via Console -----");
             if (args.Length != 1) {
                 System.Console.WriteLine("The args did not have Length == 1. The ServerConfigurations.json file must be passed to the server ");
                 return;
             }
 
             SetupDependencies();
-            await StartServer(args[0]);
-            while (true) {
-                var exitKey = System.Console.ReadKey();
-                if (exitKey.Key == ConsoleKey.Q) {
-                    break;
-                }
+            try {
+                await StartServer(args[0]);
             }
-
-            System.Console.WriteLine("\nQ was pressed. Application will exit in 1 seconds");
-            Thread.Sleep(1000);
+            catch (Exception e) {
+                System.Console.WriteLine("Exception! :(");
+                System.Console.WriteLine(e.Message);
+                throw;
+            }
+            Thread.Sleep(Timeout.Infinite);
         }
 
         private static async Task StartServer(string configPath)
@@ -85,7 +84,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<ServerManager>().As<IServerManager>().SingleInstance();
             builder.RegisterType<LogService>().As<ILogService>().SingleInstance();
             builder.RegisterType<UniverseCollection>().As<IUniverseCollection>().SingleInstance();
-            builder.RegisterType<UniverseFactory>().As<IUniverseFactory>().SingleInstance();
+            builder.RegisterType<GameServerFactory>().As<IGameServerFactory>().SingleInstance();
             builder.RegisterType<WorldCollection>().As<IWorldCollection>().SingleInstance();
             builder.RegisterType<SectionCollection>().As<ISectionCollection>().SingleInstance();
             builder.RegisterType<AreaCollection>().As<IAreaCollection>().SingleInstance();

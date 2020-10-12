@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Universe
+namespace SevenWorlds.GameServer.Database
 {
-    public interface IUniverseFactory
+    public class ServerMasterData
     {
-        void SetupFakeUniverses();
+        public string ServerId { get; set; }
+
     }
 }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Server.Manager
+namespace SevenWorlds.GameServer.Server
 {
     public interface IServerManager
     {
         Task StartServer();
+        ServerStatus GetServerStatus();
     }
 }

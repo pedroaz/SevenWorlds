@@ -22,9 +22,14 @@ namespace SevenWorlds.GameServer.Database
                 configurator.GetMongoDbKey()
             );
             var database = client.GetDatabase("SevenWorldsTestDatabase");
-            var accountsCollection = database.GetCollection<AccountModel>("Accounts");
-            var accounts = accountsCollection.Find(x => true).ToList();
+            //var accountsCollection = database.GetCollection<AccountModel>("Accounts");
+            //var accounts = accountsCollection.Find(x => true).ToList();
 
+        }
+
+        public ServerMasterData GetServerMasterData(string serverId)
+        {
+            return new ServerMasterData();
         }
     }
 }

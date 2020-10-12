@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Area;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
@@ -11,26 +12,29 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
-    public class UniverseFactory : IUniverseFactory
+    public class GameServerFactory : IGameServerFactory
     {
-        private IUniverseCollection universeCollection { get; }
-        private IWorldCollection worldCollection { get; }
-        private IAreaCollection areaCollection { get; }
-        private ISectionCollection sectionCollection { get; }
+        private readonly IDatabaseService databaseService;
+        private readonly IUniverseCollection universeCollection;
+        private readonly IWorldCollection worldCollection;
+        private readonly IAreaCollection areaCollection;
+        private readonly ISectionCollection sectionCollection;
 
-        public UniverseFactory(
+        public GameServerFactory(
             IUniverseCollection universeCollection, 
             IWorldCollection worldCollection, 
             IAreaCollection areaCollection, 
-            ISectionCollection sectionCollection)
+            ISectionCollection sectionCollection,
+            IDatabaseService databaseService)
         {
             this.universeCollection = universeCollection;
             this.worldCollection = worldCollection;
             this.areaCollection = areaCollection;
             this.sectionCollection = sectionCollection;
+            this.databaseService = databaseService;
         }
 
-        public void SetupFakeUniverses()
+        public void SetupGameServerUsingFakeData()
         {
             var universe = new UniverseData() {
                 Name = "First Universe"
@@ -78,8 +82,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 WorldIndex = 6
             };
 
-
-
             var firstArea = new AreaData() {
                 Name = "First Area",
                 Position = new WorldPosition() {
@@ -115,6 +117,16 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             areaCollection.Add(firstArea);
             areaCollection.Add(secondArea);
             sectionCollection.Add(section);
+        }
+
+        public void DumpMasterData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task SetupGameServer(string serverId)
+        {
+            
         }
     }
 }
