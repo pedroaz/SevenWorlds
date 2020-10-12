@@ -17,7 +17,7 @@ namespace SevenWorlds.GameServer.Server
         private ILogService logService { get; }
         private IGameServerFactory gameFactory { get; }
         private IGameLoopSimulator gameLoopSimulator { get; }
-        private ServerStatus serverStatus;
+        private volatile ServerStatus serverStatus;
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
             IGameServerFactory gameFactory, IConfigurator configurator)
@@ -38,11 +38,15 @@ namespace SevenWorlds.GameServer.Server
 
                     if (configurator.ShouldAutoStart()) {
                         logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.GetServerId()}");
-                        await StartGameServer(configurator.GetServerId());
+                        serverStatus.Status = GameServerStatus.ReadyToStart;
                     }
                     else {
+                        serverStatus.Status = GameServerStatus.WaitingForStartRequest;
                         logService.Log($"Server is not configured to auto start. Waiting for the StartGameServer request");
+                        await WaitForStartRequest();
                     }
+
+                    await StartGameServer(configurator.GetServerId());
                 }
             }
             catch (Exception e) {
@@ -54,15 +58,53 @@ namespace SevenWorlds.GameServer.Server
 
         private async Task StartGameServer(string serverId)
         {
+            if (serverStatus.Status == GameServerStatus.ReadyToStart) {
+
+                try {
+                    serverStatus.Status = GameServerStatus.Initializing;
+                    Task initTask = InitializeGameServer(serverId);
+                    initTask.Wait();
+                }
+                catch (AggregateException e) {
+                    logService.Log("Error on initialization. Server is now faulted");
+                    serverStatus.Status = GameServerStatus.Faulted;
+                    await Task.Delay(Timeout.Infinite);
+                }
+
+                
+
+                serverStatus.Status = GameServerStatus.Started;
+                gameLoopSimulator.StartSimulation();
+            }
+        }
+
+        private async Task InitializeGameServer(string serverId)
+        {
             logService.Log($"Starting game server with serverId: {serverId}");
             await gameFactory.SetupGameServer(serverId);
             gameFactory.DumpMasterData();
-            gameLoopSimulator.StartSimulation();
         }
+
+        private async Task WaitForStartRequest()
+        {
+            logService.Log("Waiting for Start Request");
+            while (serverStatus.Status != GameServerStatus.ReadyToStart) {
+                await Task.Delay(1000);
+            }
+        }
+
+        
 
         public ServerStatus GetServerStatus()
         {
             return serverStatus;
+        }
+
+        public void StartServerRequest(string serverId)
+        {
+            configurator.SetServerId(serverId);
+
+            serverStatus.Status = GameServerStatus.ReadyToStart;
         }
     }
 }

@@ -13,17 +13,27 @@ function setup() {
     $.connection.hub.url = connUrl;
     hubProxy = $.connection.MainHub;
     hubProxy.client.OnPing = function (data) {
-        console.log("Ping Recieved!");
+        // console.log(data);
+        // console.log("Ping Recieved!");
     }
     $.connection.hub.start().done(function () {
         console.log("Connection is ok!");
         refresh();
         setInterval(refresh, 5000);
     });
-    
 }
 
+function startServer() {
+    console.log("Starting server");
+    hubProxy.server.adminStartGameServer(getServerIdFromHtml()).done(function () {
+        
+    });
+}
 
+function getServerIdFromHtml() {
+    var value = document.getElementById("server_id_input").value;
+    return value;
+}
 
 function refresh() {
 
@@ -32,16 +42,11 @@ function refresh() {
         return;
     }
 
-    console.log("Refreshing");
+    // console.log("Refreshing");
 
     hubProxy.server.requestPing().done(function (value) {
-        console.log("Value: " + value);
+        // console.log("Value: " + value);
     });
-
-
-
-    
-    
 }
 
 main()

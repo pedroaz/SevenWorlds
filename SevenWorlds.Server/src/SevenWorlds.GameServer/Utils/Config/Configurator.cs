@@ -39,6 +39,11 @@ namespace SevenWorlds.GameServer.Utils.Config
             config = JsonConvert.DeserializeObject<ServerConfigurations>(File.ReadAllText(configFilePath));
         }
 
+        public void SetServerId(string serverId)
+        {
+            config.ServerId = serverId;
+        }
+
         public bool ShouldAutoStart()
         {
             return config.AutoStart;

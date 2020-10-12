@@ -9,6 +9,7 @@ namespace SevenWorlds.GameServer.Server
     public interface IServerManager
     {
         Task StartServer();
+        void StartServerRequest(string serverId);
         ServerStatus GetServerStatus();
     }
 }

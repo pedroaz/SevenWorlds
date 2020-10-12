@@ -3,6 +3,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
+using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
@@ -20,27 +21,30 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly IGameStateService gameStateService;
         private readonly IPlayerActionQueue playerActionQueue;
         private readonly IAccountService accountService;
+        private readonly IServerManager serverManager;
 
         public MainHub(
             ILogService logService,
             IGameStateService gameStateService,
             IPlayerActionQueue playerActionQueue,
-            IAccountService accountService)
+            IAccountService accountService,
+            IServerManager serverManager)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
             this.accountService = accountService;
+            this.serverManager = serverManager;
         }
 
         #region Admin
 
-        public void StartGameServer()
+        public void AdminStartGameServer(string serverId)
         {
-            
+            serverManager.StartServerRequest(serverId);
         }
 
-        public void StopGameServer()
+        public void AdminStopGameServer()
         {
 
         }

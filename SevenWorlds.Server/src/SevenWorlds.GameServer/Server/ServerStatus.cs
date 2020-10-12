@@ -8,15 +8,19 @@ namespace SevenWorlds.GameServer.Server
 {
     public enum GameServerStatus
     {
-        Starting,
-        Started,
-        GettingMasterData,
-        Simulating,
-        Stopping
+        Initializing = 0,
+        WaitingForStartRequest = 1,
+        ReadyToStart = 2,
+        Started = 3,
+        Faulted = 4
     }
 
     public class ServerStatus
     {
         public GameServerStatus Status { get; set; }
+        public ServerStatus()
+        {
+            Status = GameServerStatus.Initializing;
+        }
     }
 }

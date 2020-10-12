@@ -159,6 +159,10 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         {
             logService.Log($"Setting up Game Server with id: {serverId}");
             MasterDataModel masterData = await databaseService.GetMasterData(serverId);
+            if(masterData == null) {
+                logService.Log("Master Data is null!");
+                throw new AggregateException("Master Data is null");
+            }
         }
     }
 }

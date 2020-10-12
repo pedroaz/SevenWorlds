@@ -14,7 +14,14 @@
         <h1 class="text-center">Seven Worlds Control Panel</h1>
 
 
-        <button type="button" class="btn btn-primary" onclick="refresh()">Refresh</button>
+        <!--<button type="button" class="btn btn-primary" onclick="refresh()">Refresh</button>-->
+        <form>
+            <div class="form-group">
+                <label>Server Id</label>
+                <input class="form-control" id="server_id_input" placeholder="server1">
+            </div>
+        </form>
+        <button onclick="startServer()" class="btn btn-primary">Start</button>
 
 
 
