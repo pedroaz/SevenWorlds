@@ -17,9 +17,9 @@ namespace SevenWorlds.GameServer.Utils.Config
             return config.LogFilePath;
         }
 
-        public string GetTableStorageKey()
+        public string GetMongoDbKey()
         {
-            return config.TableStorageKey;
+            return config.MongoDbKey;
         }
 
         public void ReadConfigurations(string configFilePath)

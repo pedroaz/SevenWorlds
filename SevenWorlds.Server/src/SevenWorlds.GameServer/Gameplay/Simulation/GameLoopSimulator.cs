@@ -63,7 +63,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private Stopwatch BeforeStart()
         {
-            //logService.Log("----- Start of Server Simulation Tick -----");
+            logService.Log("----- Start of Server Simulation Tick -----");
             stopwatch = Stopwatch.StartNew();
             return stopwatch;
         }
@@ -71,8 +71,8 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private void EndOfTheSimulation()
         {
             stopwatch.Stop();
-            //LogInsideTick($"Loop took {stopwatch.ElapsedMilliseconds} miliseconds");
-            //logService.Log("----- End of Server Simulation Tick -----");
+            LogInsideTick($"Loop took {stopwatch.ElapsedMilliseconds} miliseconds");
+            logService.Log("----- End of Server Simulation Tick -----");
             Thread.Sleep(1000);
         }
 

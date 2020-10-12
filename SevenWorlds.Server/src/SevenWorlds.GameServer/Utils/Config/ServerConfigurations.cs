@@ -8,7 +8,7 @@ namespace SevenWorlds.GameServer.Utils.Config
 {
     public class ServerConfigurations
     {
-        public string TableStorageKey { get; set; }
+        public string MongoDbKey { get; set; }
         public string LogFilePath { get; set; }
     }
 }

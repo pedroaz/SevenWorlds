@@ -1,4 +1,7 @@
-﻿using SevenWorlds.GameServer.Utils.Config;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using SevenWorlds.GameServer.Database.CollectionsSchemas;
+using SevenWorlds.GameServer.Utils.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,14 @@ namespace SevenWorlds.GameServer.Database
         public DatabaseService(IConfigurator configurator)
         {
             this.configurator = configurator;
+
+            var client = new MongoClient(
+                configurator.GetMongoDbKey()
+            );
+            var database = client.GetDatabase("SevenWorldsTestDatabase");
+            var accountsCollection = database.GetCollection<AccountModel>("Accounts");
+            var accounts = accountsCollection.Find(x => true).ToList();
+
         }
     }
 }
