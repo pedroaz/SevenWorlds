@@ -1,29 +1,45 @@
 ﻿
 var connUrl = "https://localhost:44328/signalr";
-var hub = null;
-
+var hubProxy = null;
 
 function main() {
-    console.log("Setting up Control Panel")
-    setup();
-    refresh();
-    setInterval(refresh, 5000);
+    $(function () {
+        console.log("Setting up Control Panel")
+        setup();
+    })
 }
 
 function setup() {
     $.connection.hub.url = connUrl;
-    hub = $.connection.MainHub;
+    hubProxy = $.connection.MainHub;
+    hubProxy.client.OnPing = function (data) {
+        console.log("Ping Recieved!");
+    }
+    $.connection.hub.start().done(function () {
+        console.log("Connection is ok!");
+        refresh();
+        setInterval(refresh, 5000);
+    });
+    
 }
+
+
 
 function refresh() {
 
-    if (hub == null) {
+    if (hubProxy == null) {
         console.log("Hub is null. Not refreshing");
         return;
     }
 
-
     console.log("Refreshing");
+
+    hubProxy.server.requestPing().done(function (value) {
+        console.log("Value: " + value);
+    });
+
+
+
     
     
 }

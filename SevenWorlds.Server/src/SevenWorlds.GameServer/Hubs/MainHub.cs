@@ -52,6 +52,11 @@ namespace SevenWorlds.GameServer.Hubs
 
         #region Client Requests
 
+        public bool RequestPing()
+        {
+            return true;
+        }
+
         public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
             if (!await accountService.UsernameExists(data.Username)) {
