@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Base
 {
-    public class NetworkData : BaseData
+    public class NetworkData : GameData
     {
         public DateTime TimeOfCreation { get; } = DateTime.Now;
     }

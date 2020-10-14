@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Base
 {
-    public class BaseData
+    public class GameData
     {
-        public readonly string Id = Guid.NewGuid().ToString();
+        public readonly string ObjectId = Guid.NewGuid().ToString();
     }
 }

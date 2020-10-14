@@ -19,19 +19,17 @@ namespace SevenWorlds.GameServer.Database
         private IMongoDatabase database;
         private IMongoCollection<AccountModel> accountsCollection;
         private IMongoCollection<MasterDataModel> serverMasterDataCollection;
-        private IMongoCollection<PlayerData> playerDataCollection;
+        private IMongoCollection<PlayerModel> playerDataCollection;
 
         public DatabaseService(IConfigurator configurator, ILogService logService)
         {
             this.configurator = configurator;
             this.logService = logService;
-            database = new MongoClient(
-                configurator.GetMongoDbKey()
-            ).GetDatabase("SevenWorldsTestDatabase");
+            database = new MongoClient(configurator.GetMongoDbKey()).GetDatabase("SevenWorldsTestDatabase");
 
             accountsCollection = database.GetCollection<AccountModel>("Accounts");
             serverMasterDataCollection = database.GetCollection<MasterDataModel>("ServerMasterDatas");
-            playerDataCollection = database.GetCollection<PlayerData>("PlayerDatas");
+            playerDataCollection = database.GetCollection<PlayerModel>("PlayerDatas");
         }
 
         public async Task<AccountModel> GetAccountModelByPlayerName(string playerName)
@@ -55,7 +53,12 @@ namespace SevenWorlds.GameServer.Database
         public async Task<PlayerData> GetPlayerDataByUsername(string username)
         {
             logService.Log($"Getting Player Data from Database with username name: {username}");
-            return await playerDataCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
+            var playerModel = await playerDataCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
+            return new PlayerData(){ 
+                PlayerName = playerModel.PlayerName,
+                Username = playerModel.Username,
+                PlayerId = playerModel.PlayerId
+            };
         }
     }
 }

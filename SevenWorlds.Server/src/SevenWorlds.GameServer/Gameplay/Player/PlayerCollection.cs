@@ -28,7 +28,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 
         public PlayerData FindById(string id)
         {
-            return players.Find(x => x.Id == id);
+            return players.Find(x => x.ObjectId == id);
         }
 
         public IEnumerable<PlayerData> GetAll()
@@ -43,7 +43,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 
         public void Remove(string id)
         {
-            players.RemoveAll(x => x.Id == id);
+            players.RemoveAll(x => x.ObjectId == id);
         }
     }
 }

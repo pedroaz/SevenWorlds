@@ -170,6 +170,7 @@
     <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Database\CollectionsSchemas\AccountModel.cs" />
     <Compile Include="Database\CollectionsSchemas\BaseModel.cs" />
+    <Compile Include="Database\CollectionsSchemas\PlayerModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />
     <Compile Include="Database\CollectionsSchemas\MasterDataModel.cs" />

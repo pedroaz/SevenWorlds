@@ -37,7 +37,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void BroadcastAreaSync(AreaSyncData data)
         {
-            hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
+            hubContext.Clients.Group(data.Area.ObjectId).OnAreaSync(data);
         }
 
         #endregion

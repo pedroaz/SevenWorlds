@@ -8,5 +8,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public string ConnectionId;
         public string PlayerName;
         public string Username;
+        public string PlayerId;
     }
 }

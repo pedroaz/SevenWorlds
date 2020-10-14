@@ -119,6 +119,7 @@ namespace SevenWorlds.ConsoleClient.App
             });
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
+                print($"Login was ok");
             }
             else {
                 print("Client wasn't able to log");

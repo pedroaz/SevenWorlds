@@ -26,12 +26,12 @@ namespace SevenWorlds.GameServer.Gameplay.Section
 
         public SectionData FindById(string id)
         {
-            return sections.Find(x => x.Id == id);
+            return sections.Find(x => x.ObjectId == id);
         }
 
         public void Remove(string id)
         {
-            sections.RemoveAll(x => x.Id == id);
+            sections.RemoveAll(x => x.ObjectId == id);
         }
 
         public IEnumerable<SectionData> GetAll()

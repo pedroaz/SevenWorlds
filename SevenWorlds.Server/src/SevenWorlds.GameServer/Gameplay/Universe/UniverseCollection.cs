@@ -23,12 +23,12 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public UniverseData FindById(string id)
         {
-            return universes.Find(x => x.Id == id);
+            return universes.Find(x => x.ObjectId == id);
         }
 
         public void Remove(string id)
         {
-            universes.RemoveAll(x => x.Id == id);
+            universes.RemoveAll(x => x.ObjectId == id);
         }
 
         public void StartUniverses()

@@ -27,7 +27,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         {
             this.gameStateService = gameStateService;
             this.hubService = hubService;
-            ActionId = data.Id;
+            ActionId = data.ObjectId;
         }
 
         public virtual void Execute()

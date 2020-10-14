@@ -19,7 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player.Actions
 
         public override void Execute()
         {
-            gameStateService.MovePlayerToArea(data.Id, data.ToAreaId);
+            gameStateService.MovePlayerToArea(data.ObjectId, data.ToAreaId);
         }
     }
 }
