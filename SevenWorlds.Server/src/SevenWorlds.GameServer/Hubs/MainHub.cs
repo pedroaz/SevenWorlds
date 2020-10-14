@@ -10,6 +10,7 @@ using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Hubs
@@ -49,8 +50,6 @@ namespace SevenWorlds.GameServer.Hubs
 
         }
 
-
-
         #endregion
 
 
@@ -78,9 +77,12 @@ namespace SevenWorlds.GameServer.Hubs
                 };
             }
 
+            var playerData = await accountService.Login(data.Username, Context.ConnectionId);
+            gameStateService.AddPlayerDataToGame(playerData);
+
             return new LoginResponseData() {
                 UniverseSyncData = gameStateService.GetUniverseSyncData(),
-                PlayerData = await accountService.Login(data.Username, Context.ConnectionId),
+                PlayerData = playerData,
                 ResponseType = LoginResponseType.Success
             };
         }
@@ -135,6 +137,11 @@ namespace SevenWorlds.GameServer.Hubs
         public PlayerActionStatusData RequestStartPlayerAction(PlayerActionData playerActionData)
         {
             return playerActionQueue.AddToQueue(playerActionData);
+        }
+
+        public IEnumerable<PlayerData> RequestAllPlayerDatas()
+        {
+            return gameStateService.PlayerCollection.GetAll();
         }
 
         #endregion

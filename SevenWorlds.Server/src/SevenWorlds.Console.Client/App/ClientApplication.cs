@@ -49,6 +49,9 @@ namespace SevenWorlds.ConsoleClient.App
                         case "login":
                             Login();
                             break;
+                        case "1":
+                            Login1();
+                            break;
                         case "chat":
                             Chat();
                             break;
@@ -116,6 +119,25 @@ namespace SevenWorlds.ConsoleClient.App
             });
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
+            }
+            else {
+                print("Client wasn't able to log");
+            }
+        }
+
+        private static async void Login1()
+        {
+            var username = "pedro_test";
+            var password = "123";
+
+            print($"Login with {username} and {password}");
+            var response = await client.Login(new LoginData() {
+                Username = username,
+                Password = password
+            });
+            if (response.ResponseType == LoginResponseType.Success) {
+                playerData = response.PlayerData;
+                print($"Login was ok");
             }
             else {
                 print("Client wasn't able to log");

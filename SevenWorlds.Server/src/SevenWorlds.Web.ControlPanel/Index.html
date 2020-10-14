@@ -14,14 +14,34 @@
         <h1 class="text-center">Seven Worlds Control Panel</h1>
 
 
-        <!--<button type="button" class="btn btn-primary" onclick="refresh()">Refresh</button>-->
+
+        <h1 id="server_status">Hub Connection: OFFLINE :(</h1>
+
         <form>
             <div class="form-group">
-                <label>Server Id</label>
+                <h1>Start Server</h1>
                 <input class="form-control" id="server_id_input" placeholder="server1">
             </div>
         </form>
         <button onclick="startServer()" class="btn btn-primary">Start</button>
+
+        <div class="dropdown-divider"></div>
+
+        <h1>Players Datas</h1>
+
+        <table class="table table-striped" id="player_data_table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Player Name</th>
+                    <th scope="col">Id</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
 
 
 

@@ -3,11 +3,8 @@ using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
-using SevenWorlds.GameServer.Hubs;
-using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
-using System.Linq;
 
 namespace SevenWorlds.GameServer.Gameplay.GameState
 {
@@ -43,9 +40,9 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
         public IPlayerCollection PlayerCollection => playerCollection;
 
-        public void AddPlayerToTheGame(string playerId, string connectionId)
+        public void AddPlayerDataToGame(PlayerData playerData)
         {
-            
+            playerCollection.Add(playerData);
         }
 
         public void AddCharacterToWorld(string playerId, string connectionId)
@@ -60,7 +57,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
-                
+
             };
         }
 
