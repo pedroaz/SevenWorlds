@@ -9,5 +9,7 @@ namespace SevenWorlds.GameServer.Database
         public string ServerId { get; set; }
         public List<UniverseData> UniverseCollection { get; set; }
         public List<WorldData> WorldCollection { get; set; }
+        public List<AreaData> AreaCollection { get; set; }
+        public List<SectionData> SectionCollection { get; set; }
     }
 }

@@ -50,6 +50,11 @@ namespace SevenWorlds.GameServer.Hubs
 
         }
 
+        public async Task ResetUniverseFakeData()
+        {
+            await serverManager.ResetFakeData();
+        }
+
         #endregion
 
 

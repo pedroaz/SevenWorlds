@@ -57,8 +57,12 @@ namespace SevenWorlds.GameServer.Database
             return new PlayerData(){ 
                 PlayerName = playerModel.PlayerName,
                 Username = playerModel.Username,
-                PlayerId = playerModel.PlayerId
             };
+        }
+
+        public async Task UpdateMasterData(MasterDataModel model)
+        {
+            await serverMasterDataCollection.InsertOneAsync(model);
         }
     }
 }

@@ -106,5 +106,10 @@ namespace SevenWorlds.GameServer.Server
 
             serverStatus.Status = GameServerStatus.ReadyToStart;
         }
+
+        public async Task ResetFakeData()
+        {
+            await gameFactory.SetFakeData();
+        }
     }
 }

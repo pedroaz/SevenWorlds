@@ -44,8 +44,48 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             this.configurator = configurator;
         }
 
-        public void SetupGameServerUsingFakeData()
+        public void DumpMasterData()
         {
+            if (configurator.GetMasterDataDumpFoler().Equals(string.Empty)) {
+                logService.Log("Dump will no be done because dump folder isn't valid");
+            }
+
+            MasterDataModel masterData = new MasterDataModel(){ 
+                ServerId = "123"
+            };
+
+            var jsonText = JsonConvert.SerializeObject(masterData, Formatting.Indented);
+            var fileName = Path.Combine(configurator.GetMasterDataDumpFoler(),$"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
+
+            logService.Log($"Dumping master data to file: {fileName}");
+
+            try {
+                File.WriteAllText(fileName, jsonText);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+
+            logService.Log($"Finishded dumping to file: {fileName}");
+        }
+
+        public async Task SetupGameServer(string serverId)
+        {
+            logService.Log($"Setting up Game Server with id: {serverId}");
+            MasterDataModel masterData = await databaseService.GetMasterData(serverId);
+            if(masterData == null) {
+                logService.Log("Master Data is null!");
+                throw new AggregateException("Master Data is null");
+            }
+        }
+
+        public async Task SetFakeData()
+        {
+
+            // Set Accounts
+            // Set Master Data
+
             var universe = new UniverseData() {
                 Name = "First Universe"
             };
@@ -110,59 +150,32 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 WorldId = world0.Id
             };
 
-            var section = new SectionData() {
+            var section1 = new SectionData() {
                 Name = "Poring Camp",
                 AreaId = firstArea.Id,
                 SectionType = SectionTypes.MonsterCamp
             };
 
-            universeCollection.Add(universe);
-            worldCollection.Add(world0);
-            worldCollection.Add(world1);
-            worldCollection.Add(world2);
-            worldCollection.Add(world3);
-            worldCollection.Add(world4);
-            worldCollection.Add(world5);
-            worldCollection.Add(world6);
-            areaCollection.Add(firstArea);
-            areaCollection.Add(secondArea);
-            sectionCollection.Add(section);
-        }
 
-        public void DumpMasterData()
-        {
-            if (configurator.GetMasterDataDumpFoler().Equals(string.Empty)) {
-                logService.Log("Dump will no be done because dump folder isn't valid");
-            }
-
-            MasterDataModel masterData = new MasterDataModel(){ 
-                ServerId = "123"
+            MasterDataModel masterData = new MasterDataModel() {
+                ServerId = "fake_server",
+                UniverseCollection = new List<UniverseData>() {
+                    universe
+                },
+                WorldCollection = new List<WorldData>() {
+                    world0, world1, world2, world3,
+                    world4, world5, world6
+                },
+                AreaCollection = new List<AreaData>() {
+                    firstArea, secondArea
+                },
+                SectionCollection = new List<SectionData>() {
+                    section1
+                }
             };
 
-            var jsonText = JsonConvert.SerializeObject(masterData, Formatting.Indented);
-            var fileName = Path.Combine(configurator.GetMasterDataDumpFoler(),$"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
-
-            logService.Log($"Dumping master data to file: {fileName}");
-
-            try {
-                File.WriteAllText(fileName, jsonText);
-            }
-            catch (Exception e) {
-                logService.Log(e);
-                throw;
-            }
-
-            logService.Log($"Finishded dumping to file: {fileName}");
+            await databaseService.UpdateMasterData(masterData);
         }
 
-        public async Task SetupGameServer(string serverId)
-        {
-            logService.Log($"Setting up Game Server with id: {serverId}");
-            MasterDataModel masterData = await databaseService.GetMasterData(serverId);
-            if(masterData == null) {
-                logService.Log("Master Data is null!");
-                throw new AggregateException("Master Data is null");
-            }
-        }
     }
 }

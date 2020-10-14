@@ -35,9 +35,15 @@ function getServerIdFromHtml() {
     return value;
 }
 
+function resetServer() {
+    console.log("Reseting server START");
+    hubProxy.server.resetUniverseFakeData().done(function () {
+        console.log("Reseting server FINISHED");
+    });
+}
+
 function getAllPlayerDatas() {
     hubProxy.server.requestAllPlayerDatas().done(function (playerDatas) {
-        console.log(playerDatas);
 
         var tableRef = document.getElementById('player_data_table').getElementsByTagName('tbody')[0];
 

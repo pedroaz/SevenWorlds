@@ -10,6 +10,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
     {
         void DumpMasterData();
         Task SetupGameServer(string serverId);
-        void SetupGameServerUsingFakeData();
+        Task SetFakeData();
     }
 }
