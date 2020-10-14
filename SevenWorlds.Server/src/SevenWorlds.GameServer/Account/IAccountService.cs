@@ -10,9 +10,9 @@ namespace SevenWorlds.GameServer.Account
     public interface IAccountService
     {
         Task<bool> UsernameExists(string username);
-        Task<bool> PlayerNameExists(string username);
+        Task<bool> PlayerNameExists(string playerName);
         Task<bool> CheckLogin(string username, string password);
-        Task<PlayerData> Login(string username);
+        Task<PlayerData> Login(string username, string connectionId);
         Task RegisterAccount(string username, string password, string playerName);
     }
 }

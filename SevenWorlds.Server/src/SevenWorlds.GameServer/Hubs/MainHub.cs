@@ -54,6 +54,7 @@ namespace SevenWorlds.GameServer.Hubs
         #endregion
 
 
+
         #region Client Requests
 
         public bool RequestPing()
@@ -79,8 +80,8 @@ namespace SevenWorlds.GameServer.Hubs
 
             return new LoginResponseData() {
                 UniverseSyncData = gameStateService.GetUniverseSyncData(),
-                PlayerData = await accountService.Login(data.Username),
-                ResponseType = LoginResponseType.PasswordIncorrect
+                PlayerData = await accountService.Login(data.Username, Context.ConnectionId),
+                ResponseType = LoginResponseType.Success
             };
         }
 

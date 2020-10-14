@@ -19,17 +19,22 @@ namespace SevenWorlds.GameServer.Account
 
         public async Task<bool> CheckLogin(string username, string password)
         {
-            throw new NotImplementedException();
+            var account = await databaseService.GetAccountModelByUsername(username);
+            return account.Password == password;
         }
 
-        public async Task<PlayerData> Login(string username)
+        public async Task<PlayerData> Login(string username, string connectionId)
         {
-            throw new NotImplementedException();
+            var playerData = await databaseService.GetPlayerDataByUsername(username);
+            if(playerData != null) {
+                playerData.ConnectionId = connectionId;
+            }
+            return playerData;
         }
 
-        public Task<bool> PlayerNameExists(string username)
+        public async Task<bool> PlayerNameExists(string playerName)
         {
-            throw new NotImplementedException();
+            return await databaseService.GetAccountModelByPlayerName(playerName) != null;
         }
 
         public Task RegisterAccount(string username, string response, string playerName)
@@ -39,7 +44,7 @@ namespace SevenWorlds.GameServer.Account
 
         public async Task<bool> UsernameExists(string username)
         {
-            throw new NotImplementedException();
+            return await databaseService.GetAccountModelByUsername(username) != null;
         }
     }
 }

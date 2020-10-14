@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SevenWorlds.GameServer.Database
         private IMongoDatabase database;
         private IMongoCollection<AccountModel> accountsCollection;
         private IMongoCollection<MasterDataModel> serverMasterDataCollection;
+        private IMongoCollection<PlayerData> playerDataCollection;
 
         public DatabaseService(IConfigurator configurator, ILogService logService)
         {
@@ -29,12 +31,31 @@ namespace SevenWorlds.GameServer.Database
 
             accountsCollection = database.GetCollection<AccountModel>("Accounts");
             serverMasterDataCollection = database.GetCollection<MasterDataModel>("ServerMasterDatas");
+            playerDataCollection = database.GetCollection<PlayerData>("PlayerDatas");
+        }
+
+        public async Task<AccountModel> GetAccountModelByPlayerName(string playerName)
+        {
+            logService.Log($"Getting Account Model from Database with playername: {playerName}");
+            return await accountsCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
+        }
+
+        public async Task<AccountModel> GetAccountModelByUsername(string username)
+        {
+            logService.Log($"Getting Account Model from Database with username: {username}");
+            return await accountsCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
         }
 
         public async Task<MasterDataModel> GetMasterData(string serverId)
         {
             logService.Log($"Getting Master Data from Database with ServerId: {serverId}");
             return await serverMasterDataCollection.Find(x => x.ServerId == serverId).FirstOrDefaultAsync();
+        }
+
+        public async Task<PlayerData> GetPlayerDataByUsername(string username)
+        {
+            logService.Log($"Getting Player Data from Database with username name: {username}");
+            return await playerDataCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
         }
     }
 }

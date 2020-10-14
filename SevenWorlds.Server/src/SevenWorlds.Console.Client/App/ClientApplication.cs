@@ -38,7 +38,6 @@ namespace SevenWorlds.ConsoleClient.App
                 while (command != "quit") {
                     print("Welcome to the console client");
                     print("Type help for commands");
-                    Register();
                     var line = Console.ReadLine().ToLower();
                     switch (line) {
                         case "help":
