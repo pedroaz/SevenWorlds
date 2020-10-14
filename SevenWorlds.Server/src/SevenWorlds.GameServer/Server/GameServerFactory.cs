@@ -52,43 +52,43 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
             var world0 = new WorldData() {
                 Name = "World 1",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 0
             };
 
             var world1 = new WorldData() {
                 Name = "World 2",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 1
             };
 
             var world2 = new WorldData() {
                 Name = "World 3",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 2
             };
 
             var world3 = new WorldData() {
                 Name = "World 4",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 3
             };
 
             var world4 = new WorldData() {
                 Name = "World 5",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 4
             };
 
             var world5 = new WorldData() {
                 Name = "World 6",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 5
             };
 
             var world6 = new WorldData() {
                 Name = "World 7",
-                UniverseId = universe.ObjectId,
+                UniverseId = universe.Id,
                 WorldIndex = 6
             };
 
@@ -98,7 +98,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 0,
                     Y = 0
                 },
-                WorldId = world0.ObjectId
+                WorldId = world0.Id
             };
 
             var secondArea = new AreaData() {
@@ -107,12 +107,12 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 1,
                     Y = 0
                 },
-                WorldId = world0.ObjectId
+                WorldId = world0.Id
             };
 
             var section = new SectionData() {
                 Name = "Poring Camp",
-                AreaId = firstArea.ObjectId,
+                AreaId = firstArea.Id,
                 SectionType = SectionTypes.MonsterCamp
             };
 

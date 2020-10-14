@@ -8,6 +8,6 @@ namespace SevenWorlds.Shared.Data.Base
 {
     public class GameData
     {
-        public readonly string ObjectId = Guid.NewGuid().ToString();
+        public readonly string Id = Guid.NewGuid().ToString();
     }
 }

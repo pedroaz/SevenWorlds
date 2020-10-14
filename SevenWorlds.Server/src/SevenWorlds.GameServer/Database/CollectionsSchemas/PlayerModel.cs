@@ -10,6 +10,5 @@ namespace SevenWorlds.GameServer.Database.CollectionsSchemas
     {
         public string PlayerName;
         public string Username;
-        public string PlayerId;
     }
 }
