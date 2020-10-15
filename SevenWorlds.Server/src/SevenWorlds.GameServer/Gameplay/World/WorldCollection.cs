@@ -38,10 +38,5 @@ namespace SevenWorlds.GameServer.Gameplay.World
         {
             return worlds;
         }
-
-        public List<WorldData> GetDefaultWorlds()
-        {
-            return worlds;
-        }
     }
 }

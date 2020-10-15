@@ -11,6 +11,7 @@ using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Hubs
@@ -120,13 +121,17 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void RequestSendChatMessage(ChatMessageData data)
         {
-            logService.Log("Recieved Chat Message Command");
             Clients.All.OnChatMessage(data);
         }
 
         public UniverseSyncData RequestUniverseSync()
         {
             return gameStateService.GetUniverseSyncData();
+        }
+
+        public IEnumerable<WorldData> RequestAllWorlds()
+        {
+            return gameStateService.WorldCollection.GetAll();
         }
 
         public WorldSyncData RequestWorldSync(string worldId)
@@ -139,6 +144,11 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.GetAreaSyncData(areaId);
         }
 
+        public IEnumerable<AreaData> RequestAllAreas()
+        {
+            return gameStateService.AreaCollection.GetAll();
+        }
+
         public PlayerActionStatusData RequestStartPlayerAction(PlayerActionData playerActionData)
         {
             return playerActionQueue.AddToQueue(playerActionData);
@@ -147,6 +157,11 @@ namespace SevenWorlds.GameServer.Hubs
         public IEnumerable<PlayerData> RequestAllPlayerDatas()
         {
             return gameStateService.PlayerCollection.GetAll();
+        }
+
+        public IEnumerable<SectionData> RequestAllSections()
+        {
+            return gameStateService.SectionCollection.GetAll();
         }
 
         #endregion

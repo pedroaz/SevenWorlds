@@ -5,6 +5,8 @@ using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.GameState
 {

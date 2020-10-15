@@ -2,6 +2,7 @@
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
+using System.Linq;
 
 namespace SevenWorlds.GameServer.Hubs
 {

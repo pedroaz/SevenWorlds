@@ -78,6 +78,27 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 logService.Log("Master Data is null!");
                 throw new AggregateException("Master Data is null");
             }
+            
+            // Add universes
+            foreach (var item in masterData.UniverseCollection) {
+                universeCollection.Add(item);
+            }
+
+
+            // Add Worlds
+            foreach (var item in masterData.WorldCollection) {
+                worldCollection.Add(item);
+            }
+
+            // Add Areas
+            foreach (var item in masterData.AreaCollection) {
+                areaCollection.Add(item);
+            }
+
+            // Add Sections
+            foreach (var item in masterData.SectionCollection) {
+                sectionCollection.Add(item);
+            }
         }
 
         public async Task SetFakeData()

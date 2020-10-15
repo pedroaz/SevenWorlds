@@ -5,6 +5,8 @@ using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SevenWorlds.GameServer.Gameplay.GameState
 {
@@ -61,11 +63,13 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             };
         }
 
+        
+
         public UniverseSyncData GetUniverseSyncData()
         {
             return new UniverseSyncData() {
                 Universe = universeCollection.GetDefaultUniverse(),
-                Worlds = worldCollection.GetDefaultWorlds()
+                Worlds = worldCollection.GetAll().ToList()
             };
         }
 
@@ -75,6 +79,16 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
                 World = worldCollection.FindById(worldId),
                 Areas = areaCollection.GetAllAreasFromWorld(worldId)
             };
+        }
+
+        public IEnumerable<WorldData> GetAllWorlds()
+        {
+            return worldCollection.GetAll();
+        }
+
+        public IEnumerable<AreaData> GetAllAreas()
+        {
+            return areaCollection.GetAll();
         }
     }
 }
