@@ -133,7 +133,7 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.AreaCollection.GetAll();
         }
 
-        public PlayerActionStatusData RequestStartPlayerAction(PlayerActionData playerActionData)
+        public PlayerActionStatusData RequestPlayerAction(PlayerActionData playerActionData)
         {
             return playerActionQueue.AddToQueue(playerActionData);
         }

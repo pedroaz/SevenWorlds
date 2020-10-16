@@ -129,7 +129,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 data = new CharacterData() {
                     Id = NewId(),
                     Level = 0,
-                    CharacterName = "Nioshi",
                     PlayerName = "Pedro",
                     WorldId = worlds[0].Id
                 }

@@ -80,7 +80,7 @@ namespace SevenWorlds.GameClient.Client
 
         public async Task<PlayerActionStatusData> RequestStartPlayerAction(PlayerActionData data)
         {
-            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_StartPlayerAction, data);
+            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_PlayerAction, data);
         }
 
         public async Task<RegisterAccountResponse> RequestRegister(RegisterAccountData data)
