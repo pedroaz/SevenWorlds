@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    class EncounterData
+    public class EncounterData
     {
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
+using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
@@ -13,12 +14,13 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 {
     public class GameStateService : IGameStateService
     {
-        private readonly IUniverseCollection universeCollection;
-        private readonly IWorldCollection worldCollection;
-        private readonly IAreaCollection areaCollection;
-        private readonly ISectionCollection sectionCollection;
-        private readonly IPlayerCollection playerCollection;
-        private readonly ICharacterCollection characterCollection;
+        public IUniverseCollection UniverseCollection { get; }
+        public IWorldCollection WorldCollection { get; }
+        public IAreaCollection AreaCollection { get; }
+        public ISectionCollection SectionCollection { get; }
+        public IPlayerCollection PlayerCollection { get; }
+        public ICharacterCollection CharacterCollection { get; }
+        public IEncounterCollection EncounterCollection { get;  }
 
         public GameStateService(
             IUniverseCollection universeCollection,
@@ -26,73 +28,66 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             IAreaCollection areaCollection,
             ISectionCollection sectionCollection,
             IPlayerCollection playerCollection,
-            ICharacterCollection characterCollection)
+            ICharacterCollection characterCollection,
+            IEncounterCollection encounterCollection)
         {
-            this.universeCollection = universeCollection;
-            this.worldCollection = worldCollection;
-            this.areaCollection = areaCollection;
-            this.sectionCollection = sectionCollection;
-            this.playerCollection = playerCollection;
-            this.characterCollection = characterCollection;
+            UniverseCollection = universeCollection;
+            WorldCollection = worldCollection;
+            AreaCollection = areaCollection;
+            SectionCollection = sectionCollection;
+            PlayerCollection = playerCollection;
+            CharacterCollection = characterCollection;
+            EncounterCollection = encounterCollection;
         }
 
-        public IUniverseCollection UniverseCollection => universeCollection;
-
-        public IWorldCollection WorldCollection => worldCollection;
-
-        public IAreaCollection AreaCollection => areaCollection;
-
-        public ISectionCollection SectionCollection => sectionCollection;
-
-        public IPlayerCollection PlayerCollection => playerCollection;
-
-        public ICharacterCollection CharacterCollection => characterCollection;
+        
 
         public void AddPlayerToGame(PlayerData playerData)
         {
-            playerCollection.Add(playerData);
+            PlayerCollection.Add(playerData);
         }
 
         public void AddCharacterToGame(CharacterData characterData)
         {
-            characterCollection.Add(characterData);
+            CharacterCollection.Add(characterData);
         }
 
-        public void MovePlayerToArea(string playerId, string areaId)
+        public void MovePlayerToArea(string characterId, string areaId)
         {
+            CharacterCollection.FindById(characterId).Position = AreaCollection.FindById(areaId).Position;
         }
 
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
-
+                
             };
         }
 
         public UniverseSyncData GetUniverseSyncData()
         {
             return new UniverseSyncData() {
-                Universe = universeCollection.GetDefaultUniverse(),
-                Worlds = worldCollection.GetAll().ToList()
+                Universe = UniverseCollection.GetDefaultUniverse(),
+                Worlds = WorldCollection.GetAll().ToList()
             };
         }
 
         public WorldSyncData GetWorldSyncData(string worldId)
         {
             return new WorldSyncData() {
-                World = worldCollection.FindById(worldId),
-                Areas = areaCollection.GetAllAreasFromWorld(worldId)
+                World = WorldCollection.FindById(worldId),
+                Areas = AreaCollection.GetAllAreasFromWorld(worldId)
             };
         }
 
         public IEnumerable<WorldData> GetAllWorlds()
         {
-            return worldCollection.GetAll();
+            return WorldCollection.GetAll();
         }
 
         public IEnumerable<AreaData> GetAllAreas()
         {
-            return areaCollection.GetAll();
+            return AreaCollection.GetAll();
         }
 
        

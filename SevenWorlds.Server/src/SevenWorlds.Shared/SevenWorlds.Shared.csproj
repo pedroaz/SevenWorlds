@@ -56,9 +56,10 @@
     <Compile Include="Data\Gameplay\AreaData.cs" />
     <Compile Include="Data\Gameplay\CharacterData.cs" />
     <Compile Include="Data\Gameplay\EncounterData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\Datas\CreateBattleEncounterActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionStatusData.cs" />
-    <Compile Include="Data\Gameplay\PlayerActions\PlayerMovementActionData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\Datas\PlayerMovementActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerData.cs" />
     <Compile Include="Data\Gameplay\SectionData.cs" />
     <Compile Include="Data\Gameplay\UniverseData.cs" />

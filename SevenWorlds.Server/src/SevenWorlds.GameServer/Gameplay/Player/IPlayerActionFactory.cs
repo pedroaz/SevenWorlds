@@ -4,6 +4,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public interface IPlayerActionFactory
     {
-        CharacterAction GenerateAction(PlayerActionData data);
+        PlayerAction GenerateAction(PlayerActionData data);
     }
 }

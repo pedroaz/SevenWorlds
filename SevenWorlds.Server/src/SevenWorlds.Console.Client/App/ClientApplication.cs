@@ -40,25 +40,25 @@ namespace SevenWorlds.ConsoleClient.App
                     print("Type help for commands");
                     var line = Console.ReadLine().ToLower();
                     switch (line) {
-                        case "help":
+                        case "h":
                             ShowHelp();
                             break;
-                        case "set_ping_handler":
+                        case "ping":
                             SetPingHandler();
                             break;
-                        case "login":
+                        case "l":
                             Login();
                             break;
                         case "1":
                             Login1();
                             break;
-                        case "chat":
+                        case "c":
                             Chat();
                             break;
-                        case "move":
+                        case "m":
                             Move();
                             break;
-                        case "register":
+                        case "r":
                             Register();
                             break;
                     }
@@ -74,9 +74,13 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static void ShowHelp()
         {
-            print("[set_ping_handler] - Log if the client is recieving pings");
-            print("[login] - Login to the server");
-            print("[register] - Register the account");
+            print("[H] - Show Help Commands");
+            print("[PING] - Log if the client is recieving pings");
+            print("[L] - Login to the server");
+            print("[1] - Login with account \"one\"");
+            print("[C] - Chat with all players");
+            print("[M] - Move the character");
+            print("[R] - Register the account");
         }
 
 

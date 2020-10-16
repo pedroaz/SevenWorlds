@@ -5,10 +5,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public enum PlayerActionType
     {
         Movement = 0,
-        Attack = 1
+        CreateBattleEncounter = 1
     }
-
-    
 
     public class PlayerActionData : NetworkData
     {

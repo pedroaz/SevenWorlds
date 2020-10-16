@@ -5,7 +5,7 @@ using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 
 namespace SevenWorlds.GameServer.Gameplay.Player.Actions
 {
-    public class PlayerMovementAction : CharacterAction
+    public class PlayerMovementAction : PlayerAction
     {
         private readonly PlayerMovementActionData data;
 
@@ -19,7 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player.Actions
 
         public override void Execute()
         {
-            gameStateService.MovePlayerToArea(data.Id, data.ToAreaId);
+            gameStateService.MovePlayerToArea(data.CharacterId, data.ToAreaId);
         }
     }
 }

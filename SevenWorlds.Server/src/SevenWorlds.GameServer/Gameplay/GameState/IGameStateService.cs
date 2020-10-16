@@ -1,13 +1,12 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
+using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.GameState
 {
@@ -19,13 +18,14 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         ISectionCollection SectionCollection { get; }
         IPlayerCollection PlayerCollection { get; }
         ICharacterCollection CharacterCollection { get; }
+        IEncounterCollection EncounterCollection { get; }
 
         // Player
         void AddPlayerToGame(PlayerData playerData);
 
         // Characters 
         void AddCharacterToGame(CharacterData characterData);
-        void MovePlayerToArea(string playerId, string areaId);
+        void MovePlayerToArea(string characterId, string areaId);
 
 
         // Syncs

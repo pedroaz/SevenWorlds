@@ -183,12 +183,15 @@
     <Compile Include="Gameplay\Character\CharacterPlacementService.cs" />
     <Compile Include="Gameplay\Character\ICharacterCollection.cs" />
     <Compile Include="Gameplay\Character\ICharacterPlacementService.cs" />
+    <Compile Include="Gameplay\Encounter\EncounterCollection.cs" />
+    <Compile Include="Gameplay\Encounter\IEncounterCollection.cs" />
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
     <Compile Include="Gameplay\GameState\IGameStateService.cs" />
+    <Compile Include="Gameplay\Player\Actions\CreateBattleEncounterAction.cs" />
     <Compile Include="Gameplay\Player\Actions\PlayerMovementAction.cs" />
     <Compile Include="Gameplay\Player\IPlayerActionFactory.cs" />
     <Compile Include="Gameplay\Player\IPlayerActionQueue.cs" />
-    <Compile Include="Gameplay\Player\Actions\CharacterAction.cs" />
+    <Compile Include="Gameplay\Player\Actions\PlayerAction.cs" />
     <Compile Include="Gameplay\Player\IPlayerCollection.cs" />
     <Compile Include="Gameplay\Player\PlayerActionFactory.cs" />
     <Compile Include="Gameplay\Player\PlayerActionQueue.cs" />
