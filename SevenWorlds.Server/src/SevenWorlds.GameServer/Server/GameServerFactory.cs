@@ -130,7 +130,11 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     Id = NewId(),
                     Level = 0,
                     PlayerName = "Pedro",
-                    WorldId = worlds[0].Id
+                    WorldId = worlds[0].Id,
+                    Position = new WorldPosition() {
+                        X = 0,
+                        Y = 0
+                    }
                 }
             };
         }

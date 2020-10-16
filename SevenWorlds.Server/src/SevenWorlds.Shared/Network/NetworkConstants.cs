@@ -20,7 +20,9 @@ namespace SevenWorlds.Shared.Network
         public const string Request_PlayerAction = "RequestPlayerAction";
         public const string Request_RequestRegisterAccount = "RequestRegisterAccount";
         public const string Request_AllPlayerDatas = "RequestAllPlayerDatas";
+        public const string Request_PlayerCharacters = "RequestPlayerCharacters";
         
+
 
         // Servers broadcast to clients
         public const string Event_OnChatMessage = "OnChatMessage";

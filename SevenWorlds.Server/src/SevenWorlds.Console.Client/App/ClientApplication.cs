@@ -5,6 +5,7 @@ using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Network;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace SevenWorlds.ConsoleClient.App
         static string command = "";
 
         private static PlayerData playerData { get; set; }
+        private static CharacterData characterData { get; set; }
 
         static void print(string message)
         {
@@ -93,9 +95,7 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Move()
         {
-            await client.RequestStartPlayerAction(new PlayerMovementActionData(){
-                
-            });
+            await client.RequestMovementAction(characterData.Id, new WorldPosition(){ X = 0, Y = 1 });
         }
 
         private static async void Chat()
@@ -143,6 +143,8 @@ namespace SevenWorlds.ConsoleClient.App
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
                 print($"Login was ok");
+                List<CharacterData> characters = await client.RequestPlayerCharacters(playerData.PlayerName);
+                characterData = characters[0];
             }
             else {
                 print("Client wasn't able to log");

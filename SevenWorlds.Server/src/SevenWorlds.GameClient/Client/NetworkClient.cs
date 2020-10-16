@@ -2,9 +2,11 @@
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameClient.Client
@@ -77,17 +79,44 @@ namespace SevenWorlds.GameClient.Client
         {
             return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Request_AreaSync, areaId, playerId);
         }
-
-        public async Task<PlayerActionStatusData> RequestStartPlayerAction(PlayerActionData data)
-        {
-            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_PlayerAction, data);
-        }
-
+        
         public async Task<RegisterAccountResponse> RequestRegister(RegisterAccountData data)
         {
             return await hubProxy.Invoke<RegisterAccountResponse>(NetworkConstants.Request_RequestRegisterAccount, data);
         }
 
+        public async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
+        {
+            return await hubProxy.Invoke<List<CharacterData>>(NetworkConstants.Request_PlayerCharacters, playerName);
+        }
+
         #endregion
+
+        #region Actions
+
+        private async Task<PlayerActionStatusData> RequestGeneralAction(PlayerActionData data)
+        {
+            data.Id = Guid.NewGuid().ToString();
+            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_PlayerAction, data);
+        }
+
+        public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, string areaId)
+        {
+            return await RequestGeneralAction(new PlayerMovementActionData(){ 
+                CharacterId = characterId,
+                ToAreaId = areaId
+            });
+        }
+
+        public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, WorldPosition areaPosition)
+        {
+            return await RequestGeneralAction(new PlayerMovementActionData() {
+                CharacterId = characterId,
+                AreaPosition = areaPosition
+            });
+        }
+
+        #endregion
+
     }
 }

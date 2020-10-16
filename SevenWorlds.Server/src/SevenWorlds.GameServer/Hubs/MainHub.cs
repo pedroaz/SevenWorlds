@@ -148,6 +148,11 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.SectionCollection.GetAll();
         }
 
+        public IEnumerable<CharacterData> RequestPlayerCharacters(string playerName)
+        {
+            return gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+        }
+
         #endregion
 
 

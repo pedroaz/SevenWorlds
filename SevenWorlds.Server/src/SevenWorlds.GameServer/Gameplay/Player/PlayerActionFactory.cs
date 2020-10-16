@@ -27,7 +27,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             switch (data.ActionType) {
                 case PlayerActionType.Movement:
                     return new PlayerMovementAction( (PlayerMovementActionData) data, gameStateService, hubService);
-                case PlayerActionType.Attack:
+                case PlayerActionType.CreateBattleEncounter:
                 default:
                     return new PlayerAction(data, gameStateService, hubService);
             }

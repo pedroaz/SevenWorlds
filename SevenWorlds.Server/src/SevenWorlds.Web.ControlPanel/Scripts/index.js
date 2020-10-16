@@ -42,31 +42,6 @@ function resetServer() {
     });
 }
 
-function getAllPlayerDatas() {
-    hubProxy.server.requestAllPlayerDatas().done(function (playerDatas) {
-
-        var tableRef = document.getElementById('player_data_table').getElementsByTagName('tbody')[0];
-
-        for (var i = tableRef.rows.length-1; i >= 0; i--) {
-            tableRef.deleteRow(i);
-        }
-
-        for (var i = 0; i < playerDatas.length; i++) {
-            var data = playerDatas[0]; 
-            var rowhtml = `
-                <tr>
-                    <th scope="row">${i}</th>
-                        <td>${data.Id}</td>
-                        <td>${data.Username}</td>
-                        <td>${data.PlayerName}</td>
-                    </tr>
-                    `
-            var newRow = tableRef.insertRow(tableRef.rows.length);
-            newRow.innerHTML = rowhtml;
-        }
-    });
-}
-
 function getUniverseSync() {
 
     hubProxy.server.requestUniverseSync().done(function (universeData) {
@@ -218,7 +193,6 @@ function refresh() {
     connectionStatus.innerHTML = "Hub Connection: Online :)";
 
     // console.log("Refreshing");
-    getAllPlayerDatas();
     getUniverseSync();
     getWorldSync();
     getAreaSync();
