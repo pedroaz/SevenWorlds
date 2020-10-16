@@ -22,23 +22,24 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly ILogService logService;
         private readonly IGameStateService gameStateService;
         private readonly IPlayerActionQueue playerActionQueue;
-        private readonly IAccountService accountService;
         private readonly IServerManager serverManager;
         private readonly ILoginService loginService;
+        private readonly IAccountService accountService;
 
         public MainHub(
             ILogService logService,
             IGameStateService gameStateService,
             IPlayerActionQueue playerActionQueue,
-            IAccountService accountService,
             IServerManager serverManager,
-            ILoginService loginService)
+            ILoginService loginService,
+            IAccountService accountService)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
             this.serverManager = serverManager;
             this.loginService = loginService;
+            this.accountService = accountService;
         }
 
         #region Admin

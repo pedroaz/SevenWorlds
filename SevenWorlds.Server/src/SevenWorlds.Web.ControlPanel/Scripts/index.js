@@ -121,6 +121,39 @@ function getWorldSync() {
     });
 }
 
+function getCharacterSync() {
+
+    hubProxy.server.requestAllWorlds().done(function (worldsData) {
+
+        var tableRef = document.getElementById('world_data_table').getElementsByTagName('tbody')[0];
+
+        for (var i = tableRef.rows.length - 1; i >= 0; i--) {
+            tableRef.deleteRow(i);
+        }
+
+        for (var i = 0; i < worldsData.length; i++) {
+            var data = worldsData[i];
+            var rowhtml = `
+                <tr>
+                    <th scope="row">${i}</th>
+                        <td>${data.Id}</td>
+                        <td>${data.Name}</td>
+                        <td>${data.WorldIndex}</td>
+                        <td>${data.UniverseId}</td>
+                    </tr>
+                    `
+            var newRow = tableRef.insertRow(tableRef.rows.length);
+            newRow.innerHTML = rowhtml;
+        }
+    });
+
+    $(document).ready(function () {
+        $('#world_data_table').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+}
+
+
 function getAreaSync() {
 
     hubProxy.server.requestAllAreas().done(function (areasData) {
@@ -177,8 +210,6 @@ function refresh() {
 
     var connectionStatus = document.getElementById('server_status');
 
-    var state = $.signalR.connectionState
-
     if (hubProxy == null) {
         connectionStatus.innerHTML = "Hub Connection: Offline";
         return;
@@ -202,11 +233,4 @@ function refresh() {
 
 
 main()
-
-$(document).ready(function () {
-    $('#universe_data_table').DataTable();
-    $('#world_data_table').DataTable();
-    $('#areas_data_table').DataTable();
-    $('#sections_data_table').DataTable();
-});
 

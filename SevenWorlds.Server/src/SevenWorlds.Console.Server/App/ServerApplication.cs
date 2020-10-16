@@ -4,6 +4,7 @@ using Microsoft.AspNet.SignalR;
 using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
@@ -97,6 +98,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<Configurator>().As<IConfigurator>().SingleInstance();
             builder.RegisterType<DatabaseService>().As<IDatabaseService>().SingleInstance();
             builder.RegisterType<LoginService>().As<ILoginService>().SingleInstance();
+            builder.RegisterType<CharacterCollection>().As<ICharacterCollection>().SingleInstance();
+            builder.RegisterType<CharacterPlacementService>().As<ICharacterPlacementService>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

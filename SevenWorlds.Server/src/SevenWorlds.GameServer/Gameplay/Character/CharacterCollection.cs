@@ -1,32 +1,37 @@
-﻿using SevenWorlds.Shared.Data;
+﻿using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public class CharacterCollection : ICharacterCollection
     {
+        private List<CharacterData> characters;
+
+        public CharacterCollection()
+        {
+            characters = new List<CharacterData>();
+        }
+
         public void Add(CharacterData data)
         {
-            throw new NotImplementedException();
+            characters.Add(data);
         }
 
         public CharacterData FindById(string id)
         {
-            throw new NotImplementedException();
+            return characters.Find(x => x.Id == id);
         }
 
         public IEnumerable<CharacterData> GetAll()
         {
-            throw new NotImplementedException();
+            return characters;
         }
 
         public void Remove(string id)
         {
-            throw new NotImplementedException();
+            characters.RemoveAll(x => x.Id == id);
         }
     }
 }

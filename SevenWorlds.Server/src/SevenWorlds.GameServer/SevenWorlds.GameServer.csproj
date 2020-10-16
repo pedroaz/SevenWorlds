@@ -180,7 +180,9 @@
     <Compile Include="Gameplay\Area\AreaCollection.cs" />
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Character\CharacterCollection.cs" />
+    <Compile Include="Gameplay\Character\CharacterPlacementService.cs" />
     <Compile Include="Gameplay\Character\ICharacterCollection.cs" />
+    <Compile Include="Gameplay\Character\ICharacterPlacementService.cs" />
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
     <Compile Include="Gameplay\GameState\IGameStateService.cs" />
     <Compile Include="Gameplay\Player\Actions\PlayerMovementAction.cs" />

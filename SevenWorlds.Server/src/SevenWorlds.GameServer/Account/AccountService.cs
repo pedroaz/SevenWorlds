@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -17,34 +18,35 @@ namespace SevenWorlds.GameServer.Account
             this.databaseService = databaseService;
         }
 
-        public async Task<bool> CheckLogin(string username, string password)
+        public async Task<bool> CheckLoginCredentials(string username, string password)
         {
-            var account = await databaseService.GetAccountModelByUsername(username);
+            var account = await databaseService.GetAccountModel(username);
             return account.Password == password;
         }
 
-        public async Task<PlayerData> Login(string username, string connectionId)
+        public async Task<string> GetPlayerName(string username)
         {
-            var playerData = await databaseService.GetPlayerDataByUsername(username);
-            if(playerData != null) {
-                playerData.ConnectionId = connectionId;
-            }
-            return playerData;
+            var account = await databaseService.GetAccountModel(username);
+            return account?.PlayerName;
         }
 
         public async Task<bool> PlayerNameExists(string playerName)
         {
-            return await databaseService.GetAccountModelByPlayerName(playerName) != null;
+            return await databaseService.PlayerNameExists(playerName);
         }
 
-        public Task RegisterAccount(string username, string response, string playerName)
+        public async Task RegisterAccount(string username, string password, string playerName)
         {
-            throw new NotImplementedException();
+            await databaseService.UpdateAccount(new AccountModel() {
+                PlayerName = playerName,
+                Username = username,
+                Password = password
+            });
         }
 
         public async Task<bool> UsernameExists(string username)
         {
-            return await databaseService.GetAccountModelByUsername(username) != null;
+            return await databaseService.UsernameExists(username);
         }
     }
 }

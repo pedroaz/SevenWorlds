@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
@@ -17,19 +18,22 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         private readonly IAreaCollection areaCollection;
         private readonly ISectionCollection sectionCollection;
         private readonly IPlayerCollection playerCollection;
+        private readonly ICharacterCollection characterCollection;
 
         public GameStateService(
             IUniverseCollection universeCollection,
             IWorldCollection worldCollection,
             IAreaCollection areaCollection,
             ISectionCollection sectionCollection,
-            IPlayerCollection playerCollection)
+            IPlayerCollection playerCollection,
+            ICharacterCollection characterCollection)
         {
             this.universeCollection = universeCollection;
             this.worldCollection = worldCollection;
             this.areaCollection = areaCollection;
             this.sectionCollection = sectionCollection;
             this.playerCollection = playerCollection;
+            this.characterCollection = characterCollection;
         }
 
         public IUniverseCollection UniverseCollection => universeCollection;
@@ -42,14 +46,16 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
         public IPlayerCollection PlayerCollection => playerCollection;
 
-        public void AddPlayerDataToGame(PlayerData playerData)
+        public ICharacterCollection CharacterCollection => characterCollection;
+
+        public void AddPlayerToGame(PlayerData playerData)
         {
             playerCollection.Add(playerData);
         }
 
-        public void AddCharacterToWorld(string playerId, string connectionId)
+        public void AddCharacterToGame(CharacterData characterData)
         {
-
+            characterCollection.Add(characterData);
         }
 
         public void MovePlayerToArea(string playerId, string areaId)
@@ -62,8 +68,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
             };
         }
-
-        
 
         public UniverseSyncData GetUniverseSyncData()
         {
@@ -90,5 +94,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         {
             return areaCollection.GetAll();
         }
+
+       
     }
 }

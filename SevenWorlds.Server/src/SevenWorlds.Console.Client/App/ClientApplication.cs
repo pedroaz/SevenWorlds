@@ -128,8 +128,8 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Login1()
         {
-            var username = "pedro_test";
-            var password = "123";
+            var username = "pedroaz";
+            var password = "pedroaz123";
 
             print($"Login with {username} and {password}");
             var response = await client.Login(new LoginData() {

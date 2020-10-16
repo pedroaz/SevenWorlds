@@ -10,14 +10,21 @@ namespace SevenWorlds.GameServer.Database
 {
     public interface IDatabaseService
     {
-        Task<MasterDataModel> GetMasterData(string serverId);
-        Task<AccountModel> GetAccountModelByUsername(string username);
-        Task<AccountModel> GetAccountModelByPlayerName(string playerName);
-        Task<PlayerData> GetPlayerDataByUsername(string username);
-        Task UpdateMasterData(MasterDataModel model);
+        // Account
+        Task<AccountModel> GetAccountModel(string username);
+        Task<bool> UsernameExists(string username);
+        Task<bool> PlayerNameExists(string playerName);
         Task UpdateAccount(AccountModel model);
-        Task UpdatePlayer(PlayerModel model);
+
+        // Master
+        Task<MasterDataModel> GetMasterData(string serverId);
+        Task UpdateMasterData(MasterDataModel model);
+
+        // Character
         Task UpdateCharacter(CharacterModel model);
+        Task<List<CharacterModel>> GetAllCharacterFromPlayer(string playerName);
+
+        // Admin
         Task DeleteAll();
     }
 }

@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Base\GameData.cs" />
-    <Compile Include="Data\CharacterData.cs" />
     <Compile Include="Data\Chat\ChatMessageData.cs" />
     <Compile Include="Data\Base\NetworkData.cs" />
     <Compile Include="Data\Chat\ChatMessageResponse.cs" />
@@ -55,6 +54,7 @@
     <Compile Include="Data\Connection\RegisterAccountData.cs" />
     <Compile Include="Data\Connection\RegisterAccountResponse.cs" />
     <Compile Include="Data\Gameplay\AreaData.cs" />
+    <Compile Include="Data\Gameplay\CharacterData.cs" />
     <Compile Include="Data\Gameplay\EncounterData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionStatusData.cs" />

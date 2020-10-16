@@ -20,12 +20,10 @@ namespace SevenWorlds.GameServer.Database
         private IMongoDatabase database;
         private IMongoCollection<AccountModel> accountsCollection;
         private IMongoCollection<MasterDataModel> masterDataCollection;
-        private IMongoCollection<PlayerModel> playerDataCollection;
         private IMongoCollection<CharacterModel> characterDataCollection;
 
         private const string accountsDbName = "Accounts";
         private const string masterDataDbName = "MasterDatas";
-        private const string playerDataDbName = "Players";
         private const string charaterDataDbName = "Characters";
 
 
@@ -37,7 +35,6 @@ namespace SevenWorlds.GameServer.Database
 
             accountsCollection = database.GetCollection<AccountModel>(accountsDbName);
             masterDataCollection = database.GetCollection<MasterDataModel>(masterDataDbName);
-            playerDataCollection = database.GetCollection<PlayerModel>(playerDataDbName);
             characterDataCollection = database.GetCollection<CharacterModel>(charaterDataDbName);
         }
 
@@ -45,7 +42,6 @@ namespace SevenWorlds.GameServer.Database
         {
             await accountsCollection.DeleteManyAsync("{}");
             await masterDataCollection.DeleteManyAsync("{}");
-            await playerDataCollection.DeleteManyAsync("{}");
             await characterDataCollection.DeleteManyAsync("{}");
         }
 
@@ -55,7 +51,7 @@ namespace SevenWorlds.GameServer.Database
             return await accountsCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
         }
 
-        public async Task<AccountModel> GetAccountModelByUsername(string username)
+        public async Task<AccountModel> GetAccountModel(string username)
         {
             logService.Log($"Getting Account Model from Database with username: {username}");
             return await accountsCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
@@ -68,16 +64,6 @@ namespace SevenWorlds.GameServer.Database
             return masterData;
         }
 
-        public async Task<PlayerData> GetPlayerDataByUsername(string username)
-        {
-            logService.Log($"Getting Player Data from Database with username name: {username}");
-            var playerModel = await playerDataCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
-            return new PlayerData(){ 
-                PlayerName = playerModel.PlayerName,
-                Username = playerModel.Username,
-            };
-        }
-
         public async Task UpdateMasterData(MasterDataModel model)
         {
             await masterDataCollection.InsertOneAsync(model);
@@ -88,14 +74,27 @@ namespace SevenWorlds.GameServer.Database
             await accountsCollection.InsertOneAsync(model);
         }
 
-        public async Task UpdatePlayer(PlayerModel model)
-        {
-            await playerDataCollection.InsertOneAsync(model);
-        }
-
         public async Task UpdateCharacter(CharacterModel model)
         {
             await characterDataCollection.InsertOneAsync(model);
+        }
+
+        public async Task<bool> UsernameExists(string username)
+        {
+            var account = await accountsCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
+            return account != null;
+        }
+
+        public async Task<bool> PlayerNameExists(string playerName)
+        {
+            var account = await accountsCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
+            return account != null;
+        }
+
+        public async Task<List<CharacterModel>> GetAllCharacterFromPlayer(string playerName)
+        {
+            IAsyncCursor<CharacterModel> characters = await characterDataCollection.FindAsync(x => x.data.PlayerName == playerName);
+            return characters.ToList();
         }
     }
 }

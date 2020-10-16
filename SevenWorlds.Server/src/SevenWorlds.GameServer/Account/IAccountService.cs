@@ -11,8 +11,8 @@ namespace SevenWorlds.GameServer.Account
     {
         Task<bool> UsernameExists(string username);
         Task<bool> PlayerNameExists(string playerName);
-        Task<bool> CheckLogin(string username, string password);
-        Task<PlayerData> Login(string username, string connectionId);
+        Task<bool> CheckLoginCredentials(string username, string password);
+        Task<string> GetPlayerName(string username);
         Task RegisterAccount(string username, string password, string playerName);
     }
 }

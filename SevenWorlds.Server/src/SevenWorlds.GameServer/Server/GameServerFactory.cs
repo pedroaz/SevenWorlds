@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
@@ -22,24 +24,15 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private readonly IDatabaseService databaseService;
         private readonly ILogService logService;
         private readonly IConfigurator configurator;
-        private readonly IUniverseCollection universeCollection;
-        private readonly IWorldCollection worldCollection;
-        private readonly IAreaCollection areaCollection;
-        private readonly ISectionCollection sectionCollection;
+        private readonly IGameStateService gameStateService;
 
         public GameServerFactory(
-            IUniverseCollection universeCollection, 
-            IWorldCollection worldCollection, 
-            IAreaCollection areaCollection, 
-            ISectionCollection sectionCollection,
+            IGameStateService gameStateService,
             IDatabaseService databaseService,
             ILogService logService,
             IConfigurator configurator)
         {
-            this.universeCollection = universeCollection;
-            this.worldCollection = worldCollection;
-            this.areaCollection = areaCollection;
-            this.sectionCollection = sectionCollection;
+            this.gameStateService = gameStateService;
             this.databaseService = databaseService;
             this.logService = logService;
             this.configurator = configurator;
@@ -82,35 +75,70 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             
             // Add universes
             foreach (var item in masterData.UniverseCollection) {
-                universeCollection.Add(item);
+                gameStateService.UniverseCollection.Add(item);
             }
 
             // Add Worlds
             foreach (var item in masterData.WorldCollection) {
-                worldCollection.Add(item);
+                gameStateService.WorldCollection.Add(item);
             }
 
             // Add Areas
             foreach (var item in masterData.AreaCollection) {
-                areaCollection.Add(item);
+                gameStateService.AreaCollection.Add(item);
             }
 
             // Add Sections
             foreach (var item in masterData.SectionCollection) {
-                sectionCollection.Add(item);
+                gameStateService.SectionCollection.Add(item);
             }
         }
+
+        public string NewId()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        #region Fake
+
 
         public async Task SetFakeData()
         {
             await databaseService.DeleteAll();
 
-            MasterDataModel masterData = GenerateMasterData();
-
+            var masterData = GenerateFakeMasterData();
             await databaseService.UpdateMasterData(masterData);
+            await databaseService.UpdateAccount(GenerateFakeAccounts());
+            await databaseService.UpdateCharacter(GenerateFakeCharacters(masterData.WorldCollection));
         }
 
-        private MasterDataModel GenerateMasterData()
+        
+
+        private AccountModel GenerateFakeAccounts()
+        {
+            return new AccountModel() {
+                PlayerName = "Pedro",
+                Username = "pedroaz",
+                Password = "pedroaz123",
+            };
+        }
+
+        private CharacterModel GenerateFakeCharacters(List<WorldData> worlds)
+        {
+            return new CharacterModel() {
+                data = new CharacterData() {
+                    Id = NewId(),
+                    Level = 0,
+                    CharacterName = "Nioshi",
+                    PlayerName = "Pedro",
+                    WorldId = worlds[0].Id
+                }
+            };
+        }
+
+        
+
+        private MasterDataModel GenerateFakeMasterData()
         {
             List<UniverseData> universes = CreateNewUniverse("First Universe");
             List<WorldData> worlds = CreateSevenWorlds(universes[0]);
@@ -135,7 +163,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 Name = "Poring Camp",
                 AreaId = areaData.Id,
                 SectionType = SectionTypes.MonsterCamp,
-                Id = GameData.GenerateNewId()
+                Id = NewId()
             });
             return sections;
         }
@@ -144,11 +172,11 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         {
             List<AreaData> areas = new List<AreaData>();
 
-            for (int x = 0; x < 2; x++) {
-                for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 10; x++) {
+                for (int y = 0; y < 10; y++) {
                     areas.Add(new AreaData() {
-                        Id = GameData.GenerateNewId(),
-                        Name = $"Area {x+y}",
+                        Id = NewId(),
+                        Name = $"Area ({x},{y})",
                         Position = new WorldPosition() {
                             X = x,
                             Y = y
@@ -170,7 +198,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     Name = $"World {i}",
                     UniverseId = universe.Id,
                     WorldIndex = i,
-                    Id = GameData.GenerateNewId()
+                    Id = NewId()
                 });
             }
 
@@ -182,9 +210,13 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             return new List<UniverseData>(){
                 new UniverseData() {
                     Name = universeName,
-                    Id = GameData.GenerateNewId()
+                    Id = NewId()
                 }
             };
         }
+
+        #endregion
+
+
     }
 }
