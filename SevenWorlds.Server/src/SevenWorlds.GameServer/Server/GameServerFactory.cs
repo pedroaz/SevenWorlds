@@ -85,7 +85,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 universeCollection.Add(item);
             }
 
-
             // Add Worlds
             foreach (var item in masterData.WorldCollection) {
                 worldCollection.Add(item);
@@ -104,111 +103,88 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public async Task SetFakeData()
         {
+            await databaseService.DeleteAll();
 
-            // Set Accounts
-            // Set Master Data
-
-            var universe = new UniverseData() {
-                Name = "First Universe",
-                Id = GameData.GenerateNewId()
-            };
-
-            var world0 = new WorldData() {
-                Name = "World 1",
-                UniverseId = universe.Id,
-                WorldIndex = 0,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world1 = new WorldData() {
-                Name = "World 2",
-                UniverseId = universe.Id,
-                WorldIndex = 1,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world2 = new WorldData() {
-                Name = "World 3",
-                UniverseId = universe.Id,
-                WorldIndex = 2,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world3 = new WorldData() {
-                Name = "World 4",
-                UniverseId = universe.Id,
-                WorldIndex = 3,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world4 = new WorldData() {
-                Name = "World 5",
-                UniverseId = universe.Id,
-                WorldIndex = 4,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world5 = new WorldData() {
-                Name = "World 6",
-                UniverseId = universe.Id,
-                WorldIndex = 5,
-                Id = GameData.GenerateNewId()
-            };
-
-            var world6 = new WorldData() {
-                Name = "World 7",
-                UniverseId = universe.Id,
-                WorldIndex = 6,
-                Id = GameData.GenerateNewId()
-            };
-
-            var firstArea = new AreaData() {
-                Name = "First Area",
-                Position = new WorldPosition() {
-                    X = 0,
-                    Y = 0
-                },
-                WorldId = world0.Id,
-                Id = GameData.GenerateNewId()
-            };
-
-            var secondArea = new AreaData() {
-                Name = "Second Area",
-                Position = new WorldPosition() {
-                    X = 1,
-                    Y = 0
-                },
-                WorldId = world0.Id,
-                Id = GameData.GenerateNewId()
-            };
-
-            var section1 = new SectionData() {
-                Name = "Poring Camp",
-                AreaId = firstArea.Id,
-                SectionType = SectionTypes.MonsterCamp,
-                Id = GameData.GenerateNewId()
-            };
-
-
-            MasterDataModel masterData = new MasterDataModel() {
-                ServerId = "fake_server",
-                UniverseCollection = new List<UniverseData>() {
-                    universe
-                },
-                WorldCollection = new List<WorldData>() {
-                    world0, world1, world2, world3,
-                    world4, world5, world6
-                },
-                AreaCollection = new List<AreaData>() {
-                    firstArea, secondArea
-                },
-                SectionCollection = new List<SectionData>() {
-                    section1
-                }
-            };
+            MasterDataModel masterData = GenerateMasterData();
 
             await databaseService.UpdateMasterData(masterData);
         }
 
+        private MasterDataModel GenerateMasterData()
+        {
+            List<UniverseData> universes = CreateNewUniverse("First Universe");
+            List<WorldData> worlds = CreateSevenWorlds(universes[0]);
+            List<AreaData> areas = CreateFakeAreas(worlds[0]);
+            List<SectionData> sections = CreateFakeSections(areas[0]);
+
+            MasterDataModel masterData = new MasterDataModel() {
+                ServerId = "fake_server",
+                UniverseCollection = universes,
+                WorldCollection = worlds,
+                AreaCollection = areas,
+                SectionCollection = sections
+            };
+            return masterData;
+        }
+
+        private List<SectionData> CreateFakeSections(AreaData areaData)
+        {
+            List<SectionData> sections = new List<SectionData>();
+
+            sections.Add(new SectionData() {
+                Name = "Poring Camp",
+                AreaId = areaData.Id,
+                SectionType = SectionTypes.MonsterCamp,
+                Id = GameData.GenerateNewId()
+            });
+            return sections;
+        }
+
+        private List<AreaData> CreateFakeAreas(WorldData world)
+        {
+            List<AreaData> areas = new List<AreaData>();
+
+            for (int x = 0; x < 2; x++) {
+                for (int y = 0; y < 2; y++) {
+                    areas.Add(new AreaData() {
+                        Id = GameData.GenerateNewId(),
+                        Name = $"Area {x+y}",
+                        Position = new WorldPosition() {
+                            X = x,
+                            Y = y
+                        },
+                        WorldId = world.Id
+                    });
+                }
+            }
+
+            return areas;
+        }
+
+        private List<WorldData> CreateSevenWorlds(UniverseData universe)
+        {
+            List<WorldData> worlds = new List<WorldData>();
+
+            for (int i = 0; i < 7; i++) {
+                worlds.Add(new WorldData() {
+                    Name = $"World {i}",
+                    UniverseId = universe.Id,
+                    WorldIndex = i,
+                    Id = GameData.GenerateNewId()
+                });
+            }
+
+            return worlds;
+        }
+
+        private List<UniverseData> CreateNewUniverse(string universeName)
+        {
+            return new List<UniverseData>(){
+                new UniverseData() {
+                    Name = universeName,
+                    Id = GameData.GenerateNewId()
+                }
+            };
+        }
     }
 }

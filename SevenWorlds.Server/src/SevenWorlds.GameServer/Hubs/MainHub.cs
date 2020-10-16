@@ -24,19 +24,21 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly IPlayerActionQueue playerActionQueue;
         private readonly IAccountService accountService;
         private readonly IServerManager serverManager;
+        private readonly ILoginService loginService;
 
         public MainHub(
             ILogService logService,
             IGameStateService gameStateService,
             IPlayerActionQueue playerActionQueue,
             IAccountService accountService,
-            IServerManager serverManager)
+            IServerManager serverManager,
+            ILoginService loginService)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
-            this.accountService = accountService;
             this.serverManager = serverManager;
+            this.loginService = loginService;
         }
 
         #region Admin
@@ -69,28 +71,9 @@ namespace SevenWorlds.GameServer.Hubs
 
         public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
-            if (!await accountService.UsernameExists(data.Username)) {
+            return await loginService.Login(data, Context.ConnectionId);
 
-                return new LoginResponseData() {
-                    ResponseType = LoginResponseType.UsernameNotFound
-                };
-            }
-
-            if (!await accountService.CheckLogin(data.Username, data.Password)) {
-
-                return new LoginResponseData() {
-                    ResponseType = LoginResponseType.PasswordIncorrect
-                };
-            }
-
-            var playerData = await accountService.Login(data.Username, Context.ConnectionId);
-            gameStateService.AddPlayerDataToGame(playerData);
-
-            return new LoginResponseData() {
-                UniverseSyncData = gameStateService.GetUniverseSyncData(),
-                PlayerData = playerData,
-                ResponseType = LoginResponseType.Success
-            };
+            
         }
 
         public async Task<RegisterAccountResponse> RequestRegisterAccount(RegisterAccountData data)

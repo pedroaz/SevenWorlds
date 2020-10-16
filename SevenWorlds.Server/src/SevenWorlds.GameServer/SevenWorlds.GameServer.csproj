@@ -168,8 +168,11 @@
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Account\IAccountService.cs" />
+    <Compile Include="Account\ILoginService.cs" />
+    <Compile Include="Account\LoginService.cs" />
     <Compile Include="Database\CollectionsSchemas\AccountModel.cs" />
     <Compile Include="Database\CollectionsSchemas\BaseModel.cs" />
+    <Compile Include="Database\CollectionsSchemas\CharacterModel.cs" />
     <Compile Include="Database\CollectionsSchemas\PlayerModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />

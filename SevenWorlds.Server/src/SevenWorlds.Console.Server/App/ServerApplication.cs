@@ -96,6 +96,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance();
             builder.RegisterType<Configurator>().As<IConfigurator>().SingleInstance();
             builder.RegisterType<DatabaseService>().As<IDatabaseService>().SingleInstance();
+            builder.RegisterType<LoginService>().As<ILoginService>().SingleInstance();
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

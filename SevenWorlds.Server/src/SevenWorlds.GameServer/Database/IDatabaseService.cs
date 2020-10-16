@@ -15,5 +15,9 @@ namespace SevenWorlds.GameServer.Database
         Task<AccountModel> GetAccountModelByPlayerName(string playerName);
         Task<PlayerData> GetPlayerDataByUsername(string username);
         Task UpdateMasterData(MasterDataModel model);
+        Task UpdateAccount(AccountModel model);
+        Task UpdatePlayer(PlayerModel model);
+        Task UpdateCharacter(CharacterModel model);
+        Task DeleteAll();
     }
 }
