@@ -47,7 +47,8 @@ namespace SevenWorlds.GameServer.Database
         public async Task<MasterDataModel> GetMasterData(string serverId)
         {
             logService.Log($"Getting Master Data from Database with ServerId: {serverId}");
-            return await serverMasterDataCollection.Find(x => x.ServerId == serverId).FirstOrDefaultAsync();
+            var masterData = await serverMasterDataCollection.Find(x => x.ServerId == serverId).FirstOrDefaultAsync();
+            return masterData;
         }
 
         public async Task<PlayerData> GetPlayerDataByUsername(string username)

@@ -8,6 +8,12 @@ namespace SevenWorlds.Shared.Data.Base
 {
     public class GameData
     {
-        public readonly string Id = Guid.NewGuid().ToString();
+        public string Id { get; set; }
+
+        public static string GenerateNewId()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
     }
 }

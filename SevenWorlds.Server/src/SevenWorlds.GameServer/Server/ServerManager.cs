@@ -61,6 +61,11 @@ namespace SevenWorlds.GameServer.Server
             if (serverStatus.Status == GameServerStatus.ReadyToStart) {
 
                 try {
+                    if (serverId.Equals(string.Empty)) {
+                        logService.Log("ServerId is empty - using default server id: fake_server");
+                        serverId = "fake_server";
+                    }
+
                     serverStatus.Status = GameServerStatus.Initializing;
                     Task initTask = InitializeGameServer(serverId);
                     initTask.Wait();

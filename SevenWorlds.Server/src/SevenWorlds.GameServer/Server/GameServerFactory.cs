@@ -6,6 +6,7 @@ using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -108,49 +109,57 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             // Set Master Data
 
             var universe = new UniverseData() {
-                Name = "First Universe"
+                Name = "First Universe",
+                Id = GameData.GenerateNewId()
             };
 
             var world0 = new WorldData() {
                 Name = "World 1",
                 UniverseId = universe.Id,
-                WorldIndex = 0
+                WorldIndex = 0,
+                Id = GameData.GenerateNewId()
             };
 
             var world1 = new WorldData() {
                 Name = "World 2",
                 UniverseId = universe.Id,
-                WorldIndex = 1
+                WorldIndex = 1,
+                Id = GameData.GenerateNewId()
             };
 
             var world2 = new WorldData() {
                 Name = "World 3",
                 UniverseId = universe.Id,
-                WorldIndex = 2
+                WorldIndex = 2,
+                Id = GameData.GenerateNewId()
             };
 
             var world3 = new WorldData() {
                 Name = "World 4",
                 UniverseId = universe.Id,
-                WorldIndex = 3
+                WorldIndex = 3,
+                Id = GameData.GenerateNewId()
             };
 
             var world4 = new WorldData() {
                 Name = "World 5",
                 UniverseId = universe.Id,
-                WorldIndex = 4
+                WorldIndex = 4,
+                Id = GameData.GenerateNewId()
             };
 
             var world5 = new WorldData() {
                 Name = "World 6",
                 UniverseId = universe.Id,
-                WorldIndex = 5
+                WorldIndex = 5,
+                Id = GameData.GenerateNewId()
             };
 
             var world6 = new WorldData() {
                 Name = "World 7",
                 UniverseId = universe.Id,
-                WorldIndex = 6
+                WorldIndex = 6,
+                Id = GameData.GenerateNewId()
             };
 
             var firstArea = new AreaData() {
@@ -159,7 +168,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 0,
                     Y = 0
                 },
-                WorldId = world0.Id
+                WorldId = world0.Id,
+                Id = GameData.GenerateNewId()
             };
 
             var secondArea = new AreaData() {
@@ -168,13 +178,15 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     X = 1,
                     Y = 0
                 },
-                WorldId = world0.Id
+                WorldId = world0.Id,
+                Id = GameData.GenerateNewId()
             };
 
             var section1 = new SectionData() {
                 Name = "Poring Camp",
                 AreaId = firstArea.Id,
-                SectionType = SectionTypes.MonsterCamp
+                SectionType = SectionTypes.MonsterCamp,
+                Id = GameData.GenerateNewId()
             };
 
 

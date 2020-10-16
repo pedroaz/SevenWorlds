@@ -204,6 +204,9 @@ function refresh() {
 main()
 
 $(document).ready(function () {
-    $('#dtBasicExample').DataTable();
+    $('#universe_data_table').DataTable();
+    $('#world_data_table').DataTable();
+    $('#areas_data_table').DataTable();
+    $('#sections_data_table').DataTable();
 });
 
