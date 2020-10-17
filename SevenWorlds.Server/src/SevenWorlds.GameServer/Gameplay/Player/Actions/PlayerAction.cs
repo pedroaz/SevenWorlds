@@ -11,15 +11,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerAction
     {
-        public enum PlayerActionScale
-        {
-            Universe = 0,
-            World = 1,
-            Area = 2
-        }
-
-        public string ActionId { get; set; }
-        public PlayerActionScale Scale { get; set; }
+        internal PlayerActionData data;
         internal IGameStateService gameStateService;
         internal IHubService hubService;
 
@@ -27,10 +19,16 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         {
             this.gameStateService = gameStateService;
             this.hubService = hubService;
-            ActionId = data.Id;
+            this.data = data;
         }
 
-        public virtual void Execute()
+        public void Execute()
+        {
+            // TODO: Sync considering data scale?
+            OnExecute();
+        }
+
+        public virtual void OnExecute()
         {
 
         }

@@ -2,11 +2,9 @@
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.ConsoleClient.App
@@ -72,7 +70,7 @@ namespace SevenWorlds.ConsoleClient.App
             }
         }
 
-        
+
 
         private static void ShowHelp()
         {
@@ -95,12 +93,12 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Move()
         {
-            await client.RequestMovementAction(characterData.Id, new WorldPosition(){ X = 0, Y = 1 });
+            await client.RequestMovementAction(characterData.Id, new WorldPosition() { X = 0, Y = 1 });
         }
 
         private static async void Chat()
         {
-            if(playerData == null) {
+            if (playerData == null) {
                 print("Please log in first");
             }
             print("What you want to say:");
@@ -153,7 +151,7 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Register()
         {
-            await client.RequestRegister(new RegisterAccountData(){ 
+            await client.RequestRegister(new RegisterAccountData() {
                 Username = "Test",
                 Password = "123",
                 PlayerName = "Eu"
@@ -167,7 +165,7 @@ namespace SevenWorlds.ConsoleClient.App
             });
         }
 
-        
+
         private static async Task Connect()
         {
             client = new NetworkClient();

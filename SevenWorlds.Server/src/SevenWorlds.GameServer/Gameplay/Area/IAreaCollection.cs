@@ -11,5 +11,6 @@ namespace SevenWorlds.GameServer.Gameplay.Area
     public interface IAreaCollection : IDataCollection<AreaData>
     {
         List<AreaData> GetAllAreasFromWorld(string worldId);
+        AreaData FindByWorldPosition(WorldPosition position);
     }
 }

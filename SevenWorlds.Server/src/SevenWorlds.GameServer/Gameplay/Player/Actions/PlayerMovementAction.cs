@@ -1,25 +1,28 @@
 ﻿using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 
 namespace SevenWorlds.GameServer.Gameplay.Player.Actions
 {
     public class PlayerMovementAction : PlayerAction
     {
-        private readonly PlayerMovementActionData data;
 
-        public PlayerMovementAction(PlayerMovementActionData data, 
-            IGameStateService gameStateService, IHubService hubService) : 
+        public PlayerMovementAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService) : 
             base(data, gameStateService, hubService)
         {
-            Scale = PlayerActionScale.Area;
-            this.data = data;
+
         }
 
-        public override void Execute()
+        public override void OnExecute()
         {
-            gameStateService.MovePlayerToArea(data.CharacterId, data.ToAreaId);
+            // Move using area id
+            if(data.AreaId != null) {
+                gameStateService.MovePlayerToArea(data.CharacterId, data.AreaId);
+            }
+            // Move using area position
+            else {
+                gameStateService.MovePlayerToArea(data.CharacterId, data.Position);
+            }
         }
     }
 }

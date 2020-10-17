@@ -29,6 +29,11 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas.Find(x => x.Id == id);
         }
 
+        public AreaData FindByWorldPosition(WorldPosition position)
+        {
+            return areas.Find(x => x.Position.Equals(position));
+        }
+
         public IEnumerable<AreaData> GetAll()
         {
             return areas;

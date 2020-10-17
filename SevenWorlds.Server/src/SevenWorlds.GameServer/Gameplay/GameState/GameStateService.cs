@@ -60,6 +60,12 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             character.AreaId = area.Id;
         }
 
+        public void MovePlayerToArea(string characterId, WorldPosition areaPosition)
+        {
+            AreaData area = AreaCollection.FindByWorldPosition(areaPosition);
+            MovePlayerToArea(characterId, area.Id);
+        }
+
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
