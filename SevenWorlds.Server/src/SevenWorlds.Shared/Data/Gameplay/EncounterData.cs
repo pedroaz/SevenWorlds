@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SevenWorlds.Shared.Data.Base;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    public class EncounterData
+    public class EncounterData : NetworkData
     {
+
+        public virtual void Simulate()
+        {
+
+        }
     }
 }

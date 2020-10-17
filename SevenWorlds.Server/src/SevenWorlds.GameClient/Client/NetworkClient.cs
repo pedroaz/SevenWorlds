@@ -102,16 +102,16 @@ namespace SevenWorlds.GameClient.Client
         public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, string areaId)
         {
             return await RequestGeneralAction(new PlayerActionData(PlayerActionType.Movement, PlayerActionScale.Area) {
-                CharacterId = characterId,
-                AreaId = areaId
+                CharactersIds = new List<string>(){ characterId },
+                AreaIds = new List<string>() { areaId }
             });
         }
 
         public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, WorldPosition areaPosition)
         {
             return await RequestGeneralAction(new PlayerActionData(PlayerActionType.Movement, PlayerActionScale.Area) {
-                CharacterId = characterId,
-                Position = areaPosition
+                CharactersIds = new List<string>() { characterId },
+                Positions = new List<WorldPosition>(){ areaPosition }
             });
         }
 

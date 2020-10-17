@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
@@ -11,24 +12,23 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerAction
     {
-        internal PlayerActionData data;
         internal IGameStateService gameStateService;
         internal IHubService hubService;
+        internal LoopSyncCoordinator syncCoordinator;
 
-        public PlayerAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService)
+        public PlayerAction()
+        {
+
+        }
+
+        public PlayerAction(PlayerActionData data, IGameStateService gameStateService, IHubService hubService, LoopSyncCoordinator syncCoordinator)
         {
             this.gameStateService = gameStateService;
             this.hubService = hubService;
-            this.data = data;
+            this.syncCoordinator = syncCoordinator;
         }
 
-        public void Execute()
-        {
-            // TODO: Sync considering data scale?
-            OnExecute();
-        }
-
-        public virtual void OnExecute()
+        public virtual void Execute()
         {
 
         }

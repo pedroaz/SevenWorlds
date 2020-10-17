@@ -9,24 +9,26 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
     public class EncounterCollection : IEncounterCollection
     {
+        private List<EncounterData> encounters = new List<EncounterData>();
+
         public void Add(EncounterData data)
         {
-            throw new NotImplementedException();
+            encounters.Add(data);
         }
 
         public EncounterData FindById(string id)
         {
-            throw new NotImplementedException();
+            return encounters.Find(x => x.Id == id);
         }
 
         public IEnumerable<EncounterData> GetAll()
         {
-            throw new NotImplementedException();
+            return encounters;
         }
 
         public void Remove(string id)
         {
-            throw new NotImplementedException();
+            encounters.RemoveAll(x => x.Id == id);
         }
     }
 }

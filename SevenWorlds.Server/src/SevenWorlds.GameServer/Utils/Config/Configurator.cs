@@ -11,8 +11,12 @@ namespace SevenWorlds.GameServer.Utils.Config
 {
     public class Configurator : IConfigurator
     {
-        private readonly ILogService logService;
         private ServerConfigurations config;
+
+        public void ReadConfigurations(string configFilePath)
+        {
+            config = JsonConvert.DeserializeObject<ServerConfigurations>(File.ReadAllText(configFilePath));
+        }
 
         public string GetLogFilePath()
         {
@@ -32,11 +36,6 @@ namespace SevenWorlds.GameServer.Utils.Config
         public string GetServerId()
         {
             return config.ServerId;
-        }
-
-        public void ReadConfigurations(string configFilePath)
-        {
-            config = JsonConvert.DeserializeObject<ServerConfigurations>(File.ReadAllText(configFilePath));
         }
 
         public void SetServerId(string serverId)

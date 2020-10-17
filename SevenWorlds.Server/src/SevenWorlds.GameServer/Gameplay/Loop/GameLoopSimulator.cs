@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
@@ -19,6 +20,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private readonly IPlayerActionQueue playerActionQueue;
         private readonly IPlayerActionFactory playerActionFactory;
         private Stopwatch stopwatch;
+        private LoopSyncCoordinator syncCoordinator;
 
         private int tickCount;
 
@@ -35,7 +37,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             this.gameStateService = gameStateService;
             this.playerActionQueue = playerActionQueue;
             this.playerActionFactory = playerActionFactory;
-
+            syncCoordinator = new LoopSyncCoordinator();
             tickCount = 0;
         }
 
@@ -73,7 +75,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         {
             foreach (var playerActionData in playerActionQueue.GetAllFromQueue()) {
 
-                var action = playerActionFactory.GenerateAction(playerActionData);
+                var action = playerActionFactory.GenerateAction(playerActionData, syncCoordinator);
                 action.Execute();
             }
         }

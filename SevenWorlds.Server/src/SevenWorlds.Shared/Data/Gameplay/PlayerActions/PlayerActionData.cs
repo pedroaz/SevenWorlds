@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
@@ -19,14 +20,17 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public PlayerActionType ActionType { get; set; }
         public PlayerActionScale ActionScale { get; set; }
-        public string CharacterId { get; set; }
-        public string AreaId { get; set; }
-        public WorldPosition Position { get; set; }
+        public List<string> CharactersIds { get; set; }
+        public List<string> AreaIds { get; set; }
+        public List<WorldPosition> Positions { get; set; }
 
         public PlayerActionData(PlayerActionType type, PlayerActionScale scale)
         {
             ActionType = type;
             ActionScale = scale;
+            CharactersIds = new List<string>();
+            AreaIds = new List<string>();
+            Positions = new List<WorldPosition>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player.Actions;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.Shared.Data.Gameplay;
@@ -16,14 +17,15 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             this.hubService = hubService;
         }
 
-        public PlayerAction GenerateAction(PlayerActionData data)
+        public PlayerAction GenerateAction(PlayerActionData data, LoopSyncCoordinator syncCoordinator)
         {
             switch (data.ActionType) {
                 case PlayerActionType.Movement:
-                    return new PlayerMovementAction(data, gameStateService, hubService);
+                    return new PlayerMovementAction(data, gameStateService, hubService, syncCoordinator);
                 case PlayerActionType.CreateBattleEncounter:
+                    return new CreateBattleEncounterAction(data, gameStateService, hubService, syncCoordinator);
                 default:
-                    return new PlayerAction(data, gameStateService, hubService);
+                    return new PlayerAction(data, gameStateService, hubService, syncCoordinator);
             }
         }
     }

@@ -71,6 +71,7 @@ namespace SevenWorlds.GameServer.Server
                     initTask.Wait();
                 }
                 catch (AggregateException e) {
+                    logService.Log(e.Message);
                     logService.Log("Error on initialization. Server is now faulted");
                     serverStatus.Status = GameServerStatus.Faulted;
                     await Task.Delay(Timeout.Infinite);
