@@ -9,10 +9,19 @@ namespace SevenWorlds.Shared.Data.Gameplay
 {
     public class CharacterData : NetworkData
     {
+        // Constant
         public string PlayerName { get; set; }
+
+        // General
         public int Level { get; set; }
+        
+        // Position
         public string WorldId { get; set; }
         public string AreaId { get; set; }
         public WorldPosition Position { get; set; }
+
+        // Combat
+        public CombatData Combat { get; set; }
+
     }
 }

@@ -2,6 +2,7 @@
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
@@ -93,26 +94,22 @@ namespace SevenWorlds.GameClient.Client
 
         #region Actions
 
-        private async Task<PlayerActionStatusData> RequestGeneralAction(PlayerActionData data)
+        private async Task RequestGeneralAction(PlayerActionData data)
         {
-            data.Id = Guid.NewGuid().ToString();
-            return await hubProxy.Invoke<PlayerActionStatusData>(NetworkConstants.Request_PlayerAction, data);
+           
         }
 
-        public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, string areaId)
+        public async Task RequestMovementAction(string characterId, string areaId)
         {
-            return await RequestGeneralAction(new PlayerActionData(PlayerActionType.Movement, PlayerActionScale.Area) {
-                CharactersIds = new List<string>(){ characterId },
-                AreaIds = new List<string>() { areaId }
-            });
+            MovementActionData data = new MovementActionData() {
+                Id = Guid.NewGuid().ToString(),
+            };
+            await hubProxy.Invoke(NetworkConstants.Request_MovementAction, data);
         }
 
-        public async Task<PlayerActionStatusData> RequestMovementAction(string characterId, WorldPosition areaPosition)
+        public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)
         {
-            return await RequestGeneralAction(new PlayerActionData(PlayerActionType.Movement, PlayerActionScale.Area) {
-                CharactersIds = new List<string>() { characterId },
-                Positions = new List<WorldPosition>(){ areaPosition }
-            });
+            
         }
 
         #endregion

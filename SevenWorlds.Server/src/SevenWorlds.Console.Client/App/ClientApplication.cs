@@ -93,7 +93,6 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Move()
         {
-            await client.RequestMovementAction(characterData.Id, new WorldPosition() { X = 0, Y = 1 });
         }
 
         private static async void Chat()

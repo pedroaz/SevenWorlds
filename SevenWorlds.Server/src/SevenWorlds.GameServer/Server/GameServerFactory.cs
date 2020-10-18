@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SevenWorlds.Shared.Data.Gameplay.SectionData;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
@@ -165,7 +166,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             sections.Add(new SectionData() {
                 Name = "Poring Camp",
                 AreaId = areaData.Id,
-                SectionType = SectionTypes.MonsterCamp,
+                sectionType = SectionType.MonsterCamp,
                 Id = NewId()
             });
             return sections;

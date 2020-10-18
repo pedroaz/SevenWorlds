@@ -8,6 +8,7 @@ using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System.Collections.Generic;
@@ -61,20 +62,11 @@ namespace SevenWorlds.GameServer.Hubs
 
         #endregion
 
-
-
-        #region Client Requests
-
-        public bool RequestPing()
-        {
-            return true;
-        }
+        #region Account
 
         public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
             return await loginService.Login(data, Context.ConnectionId);
-
-            
         }
 
         public async Task<RegisterAccountResponse> RequestRegisterAccount(RegisterAccountData data)
@@ -98,15 +90,10 @@ namespace SevenWorlds.GameServer.Hubs
             };
         }
 
-        public void RequestAddCharacterToWorld()
-        {
 
-        }
+        #endregion
 
-        public void RequestSendChatMessage(ChatMessageData data)
-        {
-            Clients.All.OnChatMessage(data);
-        }
+        #region Syncs
 
         public UniverseSyncData RequestUniverseSync()
         {
@@ -133,11 +120,6 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.AreaCollection.GetAll();
         }
 
-        public PlayerActionStatusData RequestPlayerAction(PlayerActionData playerActionData)
-        {
-            return playerActionQueue.AddToQueue(playerActionData);
-        }
-
         public IEnumerable<PlayerData> RequestAllPlayerDatas()
         {
             return gameStateService.PlayerCollection.GetAll();
@@ -155,6 +137,29 @@ namespace SevenWorlds.GameServer.Hubs
 
         #endregion
 
+        #region General Client Requests
 
+        public bool RequestPing()
+        {
+            return true;
+        }
+
+        public void RequestSendChatMessage(ChatMessageData data)
+        {
+            Clients.All.OnChatMessage(data);
+        }
+        #endregion
+
+        #region Actions
+        public void RequestMovementAction(MovementActionData data)
+        {
+            playerActionQueue.AddToQueue(data);
+        }
+
+        public void RequestStartBattleAction(StartBattleActionData data)
+        {
+            playerActionQueue.AddToQueue(data);
+        }
+        #endregion
     }
 }

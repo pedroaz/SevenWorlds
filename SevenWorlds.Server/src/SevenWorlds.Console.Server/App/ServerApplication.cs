@@ -3,6 +3,7 @@ using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
 using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Actions.Executor;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
@@ -94,7 +95,6 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<HubService>().As<IHubService>().SingleInstance();
             builder.RegisterType<GameStateService>().As<IGameStateService>().SingleInstance();
             builder.RegisterType<PlayerActionQueue>().As<IPlayerActionQueue>().SingleInstance();
-            builder.RegisterType<PlayerActionFactory>().As<IPlayerActionFactory>().SingleInstance();
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance();
             builder.RegisterType<Configurator>().As<IConfigurator>().SingleInstance();
             builder.RegisterType<DatabaseService>().As<IDatabaseService>().SingleInstance();
@@ -102,6 +102,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<CharacterCollection>().As<ICharacterCollection>().SingleInstance();
             builder.RegisterType<CharacterPlacementService>().As<ICharacterPlacementService>().SingleInstance();
             builder.RegisterType<EncounterCollection>().As<IEncounterCollection>().SingleInstance();
+            builder.RegisterType<PlayerActionExecutor>().As<IPlayerActionExecutor>().SingleInstance();
+            
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

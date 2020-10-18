@@ -1,11 +1,10 @@
-﻿using SevenWorlds.GameServer.Gameplay.GameState;
+﻿using SevenWorlds.GameServer.Gameplay.Actions.Executor;
+using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -17,10 +16,10 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private ILogService logService { get; }
         private readonly IHubService hubService;
         private readonly IGameStateService gameStateService;
+        private readonly IPlayerActionExecutor playerActionExecutor;
         private readonly IPlayerActionQueue playerActionQueue;
-        private readonly IPlayerActionFactory playerActionFactory;
         private Stopwatch stopwatch;
-        private LoopSyncCoordinator syncCoordinator;
+        private SyncCoordinator syncCoordinator;
 
         private int tickCount;
 
@@ -29,15 +28,16 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             IHubService hubService,
             IGameStateService gameStateService,
             IPlayerActionQueue playerActionQueue,
-            IPlayerActionFactory playerActionFactory
+            IPlayerActionExecutor playerActionExecutor
             )
         {
             this.logService = logService;
             this.hubService = hubService;
             this.gameStateService = gameStateService;
+            this.playerActionExecutor = playerActionExecutor;
             this.playerActionQueue = playerActionQueue;
-            this.playerActionFactory = playerActionFactory;
-            syncCoordinator = new LoopSyncCoordinator();
+            syncCoordinator = new SyncCoordinator();
+            playerActionExecutor.SetSyncCoordinator(syncCoordinator);
             tickCount = 0;
         }
 
@@ -56,29 +56,29 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
                 PingAllClients();
                 //PrintWhoIsLogged();
 
-                // Player Actions
-                SimulatePlayerActions();
+                SimulateUniverse();
 
                 // End
                 EndOfTheSimulation();
             }
         }
 
+        private void SimulateUniverse()
+        {
+            // Copy Action Collection
+            playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
+
+            playerActionExecutor.ExecuteMovementActions();
+        }
+
         private void PingTickCount()
         {
-            if(tickCount % 60 == 0) {
+            if (tickCount % 60 == 0) {
                 logService.Log($"Tick count: {tickCount}");
             }
         }
 
-        private void SimulatePlayerActions()
-        {
-            foreach (var playerActionData in playerActionQueue.GetAllFromQueue()) {
-
-                var action = playerActionFactory.GenerateAction(playerActionData, syncCoordinator);
-                action.Execute();
-            }
-        }
+        
 
         private Stopwatch BeforeStart()
         {

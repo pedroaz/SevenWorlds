@@ -1,4 +1,5 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.GameServer.Gameplay.Encounter.Base;
+using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,19 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
     public class EncounterCollection : IEncounterCollection
     {
-        private List<EncounterData> encounters = new List<EncounterData>();
+        private List<EncounterInstance> encounters = new List<EncounterInstance>();
 
-        public void Add(EncounterData data)
+        public void Add(EncounterInstance data)
         {
             encounters.Add(data);
         }
 
-        public EncounterData FindById(string id)
+        public EncounterInstance FindById(string id)
         {
             return encounters.Find(x => x.Id == id);
         }
 
-        public IEnumerable<EncounterData> GetAll()
+        public IEnumerable<EncounterInstance> GetAll()
         {
             return encounters;
         }

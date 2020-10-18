@@ -26,7 +26,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         // Characters 
         void AddCharacterToGame(CharacterData characterData);
         void MovePlayerToArea(string characterId, string areaId);
-        void MovePlayerToArea(string characterId, WorldPosition areaPosition);
 
 
         // Syncs

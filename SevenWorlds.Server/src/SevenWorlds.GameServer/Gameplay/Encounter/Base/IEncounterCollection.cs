@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Utils.DataCollections;
+﻿using SevenWorlds.GameServer.Gameplay.Encounter.Base;
+using SevenWorlds.GameServer.Utils.DataCollections;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
-    public interface IEncounterCollection : IDataCollection<EncounterData>
+    public interface IEncounterCollection : IDataCollection<EncounterInstance>
     {
     }
 }

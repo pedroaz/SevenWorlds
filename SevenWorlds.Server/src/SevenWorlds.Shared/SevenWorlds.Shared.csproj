@@ -53,11 +53,15 @@
     <Compile Include="Data\Connection\PingData.cs" />
     <Compile Include="Data\Connection\RegisterAccountData.cs" />
     <Compile Include="Data\Connection\RegisterAccountResponse.cs" />
+    <Compile Include="Data\Gameplay\ActionDatas\MovementActionData.cs" />
+    <Compile Include="Data\Gameplay\ActionDatas\StartBattleActionData.cs" />
     <Compile Include="Data\Gameplay\AreaData.cs" />
     <Compile Include="Data\Gameplay\CharacterData.cs" />
-    <Compile Include="Data\Gameplay\EncounterData.cs" />
-    <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
-    <Compile Include="Data\Gameplay\PlayerActions\PlayerActionStatusData.cs" />
+    <Compile Include="Data\Gameplay\CombatData.cs" />
+    <Compile Include="Data\Gameplay\Encounters\BattleEncounterData.cs" />
+    <Compile Include="Data\Gameplay\Encounters\EncounterData.cs" />
+    <Compile Include="Data\Gameplay\MonsterData.cs" />
+    <Compile Include="Data\Gameplay\ActionDatas\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerData.cs" />
     <Compile Include="Data\Gameplay\SectionData.cs" />
     <Compile Include="Data\Gameplay\UniverseData.cs" />
@@ -68,7 +72,6 @@
     <Compile Include="Data\Sync\WorldSyncData.cs" />
     <Compile Include="Network\NetworkConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\SectionTypes.cs" />
     <Compile Include="UnityLog\LOG.cs" />
   </ItemGroup>
   <ItemGroup />

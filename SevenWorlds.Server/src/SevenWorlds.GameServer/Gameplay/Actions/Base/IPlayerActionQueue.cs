@@ -1,12 +1,14 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public interface IPlayerActionQueue
     {
-        PlayerActionStatusData AddToQueue(PlayerActionData playerAction);
-        PlayerActionStatusData GetStatusByActionId(string actionId);
-        IEnumerable<PlayerActionData> GetAllFromQueue();
+        void AddToQueue(MovementActionData action);
+        void AddToQueue(StartBattleActionData action);
+        PlayerActionCollection CopyActionCollection();
     }
 }

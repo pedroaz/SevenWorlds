@@ -1,4 +1,6 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,36 +11,43 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerActionQueue : IPlayerActionQueue
     {
-        private Queue<PlayerActionData> playerActionQueue;
+        PlayerActionCollection collection;
 
         private static object queueLock = new object();
 
         public PlayerActionQueue()
         {
-            playerActionQueue = new Queue<PlayerActionData>();
+            collection = new PlayerActionCollection();
         }
 
-        public PlayerActionStatusData AddToQueue(PlayerActionData playerAction)
+        public void AddToQueue(MovementActionData action)
         {
             lock (queueLock) {
-                playerActionQueue.Enqueue(playerAction);
+                collection.Movement.Enqueue(action);
             }
-
-            return new PlayerActionStatusData();
-        }
-        public PlayerActionStatusData GetStatusByActionId(string actionId)
-        {
-            throw new NotImplementedException();
         }
 
-        public IEnumerable<PlayerActionData> GetAllFromQueue()
+        public void AddToQueue(StartBattleActionData action)
         {
             lock (queueLock) {
-                var copy = new Queue<PlayerActionData>();
-                while(playerActionQueue.Count != 0) {
-                    copy.Enqueue(playerActionQueue.Dequeue());
+                collection.StartBattle.Enqueue(action);
+            }
+        }
+
+        public PlayerActionCollection CopyActionCollection()
+        {
+            lock (queueLock) {
+                PlayerActionCollection copyCollection = new PlayerActionCollection();
+
+                foreach (var item in copyCollection.Movement) {
+                    copyCollection.Movement.Enqueue(collection.Movement.Dequeue());
                 }
-                return copy;
+
+                foreach (var item in copyCollection.StartBattle) {
+                    copyCollection.StartBattle.Enqueue(collection.StartBattle.Dequeue());
+                }
+            
+                return copyCollection;
             }
         }
     }

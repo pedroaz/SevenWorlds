@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Loop
 {
-    public class LoopSyncCoordinator
+    public class SyncCoordinator
     {
         public List<string> AreasToSync { get; set; }
 
-        public LoopSyncCoordinator()
+        public SyncCoordinator()
         {
             AreasToSync = new List<string>();
         }

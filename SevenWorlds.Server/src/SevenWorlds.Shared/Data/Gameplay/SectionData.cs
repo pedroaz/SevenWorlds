@@ -10,8 +10,20 @@ namespace SevenWorlds.Shared.Data.Gameplay
     [System.Serializable]
     public class SectionData : NetworkData
     {
+        public enum SectionType
+        {
+            MonsterCamp,
+            Shop
+        }
+
         public string Name;
-        public SectionTypes SectionType;
+        public SectionType sectionType;
         public string AreaId;
+        public List<PlayerActionType> PossiblePlayerActions { get; set; }
+
+        public virtual void Simulate()
+        {
+
+        }
     }
 }
