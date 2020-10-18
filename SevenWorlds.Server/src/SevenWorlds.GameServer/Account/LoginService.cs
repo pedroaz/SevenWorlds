@@ -58,7 +58,7 @@ namespace SevenWorlds.GameServer.Account
             };
             // Add that object to the game
             gameStateService.AddPlayerToGame(playerData);
-            await characterPlacementService.PlaceAllPlayerCharactersIntoTheGame(playerData.PlayerName);
+            characterPlacementService.PlaceAllPlayerCharactersIntoTheGame(playerData.PlayerName);
 
             // Add character to areas
 

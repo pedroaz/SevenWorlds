@@ -170,13 +170,12 @@
     <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Account\ILoginService.cs" />
     <Compile Include="Account\LoginService.cs" />
-    <Compile Include="Database\CollectionsSchemas\AccountModel.cs" />
-    <Compile Include="Database\CollectionsSchemas\BaseModel.cs" />
-    <Compile Include="Database\CollectionsSchemas\CharacterModel.cs" />
-    <Compile Include="Database\CollectionsSchemas\PlayerModel.cs" />
+    <Compile Include="Database\Models\AccountModel.cs" />
+    <Compile Include="Database\Models\BaseModel.cs" />
+    <Compile Include="Database\Models\PlayerModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />
-    <Compile Include="Database\CollectionsSchemas\MasterDataModel.cs" />
+    <Compile Include="Database\Models\MasterDataModel.cs" />
     <Compile Include="Gameplay\Actions\Base\PlayerActionBundle.cs" />
     <Compile Include="Gameplay\Actions\Executor\IPlayerActionExecutor.cs" />
     <Compile Include="Gameplay\Actions\Executor\PlayerActionExecutor.cs" />

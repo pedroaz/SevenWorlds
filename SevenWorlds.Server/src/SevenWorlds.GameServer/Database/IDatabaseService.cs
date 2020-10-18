@@ -20,10 +20,6 @@ namespace SevenWorlds.GameServer.Database
         Task<MasterDataModel> GetMasterData(string serverId);
         Task UpdateMasterData(MasterDataModel model);
 
-        // Character
-        Task UpdateCharacter(CharacterModel model);
-        Task<List<CharacterModel>> GetAllCharacterFromPlayer(string playerName);
-
         // Admin
         Task DeleteAll();
     }

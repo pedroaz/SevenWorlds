@@ -11,20 +11,17 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public class CharacterPlacementService : ICharacterPlacementService
     {
-        private readonly IDatabaseService databaseService;
         private readonly IGameStateService gameStateService;
 
-        public CharacterPlacementService(IDatabaseService databaseService, IGameStateService gameStateService)
+        public CharacterPlacementService(IGameStateService gameStateService)
         {
-            this.databaseService = databaseService;
             this.gameStateService = gameStateService;
         }
 
-        public async Task PlaceAllPlayerCharactersIntoTheGame(string playerName)
+        public void PlaceAllPlayerCharactersIntoTheGame(string playerName)
         {
-            var models = await databaseService.GetAllCharacterFromPlayer(playerName);
-            foreach (var character in models) {
-                gameStateService.AddCharacterToGame(character.data);
+            foreach (var character in gameStateService.CharacterCollection.GetAll()) {
+                character.IsOnline = true;
             }
         }
     }

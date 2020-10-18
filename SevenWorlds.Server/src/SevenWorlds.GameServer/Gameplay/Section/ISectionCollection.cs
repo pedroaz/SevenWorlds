@@ -13,5 +13,6 @@ namespace SevenWorlds.GameServer.Gameplay.Section
     {
         SectionBundle Bundle { get;  }
         SectionBundle FindAllSectionsByArea(string areaId);
+        void SetBundle(SectionBundle bundle);
     }
 }

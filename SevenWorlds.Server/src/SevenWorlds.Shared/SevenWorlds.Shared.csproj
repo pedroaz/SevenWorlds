@@ -61,9 +61,11 @@
     <Compile Include="Data\Gameplay\Encounters\BattleEncounterData.cs" />
     <Compile Include="Data\Gameplay\Encounters\EncounterBundle.cs" />
     <Compile Include="Data\Gameplay\Encounters\EncounterData.cs" />
+    <Compile Include="Data\Gameplay\EquipmentData.cs" />
     <Compile Include="Data\Gameplay\MonsterData.cs" />
     <Compile Include="Data\Gameplay\ActionDatas\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerData.cs" />
+    <Compile Include="Data\Gameplay\CharacterResourcesData.cs" />
     <Compile Include="Data\Gameplay\Section\ArmoryData.cs" />
     <Compile Include="Data\Gameplay\Section\MonsterCampData.cs" />
     <Compile Include="Data\Gameplay\Section\ProductionCampData.cs" />
@@ -80,7 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityLog\LOG.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Storage\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(ProjectDir)$(OutDir)$(TargetFileName) $(SolutionDir)..\SevenWorlds.Unity\Assets\ExternalDLLs\$(TargetFileName)</PostBuildEvent>

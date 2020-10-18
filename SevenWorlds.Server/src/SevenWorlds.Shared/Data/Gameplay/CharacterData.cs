@@ -14,7 +14,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         // General
         public int Level { get; set; }
-        
+        public bool IsOnline { get; set; }
+
         // Position
         public string WorldId { get; set; }
         public string AreaId { get; set; }
@@ -22,6 +23,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         // Combat
         public CombatData Combat { get; set; }
+
+        // Resources
+        public CharacterResourcesData Resources { get; set; }
 
     }
 }

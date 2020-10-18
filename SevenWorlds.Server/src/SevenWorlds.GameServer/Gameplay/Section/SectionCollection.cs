@@ -12,20 +12,25 @@ namespace SevenWorlds.GameServer.Gameplay.Section
     public class SectionCollection : ISectionCollection
     {
 
-        private SectionBundle sectionBundle { get; set; }
+        private SectionBundle bundle { get; set; }
         private ILogService logService { get; }
 
-        public SectionBundle Bundle => sectionBundle;
+        public SectionBundle Bundle => bundle;
 
         public SectionCollection(ILogService logService)
         {
-            sectionBundle = new SectionBundle();
+            bundle = new SectionBundle();
             this.logService = logService;
         }
         
         public SectionBundle FindAllSectionsByArea(string areaId)
         {
-            return sectionBundle;
+            return bundle;
+        }
+
+        public void SetBundle(SectionBundle bundle)
+        {
+            this.bundle = bundle;
         }
     }
 }

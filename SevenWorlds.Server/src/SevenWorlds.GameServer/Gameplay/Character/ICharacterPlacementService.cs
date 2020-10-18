@@ -8,6 +8,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public interface ICharacterPlacementService
     {
-        Task PlaceAllPlayerCharactersIntoTheGame(string playerName);
+        void PlaceAllPlayerCharactersIntoTheGame(string playerName);
     }
 }
