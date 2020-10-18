@@ -11,43 +11,43 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public class PlayerActionQueue : IPlayerActionQueue
     {
-        PlayerActionCollection collection;
+        PlayerActionBundle bundle;
 
         private static object queueLock = new object();
 
         public PlayerActionQueue()
         {
-            collection = new PlayerActionCollection();
+            bundle = new PlayerActionBundle();
         }
 
         public void AddToQueue(MovementActionData action)
         {
             lock (queueLock) {
-                collection.Movement.Enqueue(action);
+                bundle.Movement.Enqueue(action);
             }
         }
 
         public void AddToQueue(StartBattleActionData action)
         {
             lock (queueLock) {
-                collection.StartBattle.Enqueue(action);
+                bundle.StartBattle.Enqueue(action);
             }
         }
 
-        public PlayerActionCollection CopyActionCollection()
+        public PlayerActionBundle CopyActionCollection()
         {
             lock (queueLock) {
-                PlayerActionCollection copyCollection = new PlayerActionCollection();
+                PlayerActionBundle bundleCopy = new PlayerActionBundle();
 
-                foreach (var item in copyCollection.Movement) {
-                    copyCollection.Movement.Enqueue(collection.Movement.Dequeue());
+                foreach (var item in bundleCopy.Movement) {
+                    bundleCopy.Movement.Enqueue(bundle.Movement.Dequeue());
                 }
 
-                foreach (var item in copyCollection.StartBattle) {
-                    copyCollection.StartBattle.Enqueue(collection.StartBattle.Dequeue());
+                foreach (var item in bundleCopy.StartBattle) {
+                    bundleCopy.StartBattle.Enqueue(bundle.StartBattle.Dequeue());
                 }
             
-                return copyCollection;
+                return bundleCopy;
             }
         }
     }

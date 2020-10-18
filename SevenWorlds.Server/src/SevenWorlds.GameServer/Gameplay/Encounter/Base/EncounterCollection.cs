@@ -1,35 +1,28 @@
-﻿using SevenWorlds.GameServer.Gameplay.Encounter.Base;
-using SevenWorlds.Shared.Data.Gameplay;
-using System;
+﻿using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static SevenWorlds.Shared.Data.Gameplay.EncounterData;
 
 namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
     public class EncounterCollection : IEncounterCollection
     {
-        private List<EncounterInstance> encounters = new List<EncounterInstance>();
+        private EncounterBundle bundle = new EncounterBundle();
+        public List<BattleEncounterData> Battles => bundle.Battles;
 
-        public void Add(EncounterInstance data)
+        public BattleEncounterData FindBattleEncounter(string id)
         {
-            encounters.Add(data);
+            return bundle.Battles.Find(x => x.Id == id);
         }
 
-        public EncounterInstance FindById(string id)
+        public EncounterCollection()
         {
-            return encounters.Find(x => x.Id == id);
         }
 
-        public IEnumerable<EncounterInstance> GetAll()
+        public void NewBattle(StartBattleActionData startData)
         {
-            return encounters;
-        }
-
-        public void Remove(string id)
-        {
-            encounters.RemoveAll(x => x.Id == id);
+            bundle.Battles.Add(new BattleEncounterData(startData));
         }
     }
 }

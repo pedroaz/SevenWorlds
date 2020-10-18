@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.GameServer.Utils.DataCollections;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Section
 {
-    public interface ISectionCollection : IDataCollection<SectionData>
+    public interface ISectionCollection
     {
-        List<SectionData> FindAllSectionsByArea(string areaId);
+        SectionBundle Bundle { get;  }
+        SectionBundle FindAllSectionsByArea(string areaId);
     }
 }

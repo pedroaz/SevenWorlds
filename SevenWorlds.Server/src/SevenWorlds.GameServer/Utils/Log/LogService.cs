@@ -2,10 +2,6 @@
 using Serilog.Core;
 using SevenWorlds.GameServer.Utils.Config;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Utils.Log
 {
@@ -22,7 +18,7 @@ namespace SevenWorlds.GameServer.Utils.Log
         Logger consoleLogger;
         private readonly IConfigurator configurator;
 
-        
+
 
         public LogService(IConfigurator configurator)
         {

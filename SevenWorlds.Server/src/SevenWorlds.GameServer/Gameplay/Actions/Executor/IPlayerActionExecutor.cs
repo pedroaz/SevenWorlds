@@ -11,7 +11,7 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
     public interface IPlayerActionExecutor
     {
         void SetSyncCoordinator(SyncCoordinator syncCoordinator);
-        void SetActionCollection(PlayerActionCollection playerActionCollection);
+        void SetActionCollection(PlayerActionBundle bundle);
         void ExecuteMovementActions();
         void ExecuteStartBattleActions();
     }

@@ -6,6 +6,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 {
     public class EncounterData : NetworkData
     {
+        public EncounterType Type { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 

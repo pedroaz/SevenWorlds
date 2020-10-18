@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,38 +11,21 @@ namespace SevenWorlds.GameServer.Gameplay.Section
 {
     public class SectionCollection : ISectionCollection
     {
-        private List<SectionData> sections;
+
+        private SectionBundle sectionBundle { get; set; }
         private ILogService logService { get; }
+
+        public SectionBundle Bundle => sectionBundle;
 
         public SectionCollection(ILogService logService)
         {
-            sections = new List<SectionData>();
+            sectionBundle = new SectionBundle();
             this.logService = logService;
         }
-
-        public void Add(SectionData data)
+        
+        public SectionBundle FindAllSectionsByArea(string areaId)
         {
-            sections.Add(data);
-        }
-
-        public SectionData FindById(string id)
-        {
-            return sections.Find(x => x.Id == id);
-        }
-
-        public void Remove(string id)
-        {
-            sections.RemoveAll(x => x.Id == id);
-        }
-
-        public IEnumerable<SectionData> GetAll()
-        {
-            return sections;
-        }
-
-        public List<SectionData> FindAllSectionsByArea(string areaId)
-        {
-            return sections.Where(x => x.AreaId == areaId).ToList();
+            return sectionBundle;
         }
     }
 }

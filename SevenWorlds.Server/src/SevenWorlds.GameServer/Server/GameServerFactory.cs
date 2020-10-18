@@ -10,6 +10,8 @@ using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Encounters;
+using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,24 +77,24 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             }
             
             // Add universes
-            foreach (var item in masterData.UniverseCollection) {
+            foreach (var item in masterData.Universes) {
                 gameStateService.UniverseCollection.Add(item);
             }
 
             // Add Worlds
-            foreach (var item in masterData.WorldCollection) {
+            foreach (var item in masterData.Worlds) {
                 gameStateService.WorldCollection.Add(item);
             }
 
             // Add Areas
-            foreach (var item in masterData.AreaCollection) {
+            foreach (var item in masterData.Areas) {
                 gameStateService.AreaCollection.Add(item);
             }
 
             // Add Sections
-            foreach (var item in masterData.SectionCollection) {
-                gameStateService.SectionCollection.Add(item);
-            }
+            //foreach (var item in masterData.SectionCollection) {
+            //    gameStateService.SectionCollection.Add(item);
+            //}
         }
 
         public string NewId()
@@ -105,12 +107,18 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public async Task SetFakeData()
         {
+            logService.Log("Setting fake data");
+            logService.Log("Deleting all");
             await databaseService.DeleteAll();
 
+            logService.Log("Creating master data");
             var masterData = GenerateFakeMasterData();
+
+            logService.Log("Updating databases");
             await databaseService.UpdateMasterData(masterData);
             await databaseService.UpdateAccount(GenerateFakeAccounts());
-            await databaseService.UpdateCharacter(GenerateFakeCharacters(masterData.WorldCollection));
+            await databaseService.UpdateCharacter(GenerateFakeCharacters(masterData.Worlds));
+            logService.Log("Finish updating databases");
         }
 
         
@@ -147,29 +155,31 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             List<UniverseData> universes = CreateNewUniverse("First Universe");
             List<WorldData> worlds = CreateSevenWorlds(universes[0]);
             List<AreaData> areas = CreateFakeAreas(worlds[0]);
-            List<SectionData> sections = CreateFakeSections(areas[0]);
+            SectionBundle bundle = CreateFakeSectionBundle(areas[0]);
 
             MasterDataModel masterData = new MasterDataModel() {
                 ServerId = "fake_server",
-                UniverseCollection = universes,
-                WorldCollection = worlds,
-                AreaCollection = areas,
-                SectionCollection = sections
+                Universes = universes,
+                Worlds = worlds,
+                Areas = areas,
+                Sections = bundle,
+                Encounters = new EncounterBundle()
             };
             return masterData;
         }
 
-        private List<SectionData> CreateFakeSections(AreaData areaData)
+        private SectionBundle CreateFakeSectionBundle(AreaData areaData)
         {
-            List<SectionData> sections = new List<SectionData>();
+            SectionBundle bundle = new SectionBundle();
 
-            sections.Add(new SectionData() {
+            bundle.MonsterCamps.Add(new MonsterCampData() {
                 Name = "Poring Camp",
                 AreaId = areaData.Id,
                 sectionType = SectionType.MonsterCamp,
                 Id = NewId()
             });
-            return sections;
+
+            return bundle;
         }
 
         private List<AreaData> CreateFakeAreas(WorldData world)

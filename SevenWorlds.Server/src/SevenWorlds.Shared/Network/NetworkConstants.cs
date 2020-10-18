@@ -21,12 +21,12 @@ namespace SevenWorlds.Shared.Network
         public const string Request_RequestRegisterAccount = "RequestRegisterAccount";
         // Syncs
         public const string Request_UniverseSync = "RequestUniverseSync";
-        public const string Request_RequestAllWorlds = "RequestAllWorlds";
+        public const string Request_AllWorlds = "RequestAllWorlds";
         public const string Request_WorldSync = "RequestWorldSync";
         public const string Request_AreaSync = "RequestAreaSync";
-        public const string Request_RequestAllAreas = "RequestAllAreas";
+        public const string Request_AllAreas = "RequestAllAreas";
         public const string Request_AllPlayerDatas = "RequestAllPlayerDatas";
-        public const string Request_RequestAllSections = "RequestAllSections";
+        public const string Request_SectionBundle = "RequestSectionBundle";
         public const string Request_PlayerCharacters = "RequestPlayerCharacters";
         // General
         public const string Event_OnPing = "OnPing";

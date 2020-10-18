@@ -7,6 +7,7 @@ using SevenWorlds.GameServer.Gameplay.Actions.Executor;
 using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
+using SevenWorlds.GameServer.Gameplay.Encounter.Executor;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
@@ -103,6 +104,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<CharacterPlacementService>().As<ICharacterPlacementService>().SingleInstance();
             builder.RegisterType<EncounterCollection>().As<IEncounterCollection>().SingleInstance();
             builder.RegisterType<PlayerActionExecutor>().As<IPlayerActionExecutor>().SingleInstance();
+            builder.RegisterType<EncounterExecutor>().As<IEncounterExecutor>().SingleInstance();
             
 
             container = builder.Build();

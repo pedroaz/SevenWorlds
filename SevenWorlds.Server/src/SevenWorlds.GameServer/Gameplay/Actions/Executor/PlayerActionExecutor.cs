@@ -14,7 +14,7 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
     {
         private readonly IGameStateService gameStateService;
         private SyncCoordinator syncCoordinator;
-        private PlayerActionCollection actionCollection;
+        private PlayerActionBundle actionBundle;
 
         public PlayerActionExecutor(IGameStateService gameStateService)
         {
@@ -26,15 +26,15 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
             this.syncCoordinator = syncCoordinator;
         }
 
-        public void SetActionCollection(PlayerActionCollection playerActionCollection)
+        public void SetActionCollection(PlayerActionBundle bundle)
         {
-            actionCollection = playerActionCollection;
+            this.actionBundle = bundle;
         }
 
 
         public void ExecuteMovementActions()
         {
-            foreach (var data in actionCollection.Movement) {
+            foreach (var data in actionBundle.Movement) {
 
                 gameStateService.MovePlayerToArea(data.CharacterId, data.ToAreaId);
                 syncCoordinator.AreasToSync.Add(data.ToAreaId);

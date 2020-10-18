@@ -9,6 +9,7 @@ using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.Section;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System.Collections.Generic;
@@ -47,6 +48,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void AdminStartGameServer(string serverId)
         {
+            logService.Log("Recieved Admin Start Request");
             serverManager.StartServerRequest(serverId);
         }
 
@@ -57,7 +59,9 @@ namespace SevenWorlds.GameServer.Hubs
 
         public async Task ResetUniverseFakeData()
         {
+            logService.Log("Recieved Admin Reset to Fake Data");
             await serverManager.ResetFakeData();
+            logService.Log("Finished setting fake data");
         }
 
         #endregion
@@ -125,9 +129,9 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.PlayerCollection.GetAll();
         }
 
-        public IEnumerable<SectionData> RequestAllSections()
+        public SectionBundle RequestSectionBundle()
         {
-            return gameStateService.SectionCollection.GetAll();
+            return gameStateService.SectionCollection.Bundle;
         }
 
         public IEnumerable<CharacterData> RequestPlayerCharacters(string playerName)

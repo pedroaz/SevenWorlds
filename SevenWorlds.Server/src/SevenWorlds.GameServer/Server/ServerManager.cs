@@ -77,8 +77,9 @@ namespace SevenWorlds.GameServer.Server
                     await Task.Delay(Timeout.Infinite);
                 }
 
-                
-
+                logService.Log("----------------------------");
+                logService.Log("------- SERVER_START -------");
+                logService.Log("----------------------------");
                 serverStatus.Status = GameServerStatus.Started;
                 gameLoopSimulator.StartSimulation();
             }
@@ -108,13 +109,14 @@ namespace SevenWorlds.GameServer.Server
 
         public void StartServerRequest(string serverId)
         {
+            logService.Log("Setting server status to Ready to start");
             configurator.SetServerId(serverId);
-
             serverStatus.Status = GameServerStatus.ReadyToStart;
         }
 
         public async Task ResetFakeData()
         {
+            
             await gameFactory.SetFakeData();
         }
     }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Encounter.Base
+namespace SevenWorlds.Shared.Data.Gameplay.Section
 {
-    public class EncounterInstanceFactory : IEncounterInstanceFactory
+    public class ProductionCampData : SectionData
     {
     }
 }

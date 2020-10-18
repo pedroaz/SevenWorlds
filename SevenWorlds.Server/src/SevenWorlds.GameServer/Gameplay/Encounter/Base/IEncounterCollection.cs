@@ -1,15 +1,15 @@
-﻿using SevenWorlds.GameServer.Gameplay.Encounter.Base;
-using SevenWorlds.GameServer.Utils.DataCollections;
+﻿using SevenWorlds.GameServer.Utils.DataCollections;
 using SevenWorlds.Shared.Data.Gameplay;
-using System;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
-    public interface IEncounterCollection : IDataCollection<EncounterInstance>
+    public interface IEncounterCollection
     {
+        List<BattleEncounterData> Battles { get; }
+        BattleEncounterData FindBattleEncounter(string id);
+        void NewBattle(StartBattleActionData data);
     }
 }

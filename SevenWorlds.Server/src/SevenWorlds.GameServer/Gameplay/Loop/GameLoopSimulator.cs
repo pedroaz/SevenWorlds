@@ -56,6 +56,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
                 PingAllClients();
                 //PrintWhoIsLogged();
 
+                // Do player and section simulations
                 SimulateUniverse();
 
                 // End
@@ -65,7 +66,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
         private void SimulateUniverse()
         {
-            // Copy Action Collection
+            // Copy Action Collection (First thing)
             playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
 
             playerActionExecutor.ExecuteMovementActions();

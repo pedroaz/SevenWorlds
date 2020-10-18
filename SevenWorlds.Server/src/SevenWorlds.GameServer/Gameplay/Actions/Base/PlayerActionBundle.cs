@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Actions.Base
 {
-    public class PlayerActionCollection
+    public class PlayerActionBundle
     {
         public Queue<MovementActionData> Movement { get; set; }
         public Queue<StartBattleActionData> StartBattle { get; set; }
 
-        public PlayerActionCollection()
+        public PlayerActionBundle()
         {
             Movement = new Queue<MovementActionData>();
             StartBattle = new Queue<StartBattleActionData>();

@@ -9,6 +9,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
     {
         void AddToQueue(MovementActionData action);
         void AddToQueue(StartBattleActionData action);
-        PlayerActionCollection CopyActionCollection();
+        PlayerActionBundle CopyActionCollection();
     }
 }
