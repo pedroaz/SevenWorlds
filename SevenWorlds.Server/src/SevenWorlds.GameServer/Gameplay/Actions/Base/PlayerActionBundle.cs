@@ -9,13 +9,13 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Base
 {
     public class PlayerActionBundle
     {
-        public Queue<MovementActionData> Movement { get; set; }
-        public Queue<StartBattleActionData> StartBattle { get; set; }
+        public List<MovementActionData> Movement { get; set; }
+        public List<StartBattleActionData> StartBattle { get; set; }
 
         public PlayerActionBundle()
         {
-            Movement = new Queue<MovementActionData>();
-            StartBattle = new Queue<StartBattleActionData>();
+            Movement = new List<MovementActionData>();
+            StartBattle = new List<StartBattleActionData>();
         }
     }
 }

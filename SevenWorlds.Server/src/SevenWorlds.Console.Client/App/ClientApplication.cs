@@ -34,10 +34,10 @@ namespace SevenWorlds.ConsoleClient.App
                 print("Connceted to the server");
 
                 SetDefaultHandlers();
-
+                print("Welcome to the console client");
+                print("Type help for commands");
                 while (command != "quit") {
-                    print("Welcome to the console client");
-                    print("Type help for commands");
+                    
                     var line = Console.ReadLine().ToLower();
                     switch (line) {
                         case "h":
@@ -47,10 +47,10 @@ namespace SevenWorlds.ConsoleClient.App
                             SetPingHandler();
                             break;
                         case "l":
-                            Login();
+                            await Login();
                             break;
                         case "1":
-                            Login1();
+                            await Login1();
                             break;
                         case "c":
                             Chat();
@@ -91,8 +91,17 @@ namespace SevenWorlds.ConsoleClient.App
             });
         }
 
-        private static async void Move()
+        private static async Task Move()
         {
+            if(characterData == null) {
+                print("No chracter data! Can't move!");
+                return;
+            }
+            print("Requesting sync");
+            var world = await client.RequestWorldSync(characterData.WorldId);
+            var toAreaId = world.Areas[1].Id;
+            print($"Moving to AreaId: {toAreaId}");
+            await client.RequestMovementAction(characterData.Id, characterData.AreaId ,toAreaId);
         }
 
         private static async void Chat()
@@ -108,7 +117,7 @@ namespace SevenWorlds.ConsoleClient.App
             });
         }
 
-        private static async void Login()
+        private static async Task Login()
         {
             print("Type username");
             var username = Console.ReadLine();
@@ -127,7 +136,7 @@ namespace SevenWorlds.ConsoleClient.App
             }
         }
 
-        private static async void Login1()
+        private static async Task Login1()
         {
             var username = "pedroaz";
             var password = "pedroaz123";
@@ -140,6 +149,7 @@ namespace SevenWorlds.ConsoleClient.App
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
                 print($"Login was ok");
+                print($"Requesting characters from player data: {playerData.PlayerName}");
                 List<CharacterData> characters = await client.RequestPlayerCharacters(playerData.PlayerName);
                 characterData = characters[0];
             }

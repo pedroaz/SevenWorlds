@@ -193,9 +193,9 @@
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
     <Compile Include="Gameplay\GameState\IGameStateService.cs" />
     <Compile Include="Gameplay\Loop\SyncCoordinator.cs" />
-    <Compile Include="Gameplay\Actions\Base\IPlayerActionQueue.cs" />
+    <Compile Include="Gameplay\Actions\Base\IPlayerActionCollection.cs" />
     <Compile Include="Gameplay\Player\IPlayerCollection.cs" />
-    <Compile Include="Gameplay\Actions\Base\PlayerActionQueue.cs" />
+    <Compile Include="Gameplay\Actions\Base\PlayerActionCollection.cs" />
     <Compile Include="Gameplay\Player\PlayerCollection.cs" />
     <Compile Include="Gameplay\Section\ISectionCollection.cs" />
     <Compile Include="Gameplay\Section\SectionCollection.cs" />

@@ -99,10 +99,13 @@ namespace SevenWorlds.GameClient.Client
            
         }
 
-        public async Task RequestMovementAction(string characterId, string areaId)
+        public async Task RequestMovementAction(string characterId, string fromAreaId, string toAreaId)
         {
             MovementActionData data = new MovementActionData() {
                 Id = Guid.NewGuid().ToString(),
+                CharacterId = characterId,
+                FromAreaId = fromAreaId,
+                ToAreaId = toAreaId
             };
             await hubProxy.Invoke(NetworkConstants.Request_MovementAction, data);
         }

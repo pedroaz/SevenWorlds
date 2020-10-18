@@ -95,7 +95,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<PlayerCollection>().As<IPlayerCollection>().SingleInstance();
             builder.RegisterType<HubService>().As<IHubService>().SingleInstance();
             builder.RegisterType<GameStateService>().As<IGameStateService>().SingleInstance();
-            builder.RegisterType<PlayerActionQueue>().As<IPlayerActionQueue>().SingleInstance();
+            builder.RegisterType<PlayerActionCollection>().As<IPlayerActionCollection>().SingleInstance();
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance();
             builder.RegisterType<Configurator>().As<IConfigurator>().SingleInstance();
             builder.RegisterType<DatabaseService>().As<IDatabaseService>().SingleInstance();

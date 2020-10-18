@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.Player
 {
-    public interface IPlayerActionQueue
+    public interface IPlayerActionCollection
     {
-        void AddToQueue(MovementActionData action);
-        void AddToQueue(StartBattleActionData action);
+        void AddToBundle(MovementActionData action);
+        void AddToBundle(StartBattleActionData action);
         PlayerActionBundle CopyActionCollection();
     }
 }

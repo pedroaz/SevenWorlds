@@ -23,7 +23,7 @@ namespace SevenWorlds.GameServer.Hubs
     {
         private readonly ILogService logService;
         private readonly IGameStateService gameStateService;
-        private readonly IPlayerActionQueue playerActionQueue;
+        private readonly IPlayerActionCollection playerActionQueue;
         private readonly IServerManager serverManager;
         private readonly ILoginService loginService;
         private readonly IAccountService accountService;
@@ -31,7 +31,7 @@ namespace SevenWorlds.GameServer.Hubs
         public MainHub(
             ILogService logService,
             IGameStateService gameStateService,
-            IPlayerActionQueue playerActionQueue,
+            IPlayerActionCollection playerActionQueue,
             IServerManager serverManager,
             ILoginService loginService,
             IAccountService accountService)
@@ -157,12 +157,13 @@ namespace SevenWorlds.GameServer.Hubs
         #region Actions
         public void RequestMovementAction(MovementActionData data)
         {
-            playerActionQueue.AddToQueue(data);
+            logService.Log($"Recieved Movement Request {data.CharacterId}");
+            playerActionQueue.AddToBundle(data);
         }
 
         public void RequestStartBattleAction(StartBattleActionData data)
         {
-            playerActionQueue.AddToQueue(data);
+            playerActionQueue.AddToBundle(data);
         }
         #endregion
     }

@@ -17,7 +17,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private readonly IHubService hubService;
         private readonly IGameStateService gameStateService;
         private readonly IPlayerActionExecutor playerActionExecutor;
-        private readonly IPlayerActionQueue playerActionQueue;
+        private readonly IPlayerActionCollection playerActionQueue;
         private Stopwatch stopwatch;
         private SyncCoordinator syncCoordinator;
 
@@ -27,7 +27,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             ILogService logService,
             IHubService hubService,
             IGameStateService gameStateService,
-            IPlayerActionQueue playerActionQueue,
+            IPlayerActionCollection playerActionQueue,
             IPlayerActionExecutor playerActionExecutor
             )
         {
