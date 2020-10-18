@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace SevenWorlds.Shared.Data.Sync
     {
         public AreaData Area { get; set; }
         public List<CharacterData> Characters { get; set; }
-        public List<SectionData> Sections { get; set; }
+        public SectionBundle Sections { get; set; }
     }
 }

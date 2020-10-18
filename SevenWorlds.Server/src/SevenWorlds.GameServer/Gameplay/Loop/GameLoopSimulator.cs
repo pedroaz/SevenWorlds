@@ -5,6 +5,7 @@ using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -58,10 +59,21 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
 
                 // Do player and section simulations
                 SimulateUniverse();
+                SendSyncMessages();
 
                 // End
                 EndOfTheSimulation();
             }
+        }
+
+        private void SendSyncMessages()
+        {
+            syncCoordinator.AreasToSync = syncCoordinator.AreasToSync.Distinct().ToList();
+            foreach (var area in syncCoordinator.AreasToSync) {
+                var areaSyncData = gameStateService.GetAreaSyncData(area);
+                hubService.BroadcastAreaSync(areaSyncData);
+            }
+            
         }
 
         private void SimulateUniverse()

@@ -41,6 +41,7 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
 
                 logService.Log($"Executing movement action from character: {data.CharacterId}");
                 gameStateService.MovePlayerToArea(data.CharacterId, data.ToAreaId);
+                syncCoordinator.AreasToSync.Add(data.FromAreaId);
                 syncCoordinator.AreasToSync.Add(data.ToAreaId);
             }
         }
