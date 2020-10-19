@@ -34,7 +34,7 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas.Find(x => x.Position.Equals(position));
         }
 
-        public IEnumerable<AreaData> GetAll()
+        public List<AreaData> GetAll()
         {
             return areas;
         }

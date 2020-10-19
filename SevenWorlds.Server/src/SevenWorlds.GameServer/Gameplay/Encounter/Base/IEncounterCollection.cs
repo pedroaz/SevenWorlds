@@ -8,6 +8,7 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
     public interface IEncounterCollection
     {
+        EncounterBundle Bundle { get; }
         List<BattleEncounterData> Battles { get; }
         BattleEncounterData FindBattleEncounter(string id);
         void NewBattle(StartBattleActionData data);

@@ -33,7 +33,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void BroadcastPing()
         {
-            hubContext.Clients.All.OnPing(new PingData());
+            hubContext.Clients.All.OnPing();
         }
 
         public void BroadcastAreaSync(AreaSyncData data)

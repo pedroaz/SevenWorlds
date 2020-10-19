@@ -15,17 +15,23 @@ namespace SevenWorlds.Shared.Data.Gameplay
         // General
         public int Level { get; set; }
         public bool IsOnline { get; set; }
-
-        // Position
         public string WorldId { get; set; }
+
+        // Position - Needs to be set by [CharacterPlacementService]
         public string AreaId { get; set; }
         public WorldPosition Position { get; set; }
 
         // Combat
         public CombatData Combat { get; set; }
+        public EquipmentData Equipments { get; set; }
 
         // Resources
         public CharacterResourcesData Resources { get; set; }
+
+        public CharacterData(string playerName)
+        {
+            PlayerName = playerName;
+        }
 
     }
 }

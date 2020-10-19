@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Area;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -32,5 +33,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         UniverseSyncData GetUniverseSyncData();
         WorldSyncData GetWorldSyncData(string worldId);
         AreaSyncData GetAreaSyncData(string areaId);
+        MasterDataModel GetMasterData();
     }
 }

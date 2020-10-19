@@ -11,6 +11,8 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter
         private EncounterBundle bundle = new EncounterBundle();
         public List<BattleEncounterData> Battles => bundle.Battles;
 
+        public EncounterBundle Bundle => bundle;
+
         public BattleEncounterData FindBattleEncounter(string id)
         {
             return bundle.Battles.Find(x => x.Id == id);

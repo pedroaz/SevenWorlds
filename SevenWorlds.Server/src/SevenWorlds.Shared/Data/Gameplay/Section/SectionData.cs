@@ -13,7 +13,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public enum SectionType
         {
             MonsterCamp,
-            Shop
+            Shop,
+            ProductionCamp
         }
 
         public string Name;

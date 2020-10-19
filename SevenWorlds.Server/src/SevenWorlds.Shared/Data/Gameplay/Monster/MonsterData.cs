@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    public class EquipmentData : NetworkData
+    public enum MonsterType
     {
+        Poring,
+        PecoPeco
+    }
+
+    public class MonsterData : NetworkData
+    {
+        public CombatData Combat { get; set; }
     }
 }

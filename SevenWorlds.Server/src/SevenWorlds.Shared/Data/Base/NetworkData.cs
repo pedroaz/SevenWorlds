@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Base
 {
-    public class NetworkData : GameData
+    [Serializable]
+    public class NetworkData
     {
-        public DateTime TimeOfCreation { get; } = DateTime.Now;
+        public string Id { get; set; }
+        public DateTime TimeOfCreation { get; set; }
     }
 }

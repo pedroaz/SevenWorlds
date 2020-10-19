@@ -11,5 +11,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class UniverseData : NetworkData
     {
         public string Name;
+
+        public UniverseData(string name)
+        {
+            Name = name;
+        }
     }
 }

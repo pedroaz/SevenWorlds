@@ -37,7 +37,7 @@ namespace SevenWorlds.ConsoleClient.App
                 print("Welcome to the console client");
                 print("Type help for commands");
                 while (command != "quit") {
-                    
+
                     var line = Console.ReadLine().ToLower();
                     switch (line) {
                         case "h":
@@ -93,7 +93,7 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async Task Move()
         {
-            if(characterData == null) {
+            if (characterData == null) {
                 print("No chracter data! Can't move!");
                 return;
             }
@@ -101,7 +101,7 @@ namespace SevenWorlds.ConsoleClient.App
             var world = await client.RequestWorldSync(characterData.WorldId);
             var toAreaId = world.Areas[1].Id;
             print($"Moving to AreaId: {toAreaId}");
-            await client.RequestMovementAction(characterData.Id, characterData.AreaId ,toAreaId);
+            await client.RequestMovementAction(characterData.Id, characterData.AreaId, toAreaId);
         }
 
         private static async void Chat()
@@ -111,10 +111,7 @@ namespace SevenWorlds.ConsoleClient.App
             }
             print("What you want to say:");
             var m = Console.ReadLine();
-            await client.SendChatMessage(new ChatMessageData() {
-                PlayerName = "Console",
-                Message = m
-            });
+            await client.SendChatMessage(new ChatMessageData("Console", m));
         }
 
         private static async Task Login()
@@ -123,10 +120,7 @@ namespace SevenWorlds.ConsoleClient.App
             var username = Console.ReadLine();
             print("Type password");
             var password = Console.ReadLine();
-            var response = await client.Login(new LoginData() {
-                Username = username,
-                Password = password
-            });
+            var response = await client.Login(new LoginData(username, password));
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
                 print($"Login was ok");
@@ -142,10 +136,7 @@ namespace SevenWorlds.ConsoleClient.App
             var password = "pedroaz123";
 
             print($"Login with {username} and {password}");
-            var response = await client.Login(new LoginData() {
-                Username = username,
-                Password = password
-            });
+            var response = await client.Login(new LoginData(username, password));
             if (response.ResponseType == LoginResponseType.Success) {
                 playerData = response.PlayerData;
                 print($"Login was ok");

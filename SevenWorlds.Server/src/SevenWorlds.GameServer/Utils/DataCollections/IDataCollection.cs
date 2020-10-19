@@ -11,6 +11,6 @@ namespace SevenWorlds.GameServer.Utils.DataCollections
         void Add(T data);
         T FindById(string id);
         void Remove(string id);
-        IEnumerable<T> GetAll();
+        List<T> GetAll();
     }
 }

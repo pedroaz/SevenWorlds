@@ -19,7 +19,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
         {
             return new List<PlayerActionType>();
         }
-
        
     }
 }

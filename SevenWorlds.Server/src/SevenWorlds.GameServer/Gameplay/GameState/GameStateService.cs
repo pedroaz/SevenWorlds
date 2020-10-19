@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Area;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Area;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -93,6 +94,15 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             return AreaCollection.GetAll();
         }
 
-       
+        public MasterDataModel GetMasterData()
+        {
+            MasterDataModel model = new MasterDataModel();
+            model.Universes = UniverseCollection.GetAll();
+            model.Worlds = WorldCollection.GetAll();
+            model.Areas = AreaCollection.GetAll();
+            model.Sections = SectionCollection.Bundle;
+            model.Encounters = EncounterCollection.Bundle;
+            return model;
+        }
     }
 }

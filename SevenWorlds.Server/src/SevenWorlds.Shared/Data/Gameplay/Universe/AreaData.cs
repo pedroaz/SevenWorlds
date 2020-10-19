@@ -13,5 +13,12 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public string Name;
         public WorldPosition Position;
         public string WorldId;
+
+        public AreaData(string name, WorldPosition position, string worldId)
+        {
+            Name = name;
+            Position = position;
+            WorldId = worldId;
+        }
     }
 }

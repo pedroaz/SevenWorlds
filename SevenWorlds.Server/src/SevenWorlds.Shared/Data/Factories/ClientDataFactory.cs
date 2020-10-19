@@ -1,0 +1,24 @@
+﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Chat;
+using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using System;
+
+namespace SevenWorlds.Shared.Data.Factory
+{
+    public class ClientDataFactory : DataFactory
+    {
+        public ChatMessageData CreateChatMessageData(string playerName, string message)
+        {
+            var data = new ChatMessageData(playerName, message);
+            SetDefaultValues(data);
+            return data;
+        }
+
+        public MovementActionData CreateMovementActionData(string characterId, string fromAreaId, string toAreaId)
+        {
+            var data = new MovementActionData(characterId, fromAreaId, toAreaId);
+            SetDefaultValues(data);
+            return data;
+        }
+    }
+}

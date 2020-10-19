@@ -29,7 +29,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             return characters.Find(x => x.Id == id);
         }
 
-        public IEnumerable<CharacterData> GetAll()
+        public List<CharacterData> GetAll()
         {
             return characters;
         }

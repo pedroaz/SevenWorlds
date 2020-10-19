@@ -8,5 +8,12 @@ namespace SevenWorlds.Shared.Data.Gameplay.Section
 {
     public class ProductionCampData : SectionData
     {
+        public CharacterResourceType Resource { get; set; }
+
+        public ProductionCampData(CharacterResourceType resourceType)
+        {
+            Resource = resourceType;
+            sectionType = SectionType.ProductionCamp;
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             return players.Find(x => x.Id == id);
         }
 
-        public IEnumerable<PlayerData> GetAll()
+        public List<PlayerData> GetAll()
         {
             return players;
         }

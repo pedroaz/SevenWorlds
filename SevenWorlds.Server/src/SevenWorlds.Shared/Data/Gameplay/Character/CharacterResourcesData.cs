@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-
     public enum CharacterResourceType
     {
         Gold,
@@ -18,14 +17,5 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class CharacterResourcesData : NetworkData
     {
         public Dictionary<CharacterResourceType, int> Resources { get; set; }
-        
-        public CharacterResourcesData()
-        {
-            Resources = new Dictionary<CharacterResourceType, int>() {
-                { CharacterResourceType.Gold, 0 },
-                { CharacterResourceType.Rock, 0 },
-                { CharacterResourceType.Wood, 0 },
-            };
-        }
     }
 }

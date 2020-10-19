@@ -4,6 +4,8 @@ using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Factories;
+using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using SevenWorlds.Shared.Data.Gameplay.Section;
@@ -11,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using static SevenWorlds.Shared.Data.Gameplay.SectionData;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
@@ -21,6 +22,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private readonly ILogService logService;
         private readonly IConfigurator configurator;
         private readonly IGameStateService gameStateService;
+        private readonly UniverseDataFactory universeDataFactory = new UniverseDataFactory();
+        private readonly CharacterFactory characterFactory = new CharacterFactory();
 
         public GameServerFactory(
             IGameStateService gameStateService,
@@ -40,9 +43,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 logService.Log("Dump will no be done because dump folder isn't valid");
             }
 
-            MasterDataModel masterData = new MasterDataModel() {
-                ServerId = "123"
-            };
+            MasterDataModel masterData = gameStateService.GetMasterData();
 
             var jsonText = JsonConvert.SerializeObject(masterData, Formatting.Indented);
             var fileName = Path.Combine(configurator.GetMasterDataDumpFoler(), $"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
@@ -151,11 +152,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private List<CharacterData> CreateFakeCharacters(WorldData world)
         {
             List<CharacterData> characters = new List<CharacterData>(){
-                new CharacterData() {
-                    Id = NewId(),
-                    PlayerName = "Pedro",
-                    WorldId = world.Id,
-                }
+                characterFactory.NewCharacter("Pedro", world.Id)
             };
             return characters;
         }
@@ -164,17 +161,9 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         {
             SectionBundle bundle = new SectionBundle();
 
-            bundle.MonsterCamps.Add(new MonsterCampData() {
-                Name = "Poring Camp",
-                AreaId = areaData.Id,
-                Id = NewId()
-            });
-
-            bundle.ProductionCamps.Add(new ProductionCampData() {
-                Name = "Wood Production Camp",
-                AreaId = areaData.Id,
-                Id = NewId(),
-            });
+            bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.Poring));
+            bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.PecoPeco));
+            bundle.ProductionCamps.Add(universeDataFactory.CreateNewProductionCamp(CharacterResourceType.Wood));
 
             return bundle;
         }
@@ -185,15 +174,17 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
             for (int x = 0; x < 10; x++) {
                 for (int y = 0; y < 10; y++) {
-                    areas.Add(new AreaData() {
-                        Id = NewId(),
-                        Name = $"Area ({x},{y})",
-                        Position = new WorldPosition() {
-                            X = x,
-                            Y = y
-                        },
-                        WorldId = world.Id
-                    });
+
+                    areas.Add(
+                        universeDataFactory.CreateNewArea(
+                            $"Area ({x},{y})",
+                            new WorldPosition() {
+                                X = x,
+                                Y = y
+                            },
+                            world.Id
+                        )
+                    );
                 }
             }
 
@@ -205,12 +196,13 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             List<WorldData> worlds = new List<WorldData>();
 
             for (int i = 0; i < 7; i++) {
-                worlds.Add(new WorldData() {
-                    Name = $"World {i}",
-                    UniverseId = universe.Id,
-                    WorldIndex = i,
-                    Id = NewId()
-                });
+                worlds.Add(
+                    universeDataFactory.CreateNewWorld(
+                        $"World {i}",
+                        universe.Id,
+                        i
+                    )
+                );
             }
 
             return worlds;
@@ -219,10 +211,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private List<UniverseData> CreateNewUniverse(string universeName)
         {
             return new List<UniverseData>(){
-                new UniverseData() {
-                    Name = universeName,
-                    Id = NewId()
-                }
+                universeDataFactory.CreateNewUniverse(universeName)
             };
         }
 

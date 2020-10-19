@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Sync;
@@ -15,6 +16,7 @@ namespace SevenWorlds.GameClient.Client
     {
         HubConnection hubConnection;
         private IHubProxy hubProxy;
+        private ClientDataFactory dataFactory = new ClientDataFactory();
 
         public async Task Connect(string serverUrl, string hubName)
         {
@@ -37,9 +39,9 @@ namespace SevenWorlds.GameClient.Client
             });
         }
 
-        public void SetOnPingHandler(Action<PingData> action)
+        public void SetOnPingHandler(Action<bool> action)
         {
-            hubProxy.On<PingData>(NetworkConstants.Event_OnPing, (data) => {
+            hubProxy.On<bool>(NetworkConstants.Event_OnPing, (data) => {
                 action(data);
             });
         }
@@ -55,9 +57,9 @@ namespace SevenWorlds.GameClient.Client
 
         #region Requests
 
-        public async Task<ChatMessageResponse> SendChatMessage(ChatMessageData data)
+        public async Task<bool> SendChatMessage(ChatMessageData data)
         {
-            return await hubProxy.Invoke<ChatMessageResponse>(NetworkConstants.Request_SendChatMessage, data);
+            return await hubProxy.Invoke<bool>(NetworkConstants.Request_SendChatMessage, data);
         }
 
         public async Task<LoginResponseData> Login(LoginData data)
@@ -96,23 +98,18 @@ namespace SevenWorlds.GameClient.Client
 
         private async Task RequestGeneralAction(PlayerActionData data)
         {
-           
+
         }
 
         public async Task RequestMovementAction(string characterId, string fromAreaId, string toAreaId)
         {
-            MovementActionData data = new MovementActionData() {
-                Id = Guid.NewGuid().ToString(),
-                CharacterId = characterId,
-                FromAreaId = fromAreaId,
-                ToAreaId = toAreaId
-            };
+            var data = dataFactory.CreateMovementActionData(characterId, fromAreaId, toAreaId);
             await hubProxy.Invoke(NetworkConstants.Request_MovementAction, data);
         }
 
         public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)
         {
-            
+
         }
 
         #endregion
