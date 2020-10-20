@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
 
         public void ExecuteBattleEncounters()
         {
-            foreach (var item in gameStateService.EncounterCollection.Battles) {
+            foreach (BattleEncounterData battleData in gameStateService.EncounterCollection.Battles) {
 
             }
         }

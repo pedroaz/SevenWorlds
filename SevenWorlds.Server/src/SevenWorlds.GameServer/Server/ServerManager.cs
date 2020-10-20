@@ -45,8 +45,8 @@ namespace SevenWorlds.GameServer.Server
                 using (WebApp.Start(NetworkConstants.ServerUrl)) {
                     logService.Log($"Server running on {NetworkConstants.ServerUrl}");
 
-                    if (configurator.ShouldAutoStart()) {
-                        logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.GetServerId()}");
+                    if (configurator.Config.AutoStart) {
+                        logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.Config.ServerId}");
                         serverStatus = GameServerStatus.ReadyToStart;
                     }
                     else {
@@ -55,7 +55,7 @@ namespace SevenWorlds.GameServer.Server
                         await WaitForStartRequest();
                     }
 
-                    await StartGameServer(configurator.GetServerId());
+                    await StartGameServer(configurator.Config.ServerId);
                 }
             }
             catch (Exception e) {
@@ -117,7 +117,7 @@ namespace SevenWorlds.GameServer.Server
         public void StartServerRequest(string serverId)
         {
             logService.Log("Setting server status to Ready to start");
-            configurator.SetServerId(serverId);
+            configurator.Config.ServerId = serverId;
             serverStatus = GameServerStatus.ReadyToStart;
         }
 

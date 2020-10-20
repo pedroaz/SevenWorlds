@@ -5,7 +5,7 @@ using System;
 
 namespace SevenWorlds.Shared.Data.Factory
 {
-    public class ClientDataFactory : DataFactory
+    public class ClientRequestsDataFactory : DataFactory
     {
         public ChatMessageData CreateChatMessageData(string playerName, string message)
         {

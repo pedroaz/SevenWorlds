@@ -13,6 +13,8 @@ namespace SevenWorlds.GameServer.Utils.Config
     {
         private ServerConfigurations config;
 
+        public ServerConfigurations Config => config;
+
         public void ReadConfigurations(string configFilePath)
         {
             config = JsonConvert.DeserializeObject<ServerConfigurations>(File.ReadAllText(configFilePath));

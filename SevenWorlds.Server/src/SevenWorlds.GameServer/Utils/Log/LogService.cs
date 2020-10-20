@@ -35,7 +35,7 @@ namespace SevenWorlds.GameServer.Utils.Log
 
         private string GetLogFilePath(IConfigurator configurator)
         {
-            return configurator.GetLogFilePath();
+            return configurator.Config.LogFilePath;
         }
 
         public void Log(string message)

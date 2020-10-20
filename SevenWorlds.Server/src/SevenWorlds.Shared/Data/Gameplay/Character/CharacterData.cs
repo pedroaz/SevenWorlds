@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    [System.Serializable]
     public class CharacterData : NetworkData
     {
         // Constant

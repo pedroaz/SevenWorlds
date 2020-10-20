@@ -7,7 +7,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Encounters
     public class BattleEncounterData : EncounterData
     {
         public List<string> CharaterIds { get; set; }
-        public MonsterData Monster { get; set; }
+        public string MonsterType { get; set; }
         public int MaxAmountOfCharacters { get; set; }
         public bool HasBattleEnded { get; set; }
 

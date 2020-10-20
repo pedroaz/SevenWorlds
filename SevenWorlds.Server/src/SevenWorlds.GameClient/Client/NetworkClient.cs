@@ -16,7 +16,7 @@ namespace SevenWorlds.GameClient.Client
     {
         HubConnection hubConnection;
         private IHubProxy hubProxy;
-        private ClientDataFactory dataFactory = new ClientDataFactory();
+        private ClientRequestsDataFactory dataFactory = new ClientRequestsDataFactory();
 
         public async Task Connect(string serverUrl, string hubName)
         {

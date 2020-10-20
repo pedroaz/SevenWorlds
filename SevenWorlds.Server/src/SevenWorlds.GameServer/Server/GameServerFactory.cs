@@ -39,14 +39,14 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         public void DumpMasterData()
         {
-            if (configurator.GetMasterDataDumpFoler().Equals(string.Empty)) {
+            if (configurator.Config.MasterDataDumpFolder.Equals(string.Empty)) {
                 logService.Log("Dump will no be done because dump folder isn't valid");
             }
 
             MasterDataModel masterData = gameStateService.GetMasterData();
 
             var jsonText = JsonConvert.SerializeObject(masterData, Formatting.Indented);
-            var fileName = Path.Combine(configurator.GetMasterDataDumpFoler(), $"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
+            var fileName = Path.Combine(configurator.Config.MasterDataDumpFolder, $"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}_MASTER_DUMP.json");
 
             logService.Log($"Dumping master data to file: {fileName}");
 

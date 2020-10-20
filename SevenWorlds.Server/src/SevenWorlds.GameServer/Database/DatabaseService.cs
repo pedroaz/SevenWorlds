@@ -22,7 +22,7 @@ namespace SevenWorlds.GameServer.Database
         {
             this.configurator = configurator;
             this.logService = logService;
-            database = new MongoClient(configurator.GetMongoDbKey()).GetDatabase("SevenWorldsTestDatabase");
+            database = new MongoClient(configurator.Config.MongoDbKey).GetDatabase("SevenWorldsTestDatabase");
 
             accountsCollection = database.GetCollection<AccountModel>(accountsDbName);
             masterDataCollection = database.GetCollection<MasterDataModel>(masterDataDbName);

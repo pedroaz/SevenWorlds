@@ -25,6 +25,7 @@ namespace SevenWorlds.Shared.Data.Factories
                     { CharacterResourceType.Wood.ToString(), 0 },
                 }
             };
+            SetDefaultValues(data);
             return data;
         }
     }

@@ -110,6 +110,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             model.Areas = AreaCollection.GetAll();
             model.Sections = SectionCollection.Bundle;
             model.Encounters = EncounterCollection.Bundle;
+            model.Characters = CharacterCollection.GetAll();
             return model;
         }
     }
