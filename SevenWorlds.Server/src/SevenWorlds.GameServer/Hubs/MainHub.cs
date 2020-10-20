@@ -12,6 +12,7 @@ using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,7 +61,13 @@ namespace SevenWorlds.GameServer.Hubs
         public async Task ResetUniverseFakeData()
         {
             logService.Log("Recieved Admin Reset to Fake Data");
-            await serverManager.ResetFakeData();
+            try {
+                await serverManager.ResetFakeData();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
             logService.Log("Finished setting fake data");
         }
 
@@ -104,7 +111,7 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.GetUniverseSyncData();
         }
 
-        public IEnumerable<WorldData> RequestAllWorlds()
+        public List<WorldData> RequestAllWorlds()
         {
             return gameStateService.WorldCollection.GetAll();
         }
@@ -119,12 +126,12 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.GetAreaSyncData(areaId);
         }
 
-        public IEnumerable<AreaData> RequestAllAreas()
+        public List<AreaData> RequestAllAreas()
         {
             return gameStateService.AreaCollection.GetAll();
         }
 
-        public IEnumerable<PlayerData> RequestAllPlayerDatas()
+        public List<PlayerData> RequestAllPlayerDatas()
         {
             return gameStateService.PlayerCollection.GetAll();
         }
@@ -134,7 +141,7 @@ namespace SevenWorlds.GameServer.Hubs
             return gameStateService.SectionCollection.Bundle;
         }
 
-        public IEnumerable<CharacterData> RequestPlayerCharacters(string playerName)
+        public List<CharacterData> RequestPlayerCharacters(string playerName)
         {
             return gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
         }

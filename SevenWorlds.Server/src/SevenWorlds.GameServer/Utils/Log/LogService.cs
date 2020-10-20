@@ -61,6 +61,9 @@ namespace SevenWorlds.GameServer.Utils.Log
 
         public void Log(Exception e)
         {
+            consoleLogger.Warning("EXCEPTION!!!");
+            consoleLogger.Warning(e.Message);
+
             fileLogger.Information("EXCEPTION!!!");
             fileLogger.Warning(e.Message);
         }

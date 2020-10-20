@@ -10,6 +10,16 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Server
 {
+
+    public enum GameServerStatus
+    {
+        Initializing = 0,
+        WaitingForStartRequest = 1,
+        ReadyToStart = 2,
+        Started = 3,
+        Faulted = 4
+    }
+
     public class ServerManager : IServerManager
     {
         private readonly IConfigurator configurator;
@@ -17,7 +27,7 @@ namespace SevenWorlds.GameServer.Server
         private ILogService logService { get; }
         private IGameServerFactory gameFactory { get; }
         private IGameLoopSimulator gameLoopSimulator { get; }
-        private volatile ServerStatus serverStatus;
+        private volatile GameServerStatus serverStatus;
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
             IGameServerFactory gameFactory, IConfigurator configurator)
@@ -26,7 +36,6 @@ namespace SevenWorlds.GameServer.Server
             this.gameFactory = gameFactory;
             this.configurator = configurator;
             this.gameLoopSimulator = gameLoopSimulator;
-            serverStatus = new ServerStatus();
         }
 
         public async Task StartServer()
@@ -38,10 +47,10 @@ namespace SevenWorlds.GameServer.Server
 
                     if (configurator.ShouldAutoStart()) {
                         logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.GetServerId()}");
-                        serverStatus.Status = GameServerStatus.ReadyToStart;
+                        serverStatus = GameServerStatus.ReadyToStart;
                     }
                     else {
-                        serverStatus.Status = GameServerStatus.WaitingForStartRequest;
+                        serverStatus = GameServerStatus.WaitingForStartRequest;
                         logService.Log($"Server is not configured to auto start. Waiting for the StartGameServer request");
                         await WaitForStartRequest();
                     }
@@ -58,7 +67,7 @@ namespace SevenWorlds.GameServer.Server
 
         private async Task StartGameServer(string serverId)
         {
-            if (serverStatus.Status == GameServerStatus.ReadyToStart) {
+            if (serverStatus == GameServerStatus.ReadyToStart) {
 
                 try {
                     if (serverId.Equals(string.Empty)) {
@@ -66,21 +75,26 @@ namespace SevenWorlds.GameServer.Server
                         serverId = "fake_server";
                     }
 
-                    serverStatus.Status = GameServerStatus.Initializing;
+                    serverStatus = GameServerStatus.Initializing;
                     Task initTask = InitializeGameServer(serverId);
                     initTask.Wait();
                 }
-                catch (AggregateException e) {
-                    logService.Log(e.Message);
+                catch (AggregateException agg) {
+
                     logService.Log("Error on initialization. Server is now faulted");
-                    serverStatus.Status = GameServerStatus.Faulted;
+
+                    foreach (Exception e in agg.InnerExceptions) {
+                        logService.Log(e.Message);
+                    }
+
+                    serverStatus = GameServerStatus.Faulted;
                     await Task.Delay(Timeout.Infinite);
                 }
 
                 logService.Log("----------------------------");
                 logService.Log("------- SERVER_START -------");
                 logService.Log("----------------------------");
-                serverStatus.Status = GameServerStatus.Started;
+                serverStatus = GameServerStatus.Started;
                 gameLoopSimulator.StartSimulation();
             }
         }
@@ -95,23 +109,16 @@ namespace SevenWorlds.GameServer.Server
         private async Task WaitForStartRequest()
         {
             logService.Log("Waiting for Start Request");
-            while (serverStatus.Status != GameServerStatus.ReadyToStart) {
+            while (serverStatus != GameServerStatus.ReadyToStart) {
                 await Task.Delay(1000);
             }
-        }
-
-        
-
-        public ServerStatus GetServerStatus()
-        {
-            return serverStatus;
         }
 
         public void StartServerRequest(string serverId)
         {
             logService.Log("Setting server status to Ready to start");
             configurator.SetServerId(serverId);
-            serverStatus.Status = GameServerStatus.ReadyToStart;
+            serverStatus = GameServerStatus.ReadyToStart;
         }
 
         public async Task ResetFakeData()

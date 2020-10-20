@@ -16,6 +16,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
     public class CharacterResourcesData : NetworkData
     {
-        public Dictionary<CharacterResourceType, int> Resources { get; set; }
+        public Dictionary<string, int> Resources { get; set; }
     }
 }

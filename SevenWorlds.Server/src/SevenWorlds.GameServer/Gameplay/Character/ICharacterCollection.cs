@@ -6,6 +6,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public interface ICharacterCollection : IDataCollection<CharacterData>
     {
-        IEnumerable<CharacterData> FindAllPlayerCharacters(string playerName);
+        List<CharacterData> FindAllPlayerCharacters(string playerName);
     }
 }

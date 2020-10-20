@@ -35,10 +35,6 @@ namespace SevenWorlds.Console.Server.App
                 Task mainTask = Start(args);
                 mainTask.Wait();
             }
-            catch (AggregateException e) {
-                System.Console.WriteLine("Aggregate Exception! :(");
-                System.Console.WriteLine(e.Message);
-            }
             catch (Exception e) {
                 System.Console.WriteLine("Exception! :(");
                 System.Console.WriteLine(e.Message);

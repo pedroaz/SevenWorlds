@@ -19,10 +19,10 @@ namespace SevenWorlds.Shared.Data.Factories
             data.Combat = new CombatData();
             data.IsOnline = false;
             data.Resources = new CharacterResourcesData(){ 
-                Resources = new Dictionary<CharacterResourceType, int>() {
-                    { CharacterResourceType.Gold, 0 },
-                    { CharacterResourceType.Rock, 0 },
-                    { CharacterResourceType.Wood, 0 },
+                Resources = new Dictionary<string, int>() {
+                    { CharacterResourceType.Gold.ToString(), 0 },
+                    { CharacterResourceType.Rock.ToString(), 0 },
+                    { CharacterResourceType.Wood.ToString(), 0 },
                 }
             };
             return data;

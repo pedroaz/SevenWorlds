@@ -12,7 +12,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Section
         public MonsterCampData(MonsterType monsterType)
         {
             this.monsterType = monsterType;
-            sectionType = SectionType.MonsterCamp;
+            Type = SectionType.MonsterCamp.ToString();
         }
     }
 }

@@ -33,6 +33,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 
         public void AddToBundle(StartBattleActionData action)
         {
+            logService.Log($"Adding StartBattle Action to queue");
             lock (queueLock) {
                 bundle.StartBattle.Add(action);
             }
@@ -41,6 +42,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         public PlayerActionBundle CopyActionCollection()
         {
             lock (queueLock) {
+
                 PlayerActionBundle bundleCopy = new PlayerActionBundle(){ 
                     Movement = bundle.Movement,
                     StartBattle = bundle.StartBattle

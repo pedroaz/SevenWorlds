@@ -1,9 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Encounters
 {
@@ -16,7 +13,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Encounters
 
         public BattleEncounterData(StartBattleActionData startData)
         {
-            Type = EncounterType.Battle;
+            Type = EncounterType.Battle.ToString();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
+using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
@@ -9,10 +10,12 @@ namespace SevenWorlds.GameServer.Hubs
     public class HubService : IHubService
     {
         private readonly IHubContext hubContext;
+        private readonly ILogService logService;
 
-        public HubService()
+        public HubService(ILogService logService)
         {
             hubContext = GlobalHost.ConnectionManager.GetHubContext<MainHub>();
+            this.logService = logService;
         }
 
         #region Groups
@@ -38,6 +41,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void BroadcastAreaSync(AreaSyncData data)
         {
+            logService.Log($"Broadcasting Area sync to clints on group: {data.Area.Id}");
             hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
         }
 

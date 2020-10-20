@@ -212,7 +212,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\IServerManager.cs" />
     <Compile Include="Server\ServerManager.cs" />
-    <Compile Include="Server\ServerStatus.cs" />
     <Compile Include="Startups\Startup.cs" />
     <Compile Include="Utils\Config\Configurator.cs" />
     <Compile Include="Utils\Config\IConfigurator.cs" />

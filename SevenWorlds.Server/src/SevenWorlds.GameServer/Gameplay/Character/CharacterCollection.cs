@@ -19,7 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             characters.Add(data);
         }
 
-        public IEnumerable<CharacterData> FindAllPlayerCharacters(string playerName)
+        public List<CharacterData> FindAllPlayerCharacters(string playerName)
         {
             return characters.FindAll(x => x.PlayerName == playerName);
         }

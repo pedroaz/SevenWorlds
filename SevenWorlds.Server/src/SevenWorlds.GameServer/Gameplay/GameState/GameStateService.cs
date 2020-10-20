@@ -6,6 +6,7 @@ using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
+using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 {
     public class GameStateService : IGameStateService
     {
+        private readonly ILogService logService;
+
         public IUniverseCollection UniverseCollection { get; }
         public IWorldCollection WorldCollection { get; }
         public IAreaCollection AreaCollection { get; }
@@ -30,7 +33,8 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             ISectionCollection sectionCollection,
             IPlayerCollection playerCollection,
             ICharacterCollection characterCollection,
-            IEncounterCollection encounterCollection)
+            IEncounterCollection encounterCollection,
+            ILogService logService)
         {
             UniverseCollection = universeCollection;
             WorldCollection = worldCollection;
@@ -39,22 +43,26 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             PlayerCollection = playerCollection;
             CharacterCollection = characterCollection;
             EncounterCollection = encounterCollection;
+            this.logService = logService;
         }
 
         
 
         public void AddPlayerToGame(PlayerData playerData)
         {
+            logService.Log($"Adding player to game state: {playerData.PlayerName}");
             PlayerCollection.Add(playerData);
         }
 
         public void AddCharacterToGame(CharacterData characterData)
         {
+            logService.Log($"Adding character to game state: {characterData.Id}");
             CharacterCollection.Add(characterData);
         }
 
         public void MovePlayerToArea(string characterId, string areaId)
         {
+            logService.Log($"Moving character on the game state: {characterId}");
             var character = CharacterCollection.FindById(characterId);
             var area = AreaCollection.FindById(areaId);
             character.Position = area.Position;
@@ -84,12 +92,12 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             };
         }
 
-        public IEnumerable<WorldData> GetAllWorlds()
+        public List<WorldData> GetAllWorlds()
         {
             return WorldCollection.GetAll();
         }
 
-        public IEnumerable<AreaData> GetAllAreas()
+        public List<AreaData> GetAllAreas()
         {
             return AreaCollection.GetAll();
         }

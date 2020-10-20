@@ -18,9 +18,14 @@ namespace SevenWorlds.Shared.Data.Gameplay
         }
 
         public string Name;
-        public SectionType sectionType;
+        public string Type;
         public string AreaId;
         public List<PlayerActionType> PossiblePlayerActions { get; set; }
+
+        public bool IsOfType(SectionType type)
+        {
+            return Type.Equals(type.ToString());
+        }
 
         public virtual void Simulate()
         {

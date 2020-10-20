@@ -13,7 +13,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Section
         public ProductionCampData(CharacterResourceType resourceType)
         {
             Resource = resourceType;
-            sectionType = SectionType.ProductionCamp;
+            Type = SectionType.ProductionCamp.ToString();
         }
     }
 }
