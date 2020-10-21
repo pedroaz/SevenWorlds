@@ -4,11 +4,15 @@ namespace SevenWorlds.Shared.Data.Gameplay.ActionDatas
 {
     public class StartBattleActionData : PlayerActionData
     {
+        public List<string> InitialCharacters { get; set; }
         public List<MonsterType> Monsters { get; set; }
+        public int MaxAmountOfCharacters { get; set; }
 
-        //public StartBattleActionData(MonsterType monsterType)
-        //{
-        //    MonsterType = monsterType;
-        //}
+        public StartBattleActionData(List<MonsterType> list, List<string> initialCharacters, int maxAmountOfCharacters)
+        {
+            InitialCharacters = initialCharacters;
+            Monsters = list;
+            MaxAmountOfCharacters = maxAmountOfCharacters;
+        }
     }
 }

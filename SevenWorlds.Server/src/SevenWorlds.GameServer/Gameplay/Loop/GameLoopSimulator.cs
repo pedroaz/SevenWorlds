@@ -84,9 +84,8 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         {
             // Copy Action Collection (First thing)
             playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
-
             playerActionExecutor.ExecuteMovementActions();
-
+            playerActionExecutor.ExecuteStartBattleActions();
             battleSimulator.SimulateBattles();
         }
 

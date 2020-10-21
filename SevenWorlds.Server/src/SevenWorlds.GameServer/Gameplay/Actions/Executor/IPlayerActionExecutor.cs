@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
 using SevenWorlds.GameServer.Gameplay.Loop;
+using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

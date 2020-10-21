@@ -5,12 +5,12 @@ namespace SevenWorlds.Shared.Data.Factory
 {
     public class DataFactory
     {
-        internal string GetGUID()
+        public string GetGUID()
         {
             return Guid.NewGuid().ToString();
         }
 
-        internal void SetDefaultValues(NetworkData data)
+        public void SetDefaultValues(NetworkData data)
         {
             data.TimeOfCreation = DateTime.Now;
             data.Id = GetGUID();

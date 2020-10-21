@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Character;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class MonsterData : NetworkData
     {
         MonsterType MonsterType;
-        public CombatData Combat { get; set; }
+        public HpData HpData { get; set; }
+        public CombatData CombatData { get; set; }
     }
 }

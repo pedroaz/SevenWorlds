@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Character;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,11 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public WorldPosition Position { get; set; }
 
         // Combat
-        public CombatData Combat { get; set; }
+        public CombatData InitialCombatData { get; set; }
+
+        // HP
+        public HpData hpData { get; set; }
+
         public EquipmentData Equipments { get; set; }
 
         // Resources

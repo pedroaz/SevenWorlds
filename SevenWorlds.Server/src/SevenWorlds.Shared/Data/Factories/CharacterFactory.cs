@@ -16,7 +16,7 @@ namespace SevenWorlds.Shared.Data.Factories
             data.Id = GetGUID();
             data.WorldId = worldId;
             data.Level = 1;
-            data.Combat = new CombatData();
+            data.InitialCombatData = new CombatData(data.Id);
             data.IsOnline = false;
             data.Resources = new CharacterResourcesData(){ 
                 Resources = new Dictionary<string, int>() {
