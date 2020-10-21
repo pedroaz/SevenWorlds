@@ -1,6 +1,9 @@
-﻿using SevenWorlds.GameServer.Utils.Config;
+﻿using Newtonsoft.Json;
+using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.Shared.Data.Gameplay;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace SevenWorlds.Shared.Data.Factories
 {
@@ -23,9 +26,10 @@ namespace SevenWorlds.Shared.Data.Factories
             return null;
         }
 
-        public void SetupDictionary()
+        public void SetupStorage()
         {
-            var filePath = configurator.Config.MonsterCsvPath;
+            var json = File.ReadAllText(configurator.Config.MonsterStoragePath);
+            storage = JsonConvert.DeserializeObject<Dictionary<MonsterType, MonsterData>>(json);
         }
     }
 }

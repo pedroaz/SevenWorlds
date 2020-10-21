@@ -144,7 +144,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 Areas = areas,
                 Sections = bundle,
                 Characters = characters,
-                Encounters = new EncounterBundle(),
+                Battles = new List<BattleData>()
             };
             return masterData;
         }

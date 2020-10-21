@@ -1,12 +1,14 @@
-﻿namespace SevenWorlds.Shared.Data.Gameplay.ActionDatas
+﻿using System.Collections.Generic;
+
+namespace SevenWorlds.Shared.Data.Gameplay.ActionDatas
 {
     public class StartBattleActionData : PlayerActionData
     {
-        private MonsterType MonsterType { get; set; }
+        public List<MonsterType> Monsters { get; set; }
 
-        public StartBattleActionData(MonsterType monsterType)
-        {
-            MonsterType = monsterType;
-        }
+        //public StartBattleActionData(MonsterType monsterType)
+        //{
+        //    MonsterType = monsterType;
+        //}
     }
 }

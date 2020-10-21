@@ -15,6 +15,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
     public class MonsterData : NetworkData
     {
+        MonsterType MonsterType;
         public CombatData Combat { get; set; }
     }
 }

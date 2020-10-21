@@ -6,11 +6,7 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
-    public interface IEncounterCollection
+    public interface IBattleCollection : IDataCollection<BattleData>
     {
-        EncounterBundle Bundle { get; }
-        List<BattleEncounterData> Battles { get; }
-        BattleEncounterData FindBattleEncounter(string id);
-        void NewBattle(StartBattleActionData data);
     }
 }

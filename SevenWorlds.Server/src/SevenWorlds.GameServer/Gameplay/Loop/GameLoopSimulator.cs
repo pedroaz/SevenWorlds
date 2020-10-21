@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Actions.Executor;
+using SevenWorlds.GameServer.Gameplay.Encounter.Executor;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -18,6 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
         private readonly IHubService hubService;
         private readonly IGameStateService gameStateService;
         private readonly IPlayerActionExecutor playerActionExecutor;
+        private readonly IBattleSimulator battleSimulator;
         private readonly IPlayerActionCollection playerActionQueue;
         private Stopwatch stopwatch;
         private SyncCoordinator syncCoordinator;
@@ -29,13 +31,15 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             IHubService hubService,
             IGameStateService gameStateService,
             IPlayerActionCollection playerActionQueue,
-            IPlayerActionExecutor playerActionExecutor
+            IPlayerActionExecutor playerActionExecutor,
+            IBattleSimulator battleSimulator
             )
         {
             this.logService = logService;
             this.hubService = hubService;
             this.gameStateService = gameStateService;
             this.playerActionExecutor = playerActionExecutor;
+            this.battleSimulator = battleSimulator;
             this.playerActionQueue = playerActionQueue;
             syncCoordinator = new SyncCoordinator();
             playerActionExecutor.SetSyncCoordinator(syncCoordinator);
@@ -82,6 +86,8 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
             playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
 
             playerActionExecutor.ExecuteMovementActions();
+
+            battleSimulator.SimulateBattles();
         }
 
         private void PingTickCount()

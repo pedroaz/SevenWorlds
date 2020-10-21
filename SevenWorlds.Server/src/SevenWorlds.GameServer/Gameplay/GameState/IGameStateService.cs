@@ -19,7 +19,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         ISectionCollection SectionCollection { get; }
         IPlayerCollection PlayerCollection { get; }
         ICharacterCollection CharacterCollection { get; }
-        IEncounterCollection EncounterCollection { get; }
+        IBattleCollection BattleCollection { get; }
 
         // Player
         void AddPlayerToGame(PlayerData playerData);

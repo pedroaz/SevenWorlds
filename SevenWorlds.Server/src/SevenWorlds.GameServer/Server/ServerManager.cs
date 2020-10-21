@@ -3,6 +3,7 @@ using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Factories;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Threading;
@@ -23,6 +24,7 @@ namespace SevenWorlds.GameServer.Server
     public class ServerManager : IServerManager
     {
         private readonly IConfigurator configurator;
+        private readonly IMonsterDataFactory monsterDataFactory;
 
         private ILogService logService { get; }
         private IGameServerFactory gameFactory { get; }
@@ -30,11 +32,12 @@ namespace SevenWorlds.GameServer.Server
         private volatile GameServerStatus serverStatus;
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
-            IGameServerFactory gameFactory, IConfigurator configurator)
+            IGameServerFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
             this.configurator = configurator;
+            this.monsterDataFactory = monsterDataFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
@@ -103,6 +106,7 @@ namespace SevenWorlds.GameServer.Server
         {
             logService.Log($"Starting game server with serverId: {serverId}");
             await gameFactory.SetupGameServer(serverId);
+            monsterDataFactory.SetupStorage();
             gameFactory.DumpMasterData();
         }
 

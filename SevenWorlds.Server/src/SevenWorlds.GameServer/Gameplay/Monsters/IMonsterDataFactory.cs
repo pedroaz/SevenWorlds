@@ -9,7 +9,7 @@ namespace SevenWorlds.Shared.Data.Factories
 {
     public interface IMonsterDataFactory
     {
-        void SetupDictionary();
+        void SetupStorage();
         MonsterData GetMonsterData(MonsterType monsterType);
     }
 }

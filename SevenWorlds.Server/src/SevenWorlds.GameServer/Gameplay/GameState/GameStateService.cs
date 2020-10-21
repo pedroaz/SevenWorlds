@@ -24,7 +24,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public ISectionCollection SectionCollection { get; }
         public IPlayerCollection PlayerCollection { get; }
         public ICharacterCollection CharacterCollection { get; }
-        public IEncounterCollection EncounterCollection { get;  }
+        public IBattleCollection BattleCollection { get;  }
 
         public GameStateService(
             IUniverseCollection universeCollection,
@@ -33,7 +33,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             ISectionCollection sectionCollection,
             IPlayerCollection playerCollection,
             ICharacterCollection characterCollection,
-            IEncounterCollection encounterCollection,
+            IBattleCollection battleCollection,
             ILogService logService)
         {
             UniverseCollection = universeCollection;
@@ -42,7 +42,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             SectionCollection = sectionCollection;
             PlayerCollection = playerCollection;
             CharacterCollection = characterCollection;
-            EncounterCollection = encounterCollection;
+            BattleCollection = battleCollection;
             this.logService = logService;
         }
 
@@ -109,7 +109,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             model.Worlds = WorldCollection.GetAll();
             model.Areas = AreaCollection.GetAll();
             model.Sections = SectionCollection.Bundle;
-            model.Encounters = EncounterCollection.Bundle;
+            model.Battles = BattleCollection.GetAll();
             model.Characters = CharacterCollection.GetAll();
             return model;
         }

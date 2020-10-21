@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
 {
-    public interface IEncounterExecutor
+    public interface IBattleSimulator
     {
-        void ExecuteBattleEncounters();
+        void SimulateBattles();
     }
 }

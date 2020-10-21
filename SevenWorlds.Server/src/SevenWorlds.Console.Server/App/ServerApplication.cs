@@ -18,6 +18,7 @@ using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Factories;
 using System;
 using System.Linq;
 using System.Threading;
@@ -98,10 +99,11 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<LoginService>().As<ILoginService>().SingleInstance();
             builder.RegisterType<CharacterCollection>().As<ICharacterCollection>().SingleInstance();
             builder.RegisterType<CharacterPlacementService>().As<ICharacterPlacementService>().SingleInstance();
-            builder.RegisterType<EncounterCollection>().As<IEncounterCollection>().SingleInstance();
+            builder.RegisterType<BattleCollection>().As<IBattleCollection>().SingleInstance();
             builder.RegisterType<PlayerActionExecutor>().As<IPlayerActionExecutor>().SingleInstance();
-            builder.RegisterType<EncounterExecutor>().As<IEncounterExecutor>().SingleInstance();
-            
+            builder.RegisterType<BattleSimulator>().As<IBattleSimulator>().SingleInstance();
+            builder.RegisterType<MonsterDataFactory>().As<IMonsterDataFactory>().SingleInstance();
+
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

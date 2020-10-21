@@ -1,0 +1,14 @@
+{
+    "Poring": {
+        "MonsterType": "Poring",
+        "Combat": {
+            "MaxHp": 10
+        }
+    },
+    "PecoPeco":{
+        "MonsterType": "PecoPeco",
+        "Combat": {
+            "MaxHp": 20
+        }
+    }
+}
