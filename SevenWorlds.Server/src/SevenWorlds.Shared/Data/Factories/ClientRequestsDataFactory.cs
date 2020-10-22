@@ -1,7 +1,9 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace SevenWorlds.Shared.Data.Factory
 {
@@ -19,6 +21,11 @@ namespace SevenWorlds.Shared.Data.Factory
             var data = new MovementActionData(characterId, fromAreaId, toAreaId);
             SetDefaultValues(data);
             return data;
+        }
+
+        public SelectSkillActionData CreateSelectSkillActionData()
+        {
+            return new SelectSkillActionData();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Database.CollectionsSchemas;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
@@ -21,20 +22,22 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private readonly IDatabaseService databaseService;
         private readonly ILogService logService;
         private readonly IConfigurator configurator;
+        private readonly ICharacterFactory characterFactory;
         private readonly IGameStateService gameStateService;
         private readonly UniverseDataFactory universeDataFactory = new UniverseDataFactory();
-        private readonly CharacterFactory characterFactory = new CharacterFactory();
 
         public GameServerFactory(
             IGameStateService gameStateService,
             IDatabaseService databaseService,
             ILogService logService,
-            IConfigurator configurator)
+            IConfigurator configurator,
+            ICharacterFactory characterFactory)
         {
             this.gameStateService = gameStateService;
             this.databaseService = databaseService;
             this.logService = logService;
             this.configurator = configurator;
+            this.characterFactory = characterFactory;
         }
 
         public void DumpMasterData()
@@ -87,6 +90,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
             // Characters
             foreach (var item in masterData.Characters) {
+                characterFactory.RefreshCharacter(item);
                 gameStateService.AddCharacterToGame(item);
             }
 

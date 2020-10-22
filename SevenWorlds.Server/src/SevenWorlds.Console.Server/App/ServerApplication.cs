@@ -105,6 +105,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<BattleSimulator>().As<IBattleSimulator>().SingleInstance();
             builder.RegisterType<MonsterDataFactory>().As<IMonsterDataFactory>().SingleInstance();
             builder.RegisterType<BattleFactory>().As<IBattleFactory>().SingleInstance();
+            builder.RegisterType<CharacterFactory>().As<ICharacterFactory>().SingleInstance();
+            builder.RegisterType<SkillFactory>().As<ISkillFactory>().SingleInstance();
 
 
             container = builder.Build();

@@ -32,17 +32,17 @@ namespace SevenWorlds.Shared.Data.Factories
             BattleData battleData = new BattleData(startData);
 
             // Characters
-            battleData.Characters = new List<Gameplay.CharacterData>();
+            battleData.CharacterDatas = new List<Gameplay.CharacterData>();
             foreach (var characterId in startData.InitialCharacters) {
                 var characterData = gameStateService.CharacterCollection.FindById(characterId);
-                battleData.Characters.Add(characterData);
+                battleData.CharacterDatas.Add(characterData);
                 battleData.CharactersCombatData.Add(characterData.InitialCombatData.Copy());
             }
 
             // Monsters
-            battleData.Monsters = new List<MonsterData>();
+            battleData.MonsterDatas = new List<MonsterData>();
             foreach (var monsterType in startData.Monsters) {
-                battleData.Monsters.Add(monsterDataFactory.GetMonsterData(monsterType));
+                battleData.MonsterDatas.Add(monsterDataFactory.GetMonsterData(monsterType));
             }
 
             SetDefaultValues(battleData);

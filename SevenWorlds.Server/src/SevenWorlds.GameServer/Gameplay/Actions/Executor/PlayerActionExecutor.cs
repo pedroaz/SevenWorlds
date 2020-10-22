@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player;
@@ -20,15 +21,16 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
         private readonly IGameStateService gameStateService;
         private readonly ILogService logService;
         private readonly IMonsterDataFactory monsterDataFactory;
+        private readonly IBattleFactory battleFactory;
         private SyncCoordinator syncCoordinator;
         private PlayerActionBundle actionBundle;
-        private BattleFactory battleFactory = new BattleFactory();
 
-        public PlayerActionExecutor(IGameStateService gameStateService, ILogService logService, IMonsterDataFactory monsterDataFactory)
+        public PlayerActionExecutor(IGameStateService gameStateService, ILogService logService, IMonsterDataFactory monsterDataFactory, IBattleFactory battleFactory)
         {
             this.gameStateService = gameStateService;
             this.logService = logService;
             this.monsterDataFactory = monsterDataFactory;
+            this.battleFactory = battleFactory;
         }
 
         public void SetSyncCoordinator(SyncCoordinator syncCoordinator)

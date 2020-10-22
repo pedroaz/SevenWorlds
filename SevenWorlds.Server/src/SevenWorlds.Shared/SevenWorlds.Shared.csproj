@@ -44,7 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Factories\CharacterFactory.cs" />
     <Compile Include="Data\Gameplay\Character\HpData.cs" />
     <Compile Include="Data\Gameplay\Chat\ChatMessageData.cs" />
     <Compile Include="Data\Base\NetworkData.cs" />
@@ -56,6 +55,7 @@
     <Compile Include="Data\Factories\DataFactory.cs" />
     <Compile Include="Data\Factories\UniverseDataFactory.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\MovementActionData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\SelectSkillActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\StartBattleActionData.cs" />
     <Compile Include="Data\Gameplay\Skills\SkillData.cs" />
     <Compile Include="Data\Gameplay\Universe\AreaData.cs" />

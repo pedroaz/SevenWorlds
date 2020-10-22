@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay.Character;
+using SevenWorlds.Shared.Data.Gameplay.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public CombatData InitialCombatData { get; set; }
 
         // HP
-        public HpData hpData { get; set; }
+        public HpData HpData { get; set; }
+        public List<SkillType> Skills { get; set; }
 
         public EquipmentData Equipments { get; set; }
 

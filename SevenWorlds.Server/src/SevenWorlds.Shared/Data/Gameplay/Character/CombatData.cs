@@ -27,8 +27,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
         // List of skills
         public List<SkillData> Skills { get; set; }
 
-        public CombatData(string unitId)
+        public CombatData(string unitId, List<SkillData> skills)
         {
+            UnitId = unitId;
+            Skills = skills;
             SelectedSkill = SkillType.BaseAttack;
             Attack = 1;
             IsAlive = true;
@@ -53,7 +55,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         public CombatData Copy()
         {
-            CombatData data = new CombatData(this.UnitId);
+            CombatData data = new CombatData(this.UnitId, Skills);
 
             data.UnitId = this.UnitId;
             data.TargetId = this.TargetId;

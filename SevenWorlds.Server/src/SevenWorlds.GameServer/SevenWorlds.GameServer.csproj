@@ -183,9 +183,13 @@
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Battle\Factories\BattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\IBattleFactory.cs" />
+    <Compile Include="Gameplay\Battle\Factories\ISkillFactory.cs" />
+    <Compile Include="Gameplay\Battle\Factories\SkillFactory.cs" />
     <Compile Include="Gameplay\Character\CharacterCollection.cs" />
+    <Compile Include="Gameplay\Character\CharacterFactory.cs" />
     <Compile Include="Gameplay\Character\CharacterPlacementService.cs" />
     <Compile Include="Gameplay\Character\ICharacterCollection.cs" />
+    <Compile Include="Gameplay\Character\ICharacterFactory.cs" />
     <Compile Include="Gameplay\Character\ICharacterPlacementService.cs" />
     <Compile Include="Gameplay\Battle\Base\BattleCollection.cs" />
     <Compile Include="Gameplay\Battle\Base\IBattleCollection.cs" />
