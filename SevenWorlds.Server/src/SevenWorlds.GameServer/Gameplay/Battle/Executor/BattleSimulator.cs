@@ -46,26 +46,23 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
             // Monsters Attacks!
             foreach (MonsterData monsterData in battleData.MonsterDatas) {
 
-                CharacterData target = battleData.CharacterDatas.Find(x => x.Id == monsterData.CombatData.TargetId);
+                var targetId = monsterData.CombatData.TargetId;
+                CharacterData target = battleData.CharacterDatas.Find(x => x.Id == targetId);
+                CombatData targetCombatData = battleData.CharactersCombatData.Find(x => x.UnitId == targetId);
+                ApplyDamageToCharacter(target, targetCombatData, monsterData);
             }
         }
 
         private void ApplyDamageToCharacter(CharacterData characterData, CombatData characterCombatData, MonsterData monsterData)
         {
-            var attack = monsterData.CombatData.GetCurrentSkillDamage();
-            var defense = characterCombatData.Defense;
-
-            // Calculate difference between elements
-            characterData.HpData.CurrentHp -= attack - defense;
-
+            var damage = monsterData.CombatData.GetCurrentSkillDamage(characterCombatData);
+            characterData.HpData.CurrentHp -= damage;
         }
 
         private void ApplyDamageToMonster(CombatData characterCombatData, MonsterData monsterData)
         {
-            var attack = characterCombatData.GetCurrentSkillDamage();
-            var defense = monsterData.CombatData.Defense;
-
-            monsterData.HpData.CurrentHp -= attack - defense;
+            var damage = characterCombatData.GetCurrentSkillDamage(monsterData.CombatData);
+            monsterData.HpData.CurrentHp -= damage;
         }
     }
 }

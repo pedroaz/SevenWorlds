@@ -151,11 +151,7 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async void Register()
         {
-            await client.RequestRegister(new RegisterAccountData() {
-                Username = "Test",
-                Password = "123",
-                PlayerName = "Eu"
-            });
+            await client.RequestRegister(new RegisterAccountData("Test", "123", "Eu"));
         }
 
         private static void SetPingHandler()

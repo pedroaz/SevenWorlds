@@ -9,7 +9,8 @@ public enum ScreenId
     Login,
     Universe,
     World,
-    Area
+    Area,
+    Register
 }
 
 public class GameScreen : MonoBehaviour

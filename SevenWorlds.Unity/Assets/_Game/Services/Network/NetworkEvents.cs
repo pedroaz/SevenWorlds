@@ -12,9 +12,9 @@ public static class NetworkEvents
         OnChatMessageRecieved(null, args);
     }
 
-    public delegate void PingEventHandle(object sender, NetworkArgs<PingData> e);
+    public delegate void PingEventHandle(object sender, NetworkArgs<bool> e);
     public static event PingEventHandle OnPingRecieved = delegate { };
-    public static void FirePingRecievedEvent(NetworkArgs<PingData> args)
+    public static void FirePingRecievedEvent(NetworkArgs<bool> args)
     {
         OnPingRecieved(null, args);
     }

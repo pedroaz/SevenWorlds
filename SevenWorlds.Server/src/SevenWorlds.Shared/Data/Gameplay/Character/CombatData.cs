@@ -36,7 +36,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
             IsAlive = true;
         }
 
-        public int GetCurrentSkillDamage()
+        public int GetCurrentSkillDamage(CombatData targetCombatData)
         {
             SkillData skill = Skills.Find(x => x.IsOfType(SelectedSkill));
             

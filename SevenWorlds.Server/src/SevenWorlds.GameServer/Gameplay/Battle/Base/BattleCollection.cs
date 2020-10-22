@@ -7,7 +7,7 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter
 {
     public class BattleCollection : IBattleCollection
     {
-        private List<BattleData> battles { get; set; }
+        private List<BattleData> battles { get; set; } = new List<BattleData>();
 
         public void Add(BattleData data)
         {

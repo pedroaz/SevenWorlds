@@ -30,7 +30,7 @@ public class NetworkLogger : MonoBehaviour
         print($"{args.Data.PlayerName} send message: {args.Data.Message}");
     }
 
-    public void LogPing(object sender, NetworkArgs<PingData> args)
+    public void LogPing(object sender, NetworkArgs<bool> args)
     {
         if (!logPing) return;
         print("Ping Recieved");

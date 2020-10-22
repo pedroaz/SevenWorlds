@@ -1,8 +1,10 @@
 ﻿using SevenWorlds.GameClient.Client;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
+using SevenWorlds.Shared.UnityLog;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,24 +12,27 @@ using UnityEngine;
 public class NetworkService : GameService<NetworkService>
 {
     private NetworkClient client;
+    private ClientRequestsDataFactory dataFactory;
 
     public void Awake()
     {
         Object = this;
         client = new NetworkClient();
+        dataFactory = new ClientRequestsDataFactory();
     }
 
     public async Task<bool> ConnectToServer()
     {
         try {
             await client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
+            LOG.Log("Connection was ok!");
             SetEventHandlers();
             return true;
         }
         catch (Exception e) {
 
-            print("Wasn't able to connect to server because: ");
-            print(e.Message);
+            LOG.Log("Wasn't able to connect to server because: ");
+            LOG.Log(e.Message);
             return false;
         }
         
@@ -45,7 +50,7 @@ public class NetworkService : GameService<NetworkService>
 
         client.SetOnPingHandler(
             (data) => {
-                NetworkEvents.FirePingRecievedEvent(new NetworkArgs<PingData>() {
+                NetworkEvents.FirePingRecievedEvent(new NetworkArgs<bool>() {
                     Data = data
                 });
             }
@@ -65,7 +70,7 @@ public class NetworkService : GameService<NetworkService>
         client.Dispose();
     }
 
-    public async Task<ChatMessageResponse> SendChatMessage(ChatMessageData data)
+    public async Task<bool> SendChatMessage(ChatMessageData data)
     {
         return await client.SendChatMessage(data);
     }
@@ -89,6 +94,17 @@ public class NetworkService : GameService<NetworkService>
     {
         return await client.Login(data);
     }
+
+    public async Task<RegisterAccountResponse> Register(string username, string password, string playerName)
+    {
+        var data = dataFactory.CreateRegisterAccountData(username, password, playerName);
+        return await client.RequestRegister(data);
+    }
+
+    //public async Task<LoginResponseData> Login(LoginData data)
+    //{
+    //    return await client.Login(data);
+    //}
 
 
 }

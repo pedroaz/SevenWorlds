@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Chat;
+using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using System;
@@ -26,6 +27,13 @@ namespace SevenWorlds.Shared.Data.Factory
         public SelectSkillActionData CreateSelectSkillActionData()
         {
             return new SelectSkillActionData();
+        }
+
+        public RegisterAccountData CreateRegisterAccountData(string username, string password, string playerName)
+        {
+            RegisterAccountData data = new RegisterAccountData(username, password, playerName);
+            SetDefaultValues(data);
+            return data;
         }
     }
 }

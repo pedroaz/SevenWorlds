@@ -16,14 +16,13 @@ public class LoginService : GameService<LoginService>
 
     public async Task<LoginResponseData> Login()
     {
-        return await NetworkService.Object.Login(new LoginData() {
-            PlayerName = InputField.text
+        return await NetworkService.Object.Login(new LoginData(InputField.text, "123") {
         });
     }
 
     public async Task ProcessLoginResponse(LoginResponseData response)
     {
-        if (response.Success) {
+        if (response.ResponseType == LoginResponseType.Success) {
             print("Log in was success!");
             GameState.Object.PlayerData = response.PlayerData;
             GameState.Object.Universe = response.UniverseSyncData.Universe;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Hosting;
+using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Config;
@@ -25,6 +26,7 @@ namespace SevenWorlds.GameServer.Server
     {
         private readonly IConfigurator configurator;
         private readonly IMonsterDataFactory monsterDataFactory;
+        private readonly ISkillFactory skillFactory;
 
         private ILogService logService { get; }
         private IGameServerFactory gameFactory { get; }
@@ -32,12 +34,14 @@ namespace SevenWorlds.GameServer.Server
         private volatile GameServerStatus serverStatus;
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
-            IGameServerFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory)
+            IGameServerFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
+            ISkillFactory skillFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
             this.configurator = configurator;
             this.monsterDataFactory = monsterDataFactory;
+            this.skillFactory = skillFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
@@ -47,6 +51,8 @@ namespace SevenWorlds.GameServer.Server
                 logService.Log("Starting the Game Server");
                 using (WebApp.Start(NetworkConstants.ServerUrl)) {
                     logService.Log($"Server running on {NetworkConstants.ServerUrl}");
+                    
+                    SetupStorages();
 
                     if (configurator.Config.AutoStart) {
                         logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.Config.ServerId}");
@@ -66,6 +72,14 @@ namespace SevenWorlds.GameServer.Server
                 logService.Log(e.Message);
                 throw;
             }
+        }
+
+        private void SetupStorages()
+        {
+            logService.Log("Setting up skill factory");
+            skillFactory.SetupStorage();
+            logService.Log("Setting up monster factory");
+            monsterDataFactory.SetupStorage();
         }
 
         private async Task StartGameServer(string serverId)
@@ -106,7 +120,6 @@ namespace SevenWorlds.GameServer.Server
         {
             logService.Log($"Starting game server with serverId: {serverId}");
             await gameFactory.SetupGameServer(serverId);
-            monsterDataFactory.SetupStorage();
             gameFactory.DumpMasterData();
         }
 

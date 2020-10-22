@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -15,6 +16,7 @@ public class GameButton : MonoBehaviour
         button = GetComponentInChildren<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
+            LOG.Log($"[CLICK] - {this.GetType()}");
             _ = OnClick();
         });
         AfterAwake();
