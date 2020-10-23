@@ -127,8 +127,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         {
             return new AccountModel() {
                 PlayerName = "Pedro",
-                Username = "pedroaz",
-                Password = "pedroaz123",
+                Username = "1",
+                Password = "1",
             };
         }
 

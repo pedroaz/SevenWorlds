@@ -2,10 +2,12 @@
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Factory;
+using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using SevenWorlds.Shared.UnityLog;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -24,6 +26,7 @@ public class NetworkService : GameService<NetworkService>
     public async Task<bool> ConnectToServer()
     {
         try {
+
             await client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
             LOG.Log("Connection was ok!");
             SetEventHandlers();
@@ -100,6 +103,12 @@ public class NetworkService : GameService<NetworkService>
     {
         var data = dataFactory.CreateRegisterAccountData(username, password, playerName);
         return await client.RequestRegister(data);
+    }
+
+    public async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
+    {
+        var data = await  client.RequestPlayerCharacters(playerName);
+        return data;
     }
 
     //public async Task<LoginResponseData> Login(LoginData data)

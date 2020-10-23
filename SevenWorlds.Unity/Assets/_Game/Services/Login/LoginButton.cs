@@ -1,11 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Threading.Tasks;
 
 public class LoginButton : GameButton
 {
     public override async Task OnClick()
     {
-        var response = await LoginService.Object.TryToLogin();
-        await LoginService.Object.ProcessLoginResponse(response);
+        try {
+            var response = await LoginService.Object.TryToLogin();
+            await LoginService.Object.ProcessLoginResponse(response);
+        }
+        catch (System.Exception e) {
+            LOG.Error($"Error on {this.GetType()}");
+            LOG.Error(e.Message);
+        }
     }
 
    

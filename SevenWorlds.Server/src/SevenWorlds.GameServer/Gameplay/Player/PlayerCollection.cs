@@ -45,5 +45,10 @@ namespace SevenWorlds.GameServer.Gameplay.Player
         {
             players.RemoveAll(x => x.Id == id);
         }
+
+        public PlayerData FindByConnectionId(string connectionId)
+        {
+            return players?.Find(x => x.ConnectionId == connectionId);
+        }
     }
 }

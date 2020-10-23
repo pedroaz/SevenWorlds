@@ -45,6 +45,12 @@ namespace SevenWorlds.GameServer.Hubs
             this.accountService = accountService;
         }
 
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            logService.Log($"Someone disconnected! {Context.ConnectionId}");
+            return base.OnDisconnected(stopCalled);
+        }
+
         #region Admin
 
         public void AdminStartGameServer(string serverId)

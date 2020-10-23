@@ -8,5 +8,10 @@ namespace SevenWorlds.Shared.UnityLog
         {
             Debug.Log(obj.ToString());
         }
+
+        public static void Error(object obj)
+        {
+            Debug.LogError(obj.ToString());
+        }
     }
 }

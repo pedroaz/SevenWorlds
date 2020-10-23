@@ -113,5 +113,17 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             model.Characters = CharacterCollection.GetAll();
             return model;
         }
+
+        public void RemovePlayerFromTheGame(string connectionId)
+        {
+            logService.Log($"Tring to remove player with connection id from the server {connectionId}");
+            var playerData = PlayerCollection.FindByConnectionId(connectionId);
+
+            if (playerData == null) {
+                logService.Log($"Wasn't able to find any player with connection id {connectionId}");
+            }
+
+            // Mark to remove it...
+        }
     }
 }

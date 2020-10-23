@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.UnityLog;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -17,9 +18,27 @@ public class SelectWorldButton : GameButton
     
     public override async Task OnClick()
     {
-        GameState.Object.CurrentWorld = GameState.Object.Worlds.Find(x => x.WorldIndex == WorldIndex);
-        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.Object.CurrentWorld.Name);
-        await ScreenChangerService.Object.ChangeScreen(ScreenId.World);
+        GameState.SetCurrentWorld(WorldIndex);
+        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.WorldName);
+
+        // Get characters from server
+        var characters = await NetworkService.Object.RequestPlayerCharacters(GameState.PlayerName);
+
+        if(characters == null) {
+            LOG.Log($"Player does not have any characters: {GameState.PlayerName}");
+            return;
+        }
+
+        var character = characters.Find(x => x.WorldId == GameState.WorldId);
+
+        if(character == null) {
+            LOG.Log($"Player does not have a character on world: {GameState.WorldId}");
+            await ScreenChangerService.Object.ChangeScreen(ScreenId.CreateCharacter);
+        }
+        else {
+            LOG.Log($"Found Character!");
+            await ScreenChangerService.Object.ChangeScreen(ScreenId.SelectCharacter);
+        }
     }
 
     public void Refresh(WorldData data)

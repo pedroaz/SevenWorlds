@@ -23,6 +23,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
         // Player
         void AddPlayerToGame(PlayerData playerData);
+        void RemovePlayerFromTheGame(string connectionId);
 
         // Characters 
         void AddCharacterToGame(CharacterData characterData);

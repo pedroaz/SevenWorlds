@@ -17,6 +17,14 @@ public class GameState : GameService<GameState>
     private void Awake()
     {
         Object = this;
+    }
 
+    public static string PlayerName => Object?.PlayerData?.PlayerName;
+    public static string WorldId => Object?.CurrentWorld?.Id;
+    public static string WorldName => Object?.CurrentWorld?.Name;
+
+    public static void SetCurrentWorld(int index)
+    {
+        Object.CurrentWorld = Object.Worlds.Find(x => x.WorldIndex == index);
     }
 }

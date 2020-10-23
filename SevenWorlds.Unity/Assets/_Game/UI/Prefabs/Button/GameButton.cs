@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.Shared.UnityLog;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -15,8 +16,10 @@ public class GameButton : SetupMonoBehaviour
         button = GetComponentInChildren<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
+
             LOG.Log($"[CLICK] - {this.GetType()}");
             _ = OnClick();
+
         });
         Setup();
     }

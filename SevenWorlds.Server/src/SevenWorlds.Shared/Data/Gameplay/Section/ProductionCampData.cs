@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Section
 {
+    [System.Serializable]
     public class ProductionCampData : SectionData
     {
         public CharacterResourceType Resource;

@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum GameTextId
+{
+    None,
+    IsConnectedToServer,
+    PlayerName,
+    UniverseName,
+    WorldName
+}
+
 public class GameText : MonoBehaviour
 {
     private TextMeshProUGUI textMesh;
@@ -33,11 +42,4 @@ public class GameText : MonoBehaviour
     }
 }
 
-public enum GameTextId
-{
-    None,
-    IsConnectedToServer,
-    PlayerName,
-    UniverseName,
-    WorldName
-}
+

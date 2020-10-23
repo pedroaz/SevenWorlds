@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Section
 {
+    [System.Serializable]
     public class SectionBundle : NetworkData
     {
         public List<MonsterCampData> MonsterCamps;
