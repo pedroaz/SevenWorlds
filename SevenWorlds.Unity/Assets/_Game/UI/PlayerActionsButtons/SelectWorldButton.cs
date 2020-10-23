@@ -9,27 +9,16 @@ public class SelectWorldButton : GameButton
     [HideInInspector]
     public int WorldIndex;
 
-    private TextMeshProUGUI btnText;
+    public GameText worldNameText;
+    public GameText hasCharacterText;
 
-    public override void Setup()
-    {
-        btnText = GetComponentInChildren<TextMeshProUGUI>();
-    }
-    
     public override async Task OnClick()
     {
         GameState.SetCurrentWorld(WorldIndex);
         UIEvents.ChangeGameText(GameTextId.WorldName, GameState.WorldName);
 
         // Get characters from server
-        var characters = await NetworkService.Object.RequestPlayerCharacters(GameState.PlayerName);
-
-        if(characters == null) {
-            LOG.Log($"Player does not have any characters: {GameState.PlayerName}");
-            return;
-        }
-
-        var character = characters.Find(x => x.WorldId == GameState.WorldId);
+        var character = GameState.Object.Characters.Find(x => x.WorldId == GameState.WorldId);
 
         if(character == null) {
             LOG.Log($"Player does not have a character on world: {GameState.WorldId}");
@@ -41,8 +30,14 @@ public class SelectWorldButton : GameButton
         }
     }
 
-    public void Refresh(WorldData data)
+    public void Refresh(WorldData data, CharacterData characterData)
     {
-        btnText.text = data.Name;
+        worldNameText.SetText(data.Name);
+        if(characterData == null) {
+            hasCharacterText.SetText("No Character");
+        }
+        else {
+            hasCharacterText.SetText($"Character Lvl: {characterData.Level}");
+        }
     }
 }

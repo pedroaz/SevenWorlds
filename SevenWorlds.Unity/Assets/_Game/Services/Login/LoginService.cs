@@ -31,6 +31,7 @@ public class LoginService : GameService<LoginService>
             GameState.Object.PlayerData = response.PlayerData;
             GameState.Object.Universe = response.UniverseSyncData.Universe;
             GameState.Object.Worlds = response.UniverseSyncData.Worlds;
+            GameState.Object.Characters = await NetworkService.Object.RequestPlayerCharacters(response.PlayerData.PlayerName);
             GeneralRefresherService.Object.Refresh();
             await ScreenChangerService.Object.ChangeScreen(ScreenId.Universe);
         }

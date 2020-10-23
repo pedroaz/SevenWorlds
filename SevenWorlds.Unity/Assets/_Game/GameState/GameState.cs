@@ -13,6 +13,8 @@ public class GameState : GameService<GameState>
     public List<AreaData> Areas;
     public AreaData CurrentArea;
     public SectionBundle Sections;
+    public List<CharacterData> Characters;
+    public CharacterData CurrentCharacter;
 
     private void Awake()
     {

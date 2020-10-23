@@ -23,7 +23,7 @@ public class GameInitializer : MonoBehaviour
     {
         UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Not Connected to the server");
 
-        while (!connected) {
+        while (!connected && Application.isPlaying) {
             connected = await NetworkService.Object.ConnectToServer();
             if (connected) {
                 UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Connected to the server");
