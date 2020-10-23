@@ -4,8 +4,8 @@ namespace SevenWorlds.Shared.Data.Chat
 {
     public class ChatMessageData : NetworkData
     {
-        public string PlayerName { get; set; }
-        public string Message { get; set; }
+        public string PlayerName;
+        public string Message;
 
         public ChatMessageData(string playerName, string message)
         {

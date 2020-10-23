@@ -15,9 +15,9 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
 
     public class SkillData
     {
-        public string SkillType { get; set; }
-        public string Description { get; set; }
-        public string Formula { get; set; }
+        public string SkillType;
+        public string Description;
+        public string Formula;
         public Dictionary<CharacterResourceType, int> ResourcesCost;
 
         public bool IsOfType(SkillType type)

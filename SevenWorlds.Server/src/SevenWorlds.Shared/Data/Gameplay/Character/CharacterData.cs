@@ -13,25 +13,25 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class CharacterData : NetworkData
     {
         // Constant
-        public string PlayerName { get; set; }
+        public string PlayerName;
 
         // General
-        public int Level { get; set; }
-        public bool IsOnline { get; set; }
-        public string WorldId { get; set; }
+        public int Level;
+        public bool IsOnline;
+        public string WorldId;
 
         // Position - Needs to be set by [CharacterPlacementService]
-        public string AreaId { get; set; }
-        public WorldPosition Position { get; set; }
+        public string AreaId;
+        public WorldPosition Position;
 
         // Combat
-        public CombatData InitialCombatData { get; set; }
+        public CombatData InitialCombatData;
 
         // HP
-        public HpData HpData { get; set; }
-        public List<SkillType> Skills { get; set; }
+        public HpData HpData;
+        public List<SkillType> Skills;
 
-        public EquipmentData Equipments { get; set; }
+        public EquipmentData Equipments;
 
         // Resources
         public CharacterResourcesData Resources { get; set; }

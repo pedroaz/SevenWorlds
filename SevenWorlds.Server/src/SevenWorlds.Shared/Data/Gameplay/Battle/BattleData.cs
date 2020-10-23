@@ -13,11 +13,11 @@ namespace SevenWorlds.Shared.Data.Gameplay.Encounters
 
     public class BattleData : NetworkData
     {
-        public List<CharacterData> CharacterDatas { get; set; }
-        public List<CombatData> CharactersCombatData { get; set; }
-        public List<MonsterData> MonsterDatas { get; set; }
-        public int MaxAmountOfCharacters { get; set; }
-        public BattleStatus Status { get; set; }
+        public List<CharacterData> CharacterDatas;
+        public List<CombatData> CharactersCombatData;
+        public List<MonsterData> MonsterDatas;
+        public int MaxAmountOfCharacters;
+        public BattleStatus Status;
 
         public BattleData(StartBattleActionData startData)
         {

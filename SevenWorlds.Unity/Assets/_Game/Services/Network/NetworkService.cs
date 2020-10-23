@@ -92,6 +92,7 @@ public class NetworkService : GameService<NetworkService>
 
     public async Task<LoginResponseData> Login(LoginData data)
     {
+        LOG.Log("Sending login request");
         return await client.Login(data);
     }
 

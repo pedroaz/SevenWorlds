@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameInitializer : MonoBehaviour
@@ -8,6 +9,12 @@ public class GameInitializer : MonoBehaviour
     async void Start()
     {
         await ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
+
+
+        LOG.Log("Setting up all objects");
+        foreach (var item in Resources.FindObjectsOfTypeAll<SetupMonoBehaviour>()) {
+            item.Setup();
+        }
 
         await ConnectToServer();
     }

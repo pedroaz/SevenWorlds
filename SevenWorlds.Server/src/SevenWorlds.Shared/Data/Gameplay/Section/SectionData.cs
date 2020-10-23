@@ -20,7 +20,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public string Name;
         public string Type;
         public string AreaId;
-        public List<PlayerActionType> PossiblePlayerActions { get; set; }
+        public List<PlayerActionType> PossiblePlayerActions;
 
         public bool IsOfType(SectionType type)
         {

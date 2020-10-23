@@ -163,7 +163,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
         private SectionBundle CreateFakeSectionBundle(AreaData areaData)
         {
-            SectionBundle bundle = new SectionBundle();
+            SectionBundle bundle = universeDataFactory.CreateNewSectionBundle();
 
             bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.Poring));
             bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.PecoPeco));

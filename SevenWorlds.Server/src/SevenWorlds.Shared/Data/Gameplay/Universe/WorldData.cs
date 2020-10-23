@@ -10,9 +10,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
     [System.Serializable]
     public class WorldData : NetworkData
     {
-        public string Name { get; set; }
-        public string UniverseId { get; set; }
-        public int WorldIndex { get; set; }
+        public string Name;
+        public string UniverseId;
+        public int WorldIndex;
 
         public WorldData(string name, string universeId, int worldIndex)
         {

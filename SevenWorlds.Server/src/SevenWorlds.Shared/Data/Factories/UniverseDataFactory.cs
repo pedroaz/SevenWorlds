@@ -44,5 +44,17 @@ namespace SevenWorlds.Shared.Data.Factory
             SetDefaultValues(data);
             return data;
         }
+
+        public SectionBundle CreateNewSectionBundle()
+        {
+            var data = new SectionBundle(){ 
+                Armories = new List<ArmoryData>(),
+                MonsterCamps = new List<MonsterCampData>(),
+                ProductionCamps = new List<ProductionCampData>(),
+                Shops = new List<ShopData>()
+            };
+            SetDefaultValues(data);
+            return data;
+        }
     }
 }

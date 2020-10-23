@@ -8,7 +8,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Section
 {
     public class MonsterCampData : SectionData
     {
-        public MonsterType monsterType { get; set; }
+        public MonsterType monsterType;
         public MonsterCampData(MonsterType monsterType)
         {
             this.monsterType = monsterType;

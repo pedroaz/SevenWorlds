@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
@@ -19,7 +20,8 @@ namespace SevenWorlds.GameServer.Gameplay.Section
 
         public SectionCollection(ILogService logService)
         {
-            bundle = new SectionBundle();
+            UniverseDataFactory dataFactory = new UniverseDataFactory();
+            bundle = dataFactory.CreateNewSectionBundle();
             this.logService = logService;
         }
         

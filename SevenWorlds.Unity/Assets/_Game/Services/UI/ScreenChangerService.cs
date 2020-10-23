@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,7 +8,6 @@ public class ScreenChangerService : GameService<ScreenChangerService>
 {
     private List<GameScreen> screens;
 
-    [HideInInspector]
     public GameScreen currentScreen;
 
     private void Awake()
@@ -23,6 +23,8 @@ public class ScreenChangerService : GameService<ScreenChangerService>
 
     public async Task ChangeScreen(ScreenId id)
     {
+        LOG.Log($"Chaning screen to: {id}");
+
         switch (id) {
             case ScreenId.Black:
                 break;

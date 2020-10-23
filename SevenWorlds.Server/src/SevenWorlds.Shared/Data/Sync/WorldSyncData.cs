@@ -5,7 +5,7 @@ namespace SevenWorlds.Shared.Data.Sync
 {
     public class WorldSyncData
     {
-        public WorldData World { get; set; }
-        public List<AreaData> Areas { get; set; }
+        public WorldData World;
+        public List<AreaData> Areas;
     }
 }

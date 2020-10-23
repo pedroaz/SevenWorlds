@@ -9,9 +9,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
     [System.Serializable]
     public class PlayerData : NetworkData
     {
-        public string ConnectionId { get; set; }
-        public string PlayerName { get; set; }
-        public List<string> CharacterIds { get; set; }
-        public List<string> RelicIds { get; set; }
+        public string ConnectionId;
+        public string PlayerName;
+        public List<string> CharacterIds;
+        public List<string> RelicIds;
     }
 }

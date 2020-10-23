@@ -8,9 +8,9 @@ namespace SevenWorlds.Shared.Data.Gameplay.ActionDatas
 {
     public class MovementActionData : PlayerActionData
     {
-        public string CharacterId { get; set; }
-        public string FromAreaId { get; set; }
-        public string ToAreaId { get; set; }
+        public string CharacterId;
+        public string FromAreaId;
+        public string ToAreaId;
 
         public override PlayerActionType GetActionType => PlayerActionType.Movement;
 

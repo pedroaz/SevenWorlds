@@ -11,7 +11,7 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
     private void Awake()
     {
         Object = this;
-        buttons = FindObjectsOfType<SelectWorldButton>().ToList();
+        buttons = Resources.FindObjectsOfTypeAll<SelectWorldButton>().ToList();
     }
 
     public async Task Refresh()

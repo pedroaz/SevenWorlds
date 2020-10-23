@@ -5,7 +5,7 @@ namespace SevenWorlds.Shared.Data.Sync
 {
     public class UniverseSyncData
     {
-        public UniverseData Universe { get; set; }
-        public List<WorldData> Worlds { get; set; }
+        public UniverseData Universe;
+        public List<WorldData> Worlds;
     }
 }

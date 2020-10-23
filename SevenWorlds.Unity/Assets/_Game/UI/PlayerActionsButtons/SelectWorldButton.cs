@@ -10,11 +10,11 @@ public class SelectWorldButton : GameButton
 
     private TextMeshProUGUI btnText;
 
-    public override void AfterAwake()
+    public override void Setup()
     {
         btnText = GetComponentInChildren<TextMeshProUGUI>();
     }
-
+    
     public override async Task OnClick()
     {
         GameState.Object.CurrentWorld = GameState.Object.Worlds.Find(x => x.WorldIndex == WorldIndex);

@@ -6,9 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour
+public class GameButton : SetupMonoBehaviour
 {
-    
     private Button button;
 
     private void Awake()
@@ -19,12 +18,7 @@ public class GameButton : MonoBehaviour
             LOG.Log($"[CLICK] - {this.GetType()}");
             _ = OnClick();
         });
-        AfterAwake();
-    }
-
-    public virtual void AfterAwake()
-    {
-
+        Setup();
     }
 
     public virtual async Task OnClick()

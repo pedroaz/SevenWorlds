@@ -4,9 +4,7 @@ public class LoginButton : GameButton
 {
     public override async Task OnClick()
     {
-        print("Trying to log in!");
-
-        var response = await LoginService.Object.Login();
+        var response = await LoginService.Object.TryToLogin();
         await LoginService.Object.ProcessLoginResponse(response);
     }
 
