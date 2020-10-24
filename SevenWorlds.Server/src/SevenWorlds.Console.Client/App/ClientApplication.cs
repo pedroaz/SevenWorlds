@@ -56,7 +56,7 @@ namespace SevenWorlds.ConsoleClient.App
                             Chat();
                             break;
                         case "m":
-                            Move();
+                            await Move();
                             break;
                         case "r":
                             Register();

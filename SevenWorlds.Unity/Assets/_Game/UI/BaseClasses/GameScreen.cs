@@ -8,11 +8,10 @@ public enum ScreenId
     Chat,
     Login,
     Universe,
-    World,
     Area,
     Register,
     SelectCharacter,
-    CreateCharacter
+    CreateCharacter,
 }
 
 public class GameScreen : MonoBehaviour

@@ -181,6 +181,8 @@
     <Compile Include="Gameplay\Actions\Executor\PlayerActionExecutor.cs" />
     <Compile Include="Gameplay\Area\AreaCollection.cs" />
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
+    <Compile Include="Gameplay\Battle\AI\IMonsterAIService.cs" />
+    <Compile Include="Gameplay\Battle\AI\MonsterAIService.cs" />
     <Compile Include="Gameplay\Battle\Factories\BattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\IBattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\ISkillFactory.cs" />

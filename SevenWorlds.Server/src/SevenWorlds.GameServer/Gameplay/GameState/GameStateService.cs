@@ -123,7 +123,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
                 logService.Log($"Wasn't able to find any player with connection id {connectionId}");
             }
 
-            // Mark to remove it...
+            // TODO Mark to remove it...
         }
     }
 }

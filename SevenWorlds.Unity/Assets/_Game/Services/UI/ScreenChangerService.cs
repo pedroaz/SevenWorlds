@@ -35,9 +35,6 @@ public class ScreenChangerService : GameService<ScreenChangerService>
             case ScreenId.Universe:
                 await UniverseScreenRefresherService.Object.Refresh();
                 break;
-            case ScreenId.World:
-                await WorldScreenRefresherService.Object.Refresh();
-                break;
             case ScreenId.Area:
                 await AreaScreenRefresherService.Object.Refresh();
                 break;

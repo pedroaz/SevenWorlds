@@ -13,12 +13,12 @@ public enum GameTextId
     WorldName
 }
 
-public class GameText : MonoBehaviour
+public class GameText : SetupMonoBehaviour
 {
     private TextMeshProUGUI textMesh;
     public GameTextId Id;
 
-    private void Awake()
+    public override void Setup()
     {
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
         UIEvents.OnGameTextChanged += GameTextChanged;
@@ -33,6 +33,7 @@ public class GameText : MonoBehaviour
 
     public void SetText(string t)
     {
+        if (textMesh == null) return;
         textMesh.text = t;
     }
 

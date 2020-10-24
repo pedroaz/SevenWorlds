@@ -8,7 +8,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
 {
     public enum SkillType
     {
-        BaseAttack,
+        WeaponAttack,
         DoubleAttack,
         TrippleAttack
     }

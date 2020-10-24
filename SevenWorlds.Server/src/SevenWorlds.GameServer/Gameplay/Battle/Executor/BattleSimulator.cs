@@ -1,4 +1,6 @@
-﻿using SevenWorlds.GameServer.Gameplay.GameState;
+﻿using MongoDB.Bson;
+using SevenWorlds.GameServer.Gameplay.Battle.AI;
+using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.Shared.Data.Factories;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Encounters;
@@ -10,10 +12,12 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
     public class BattleSimulator : IBattleSimulator
     {
         private readonly IGameStateService gameStateService;
+        private readonly IMonsterAIService monsterAIService;
 
-        public BattleSimulator(IGameStateService gameStateService)
+        public BattleSimulator(IGameStateService gameStateService, IMonsterAIService monsterAIService)
         {
             this.gameStateService = gameStateService;
+            this.monsterAIService = monsterAIService;
         }
 
         public void SimulateBattles()
@@ -21,10 +25,9 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
             foreach (BattleData battleData in gameStateService.BattleCollection.GetAll()) {
                 switch (battleData.Status) {
                     case BattleStatus.BeforeStart:
-                        
                         break;
                     case BattleStatus.InProgress:
-                        Fight(battleData);
+                        Simulate(battleData);
                         break;
                     case BattleStatus.Finished:
                         break;
@@ -32,37 +35,14 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
             }
         }
 
-        private void Fight(BattleData battleData)
+        private void Simulate(BattleData battleData)
         {
-            // Character Attacks!
-            foreach (CombatData characterCombatData in battleData.CharactersCombatData) {
-                MonsterData target = battleData.MonsterDatas.Find(x => x.Id == characterCombatData.TargetId);
-
-                if(target != null) {
-                    ApplyDamageToMonster(characterCombatData, target);
-                }
-            }
-
-            // Monsters Attacks!
-            foreach (MonsterData monsterData in battleData.MonsterDatas) {
-
-                var targetId = monsterData.CombatData.TargetId;
-                CharacterData target = battleData.CharacterDatas.Find(x => x.Id == targetId);
-                CombatData targetCombatData = battleData.CharactersCombatData.Find(x => x.UnitId == targetId);
-                ApplyDamageToCharacter(target, targetCombatData, monsterData);
+            // Set target and skill of monsters 
+            foreach (var monster in battleData.Monsters) {
+                monsterAIService.Simulate(monster);
             }
         }
 
-        private void ApplyDamageToCharacter(CharacterData characterData, CombatData characterCombatData, MonsterData monsterData)
-        {
-            var damage = monsterData.CombatData.GetCurrentSkillDamage(characterCombatData);
-            characterData.HpData.CurrentHp -= damage;
-        }
-
-        private void ApplyDamageToMonster(CombatData characterCombatData, MonsterData monsterData)
-        {
-            var damage = characterCombatData.GetCurrentSkillDamage(monsterData.CombatData);
-            monsterData.HpData.CurrentHp -= damage;
-        }
+        
     }
 }

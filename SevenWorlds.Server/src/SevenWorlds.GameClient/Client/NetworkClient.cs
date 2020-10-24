@@ -95,22 +95,16 @@ namespace SevenWorlds.GameClient.Client
         #endregion
 
         #region Actions
-
-        private async Task RequestGeneralAction(PlayerActionData data)
-        {
-
-        }
-
         public async Task RequestMovementAction(string characterId, string fromAreaId, string toAreaId)
         {
             var data = dataFactory.CreateMovementActionData(characterId, fromAreaId, toAreaId);
             await hubProxy.Invoke(NetworkConstants.Request_MovementAction, data);
         }
 
-        public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)
-        {
-
-        }
+        //public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)
+        //{
+            
+        //}
 
         #endregion
 

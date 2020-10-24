@@ -44,7 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Gameplay\Character\HpData.cs" />
     <Compile Include="Data\Gameplay\Chat\ChatMessageData.cs" />
     <Compile Include="Data\Base\NetworkData.cs" />
     <Compile Include="Data\Connection\LoginData.cs" />

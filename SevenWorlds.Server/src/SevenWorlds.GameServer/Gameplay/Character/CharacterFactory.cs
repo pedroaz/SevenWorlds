@@ -33,11 +33,11 @@ namespace SevenWorlds.Shared.Data.Factories
             data.Level = 1;
 
             List<SkillType> initialSkills = new List<SkillType>() {
-                SkillType.BaseAttack
+                SkillType.WeaponAttack
             };
 
             data.Skills = initialSkills;
-            data.InitialCombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
+            data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
                 initialSkills
             ));
             data.IsOnline = false;
@@ -55,7 +55,7 @@ namespace SevenWorlds.Shared.Data.Factories
         public void RefreshCharacter(CharacterData data)
         {
             // Refresh initial combat data
-            data.InitialCombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
+            data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
                 data.Skills
             ));
         }

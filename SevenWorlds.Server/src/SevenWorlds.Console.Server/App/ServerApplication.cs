@@ -5,6 +5,7 @@ using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Actions.Executor;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Battle.AI;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
@@ -107,6 +108,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<BattleFactory>().As<IBattleFactory>().SingleInstance();
             builder.RegisterType<CharacterFactory>().As<ICharacterFactory>().SingleInstance();
             builder.RegisterType<SkillFactory>().As<ISkillFactory>().SingleInstance();
+            builder.RegisterType<MonsterAIService>().As<IMonsterAIService>().SingleInstance();
 
 
             container = builder.Build();
