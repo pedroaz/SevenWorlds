@@ -20,9 +20,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 
         public void PlaceAllPlayerCharactersIntoTheGame(string playerName)
         {
-            foreach (var character in gameStateService.CharacterCollection.GetAll()) {
-                character.IsOnline = true;
-            }
+           
         }
     }
 }

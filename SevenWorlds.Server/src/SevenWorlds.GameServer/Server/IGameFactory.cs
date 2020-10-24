@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
-    public interface IGameServerFactory
+    public interface IGameFactory
     {
         void DumpMasterData();
         Task SetupGameServer(string serverId);

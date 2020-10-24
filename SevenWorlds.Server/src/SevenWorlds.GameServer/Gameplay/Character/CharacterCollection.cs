@@ -38,5 +38,10 @@ namespace SevenWorlds.GameServer.Gameplay.Character
         {
             characters.RemoveAll(x => x.Id == id);
         }
+
+        public void RemovePlayerCharacters(string playerName)
+        {
+            characters.RemoveAll(x => x.PlayerName == playerName);
+        }
     }
 }

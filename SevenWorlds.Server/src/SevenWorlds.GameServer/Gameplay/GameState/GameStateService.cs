@@ -109,8 +109,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             model.Worlds = WorldCollection.GetAll();
             model.Areas = AreaCollection.GetAll();
             model.Sections = SectionCollection.Bundle;
-            model.Battles = BattleCollection.GetAll();
-            model.Characters = CharacterCollection.GetAll();
             return model;
         }
 
@@ -121,9 +119,12 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
 
             if (playerData == null) {
                 logService.Log($"Wasn't able to find any player with connection id {connectionId}");
+                return;
             }
 
-            // TODO Mark to remove it...
+            // TODO Need to improve this when it crashses...
+            PlayerCollection.RemovePlayer(playerData.PlayerName);
+            CharacterCollection.RemovePlayerCharacters(playerData.PlayerName);
         }
     }
 }

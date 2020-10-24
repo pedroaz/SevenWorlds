@@ -29,12 +29,12 @@ namespace SevenWorlds.GameServer.Server
         private readonly ISkillFactory skillFactory;
 
         private ILogService logService { get; }
-        private IGameServerFactory gameFactory { get; }
+        private IGameFactory gameFactory { get; }
         private IGameLoopSimulator gameLoopSimulator { get; }
         private volatile GameServerStatus serverStatus;
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
-            IGameServerFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
+            IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
             ISkillFactory skillFactory)
         {
             this.logService = logService;

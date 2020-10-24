@@ -172,7 +172,7 @@
     <Compile Include="Account\LoginService.cs" />
     <Compile Include="Database\Models\AccountModel.cs" />
     <Compile Include="Database\Models\BaseModel.cs" />
-    <Compile Include="Database\Models\PlayerModel.cs" />
+    <Compile Include="Database\Models\CharacterModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />
     <Compile Include="Database\Models\MasterDataModel.cs" />
@@ -210,8 +210,8 @@
     <Compile Include="Gameplay\Section\SectionCollection.cs" />
     <Compile Include="Gameplay\Loop\GameLoopSimulator.cs" />
     <Compile Include="Gameplay\Loop\IGameLoopSimulator.cs" />
-    <Compile Include="Server\IGameServerFactory.cs" />
-    <Compile Include="Server\GameServerFactory.cs" />
+    <Compile Include="Server\IGameFactory.cs" />
+    <Compile Include="Server\GameFactory.cs" />
     <Compile Include="Gameplay\Universe\IUniverseCollection.cs" />
     <Compile Include="Gameplay\Universe\UniverseCollection.cs" />
     <Compile Include="Gameplay\World\IWorldCollection.cs" />

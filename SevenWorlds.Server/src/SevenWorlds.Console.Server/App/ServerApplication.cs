@@ -86,7 +86,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<ServerManager>().As<IServerManager>().SingleInstance();
             builder.RegisterType<LogService>().As<ILogService>().SingleInstance();
             builder.RegisterType<UniverseCollection>().As<IUniverseCollection>().SingleInstance();
-            builder.RegisterType<GameServerFactory>().As<IGameServerFactory>().SingleInstance();
+            builder.RegisterType<GameFactory>().As<IGameFactory>().SingleInstance();
             builder.RegisterType<WorldCollection>().As<IWorldCollection>().SingleInstance();
             builder.RegisterType<SectionCollection>().As<ISectionCollection>().SingleInstance();
             builder.RegisterType<AreaCollection>().As<IAreaCollection>().SingleInstance();

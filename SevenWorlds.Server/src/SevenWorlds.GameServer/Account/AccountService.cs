@@ -37,7 +37,7 @@ namespace SevenWorlds.GameServer.Account
 
         public async Task RegisterAccount(string username, string password, string playerName)
         {
-            await databaseService.UpdateAccount(new AccountModel() {
+            await databaseService.InsertAccount(new AccountModel() {
                 PlayerName = playerName,
                 Username = username,
                 Password = password

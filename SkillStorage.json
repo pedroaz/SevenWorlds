@@ -1,5 +1,5 @@
 {
-    "BaseAttack": {
+    "WeaponAttack": {
         "SkillType": "WeaponAttack",
         "Description": "A Simple Attak",
         "Formula": "Attack",

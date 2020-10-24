@@ -47,16 +47,31 @@ namespace SevenWorlds.GameServer.Hubs
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            logService.Log($"Someone disconnected! {Context.ConnectionId}");
-            return base.OnDisconnected(stopCalled);
+            try {
+                logService.Log($"Someone disconnected! {Context.ConnectionId}");
+                gameStateService.RemovePlayerFromTheGame(Context.ConnectionId);
+                return base.OnDisconnected(stopCalled);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+            
         }
 
         #region Admin
 
         public void AdminStartGameServer(string serverId)
         {
-            logService.Log("Recieved Admin Start Request");
-            serverManager.StartServerRequest(serverId);
+            try {
+                logService.Log("Recieved Admin Start Request");
+                serverManager.StartServerRequest(serverId);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+            
         }
 
         public void AdminStopGameServer()
@@ -83,28 +98,40 @@ namespace SevenWorlds.GameServer.Hubs
 
         public async Task<LoginResponseData> RequestLogin(LoginData data)
         {
-            return await loginService.Login(data, Context.ConnectionId);
+            try {
+                return await loginService.Login(data, Context.ConnectionId);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public async Task<RegisterAccountResponse> RequestRegisterAccount(RegisterAccountData data)
         {
-            if (await accountService.UsernameExists(data.Username)) {
+            try {
+                if (await accountService.UsernameExists(data.Username)) {
+                    return new RegisterAccountResponse() {
+                        response = RegisterAccountResponseType.UserNameAlreadyExists
+                    };
+                }
+
+                if (await accountService.PlayerNameExists(data.Username)) {
+                    return new RegisterAccountResponse() {
+                        response = RegisterAccountResponseType.PlayerNameAlreadyExists
+                    };
+                }
+
+                await accountService.RegisterAccount(data.Username, data.Password, data.PlayerName);
+
                 return new RegisterAccountResponse() {
-                    response = RegisterAccountResponseType.UserNameAlreadyExists
+                    response = RegisterAccountResponseType.Success
                 };
             }
-
-            if (await accountService.PlayerNameExists(data.Username)) {
-                return new RegisterAccountResponse() {
-                    response = RegisterAccountResponseType.PlayerNameAlreadyExists
-                };
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
             }
-
-            await accountService.RegisterAccount(data.Username, data.Password, data.PlayerName);
-
-            return new RegisterAccountResponse() {
-                response = RegisterAccountResponseType.Success
-            };
         }
 
 
@@ -114,42 +141,90 @@ namespace SevenWorlds.GameServer.Hubs
 
         public UniverseSyncData RequestUniverseSync()
         {
-            return gameStateService.GetUniverseSyncData();
+            try {
+                return gameStateService.GetUniverseSyncData();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public List<WorldData> RequestAllWorlds()
         {
-            return gameStateService.WorldCollection.GetAll();
+            try {
+                return gameStateService.WorldCollection.GetAll();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public WorldSyncData RequestWorldSync(string worldId)
         {
-            return gameStateService.GetWorldSyncData(worldId);
+            try {
+                return gameStateService.GetWorldSyncData(worldId);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public AreaSyncData RequestAreaSync(string areaId, string playerId)
         {
-            return gameStateService.GetAreaSyncData(areaId);
+            try {
+                return gameStateService.GetAreaSyncData(areaId);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public List<AreaData> RequestAllAreas()
         {
-            return gameStateService.AreaCollection.GetAll();
+            try {
+                return gameStateService.AreaCollection.GetAll();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public List<PlayerData> RequestAllPlayerDatas()
         {
-            return gameStateService.PlayerCollection.GetAll();
+            try {
+                return gameStateService.PlayerCollection.GetAll();
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public SectionBundle RequestSectionBundle()
         {
-            return gameStateService.SectionCollection.Bundle;
+            try {
+                return gameStateService.SectionCollection.Bundle;
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public List<CharacterData> RequestPlayerCharacters(string playerName)
         {
-            return gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+            try {
+                return gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         #endregion
@@ -158,25 +233,50 @@ namespace SevenWorlds.GameServer.Hubs
 
         public bool RequestPing()
         {
-            return true;
+            try {
+                return true;
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public void RequestSendChatMessage(ChatMessageData data)
         {
-            Clients.All.OnChatMessage(data);
+            try {
+                Clients.All.OnChatMessage(data);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
         #endregion
 
         #region Actions
         public void RequestMovementAction(MovementActionData data)
         {
-            logService.Log($"Recieved Movement Request {data.CharacterId}");
-            playerActionQueue.AddToBundle(data);
+            try {
+                logService.Log($"Recieved Movement Request {data.CharacterId}");
+                playerActionQueue.AddToBundle(data);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
 
         public void RequestStartBattleAction(StartBattleActionData data)
         {
-            playerActionQueue.AddToBundle(data);
+            try {
+                playerActionQueue.AddToBundle(data);
+
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
         }
         #endregion
     }

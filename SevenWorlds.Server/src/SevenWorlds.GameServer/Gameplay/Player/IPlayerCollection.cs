@@ -12,5 +12,6 @@ namespace SevenWorlds.GameServer.Gameplay.Player
     {
         PlayerData FindByName(string name);
         PlayerData FindByConnectionId(string connectionId);
+        void RemovePlayer(string playerName);
     }
 }

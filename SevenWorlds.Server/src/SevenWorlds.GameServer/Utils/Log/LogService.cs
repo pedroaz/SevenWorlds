@@ -2,6 +2,9 @@
 using Serilog.Core;
 using SevenWorlds.GameServer.Utils.Config;
 using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace SevenWorlds.GameServer.Utils.Log
 {
@@ -12,23 +15,31 @@ namespace SevenWorlds.GameServer.Utils.Log
         All
     }
 
+    public enum LogLevel
+    {
+        Debug,
+        Information,
+        Warning,
+        Error
+    }
+
+    public enum LogType
+    {
+        None,
+        Initialization
+    }
+
     public class LogService : ILogService
     {
-        Logger fileLogger;
-        Logger consoleLogger;
+        Logger logger;
         private readonly IConfigurator configurator;
-
-
 
         public LogService(IConfigurator configurator)
         {
             this.configurator = configurator;
 
-            fileLogger = new LoggerConfiguration()
+            logger = new LoggerConfiguration()
                 .WriteTo.File(GetLogFilePath(configurator))
-                .CreateLogger();
-
-            consoleLogger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
         }
@@ -38,34 +49,48 @@ namespace SevenWorlds.GameServer.Utils.Log
             return configurator.Config.LogFilePath;
         }
 
-        public void Log(string message)
+        public void Log(
+            string message, LogLevel level = LogLevel.Information, LogType type = LogType.None,
+            [CallerFilePath] string file = "",[CallerMemberName] string method = "", [CallerLineNumber] int number = 0)
         {
-            fileLogger.Information(message);
-            consoleLogger.Information(message);
-        }
+            string line = CreateLogLine(message, Path.GetFileName(file), method, number, type);
 
-        public void Log(string message, LogDestination logDestination)
-        {
-            switch (logDestination) {
-                case LogDestination.Console:
-                    consoleLogger.Information(message);
+            switch (level) {
+                case LogLevel.Debug:
+                    logger.Debug(line);
                     break;
-                case LogDestination.File:
-                    fileLogger.Information(message);
+                case LogLevel.Information:
+                    logger.Information(line);
                     break;
-                case LogDestination.All:
-                    Log(message);
+                case LogLevel.Warning:
+                    logger.Warning(line);
+                    break;
+                case LogLevel.Error:
+                    logger.Error(line);
                     break;
             }
         }
 
-        public void Log(Exception e)
+        private string CreateLogLine(string message,string fileName, string caller, int number, LogType type)
         {
-            consoleLogger.Warning("EXCEPTION!!!");
-            consoleLogger.Warning(e.Message);
+            return $"[{fileName}@{number}->{caller}]{GetLogPrefix(type)} {message}";
+        }
 
-            fileLogger.Information("EXCEPTION!!!");
-            fileLogger.Warning(e.Message);
+        private string GetLogPrefix(LogType type)
+        {
+            switch (type) {
+                case LogType.Initialization:
+                    return "[Initialization]";
+                case LogType.None:
+                default:
+                    return "";
+            }
+        }
+
+        public void Log(Exception e, 
+            [CallerFilePath] string file = "", [CallerMemberName] string method = "", [CallerLineNumber] int number = 0)
+        {
+            Log(e.Message, level: LogLevel.Error, file: file, method: method, number: number);
         }
     }
 }

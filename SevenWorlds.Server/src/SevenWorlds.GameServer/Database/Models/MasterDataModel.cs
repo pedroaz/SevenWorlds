@@ -13,8 +13,6 @@ namespace SevenWorlds.GameServer.Database
         public List<UniverseData> Universes { get; set; }
         public List<WorldData> Worlds { get; set; }
         public List<AreaData> Areas { get; set; }
-        public List<CharacterData> Characters { get; set; }
-        public List<BattleData> Battles { get; set; }
         public SectionBundle Sections { get; set; }
     }
 }

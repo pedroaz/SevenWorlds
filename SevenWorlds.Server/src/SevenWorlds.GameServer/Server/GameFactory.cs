@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Universe
 {
-    public class GameServerFactory : IGameServerFactory
+    public class GameFactory : IGameFactory
     {
         private readonly IDatabaseService databaseService;
         private readonly ILogService logService;
@@ -26,7 +26,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private readonly IGameStateService gameStateService;
         private readonly UniverseDataFactory universeDataFactory = new UniverseDataFactory();
 
-        public GameServerFactory(
+        public GameFactory(
             IGameStateService gameStateService,
             IDatabaseService databaseService,
             ILogService logService,
@@ -88,12 +88,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 gameStateService.AreaCollection.Add(item);
             }
 
-            // Characters
-            foreach (var item in masterData.Characters) {
-                characterFactory.RefreshCharacter(item);
-                gameStateService.AddCharacterToGame(item);
-            }
-
             //Add Sections
             gameStateService.SectionCollection.SetBundle(masterData.Sections);
         }
@@ -115,20 +109,37 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             logService.Log("Creating master data");
             var masterData = GenerateFakeMasterData();
 
-            logService.Log("Updating databases");
-            await databaseService.UpdateMasterData(masterData);
-            await databaseService.UpdateAccount(GenerateFakeAccounts());
+            logService.Log("Updating Databases");
+            logService.Log("Updating Master Data");
+            await databaseService.InsertMasterData(masterData);
+
+            logService.Log("Updating Accounts");
+            foreach (var account in GenerateFakeAccounts()) {
+                await databaseService.InsertAccount(account);
+            }
+
+            logService.Log("Updating Characters - All into world 1");
+            foreach (var character in CreateFakeCharacters(masterData.Worlds[0])) {
+                await databaseService.InsertCharacter(character.PlayerName, character);
+            }
             logService.Log("Finish updating databases");
         }
 
 
 
-        private AccountModel GenerateFakeAccounts()
+        private List<AccountModel> GenerateFakeAccounts()
         {
-            return new AccountModel() {
-                PlayerName = "Pedro",
-                Username = "1",
-                Password = "1",
+            return new List<AccountModel>() {
+                new AccountModel() {
+                    PlayerName = "Pedro",
+                    Username = "1",
+                    Password = "1",
+                },
+                new AccountModel() {
+                    PlayerName = "Carol",
+                    Username = "2",
+                    Password = "2",
+                },
             };
         }
 
@@ -139,7 +150,6 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             List<WorldData> worlds = CreateSevenWorlds(universes[0]);
             List<AreaData> areas = CreateFakeAreas(worlds[0]);
             SectionBundle bundle = CreateFakeSectionBundle(areas[0]);
-            List<CharacterData> characters = CreateFakeCharacters(worlds[0]);
 
             MasterDataModel masterData = new MasterDataModel() {
                 ServerId = "fake_server",
@@ -147,18 +157,16 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 Worlds = worlds,
                 Areas = areas,
                 Sections = bundle,
-                Characters = characters,
-                Battles = new List<BattleData>()
             };
             return masterData;
         }
 
         private List<CharacterData> CreateFakeCharacters(WorldData world)
         {
-            List<CharacterData> characters = new List<CharacterData>(){
-                characterFactory.NewCharacter("Pedro", world.Id)
+            return new List<CharacterData>(){
+                characterFactory.NewCharacter("Pedro", world.Id),
+                characterFactory.NewCharacter("Carol", world.Id)
             };
-            return characters;
         }
 
         private SectionBundle CreateFakeSectionBundle(AreaData areaData)

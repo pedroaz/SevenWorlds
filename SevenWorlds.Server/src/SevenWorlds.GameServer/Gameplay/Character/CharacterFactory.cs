@@ -40,7 +40,6 @@ namespace SevenWorlds.Shared.Data.Factories
             data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
                 initialSkills
             ));
-            data.IsOnline = false;
             data.Resources = new CharacterResourcesData(){ 
                 Resources = new Dictionary<string, int>() {
                     { CharacterResourceType.Gold.ToString(), 0 },

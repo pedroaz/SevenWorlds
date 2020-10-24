@@ -12,7 +12,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         // General
         public int Level;
-        public bool IsOnline;
         public string WorldId;
 
         // Position - Needs to be set by [CharacterPlacementService]

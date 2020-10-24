@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.GameServer.Database.CollectionsSchemas;
+using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,15 @@ namespace SevenWorlds.GameServer.Database
         Task<AccountModel> GetAccountModel(string username);
         Task<bool> UsernameExists(string username);
         Task<bool> PlayerNameExists(string playerName);
-        Task UpdateAccount(AccountModel model);
+        Task InsertAccount(AccountModel model);
+
+        // Characters
+        Task<CharacterModel> GetAllCharactersFromPlayer(string playerName);
+        Task InsertCharacter(string playerName, CharacterData data);
 
         // Master
         Task<MasterDataModel> GetMasterData(string serverId);
-        Task UpdateMasterData(MasterDataModel model);
+        Task InsertMasterData(MasterDataModel model);
 
         // Admin
         Task DeleteAll();

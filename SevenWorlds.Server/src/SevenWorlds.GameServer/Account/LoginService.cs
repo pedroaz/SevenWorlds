@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Character;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Connection;
@@ -17,17 +18,20 @@ namespace SevenWorlds.GameServer.Account
         private readonly IGameStateService gameStateService;
         private readonly ILogService logService;
         private readonly ICharacterPlacementService characterPlacementService;
+        private readonly IDatabaseService databaseService;
 
         public LoginService(
             IAccountService accountService, 
             IGameStateService gameStateService,
             ILogService logService,
-            ICharacterPlacementService characterPlacementService)
+            ICharacterPlacementService characterPlacementService,
+            IDatabaseService databaseService)
         {
             this.accountService = accountService;
             this.gameStateService = gameStateService;
             this.logService = logService;
             this.characterPlacementService = characterPlacementService;
+            this.databaseService = databaseService;
         }
 
         public async Task<LoginResponseData> Login(LoginData data, string connectionId)
@@ -58,6 +62,10 @@ namespace SevenWorlds.GameServer.Account
             };
             // Add that object to the game
             gameStateService.AddPlayerToGame(playerData);
+            var model = await databaseService.GetAllCharactersFromPlayer(playerData.PlayerName);
+            foreach (var character in model.Characters) {
+                gameStateService.AddCharacterToGame(character);
+            }
             characterPlacementService.PlaceAllPlayerCharactersIntoTheGame(playerData.PlayerName);
 
             // Add character to areas
