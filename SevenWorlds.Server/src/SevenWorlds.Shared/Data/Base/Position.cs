@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace SevenWorlds.Shared.Data.Gameplay
 {
     [System.Serializable]
-    public class WorldPosition
+    public class Position
     {
         public int X;
         public int Y;
 
         public override bool Equals(object obj)
         {
-            return obj is WorldPosition position &&
+            return obj is Position position &&
                    X == position.X &&
                    Y == position.Y;
         }

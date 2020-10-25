@@ -7,8 +7,24 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    public class EquipmentData : NetworkData
+    public enum EquipmentType
     {
+        Sword,
+        Bow,
+    }
 
+    public class EquipmentData
+    {
+        public EquipmentType Type;
+        public int MaxHp;
+
+        public int Attack;
+        public int Defense;
+        public int Speed;
+
+        public int Fire;
+        public int Water;
+        public int Earth;
+        public int Air;
     }
 }

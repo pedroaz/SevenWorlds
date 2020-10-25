@@ -74,7 +74,7 @@
     <Compile Include="Data\Gameplay\Section\ShopData.cs" />
     <Compile Include="Data\Gameplay\Universe\UniverseData.cs" />
     <Compile Include="Data\Gameplay\Universe\WorldData.cs" />
-    <Compile Include="Data\Base\WorldPosition.cs" />
+    <Compile Include="Data\Base\Position.cs" />
     <Compile Include="Data\Sync\AreaSyncData.cs" />
     <Compile Include="Data\Sync\UniverseSyncData.cs" />
     <Compile Include="Data\Sync\WorldSyncData.cs" />

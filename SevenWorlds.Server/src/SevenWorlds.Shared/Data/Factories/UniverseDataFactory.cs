@@ -24,7 +24,7 @@ namespace SevenWorlds.Shared.Data.Factory
             return data;
         }
 
-        public AreaData CreateNewArea(string name, WorldPosition position, string worldId)
+        public AreaData CreateNewArea(string name, Position position, string worldId)
         {
             var data = new AreaData(name, position, worldId);
             SetDefaultValues(data);

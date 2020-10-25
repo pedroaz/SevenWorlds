@@ -1,32 +1,33 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    public class CombatData : NetworkData
+    public class CombatData
     {
-        public int MaxHp { get; set; }
-        public int CurrentHp { get; set; }
+        public int MaxHp;
+        public int CurrentHp;
 
-        public string UnitId { get; set; }
-        public List<string> TargetIds { get; set; }
+        public string UnitId;
+        public List<string> TargetIds;
 
-        public SkillData SelectedSkill { get; set; }
-        public int Attack { get; set; }
-        public int Defense { get; set; }
-        public int Speed { get; set; }
-        public bool IsAlive { get; set; }
+        public SkillData SelectedSkill;
+        public int Attack;
+        public int Defense;
+        public int Speed;
+        public bool IsAlive;
 
-        public int Fire { get; set; }
-        public int Water { get; set; }
-        public int Earth { get; set; }
-        public int Air { get; set; }
+        public int Fire;
+        public int Water;
+        public int Earth;
+        public int Air;
 
         // List of skills
-        public List<SkillData> Skills { get; set; }
+        public List<SkillData> Skills;
 
         public CombatData(string unitId, List<SkillData> skills)
         {
@@ -35,6 +36,19 @@ namespace SevenWorlds.Shared.Data.Gameplay
             Attack = 1;
             IsAlive = true;
             TargetIds = new List<string>();
+        }
+
+        public void AddEquipData(EquipmentData equipmentData)
+        {
+            if (equipmentData == null) return;
+            MaxHp += equipmentData.MaxHp;
+            Attack += equipmentData.Attack;
+            Defense += equipmentData.Defense;
+            Speed += equipmentData.Speed;
+            Fire += equipmentData.Fire;
+            Water += equipmentData.Water;
+            Earth += equipmentData.Earth;
+            Air += equipmentData.Air;
         }
     }
 }

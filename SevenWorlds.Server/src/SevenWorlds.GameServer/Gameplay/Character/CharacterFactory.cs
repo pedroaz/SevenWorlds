@@ -36,18 +36,13 @@ namespace SevenWorlds.Shared.Data.Factories
 
 
             // Skills
-            List<SkillType> initialSkills = GetInitialMethods(characterType);
-            characterData.Skills = initialSkills;
-            characterData.CombatData = new CombatData(characterData.Id, skillFactory.GetListOfSkillDatas(
-                initialSkills
-            ));
+            characterData.Skills = GetInitialMethods(characterType);
 
             // Resources
-            characterData.Resources = new WorldResourcesData() {
-                Resources = new Dictionary<WorldResourceType, int>()
-            };
+            characterData.Resources = new WorldResourcesData();
 
-
+            // Refresh
+            RefreshCharacter(characterData);
 
             return characterData;
         }
@@ -69,6 +64,10 @@ namespace SevenWorlds.Shared.Data.Factories
             data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
                 data.Skills
             ));
+
+            data.CombatData.AddEquipData(data.Equipments);
+
+            
         }
     }
 }

@@ -190,7 +190,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     areas.Add(
                         universeDataFactory.CreateNewArea(
                             $"Area ({x},{y})",
-                            new WorldPosition() {
+                            new Position() {
                                 X = x,
                                 Y = y
                             },

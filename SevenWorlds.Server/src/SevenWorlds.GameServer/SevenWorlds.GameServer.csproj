@@ -199,6 +199,8 @@
     <Compile Include="Gameplay\Battle\Base\IBattleCollection.cs" />
     <Compile Include="Gameplay\Battle\Executor\BattleSimulator.cs" />
     <Compile Include="Gameplay\Battle\Executor\IBattleSimulator.cs" />
+    <Compile Include="Gameplay\Equipment\EquipmentFactory.cs" />
+    <Compile Include="Gameplay\Equipment\IEquipmentFactory.cs" />
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
     <Compile Include="Gameplay\GameState\IGameStateService.cs" />
     <Compile Include="Gameplay\Loop\SyncCoordinator.cs" />

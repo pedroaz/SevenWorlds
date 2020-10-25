@@ -11,10 +11,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public class AreaData : NetworkData
     {
         public string Name;
-        public WorldPosition Position;
+        public Position Position;
         public string WorldId;
 
-        public AreaData(string name, WorldPosition position, string worldId)
+        public AreaData(string name, Position position, string worldId)
         {
             Name = name;
             Position = position;

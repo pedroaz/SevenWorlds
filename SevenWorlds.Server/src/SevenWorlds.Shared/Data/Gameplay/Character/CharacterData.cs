@@ -30,7 +30,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         // Position - Needs to be set by [CharacterPlacementService]
         public string AreaId;
-        public WorldPosition Position;
+        public Position Position;
 
         // Combat
         public CombatData CombatData;

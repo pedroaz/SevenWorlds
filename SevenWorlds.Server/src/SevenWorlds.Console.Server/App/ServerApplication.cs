@@ -11,6 +11,7 @@ using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Encounter.Executor;
+using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
@@ -111,6 +112,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<SkillFactory>().As<ISkillFactory>().SingleInstance();
             builder.RegisterType<MonsterAIService>().As<IMonsterAIService>().SingleInstance();
             builder.RegisterType<SkillSimulator>().As<ISkillSimulator>().SingleInstance();
+            builder.RegisterType<EquipmentFactory>().As<IEquipmentFactory>().SingleInstance();
+
 
             container = builder.Build();
             GlobalHost.DependencyResolver = new AutofacDependencyResolver(container);

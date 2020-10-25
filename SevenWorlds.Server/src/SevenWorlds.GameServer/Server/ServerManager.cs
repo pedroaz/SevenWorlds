@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Hosting;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
+using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.Simulation;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Config;
@@ -27,6 +28,7 @@ namespace SevenWorlds.GameServer.Server
         private readonly IConfigurator configurator;
         private readonly IMonsterDataFactory monsterDataFactory;
         private readonly ISkillFactory skillFactory;
+        private readonly IEquipmentFactory equipmentFactory;
 
         private ILogService logService { get; }
         private IGameFactory gameFactory { get; }
@@ -35,32 +37,33 @@ namespace SevenWorlds.GameServer.Server
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
             IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
-            ISkillFactory skillFactory)
+            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
             this.configurator = configurator;
             this.monsterDataFactory = monsterDataFactory;
             this.skillFactory = skillFactory;
+            this.equipmentFactory = equipmentFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
         public async Task StartServer()
         {
             try {
-                logService.Log("Starting the Game Server");
+                logService.Log("Starting the Game Server", type: LogType.Initialization);
                 using (WebApp.Start(NetworkConstants.ServerUrl)) {
-                    logService.Log($"Server running on {NetworkConstants.ServerUrl}");
+                    logService.Log($"Server running on {NetworkConstants.ServerUrl}", type: LogType.Initialization);
                     
                     SetupStorages();
 
                     if (configurator.Config.AutoStart) {
-                        logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.Config.ServerId}");
+                        logService.Log($"Server is configured to auto start and it will start with ServerId from config file: {configurator.Config.ServerId}", type: LogType.Initialization);
                         serverStatus = GameServerStatus.ReadyToStart;
                     }
                     else {
                         serverStatus = GameServerStatus.WaitingForStartRequest;
-                        logService.Log($"Server is not configured to auto start. Waiting for the StartGameServer request");
+                        logService.Log($"Server is not configured to auto start. Waiting for the StartGameServer request", type: LogType.Initialization);
                         await WaitForStartRequest();
                     }
 
@@ -76,10 +79,12 @@ namespace SevenWorlds.GameServer.Server
 
         private void SetupStorages()
         {
-            logService.Log("Setting up skill factory");
+            logService.Log("Setting up Skill factory", type: LogType.Initialization);
             skillFactory.SetupStorage();
-            logService.Log("Setting up monster factory");
+            logService.Log("Setting up Monster factory", type: LogType.Initialization);
             monsterDataFactory.SetupStorage();
+            logService.Log("Setting up Equipment factory", type: LogType.Initialization);
+            equipmentFactory.SetupStorage();
         }
 
         private async Task StartGameServer(string serverId)
@@ -88,7 +93,7 @@ namespace SevenWorlds.GameServer.Server
 
                 try {
                     if (serverId.Equals(string.Empty)) {
-                        logService.Log("ServerId is empty - using default server id: fake_server");
+                        logService.Log("ServerId is empty - using default server id: fake_server", type: LogType.Initialization);
                         serverId = "fake_server";
                     }
 
@@ -98,7 +103,7 @@ namespace SevenWorlds.GameServer.Server
                 }
                 catch (AggregateException agg) {
 
-                    logService.Log("Error on initialization. Server is now faulted");
+                    logService.Log("Error on initialization. Server is now faulted", type: LogType.Initialization, level: LogLevel.Error);
 
                     foreach (Exception e in agg.InnerExceptions) {
                         logService.Log(e.Message);
@@ -108,9 +113,9 @@ namespace SevenWorlds.GameServer.Server
                     await Task.Delay(Timeout.Infinite);
                 }
 
-                logService.Log("----------------------------");
-                logService.Log("------- SERVER_START -------");
-                logService.Log("----------------------------");
+                logService.Log("----------------------------", type: LogType.Initialization);
+                logService.Log("------- SERVER_START -------", type: LogType.Initialization);
+                logService.Log("----------------------------", type: LogType.Initialization);
                 serverStatus = GameServerStatus.Started;
                 gameLoopSimulator.StartSimulation();
             }
@@ -118,14 +123,14 @@ namespace SevenWorlds.GameServer.Server
 
         private async Task InitializeGameServer(string serverId)
         {
-            logService.Log($"Starting game server with serverId: {serverId}");
+            logService.Log($"Starting game server with serverId: {serverId}", type: LogType.Initialization);
             await gameFactory.SetupGameServer(serverId);
             gameFactory.DumpMasterData();
         }
 
         private async Task WaitForStartRequest()
         {
-            logService.Log("Waiting for Start Request");
+            logService.Log("Waiting for Start Request", type: LogType.Initialization);
             while (serverStatus != GameServerStatus.ReadyToStart) {
                 await Task.Delay(1000);
             }
@@ -133,7 +138,7 @@ namespace SevenWorlds.GameServer.Server
 
         public void StartServerRequest(string serverId)
         {
-            logService.Log("Setting server status to Ready to start");
+            logService.Log("Setting server status to Ready to start", type: LogType.Initialization);
             configurator.Config.ServerId = serverId;
             serverStatus = GameServerStatus.ReadyToStart;
         }
