@@ -1,0 +1,14 @@
+{
+    "Warrior":[
+        {
+            "Type": "AttackUp",
+            "Value": "10",
+            "Cost": 1
+        },
+        {
+            "Type": "DefenseUp",
+            "Value": "5",
+            "Cost": 2
+        }
+    ]
+}

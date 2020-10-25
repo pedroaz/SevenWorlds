@@ -16,5 +16,6 @@ namespace SevenWorlds.GameServer.Utils.Config
         public string MonsterStoragePath { get; set; }
         public string SkillStoragePath { get; set; }
         public string EquipmentsStoragePath { get; set; }
+        public string TalentsStoragePath { get; set; }
     }
 }

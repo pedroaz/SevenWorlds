@@ -16,6 +16,7 @@ using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Simulation;
+using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
 using SevenWorlds.GameServer.Hubs;
@@ -113,6 +114,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<MonsterAIService>().As<IMonsterAIService>().SingleInstance();
             builder.RegisterType<SkillSimulator>().As<ISkillSimulator>().SingleInstance();
             builder.RegisterType<EquipmentFactory>().As<IEquipmentFactory>().SingleInstance();
+            builder.RegisterType<TalentFactory>().As<ITalentFactory>().SingleInstance();
 
 
             container = builder.Build();

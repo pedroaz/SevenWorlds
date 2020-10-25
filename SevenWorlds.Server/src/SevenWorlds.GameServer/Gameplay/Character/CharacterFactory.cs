@@ -58,16 +58,20 @@ namespace SevenWorlds.Shared.Data.Factories
             
         }
 
-        public void RefreshCharacter(CharacterData data)
+        public void RefreshCharacter(CharacterData characterData)
         {
             // Refresh initial combat data
-            data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
-                data.Skills
+            characterData.CombatData = new CombatData(characterData.Id, skillFactory.GetListOfSkillDatas(
+                characterData.Skills
             ));
 
-            data.CombatData.AddEquipData(data.Equipments);
+            characterData.CombatData.AddEquipData(characterData.Equipments);
 
-            
+            foreach (var talent in characterData.TalentBundle.AvailableTalents) {
+                if (talent.IsEnabled) {
+                    talent.ApplyTalent(characterData);
+                }
+            }
         }
     }
 }

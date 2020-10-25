@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
+using SevenWorlds.Shared.Data.Gameplay.Talent;
 using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
@@ -37,6 +38,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         public List<SkillType> Skills;
         public EquipmentData Equipments;
+        public TalentBundle TalentBundle;
 
         // Resources
         public WorldResourcesData Resources;
@@ -46,6 +48,5 @@ namespace SevenWorlds.Shared.Data.Gameplay
             PlayerName = playerName;
             Type = type;
         }
-
     }
 }

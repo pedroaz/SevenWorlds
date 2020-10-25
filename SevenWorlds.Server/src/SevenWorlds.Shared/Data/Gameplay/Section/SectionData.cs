@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    public enum SectionType
+    {
+        MonsterCamp,
+        Shop,
+        ProductionCamp
+    }
+
     [System.Serializable]
     public class SectionData : NetworkData
     {
-        public enum SectionType
-        {
-            MonsterCamp,
-            Shop,
-            ProductionCamp
-        }
-
         public string Name;
         public string Type;
         public string AreaId;

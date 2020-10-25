@@ -57,6 +57,8 @@
     <Compile Include="Data\Gameplay\PlayerActions\SelectSkillActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\StartBattleActionData.cs" />
     <Compile Include="Data\Gameplay\Skills\SkillData.cs" />
+    <Compile Include="Data\Gameplay\Talent\TalentBundle.cs" />
+    <Compile Include="Data\Gameplay\Talent\TalentData.cs" />
     <Compile Include="Data\Gameplay\Universe\AreaData.cs" />
     <Compile Include="Data\Gameplay\Character\CharacterData.cs" />
     <Compile Include="Data\Gameplay\Character\CombatData.cs" />

@@ -2,6 +2,7 @@
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.Simulation;
+using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
@@ -29,6 +30,7 @@ namespace SevenWorlds.GameServer.Server
         private readonly IMonsterDataFactory monsterDataFactory;
         private readonly ISkillFactory skillFactory;
         private readonly IEquipmentFactory equipmentFactory;
+        private readonly ITalentFactory talentFactory;
 
         private ILogService logService { get; }
         private IGameFactory gameFactory { get; }
@@ -37,7 +39,7 @@ namespace SevenWorlds.GameServer.Server
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
             IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
-            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory)
+            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
@@ -45,6 +47,7 @@ namespace SevenWorlds.GameServer.Server
             this.monsterDataFactory = monsterDataFactory;
             this.skillFactory = skillFactory;
             this.equipmentFactory = equipmentFactory;
+            this.talentFactory = talentFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
@@ -85,6 +88,10 @@ namespace SevenWorlds.GameServer.Server
             monsterDataFactory.SetupStorage();
             logService.Log("Setting up Equipment factory", type: LogType.Initialization);
             equipmentFactory.SetupStorage();
+            logService.Log("Setting up Talent factory", type: LogType.Initialization);
+            talentFactory.SetupStorage();
+
+
         }
 
         private async Task StartGameServer(string serverId)

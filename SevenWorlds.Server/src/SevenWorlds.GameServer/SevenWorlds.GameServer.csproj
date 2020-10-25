@@ -214,6 +214,8 @@
     <Compile Include="Gameplay\Section\SectionCollection.cs" />
     <Compile Include="Gameplay\Loop\GameLoopSimulator.cs" />
     <Compile Include="Gameplay\Loop\IGameLoopSimulator.cs" />
+    <Compile Include="Gameplay\Talent\ITalentFactory.cs" />
+    <Compile Include="Gameplay\Talent\TalentFactory.cs" />
     <Compile Include="Server\IGameFactory.cs" />
     <Compile Include="Server\GameFactory.cs" />
     <Compile Include="Gameplay\Universe\IUniverseCollection.cs" />
