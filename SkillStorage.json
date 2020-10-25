@@ -1,9 +1,19 @@
 {
     "WeaponAttack": {
-        "SkillType": "WeaponAttack",
+        "Type": "WeaponAttack",
+        "TargetType": "Single",
         "Description": "A Simple Attak",
-        "Formula": "Attack",
+        "DamageDescription": "[Attack]",
         "ResourcesCost":{
         }
-    } 
+    },
+    "GoldStrike": {
+        "Type": "GoldStrike",
+        "TargetType": "Single",
+        "Description": "Attack using gold.",
+        "DamageDescription": "[Attack] + [10]",
+        "ResourcesCost":{
+            "Gold": 1
+        }
+    }
 }

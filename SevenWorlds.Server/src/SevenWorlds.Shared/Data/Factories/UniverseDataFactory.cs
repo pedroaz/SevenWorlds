@@ -38,7 +38,7 @@ namespace SevenWorlds.Shared.Data.Factory
             return data;
         }
 
-        public ProductionCampData CreateNewProductionCamp(CharacterResourceType resourceType)
+        public ProductionCampData CreateNewProductionCamp(WorldResourceType resourceType)
         {
             var data = new ProductionCampData(resourceType);
             SetDefaultValues(data);

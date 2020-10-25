@@ -183,6 +183,8 @@
     <Compile Include="Gameplay\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Battle\AI\IMonsterAIService.cs" />
     <Compile Include="Gameplay\Battle\AI\MonsterAIService.cs" />
+    <Compile Include="Gameplay\Battle\Executor\ISkillSimulator.cs" />
+    <Compile Include="Gameplay\Battle\Executor\SkillSimulator.cs" />
     <Compile Include="Gameplay\Battle\Factories\BattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\IBattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\ISkillFactory.cs" />

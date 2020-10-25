@@ -9,21 +9,27 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
     public enum SkillType
     {
         WeaponAttack,
-        DoubleAttack,
-        TrippleAttack
+        GoldStrike,
+    }
+
+    public enum SkillTargetType
+    {
+        Self,
+        Single,
+        AllEnemies,
+        AllAllys,
+        Random
     }
 
     public class SkillData
     {
-        public string SkillType;
+        // Description
+        public SkillType Type;
+        public SkillTargetType TargetType;
         public string Description;
-        public string Formula;
-        public Dictionary<CharacterResourceType, int> ResourcesCost;
+        public string DamageDescription;
 
-        public bool IsOfType(SkillType type)
-        {
-            return type.ToString().Equals(SkillType);
-        }
-
+        // Resources
+        public Dictionary<WorldResourceType, int> ResourcesCost;
     }
 }

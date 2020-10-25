@@ -9,9 +9,9 @@ namespace SevenWorlds.Shared.Data.Gameplay.Section
     [System.Serializable]
     public class ProductionCampData : SectionData
     {
-        public CharacterResourceType Resource;
+        public WorldResourceType Resource;
 
-        public ProductionCampData(CharacterResourceType resourceType)
+        public ProductionCampData(WorldResourceType resourceType)
         {
             Resource = resourceType;
             Type = SectionType.ProductionCamp.ToString();

@@ -12,9 +12,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public int CurrentHp { get; set; }
 
         public string UnitId { get; set; }
-        public string TargetId { get; set; }
+        public List<string> TargetIds { get; set; }
 
-        public SkillType SelectedSkill { get; set; }
+        public SkillData SelectedSkill { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Speed { get; set; }
@@ -32,32 +32,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
         {
             UnitId = unitId;
             Skills = skills;
-            SelectedSkill = SkillType.WeaponAttack;
             Attack = 1;
             IsAlive = true;
-        }
-
-        public int GetCurrentSkillDamage(CombatData targetCombatData)
-        {
-            SkillData skill = Skills.Find(x => x.IsOfType(SelectedSkill));
-
-            StringBuilder sb = new StringBuilder(skill.Formula);
-
-            sb.Replace("Attack", Attack.ToString());
-            sb.Replace("Fire", Fire.ToString());
-            sb.Replace("Water", Water.ToString());
-            sb.Replace("Earth", Earth.ToString());
-            sb.Replace("Air", Air.ToString());
-
-            var result = (int)new DataTable().Compute(sb.ToString(), "");
-
-            return result;
-        }
-
-        public void Fight(CombatData target)
-        {
-            var damage = GetCurrentSkillDamage(target);
-            target.CurrentHp -= damage;
+            TargetIds = new List<string>();
         }
     }
 }

@@ -164,8 +164,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
         private List<CharacterData> CreateFakeCharacters(WorldData world)
         {
             return new List<CharacterData>(){
-                characterFactory.NewCharacter("Pedro", world.Id),
-                characterFactory.NewCharacter("Carol", world.Id)
+                characterFactory.NewCharacter("Pedro", world.Id, CharacterType.ElementalWarrior),
+                characterFactory.NewCharacter("Carol", world.Id, CharacterType.Hunter)
             };
         }
 
@@ -175,7 +175,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
 
             bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.Poring));
             bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.PecoPeco));
-            bundle.ProductionCamps.Add(universeDataFactory.CreateNewProductionCamp(CharacterResourceType.Wood));
+            bundle.ProductionCamps.Add(universeDataFactory.CreateNewProductionCamp(WorldResourceType.Wood));
 
             return bundle;
         }

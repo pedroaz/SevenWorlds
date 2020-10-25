@@ -26,7 +26,8 @@ namespace SevenWorlds.GameServer.Utils.Log
     public enum LogType
     {
         None,
-        Initialization
+        Initialization, 
+        Battle
     }
 
     public class LogService : ILogService

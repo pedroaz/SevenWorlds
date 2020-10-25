@@ -23,32 +23,44 @@ namespace SevenWorlds.Shared.Data.Factories
             this.skillFactory = skillFactory;
         }
 
-        public CharacterData NewCharacter(string playerName, string worldId)
+        public CharacterData NewCharacter(string playerName, string worldId, CharacterType characterType)
         {
             logService.Log($"Creating new character for: {playerName} on world: {worldId}");
 
-            var data = new CharacterData(playerName);
-            data.Id = GetGUID();
-            data.WorldId = worldId;
-            data.Level = 1;
+            // General
+            var characterData = new CharacterData(playerName, characterType);
+            characterData.Id = GetGUID();
+            characterData.WorldId = worldId;
+            characterData.Level = 1;
+            SetDefaultValues(characterData);
 
-            List<SkillType> initialSkills = new List<SkillType>() {
-                SkillType.WeaponAttack
-            };
 
-            data.Skills = initialSkills;
-            data.CombatData = new CombatData(data.Id, skillFactory.GetListOfSkillDatas(
+            // Skills
+            List<SkillType> initialSkills = GetInitialMethods(characterType);
+            characterData.Skills = initialSkills;
+            characterData.CombatData = new CombatData(characterData.Id, skillFactory.GetListOfSkillDatas(
                 initialSkills
             ));
-            data.Resources = new CharacterResourcesData(){ 
-                Resources = new Dictionary<string, int>() {
-                    { CharacterResourceType.Gold.ToString(), 0 },
-                    { CharacterResourceType.Rock.ToString(), 0 },
-                    { CharacterResourceType.Wood.ToString(), 0 },
-                }
+
+            // Resources
+            characterData.Resources = new WorldResourcesData() {
+                Resources = new Dictionary<WorldResourceType, int>()
             };
-            SetDefaultValues(data);
-            return data;
+
+
+
+            return characterData;
+        }
+
+        private static List<SkillType> GetInitialMethods(CharacterType type)
+        {
+            switch (type) {
+                default:
+                    return new List<SkillType>() {
+                        SkillType.WeaponAttack
+                    };
+            }
+            
         }
 
         public void RefreshCharacter(CharacterData data)

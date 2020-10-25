@@ -65,7 +65,7 @@
     <Compile Include="Data\Gameplay\Monster\MonsterData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\Universe\PlayerData.cs" />
-    <Compile Include="Data\Gameplay\Character\CharacterResourcesData.cs" />
+    <Compile Include="Data\Gameplay\Character\WorldResourcesData.cs" />
     <Compile Include="Data\Gameplay\Section\ArmoryData.cs" />
     <Compile Include="Data\Gameplay\Section\MonsterCampData.cs" />
     <Compile Include="Data\Gameplay\Section\ProductionCampData.cs" />
