@@ -17,6 +17,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public EquipmentType Type;
         public int MaxHp;
+        public int BaseCD;
 
         public int Attack;
         public int Defense;

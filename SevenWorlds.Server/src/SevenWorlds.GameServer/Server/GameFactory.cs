@@ -187,6 +187,13 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             for (int x = 0; x < 10; x++) {
                 for (int y = 0; y < 10; y++) {
 
+                    var areaType = AreaType.Battleground;
+
+                    if (x == 0 && y == 0) {
+                        areaType = AreaType.City;
+                    }
+                    
+
                     areas.Add(
                         universeDataFactory.CreateNewArea(
                             $"Area ({x},{y})",
@@ -194,7 +201,8 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                                 X = x,
                                 Y = y
                             },
-                            world.Id
+                            world.Id,
+                            areaType
                         )
                     );
                 }

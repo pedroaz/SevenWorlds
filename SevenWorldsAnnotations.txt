@@ -1,6 +1,4 @@
-Skills / Orbs
-	Have max amount of charges
-	Can be recharged on fire camps
-	Cost resources to recharge
-	Are way powerfull than normal attacks
-	
+Refresh character when loading
+
+
+Create equips, skills, talents, characterTypes, monsters

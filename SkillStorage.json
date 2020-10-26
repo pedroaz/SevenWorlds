@@ -2,6 +2,7 @@
     "WeaponAttack": {
         "Type": "WeaponAttack",
         "TargetType": "Single",
+        "BaseCD": 3,
         "Description": "A Simple Attak",
         "DamageDescription": "[Attack]",
         "ResourcesCost":{
@@ -10,6 +11,7 @@
     "GoldStrike": {
         "Type": "GoldStrike",
         "TargetType": "Single",
+        "BaseCD": 3,
         "Description": "Attack using gold.",
         "DamageDescription": "[Attack] + [10]",
         "ResourcesCost":{

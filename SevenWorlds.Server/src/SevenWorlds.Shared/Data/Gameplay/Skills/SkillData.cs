@@ -28,6 +28,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
         public SkillTargetType TargetType;
         public string Description;
         public string DamageDescription;
+        public int BaseCD;
 
         // Resources
         public Dictionary<WorldResourceType, int> ResourcesCost;
