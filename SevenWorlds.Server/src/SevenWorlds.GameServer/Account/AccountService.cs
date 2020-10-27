@@ -21,6 +21,9 @@ namespace SevenWorlds.GameServer.Account
         public async Task<bool> CheckLoginCredentials(string username, string password)
         {
             var account = await databaseService.GetAccountModel(username);
+            if(account == null) {
+                return false;
+            }
             return account.Password == password;
         }
 

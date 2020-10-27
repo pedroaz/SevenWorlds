@@ -4,6 +4,7 @@ using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
+using SevenWorlds.Shared.Data.Gameplay.Talent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,8 @@ namespace SevenWorlds.Shared.Data.Factories
             // Resources
             characterData.Resources = new WorldResourcesData();
 
+            characterData.TalentBundle = new TalentBundle();
+
             // Refresh
             RefreshCharacter(characterData);
 
@@ -67,7 +70,7 @@ namespace SevenWorlds.Shared.Data.Factories
 
             characterData.CombatData.AddEquipData(characterData.Equipments);
 
-            foreach (var talent in characterData.TalentBundle.AvailableTalents) {
+            foreach (var talent in characterData?.TalentBundle?.AvailableTalents) {
                 if (talent.IsEnabled) {
                     talent.ApplyTalent(characterData);
                 }

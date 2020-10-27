@@ -12,6 +12,10 @@ public enum ScreenId
     Register,
     SelectCharacter,
     CreateCharacter,
+    SpiritShop,
+    Quests,
+    SpiritActionHouse,
+    Raids
 }
 
 public class GameScreen : MonoBehaviour

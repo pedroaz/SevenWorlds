@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Database.CollectionsSchemas;
+using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
@@ -118,6 +119,11 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                 await databaseService.InsertAccount(account);
             }
 
+            logService.Log("Updating Players");
+            foreach (var player in GenerateFakePlayers()) {
+                await databaseService.InsertPlayer(player);
+            }
+
             logService.Log("Updating Characters - All into world 1");
             foreach (var character in CreateFakeCharacters(masterData.Worlds[0])) {
                 await databaseService.InsertCharacter(character.PlayerName, character);
@@ -140,6 +146,17 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     Username = "2",
                     Password = "2",
                 },
+            };
+        }
+
+        private List<PlayerModel> GenerateFakePlayers()
+        {
+            return new List<PlayerModel>() {
+                new PlayerModel() {
+                    PlayerName = "Pedro",
+                    Data = new PlayerData("Pedro") {
+                    }
+                }
             };
         }
 

@@ -132,8 +132,8 @@ namespace SevenWorlds.ConsoleClient.App
 
         private static async Task Login1()
         {
-            var username = "pedroaz";
-            var password = "pedroaz123";
+            var username = "1";
+            var password = "1";
 
             print($"Login with {username} and {password}");
             var response = await client.Login(new LoginData(username, password));

@@ -52,14 +52,12 @@ namespace SevenWorlds.GameServer.Account
                 };
             }
 
-            // Create player data object
-            PlayerData playerData = new PlayerData(){ 
-                Id = Guid.NewGuid().ToString(),
-                ConnectionId = connectionId,
-                PlayerName = await accountService.GetPlayerName(data.Username),
-                CharacterIds = null,
-                RelicIds = null
-            };
+            
+            var playerName = await accountService.GetPlayerName(data.Username);
+            var playerData = await databaseService.GetPlayerData(playerName);
+            playerData.ConnectionId = connectionId;
+
+
             // Add that object to the game
             gameStateService.AddPlayerToGame(playerData);
             var model = await databaseService.GetAllCharactersFromPlayer(playerData.PlayerName);

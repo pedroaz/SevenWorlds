@@ -11,5 +11,10 @@ namespace SevenWorlds.Shared.Data.Gameplay.Talent
         public int MaxTalentPoints;
 
         public List<TalentData> AvailableTalents;
+
+        public TalentBundle()
+        {
+            AvailableTalents = new List<TalentData>();
+        }
     }
 }

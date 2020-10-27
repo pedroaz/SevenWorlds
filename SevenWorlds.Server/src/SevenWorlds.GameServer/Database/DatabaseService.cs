@@ -17,10 +17,12 @@ namespace SevenWorlds.GameServer.Database
         private IMongoCollection<AccountModel> accountsCollection;
         private IMongoCollection<MasterDataModel> masterDataCollection;
         private IMongoCollection<CharacterModel> charactersCollection;
+        private IMongoCollection<PlayerModel> playersCollection;
 
         private const string accountsDbName = "Accounts";
         private const string masterDataDbName = "MasterDatas";
-        private const string charactersDataDbName = "Characters";
+        private const string charactersDbName = "Characters";
+        private const string playersDbName = "Players";
 
 
         public DatabaseService(IConfigurator configurator, ILogService logService)
@@ -31,7 +33,8 @@ namespace SevenWorlds.GameServer.Database
 
             accountsCollection = database.GetCollection<AccountModel>(accountsDbName);
             masterDataCollection = database.GetCollection<MasterDataModel>(masterDataDbName);
-            charactersCollection = database.GetCollection<CharacterModel>(charactersDataDbName);
+            charactersCollection = database.GetCollection<CharacterModel>(charactersDbName);
+            playersCollection = database.GetCollection<PlayerModel>(playersDbName);
         }
 
         public async Task DeleteAll()
@@ -39,6 +42,7 @@ namespace SevenWorlds.GameServer.Database
             await accountsCollection.DeleteManyAsync("{}");
             await masterDataCollection.DeleteManyAsync("{}");
             await charactersCollection.DeleteManyAsync("{}");
+            await playersCollection.DeleteManyAsync("{}");
         }
 
         public async Task<AccountModel> GetAccountModelByPlayerName(string playerName)
@@ -87,7 +91,7 @@ namespace SevenWorlds.GameServer.Database
             logService.Log($"Inserting character into the database for player: {playerName}");
             var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
             // Adding first character
-            if(model == null) {
+            if (model == null) {
                 model = new CharacterModel() {
                     PlayerName = playerName,
                     Characters = new List<CharacterData>() {
@@ -103,12 +107,23 @@ namespace SevenWorlds.GameServer.Database
             }
         }
 
+        public async Task InsertPlayer(PlayerModel model)
+        {
+            await playersCollection.InsertOneAsync(model);
+        }
+
         public async Task<CharacterModel> GetAllCharactersFromPlayer(string playerName)
         {
             logService.Log($"Getting all character for player: {playerName}");
             var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
             logService.Log($"Found {model.Characters.Count} characters");
             return model;
+        }
+
+        public async Task<PlayerData> GetPlayerData(string playerName)
+        {
+            var model = await playersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
+            return model.Data;
         }
     }
 }

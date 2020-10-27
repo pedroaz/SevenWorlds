@@ -17,6 +17,10 @@ namespace SevenWorlds.GameServer.Database
         Task<bool> PlayerNameExists(string playerName);
         Task InsertAccount(AccountModel model);
 
+        // Player
+        Task<PlayerData> GetPlayerData(string playerName);
+        Task InsertPlayer(PlayerModel model);
+
         // Characters
         Task<CharacterModel> GetAllCharactersFromPlayer(string playerName);
         Task InsertCharacter(string playerName, CharacterData data);
