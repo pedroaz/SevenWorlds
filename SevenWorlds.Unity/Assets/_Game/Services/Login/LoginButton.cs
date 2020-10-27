@@ -10,8 +10,7 @@ public class LoginButton : GameButton
             await LoginService.Object.ProcessLoginResponse(response);
         }
         catch (System.Exception e) {
-            LOG.Error($"Error on {this.GetType()}");
-            LOG.Error(e.Message);
+            LOG.Log(e);
         }
     }
 

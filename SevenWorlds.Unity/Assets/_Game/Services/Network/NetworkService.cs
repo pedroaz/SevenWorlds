@@ -34,8 +34,7 @@ public class NetworkService : GameService<NetworkService>
         }
         catch (Exception e) {
 
-            LOG.Log("Wasn't able to connect to server because: ");
-            LOG.Log(e.Message);
+            LOG.Log($"Wasn't able to connect to server. Will try again - {e.Message}", LogLevel.Warning);
             return false;
         }
         

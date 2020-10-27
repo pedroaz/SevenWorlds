@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ScreenSwitchButton : GameButton
+public class ScreenChangerButton : GameButton
 {
     public ScreenId screenId;
 

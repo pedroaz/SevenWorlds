@@ -15,6 +15,10 @@ public class GameInitializer : MonoBehaviour
         foreach (var item in Resources.FindObjectsOfTypeAll<SetupMonoBehaviour>()) {
             item.Setup();
         }
+        
+        
+        UserInputService.Object.ShouldHandleUserInputs = true;
+        SoundService.Object.PlaySong(SongId.Opening);
 
         await ConnectToServer();
     }

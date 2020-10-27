@@ -14,19 +14,15 @@ public class ScreenChangerService : GameService<ScreenChangerService>
     {
         Object = this;
         screens = FindObjectsOfType<GameScreen>().ToList();
-        currentScreen = screens.Find(x => x.Id == ScreenId.Black);
-        foreach (var screen in screens) {
-            screen.Hide();
-        }
+        currentScreen = screens.Find(x => x.Id == ScreenId.Loading);
     }
-
 
     public async Task ChangeScreen(ScreenId id)
     {
         LOG.Log($"Chaning screen to: {id}");
 
         switch (id) {
-            case ScreenId.Black:
+            case ScreenId.Loading:
                 break;
             case ScreenId.Chat:
                 break;

@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum ScreenId
 {
-    Black,
+    Loading,
     Chat,
     Login,
     Universe,
@@ -15,14 +16,14 @@ public enum ScreenId
     SpiritShop,
     Quests,
     SpiritActionHouse,
-    Raids
+    Raids,
+    PlayerInfo
 }
 
 public class GameScreen : MonoBehaviour
 {
     public ScreenId Id;
-    [HideInInspector]
-    public GameObject contianer;
+    private GameObject contianer;
 
     private void Awake()
     {
@@ -36,6 +37,9 @@ public class GameScreen : MonoBehaviour
 
     public void Hide()
     {
+        if(contianer == null) {
+            LOG.Log($"{Id.ToString()} screen does not have a container!");
+        }
         contianer.SetActive(false);
     }
 }

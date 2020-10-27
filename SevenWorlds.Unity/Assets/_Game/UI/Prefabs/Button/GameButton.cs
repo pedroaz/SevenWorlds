@@ -7,8 +7,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ButtonSound
+{
+    None,
+    Default
+}
+
 public class GameButton : SetupMonoBehaviour
 {
+    public ButtonSound buttonSound;
     private Button button;
 
     private void Awake()
@@ -18,6 +25,11 @@ public class GameButton : SetupMonoBehaviour
         button.onClick.AddListener(() => {
 
             LOG.Log($"[CLICK] - {this.GetType()}");
+            switch (buttonSound) {
+                case ButtonSound.Default:
+                    SoundService.Object.PlaySound(SfxId.BUTTON_CLICK_1);
+                    break;
+            }
             _ = OnClick();
 
         });
