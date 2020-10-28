@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.UnityLog;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class GameInitializer : MonoBehaviour
 
     async void Start()
     {
+
+        ScreenChangerService.Object.HideAll();
         await ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
 
 
@@ -20,7 +23,12 @@ public class GameInitializer : MonoBehaviour
         UserInputService.Object.ShouldHandleUserInputs = true;
         SoundService.Object.PlaySong(SongId.Opening);
 
-        await ConnectToServer();
+        try {
+            await ConnectToServer();
+        }
+        catch (Exception e) {
+            LOG.Log(e);
+        }
     }
 
     private async Task ConnectToServer()

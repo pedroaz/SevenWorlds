@@ -36,6 +36,11 @@ public class GameButton : SetupMonoBehaviour
         Setup();
     }
 
+    public void SetInteractable(bool value)
+    {
+        button.interactable = value;
+    }
+
     public virtual async Task OnClick()
     {
         await new Task(() => { });

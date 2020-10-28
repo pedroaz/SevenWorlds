@@ -17,6 +17,13 @@ public class ScreenChangerService : GameService<ScreenChangerService>
         currentScreen = screens.Find(x => x.Id == ScreenId.Loading);
     }
 
+    public void HideAll()
+    {
+        foreach (var screen in screens) {
+            screen.Hide();
+        }
+    }
+
     public async Task ChangeScreen(ScreenId id)
     {
         LOG.Log($"Chaning screen to: {id}");
