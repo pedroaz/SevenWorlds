@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Database.CollectionsSchemas;
+using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.Shared.Data.Gameplay;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,11 @@ namespace SevenWorlds.GameServer.Account
                 PlayerName = playerName,
                 Username = username,
                 Password = password
+            });
+
+            await databaseService.InsertPlayer(new PlayerModel() {
+                PlayerName = playerName,
+                Data = new PlayerData(playerName)
             });
         }
 

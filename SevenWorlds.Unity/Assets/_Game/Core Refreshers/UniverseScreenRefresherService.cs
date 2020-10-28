@@ -22,9 +22,6 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
         var worlds = GameState.Object.Worlds;
 
         for (int i = 0; i < 7; i++) {
-
-
-
             var btn = buttons.Find(x => x.WorldIndex == i);
             var worldData = worlds?.Find(x => x.WorldIndex == i);
             var characterData = characters.Find(x => x.WorldId == worldData.Id);

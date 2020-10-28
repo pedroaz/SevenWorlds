@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Battle.Factories;
+﻿using SevenWorlds.GameServer.Database;
+using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Factory;
@@ -17,11 +18,13 @@ namespace SevenWorlds.Shared.Data.Factories
     {
         private readonly ILogService logService;
         private readonly ISkillFactory skillFactory;
+        private readonly IDatabaseService databaseService;
 
-        public CharacterFactory(ILogService logService, ISkillFactory skillFactory)
+        public CharacterFactory(ILogService logService, ISkillFactory skillFactory, IDatabaseService databaseService)
         {
             this.logService = logService;
             this.skillFactory = skillFactory;
+            this.databaseService = databaseService;
         }
 
         public CharacterData NewCharacter(string playerName, string worldId, CharacterType characterType)
@@ -46,6 +49,8 @@ namespace SevenWorlds.Shared.Data.Factories
 
             // Refresh
             RefreshCharacter(characterData);
+
+            databaseService.InsertCharacter(playerName, characterData);
 
             return characterData;
         }

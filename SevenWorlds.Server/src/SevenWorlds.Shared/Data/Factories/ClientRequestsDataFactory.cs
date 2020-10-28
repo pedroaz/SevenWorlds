@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.Shared.Data.Base;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Gameplay.PlayerActions;
 using System;
@@ -33,6 +34,12 @@ namespace SevenWorlds.Shared.Data.Factory
         {
             RegisterAccountData data = new RegisterAccountData(username, password, playerName);
             SetDefaultValues(data);
+            return data;
+        }
+
+        public CharacterData CreateNewCharacter(string playerName, CharacterType characterType)
+        {
+            CharacterData data = new CharacterData(playerName, characterType);
             return data;
         }
     }

@@ -13,6 +13,4 @@ public class LoginButton : GameButton
             LOG.Log(e);
         }
     }
-
-   
 }

@@ -60,8 +60,8 @@ namespace SevenWorlds.GameServer.Account
 
             // Add that object to the game
             gameStateService.AddPlayerToGame(playerData);
-            var model = await databaseService.GetAllCharactersFromPlayer(playerData.PlayerName);
-            foreach (var character in model.Characters) {
+            var characters = await databaseService.GetAllCharactersFromPlayer(playerData.PlayerName);
+            foreach (var character in characters) {
                 gameStateService.AddCharacterToGame(character);
             }
             characterPlacementService.PlaceAllPlayerCharactersIntoTheGame(playerData.PlayerName);

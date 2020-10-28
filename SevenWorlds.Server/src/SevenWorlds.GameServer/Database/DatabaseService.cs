@@ -76,7 +76,7 @@ namespace SevenWorlds.GameServer.Database
 
         public async Task<bool> UsernameExists(string username)
         {
-            var account = await accountsCollection.FindAsync(x => x.Username == username);
+            var account = await accountsCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
             return account != null;
         }
 
@@ -112,12 +112,16 @@ namespace SevenWorlds.GameServer.Database
             await playersCollection.InsertOneAsync(model);
         }
 
-        public async Task<CharacterModel> GetAllCharactersFromPlayer(string playerName)
+        public async Task<List<CharacterData>> GetAllCharactersFromPlayer(string playerName)
         {
             logService.Log($"Getting all character for player: {playerName}");
             var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
+            if(model == null || model.Characters == null) {
+                logService.Log($"Did not found any characters for player: {playerName}");
+                return new List<CharacterData>();
+            }
             logService.Log($"Found {model.Characters.Count} characters");
-            return model;
+            return model.Characters;
         }
 
         public async Task<PlayerData> GetPlayerData(string playerName)

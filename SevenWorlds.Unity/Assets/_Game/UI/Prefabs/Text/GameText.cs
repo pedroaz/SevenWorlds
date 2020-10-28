@@ -10,7 +10,8 @@ public enum GameTextId
     IsConnectedToServer,
     PlayerName,
     UniverseName,
-    WorldName
+    WorldName,
+    SelectedCharacterType
 }
 
 public class GameText : SetupMonoBehaviour

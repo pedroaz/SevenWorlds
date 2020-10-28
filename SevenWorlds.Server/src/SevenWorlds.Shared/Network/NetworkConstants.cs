@@ -18,7 +18,9 @@ namespace SevenWorlds.Shared.Network
         public const string Request_ResetUniverseFakeData = "ResetUniverseFakeData";
         // Account
         public const string Request_Login = "RequestLogin";
-        public const string Request_RequestRegisterAccount = "RequestRegisterAccount";
+        public const string Request_RegisterAccount = "RequestRegisterAccount";
+        public const string Request_CreateCharacter = "RequestCreateCharacter";
+        
         // Syncs
         public const string Request_UniverseSync = "RequestUniverseSync";
         public const string Request_AllWorlds = "RequestAllWorlds";

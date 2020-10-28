@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using SevenWorlds.GameServer.Account;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Server;
@@ -28,6 +29,7 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly IServerManager serverManager;
         private readonly ILoginService loginService;
         private readonly IAccountService accountService;
+        private readonly ICharacterFactory characterFactory;
 
         public MainHub(
             ILogService logService,
@@ -35,7 +37,8 @@ namespace SevenWorlds.GameServer.Hubs
             IPlayerActionCollection playerActionQueue,
             IServerManager serverManager,
             ILoginService loginService,
-            IAccountService accountService)
+            IAccountService accountService,
+            ICharacterFactory characterFactory)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
@@ -43,6 +46,7 @@ namespace SevenWorlds.GameServer.Hubs
             this.serverManager = serverManager;
             this.loginService = loginService;
             this.accountService = accountService;
+            this.characterFactory = characterFactory;
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -132,6 +136,13 @@ namespace SevenWorlds.GameServer.Hubs
                 logService.Log(e);
                 throw;
             }
+        }
+
+
+        public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType characterType)
+        {
+            characterFactory.NewCharacter(playerName, worldId, characterType);
+            return true;
         }
 
 
@@ -280,6 +291,8 @@ namespace SevenWorlds.GameServer.Hubs
                 throw;
             }
         }
+
+        
         #endregion
     }
 }

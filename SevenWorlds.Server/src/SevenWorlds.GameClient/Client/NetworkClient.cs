@@ -84,13 +84,19 @@ namespace SevenWorlds.GameClient.Client
 
         public async Task<RegisterAccountResponse> RequestRegister(RegisterAccountData data)
         {
-            return await hubProxy.Invoke<RegisterAccountResponse>(NetworkConstants.Request_RequestRegisterAccount, data);
+            return await hubProxy.Invoke<RegisterAccountResponse>(NetworkConstants.Request_RegisterAccount, data);
         }
 
         public async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
         {
             return await hubProxy.Invoke<List<CharacterData>>(NetworkConstants.Request_PlayerCharacters, playerName);
         }
+
+        public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
+        {
+            return await hubProxy.Invoke<bool>(NetworkConstants.Request_CreateCharacter, playerName, worldId, type);
+        }
+
 
         #endregion
 

@@ -22,7 +22,7 @@ public class RegistrationService : GameService<RegistrationService>
         var password = passwordInputField.GetValue();
         var playerName = playerNameInputField.GetValue();
 
-        LOG.Log($"Trying to login with: {username} | {password} | {playerName}");
+        LOG.Log($"Trying to register with: {username} | {password} | {playerName}");
 
         var res = await NetworkService.Object.Register(username, password, playerName);
 

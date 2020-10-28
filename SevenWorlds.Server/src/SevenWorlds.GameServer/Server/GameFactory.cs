@@ -113,21 +113,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             logService.Log("Updating Databases");
             logService.Log("Updating Master Data");
             await databaseService.InsertMasterData(masterData);
-
-            logService.Log("Updating Accounts");
-            foreach (var account in GenerateFakeAccounts()) {
-                await databaseService.InsertAccount(account);
-            }
-
-            logService.Log("Updating Players");
-            foreach (var player in GenerateFakePlayers()) {
-                await databaseService.InsertPlayer(player);
-            }
-
-            logService.Log("Updating Characters - All into world 1");
-            foreach (var character in CreateFakeCharacters(masterData.Worlds[0])) {
-                await databaseService.InsertCharacter(character.PlayerName, character);
-            }
+           
             logService.Log("Finish updating databases");
         }
 
@@ -177,14 +163,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             };
             return masterData;
         }
-
-        private List<CharacterData> CreateFakeCharacters(WorldData world)
-        {
-            return new List<CharacterData>(){
-                characterFactory.NewCharacter("Pedro", world.Id, CharacterType.ElementalWarrior),
-                characterFactory.NewCharacter("Carol", world.Id, CharacterType.Hunter)
-            };
-        }
+       
 
         private SectionBundle CreateFakeSectionBundle(AreaData areaData)
         {
