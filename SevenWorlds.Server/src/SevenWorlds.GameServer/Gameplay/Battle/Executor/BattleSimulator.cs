@@ -1,15 +1,11 @@
-﻿using MongoDB.Bson;
-using SevenWorlds.GameServer.Gameplay.Battle.AI;
-using SevenWorlds.GameServer.Gameplay.Battle.Executor;
+﻿using SevenWorlds.GameServer.Gameplay.Battle.AI;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factories;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Encounters;
-using System;
 using System.Collections.Generic;
 
-namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
+namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
 {
     public class BattleSimulator : IBattleSimulator
     {
@@ -18,7 +14,7 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
         private readonly ILogService logService;
         private readonly ISkillSimulator skillSimulator;
 
-        public BattleSimulator(IGameStateService gameStateService, IMonsterAIService monsterAIService, 
+        public BattleSimulator(IGameStateService gameStateService, IMonsterAIService monsterAIService,
             ILogService logService, ISkillSimulator skillSimulator)
         {
             this.gameStateService = gameStateService;
@@ -71,6 +67,6 @@ namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
             }
             return targets;
         }
-        
+
     }
 }

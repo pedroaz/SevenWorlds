@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.Shared.Data.Factories
+namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
 {
     public interface IMonsterDataFactory
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Encounter.Executor
+namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
 {
     public interface IBattleSimulator
     {

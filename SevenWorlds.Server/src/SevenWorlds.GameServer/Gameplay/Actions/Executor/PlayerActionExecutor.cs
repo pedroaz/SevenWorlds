@@ -2,17 +2,9 @@
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
-using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factories;
-using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
-using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
 {

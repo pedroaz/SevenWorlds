@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace SevenWorlds.GameServer.Database.CollectionsSchemas
+namespace SevenWorlds.GameServer.Database.Models
 {
     public class BaseModel
     {

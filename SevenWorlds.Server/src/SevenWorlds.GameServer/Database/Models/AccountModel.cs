@@ -1,4 +1,4 @@
-﻿namespace SevenWorlds.GameServer.Database.CollectionsSchemas
+﻿namespace SevenWorlds.GameServer.Database.Models
 {
     public class AccountModel : BaseModel
     {

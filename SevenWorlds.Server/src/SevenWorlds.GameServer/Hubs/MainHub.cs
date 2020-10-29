@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using SevenWorlds.GameServer.Account;
+using SevenWorlds.GameServer.Gameplay.Actions.Base;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
-using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
@@ -15,7 +15,6 @@ using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Hubs
@@ -60,7 +59,7 @@ namespace SevenWorlds.GameServer.Hubs
                 logService.Log(e);
                 throw;
             }
-            
+
         }
 
         #region Admin
@@ -75,7 +74,7 @@ namespace SevenWorlds.GameServer.Hubs
                 logService.Log(e);
                 throw;
             }
-            
+
         }
 
         public void AdminStopGameServer()
@@ -141,8 +140,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType characterType)
         {
-            characterFactory.NewCharacter(playerName, worldId, characterType);
-            return true;
+            return await characterFactory.NewCharacter(playerName, worldId, characterType);
         }
 
 
@@ -292,7 +290,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
-        
+
         #endregion
     }
 }

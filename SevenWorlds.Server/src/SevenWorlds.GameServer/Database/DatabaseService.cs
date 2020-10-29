@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
@@ -116,7 +115,7 @@ namespace SevenWorlds.GameServer.Database
         {
             logService.Log($"Getting all character for player: {playerName}");
             var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
-            if(model == null || model.Characters == null) {
+            if (model == null || model.Characters == null) {
                 logService.Log($"Did not found any characters for player: {playerName}");
                 return new List<CharacterData>();
             }

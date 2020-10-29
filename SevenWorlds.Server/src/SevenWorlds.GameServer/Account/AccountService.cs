@@ -1,11 +1,6 @@
 ﻿using SevenWorlds.GameServer.Database;
-using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.Shared.Data.Gameplay;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Account
@@ -22,7 +17,7 @@ namespace SevenWorlds.GameServer.Account
         public async Task<bool> CheckLoginCredentials(string username, string password)
         {
             var account = await databaseService.GetAccountModel(username);
-            if(account == null) {
+            if (account == null) {
                 return false;
             }
             return account.Password == password;

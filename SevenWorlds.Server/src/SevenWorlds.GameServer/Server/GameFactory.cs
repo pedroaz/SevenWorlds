@@ -1,22 +1,19 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
-using SevenWorlds.GameServer.Database.CollectionsSchemas;
 using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factories;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.Encounters;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Universe
+namespace SevenWorlds.GameServer.Server
 {
     public class GameFactory : IGameFactory
     {
@@ -113,7 +110,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             logService.Log("Updating Databases");
             logService.Log("Updating Master Data");
             await databaseService.InsertMasterData(masterData);
-           
+
             logService.Log("Finish updating databases");
         }
 
@@ -163,7 +160,7 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
             };
             return masterData;
         }
-       
+
 
         private SectionBundle CreateFakeSectionBundle(AreaData areaData)
         {
@@ -188,15 +185,12 @@ namespace SevenWorlds.GameServer.Gameplay.Universe
                     if (x == 0 && y == 0) {
                         areaType = AreaType.City;
                     }
-                    
+
 
                     areas.Add(
                         universeDataFactory.CreateNewArea(
                             $"Area ({x},{y})",
-                            new Position() {
-                                X = x,
-                                Y = y
-                            },
+                            new Position(x, y),
                             world.Id,
                             areaType
                         )

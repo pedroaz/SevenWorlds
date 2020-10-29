@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.Shared.Data.Factories
+namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public class CharacterFactory : DataFactory, ICharacterFactory
     {
@@ -27,7 +27,7 @@ namespace SevenWorlds.Shared.Data.Factories
             this.databaseService = databaseService;
         }
 
-        public CharacterData NewCharacter(string playerName, string worldId, CharacterType characterType)
+        public async Task<bool> NewCharacter(string playerName, string worldId, CharacterType characterType)
         {
             logService.Log($"Creating new character for: {playerName} on world: {worldId}");
 
@@ -50,9 +50,9 @@ namespace SevenWorlds.Shared.Data.Factories
             // Refresh
             RefreshCharacter(characterData);
 
-            databaseService.InsertCharacter(playerName, characterData);
+            await databaseService.InsertCharacter(playerName, characterData);
 
-            return characterData;
+            return true;
         }
 
         private static List<SkillType> GetInitialMethods(CharacterType type)

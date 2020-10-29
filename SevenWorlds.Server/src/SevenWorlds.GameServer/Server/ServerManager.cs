@@ -1,12 +1,10 @@
 ﻿using Microsoft.Owin.Hosting;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Equipment;
-using SevenWorlds.GameServer.Gameplay.Simulation;
+using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Talent;
-using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factories;
 using SevenWorlds.Shared.Network;
 using System;
 using System.Threading;
@@ -37,7 +35,7 @@ namespace SevenWorlds.GameServer.Server
         private IGameLoopSimulator gameLoopSimulator { get; }
         private volatile GameServerStatus serverStatus;
 
-        public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator, 
+        public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator,
             IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
             ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory)
         {
@@ -57,7 +55,7 @@ namespace SevenWorlds.GameServer.Server
                 logService.Log("Starting the Game Server", type: LogType.Initialization);
                 using (WebApp.Start(NetworkConstants.ServerUrl)) {
                     logService.Log($"Server running on {NetworkConstants.ServerUrl}", type: LogType.Initialization);
-                    
+
                     SetupStorages();
 
                     if (configurator.Config.AutoStart) {
@@ -152,7 +150,7 @@ namespace SevenWorlds.GameServer.Server
 
         public async Task ResetFakeData()
         {
-            
+
             await gameFactory.SetFakeData();
         }
     }

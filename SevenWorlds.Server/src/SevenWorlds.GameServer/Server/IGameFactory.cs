@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Universe
+namespace SevenWorlds.GameServer.Server
 {
     public interface IGameFactory
     {

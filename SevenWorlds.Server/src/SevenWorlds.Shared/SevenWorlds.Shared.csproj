@@ -63,13 +63,13 @@
     <Compile Include="Data\Gameplay\Talent\TalentData.cs" />
     <Compile Include="Data\Gameplay\Universe\AreaData.cs" />
     <Compile Include="Data\Gameplay\Character\CharacterData.cs" />
-    <Compile Include="Data\Gameplay\Character\CombatData.cs" />
+    <Compile Include="Data\Gameplay\Battle\CombatData.cs" />
     <Compile Include="Data\Gameplay\Battle\BattleData.cs" />
-    <Compile Include="Data\Gameplay\Character\EquipmentData.cs" />
+    <Compile Include="Data\Gameplay\Equipment\EquipmentData.cs" />
     <Compile Include="Data\Gameplay\Monster\MonsterData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
     <Compile Include="Data\Gameplay\Universe\PlayerData.cs" />
-    <Compile Include="Data\Gameplay\Character\WorldResourcesData.cs" />
+    <Compile Include="Data\Gameplay\WorldResource\WorldResourcesData.cs" />
     <Compile Include="Data\Gameplay\Section\ArmoryData.cs" />
     <Compile Include="Data\Gameplay\Section\MonsterCampData.cs" />
     <Compile Include="Data\Gameplay\Section\ProductionCampData.cs" />

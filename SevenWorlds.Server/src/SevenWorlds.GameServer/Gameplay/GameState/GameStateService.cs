@@ -1,7 +1,7 @@
-﻿using SevenWorlds.GameServer.Database;
+﻿using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Battle.Base;
 using SevenWorlds.GameServer.Gameplay.Character;
-using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
@@ -24,7 +24,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public ISectionCollection SectionCollection { get; }
         public IPlayerCollection PlayerCollection { get; }
         public ICharacterCollection CharacterCollection { get; }
-        public IBattleCollection BattleCollection { get;  }
+        public IBattleCollection BattleCollection { get; }
 
         public GameStateService(
             IUniverseCollection universeCollection,
@@ -46,7 +46,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             this.logService = logService;
         }
 
-        
+
 
         public void AddPlayerToGame(PlayerData playerData)
         {
@@ -72,7 +72,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
-                
+
             };
         }
 

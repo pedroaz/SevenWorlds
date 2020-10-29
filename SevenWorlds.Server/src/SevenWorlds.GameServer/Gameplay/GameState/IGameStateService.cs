@@ -1,7 +1,7 @@
-﻿using SevenWorlds.GameServer.Database;
+﻿using SevenWorlds.GameServer.Database.Models;
 using SevenWorlds.GameServer.Gameplay.Area;
+using SevenWorlds.GameServer.Gameplay.Battle.Base;
 using SevenWorlds.GameServer.Gameplay.Character;
-using SevenWorlds.GameServer.Gameplay.Encounter;
 using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;

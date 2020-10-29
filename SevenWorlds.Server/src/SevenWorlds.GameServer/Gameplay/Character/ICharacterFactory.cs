@@ -9,7 +9,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 {
     public interface ICharacterFactory
     {
-        CharacterData NewCharacter(string playerName, string worldId, CharacterType characterType);
+        Task<bool> NewCharacter(string playerName, string worldId, CharacterType characterType);
         void RefreshCharacter(CharacterData data);
     }
 }

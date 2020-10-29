@@ -1,11 +1,8 @@
-﻿using SevenWorlds.GameServer.Database.CollectionsSchemas;
-using SevenWorlds.GameServer.Gameplay.Encounter;
-using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.Encounters;
+﻿using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using System.Collections.Generic;
 
-namespace SevenWorlds.GameServer.Database
+namespace SevenWorlds.GameServer.Database.Models
 {
     public class MasterDataModel : BaseModel
     {

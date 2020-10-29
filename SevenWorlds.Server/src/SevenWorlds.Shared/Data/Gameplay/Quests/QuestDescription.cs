@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Quests
 {
@@ -13,13 +9,13 @@ namespace SevenWorlds.Shared.Data.Gameplay.Quests
         public Dictionary<WorldResourceType, int> ResourcesToCollect;
         public Dictionary<MonsterType, int> MonstersToKill;
 
-        private Dictionary<MonsterType, int> monstersKilled;
-        private Dictionary<WorldResourceType, int> resourcesCollected;
+        private Dictionary<MonsterType, int> monstersKilled = new Dictionary<MonsterType, int>();
+        private Dictionary<WorldResourceType, int> resourcesCollected = new Dictionary<WorldResourceType, int>();
 
         public List<CharacterType> CharacterTypeRewards;
         public int MoneyReward;
-        public List<string> SpiritRelicIdsReward;
-        public List<string> PhysicalRelicIdsReward;
+        public List<string> SpiritRelicIdsReward = new List<string>();
+        public List<string> PhysicalRelicIdsReward = new List<string>();
 
         public void Setup()
         {

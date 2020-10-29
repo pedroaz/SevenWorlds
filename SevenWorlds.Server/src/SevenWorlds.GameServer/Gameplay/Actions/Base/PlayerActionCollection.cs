@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWorlds.GameServer.Gameplay.Player
+namespace SevenWorlds.GameServer.Gameplay.Actions.Base
 {
     public class PlayerActionCollection : IPlayerActionCollection
     {

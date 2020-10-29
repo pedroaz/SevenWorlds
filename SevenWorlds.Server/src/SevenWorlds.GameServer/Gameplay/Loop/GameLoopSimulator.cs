@@ -1,17 +1,14 @@
-﻿using SevenWorlds.GameServer.Gameplay.Actions.Executor;
-using SevenWorlds.GameServer.Gameplay.Encounter.Executor;
+﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+using SevenWorlds.GameServer.Gameplay.Actions.Executor;
+using SevenWorlds.GameServer.Gameplay.Battle.Executor;
 using SevenWorlds.GameServer.Gameplay.GameState;
-using SevenWorlds.GameServer.Gameplay.Loop;
-using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Gameplay;
-using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
-namespace SevenWorlds.GameServer.Gameplay.Simulation
+namespace SevenWorlds.GameServer.Gameplay.Loop
 {
     public class GameLoopSimulator : IGameLoopSimulator
     {
@@ -74,7 +71,7 @@ namespace SevenWorlds.GameServer.Gameplay.Simulation
                 var areaSyncData = gameStateService.GetAreaSyncData(area);
                 hubService.BroadcastAreaSync(areaSyncData);
             }
-            
+
         }
 
         private void SimulateUniverse()
