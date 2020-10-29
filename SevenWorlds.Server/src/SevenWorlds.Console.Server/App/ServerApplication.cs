@@ -25,6 +25,7 @@ using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Factories;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace SevenWorlds.Console.Server.App
         {
             System.Console.WriteLine("----- Starting the Server via Console -----");
             if (args.Length != 1) {
-                System.Console.WriteLine("The args did not have Length == 1. The ServerConfigurations.json file must be passed to the server ");
+                System.Console.WriteLine("The args did not have Length == 1. The path Env Path must be passed");
                 return;
             }
 
@@ -67,7 +68,7 @@ namespace SevenWorlds.Console.Server.App
             try {
                 using (var scope = container.BeginLifetimeScope()) {
                     var configurator = scope.Resolve<IConfigurator>();
-                    configurator.ReadConfigurations(configPath);
+                    configurator.ReadConfigurations(Path.Combine(configPath, "ServerConfigurations.json"));
                     var serverManager = scope.Resolve<IServerManager>();
                     await serverManager.StartServer();
                 }

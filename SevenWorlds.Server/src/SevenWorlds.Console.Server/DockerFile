@@ -1,0 +1,9 @@
+﻿FROM mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019
+
+WORKDIR /App 
+
+EXPOSE 80 
+
+COPY /bin/Debug .
+
+ENTRYPOINT ["SevenWorlds.Console.Server.exe"] 

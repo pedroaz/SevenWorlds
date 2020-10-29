@@ -8,9 +8,12 @@ namespace SevenWorlds.GameServer.Utils.Config
 {
     public class ServerConfigurations
     {
+        // From File
         public bool AutoStart { get; set; }
         public string ServerId { get; set; }
         public string MongoDbKey { get; set; }
+        // Generated
+        public string EnvFolder { get; set; }
         public string LogFilePath { get; set; }
         public string MasterDataDumpFolder { get; set; }
         public string MonsterStoragePath { get; set; }
