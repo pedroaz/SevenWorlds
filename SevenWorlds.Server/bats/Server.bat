@@ -1,1 +1,0 @@
-start "GameServer" "..\src\SevenWorlds.Console.Server\bin\Debug\SevenWorlds.Console.Server.exe" "c:\Users\Pedro\Desktop\dev\MMO\SevenWorlds\ServerConfigurations.json"
