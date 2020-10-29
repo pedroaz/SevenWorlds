@@ -43,6 +43,9 @@ public class GameInitializer : MonoBehaviour
             else {
                 UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Not Connected to the server");
             }
+
+            LOG.Log("Failed to connect to server. Waiting 3 seconds and trying again");
+            await Task.Delay(3000);
         } 
 
         

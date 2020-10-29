@@ -1,4 +1,0 @@
-Refresh character when loading
-
-
-Create equips, skills, talents, characterTypes, monsters

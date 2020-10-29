@@ -2,7 +2,7 @@
 
 WORKDIR /App 
 
-EXPOSE 80 
+EXPOSE 44328
 
 COPY /bin/Debug .
 
