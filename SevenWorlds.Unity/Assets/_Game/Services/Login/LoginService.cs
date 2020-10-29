@@ -14,6 +14,9 @@ public class LoginService : GameService<LoginService>
     private void Awake()
     {
         Object = this;
+        if(usernameInputField == null || passwordInputField == null) {
+            LOG.Log("Missing fields on LoginService", LogLevel.Error);
+        }
     }
 
     public async Task<LoginResponseData> TryToLogin()

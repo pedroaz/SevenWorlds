@@ -14,6 +14,9 @@ public class RegistrationService : GameService<RegistrationService>
     private void Awake()
     {
         Object = this;
+        if(usernameInputField == null || passwordInputField == null || playerNameInputField == null) {
+            LOG.Log("Missing fields on Registration Service", LogLevel.Error);
+        }
     }
 
     public async Task TryToRegister()

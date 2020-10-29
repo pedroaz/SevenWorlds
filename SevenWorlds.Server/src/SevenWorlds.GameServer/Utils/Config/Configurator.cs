@@ -39,10 +39,10 @@ namespace SevenWorlds.GameServer.Utils.Config
 
         private void SetStoragePaths()
         {
-            Config.MonsterStoragePath = Path.Combine(Config.EnvFolder, "StoragesFolder", "MonsterStorage.json");
-            Config.EquipmentsStoragePath = Path.Combine(Config.EnvFolder, "StoragesFolder", "EquipmentStorage.json");
-            Config.SkillStoragePath = Path.Combine(Config.EnvFolder, "StoragesFolder", "SkillStorage.json");
-            Config.TalentsStoragePath = Path.Combine(Config.EnvFolder, "StoragesFolder", "TalentStorage.json");
+            Config.MonsterStoragePath = Path.Combine(Config.EnvFolder, "Storage", "MonsterStorage.json");
+            Config.EquipmentsStoragePath = Path.Combine(Config.EnvFolder, "Storage", "EquipmentStorage.json");
+            Config.SkillStoragePath = Path.Combine(Config.EnvFolder, "Storage", "SkillStorage.json");
+            Config.TalentsStoragePath = Path.Combine(Config.EnvFolder, "Storage", "TalentStorage.json");
         }
     }
 }
