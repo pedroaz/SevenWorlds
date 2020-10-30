@@ -14,19 +14,18 @@ public class SelectWorldButton : GameButton
 
     public override async Task OnClick()
     {
-        GameState.SetCurrentWorld(WorldIndex);
-        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.WorldName);
+        GameState.SetCurrentWorldByWorldIndex(WorldIndex);
+        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.CurrentWorld.Name);
 
-        // Get characters from server
-        var character = GameState.Object.Characters.Find(x => x.WorldId == GameState.WorldId);
+        var character = GameState.GetCharacterByWorldId(GameState.CurrentWorld.Id);
 
         if(character == null) {
-            LOG.Log($"Player does not have a character on world: {GameState.WorldId}");
-            await ScreenChangerService.Object.ChangeScreen(ScreenId.CreateCharacter);
+            LOG.Log($"Player does not have a character on world: {GameState.CurrentWorld.Id}");
+            await ScreenChangerService.ChangeScreen(ScreenId.CreateCharacter);
         }
         else {
             LOG.Log($"Found Character!");
-            await ScreenChangerService.Object.ChangeScreen(ScreenId.SelectCharacter);
+            await ScreenChangerService.ChangeScreen(ScreenId.SelectCharacter);
         }
     }
 

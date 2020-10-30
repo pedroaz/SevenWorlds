@@ -7,7 +7,7 @@ public class OpenGithubButton : GameButton
 {
     public override Task OnClick()
     {
-        WebHelperService.Object.OpenGitHubPage();
+        WebHelperService.OpenGitHubPage();
         return base.OnClick();
     }
 }

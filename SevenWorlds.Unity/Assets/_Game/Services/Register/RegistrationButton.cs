@@ -5,6 +5,6 @@ public class RegistrationButton : GameButton
 {
     public override async Task OnClick()
     {
-        await RegistrationService.Object.TryToRegister();
+        await RegistrationService.TryToRegister();
     }
 }

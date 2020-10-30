@@ -43,27 +43,27 @@ public class SoundService : GameService<SoundService>
         songInstances.Add(SongId.Opening, RuntimeManager.CreateInstance(SONG_OPENING));
     }
 
-    public void PlaySong(SongId id)
+    public static void PlaySong(SongId id)
     {
         LOG.Log($"Starting to play song: {id}");
-        if (!SoundEnable) return;
+        if (!Object.SoundEnable) return;
         StopAllSongs();
-        songInstances[id].start();
+        Object.songInstances[id].start();
     }
 
-    public void PlaySound(SfxId id)
+    public static void PlaySound(SfxId id)
     {
         switch (id) {
             case SfxId.BUTTON_CLICK_1:
-                RuntimeManager.PlayOneShot(SFX_BUTTON_CLICK_1);
+                RuntimeManager.PlayOneShot(Object.SFX_BUTTON_CLICK_1);
                 break;
         }
     }
 
-    private void StopAllSongs()
+    private static void StopAllSongs()
     {
-        if (!SoundEnable) return;
-        foreach (var item in songInstances) {
+        if (!Object.SoundEnable) return;
+        foreach (var item in Object.songInstances) {
             item.Value.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }

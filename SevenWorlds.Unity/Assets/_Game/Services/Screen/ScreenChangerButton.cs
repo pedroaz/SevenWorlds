@@ -9,6 +9,6 @@ public class ScreenChangerButton : GameButton
 
     public override async Task OnClick()
     {
-        await ScreenChangerService.Object.ChangeScreen(screenId);
+        await ScreenChangerService.ChangeScreen(screenId);
     }
 }

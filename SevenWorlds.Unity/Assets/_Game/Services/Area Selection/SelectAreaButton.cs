@@ -11,9 +11,9 @@ public class SelectAreaButton : GameButton
 
     public override async Task OnClick()
     {
-        AreaData area = GameState.Object.Areas.Find(_ => (_.Position.X == x) && (_.Position.Y == y));
-        GameState.Object.CurrentArea = area;
-        await ScreenChangerService.Object.ChangeScreen(ScreenId.Area);
+        //AreaData area = GameState.GetArea(x, y);
+        //GameState.SetCurrentArea(area);
+        //await ScreenChangerService.ChangeScreen(ScreenId.Area);
     }
 
     public void SetupPosition(int x, int y)

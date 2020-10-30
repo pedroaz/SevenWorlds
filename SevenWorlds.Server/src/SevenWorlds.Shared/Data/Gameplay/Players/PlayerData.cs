@@ -1,13 +1,14 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Players;
 using SevenWorlds.Shared.Data.Gameplay.Quests;
 using System;
 using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-    /// <summary>
-    /// This object will not be store to the database
-    /// </summary>
+
+    
+
     [System.Serializable]
     public class PlayerData : NetworkData
     {
@@ -18,6 +19,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public int Money;
         public List<CharacterType> AvailableCharacters;
         public List<QuestData> Quests;
+        public PlayerRecord Record;
+
 
         public PlayerData(string playerName)
         {
@@ -29,6 +32,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
             TimeOfCreation = DateTime.Now;
             Quests = new List<QuestData>();
             AvailableCharacters = new List<CharacterType>();
+            Record = new PlayerRecord();
         }
     }
 }

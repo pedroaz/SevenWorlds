@@ -19,15 +19,15 @@ public class RegistrationService : GameService<RegistrationService>
         }
     }
 
-    public async Task TryToRegister()
+    public static async Task TryToRegister()
     {
-        var username = usernameInputField.GetValue();
-        var password = passwordInputField.GetValue();
-        var playerName = playerNameInputField.GetValue();
+        var username = Object.usernameInputField.GetValue();
+        var playerName = Object.playerNameInputField.GetValue();
+        var password = Object.passwordInputField.GetValue();
 
         LOG.Log($"Trying to register with: {username} | {password} | {playerName}");
 
-        var res = await NetworkService.Object.Register(username, password, playerName);
+        var res = await NetworkService.Register(username, password, playerName);
 
         switch (res.response) {
             case RegisterAccountResponseType.Success:

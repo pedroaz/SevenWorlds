@@ -17,14 +17,14 @@ public class ScreenChangerService : GameService<ScreenChangerService>
         currentScreen = screens.Find(x => x.Id == ScreenId.Loading);
     }
 
-    public void HideAll()
+    public static void HideAll()
     {
-        foreach (var screen in screens) {
+        foreach (var screen in Object.screens) {
             screen.Hide();
         }
     }
 
-    public async Task ChangeScreen(ScreenId id)
+    public static async Task ChangeScreen(ScreenId id)
     {
         LOG.Log($"Chaning screen to: {id}");
 
@@ -40,11 +40,11 @@ public class ScreenChangerService : GameService<ScreenChangerService>
                 break;
         }
 
-        if (currentScreen.Id != id) {
-            currentScreen.Hide();
-            var screen = screens.Find(x => x.Id == id);
+        if (Object.currentScreen.Id != id) {
+            Object.currentScreen.Hide();
+            var screen = Object.screens.Find(x => x.Id == id);
             screen.Show();
-            currentScreen = screen;
+            Object.currentScreen = screen;
         }
     }
 }

@@ -27,7 +27,7 @@ public class GameButton : SetupMonoBehaviour
             LOG.Log($"[CLICK] - {this.GetType()}");
             switch (buttonSound) {
                 case ButtonSound.Default:
-                    SoundService.Object.PlaySound(SfxId.BUTTON_CLICK_1);
+                    SoundService.PlaySound(SfxId.BUTTON_CLICK_1);
                     break;
             }
             _ = OnClick();

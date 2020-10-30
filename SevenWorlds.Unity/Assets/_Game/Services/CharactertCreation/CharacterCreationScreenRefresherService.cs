@@ -9,7 +9,7 @@ public class CharacterCreationScreenRefresherService : GameService<CharacterCrea
 {
 
     public bool hasCharacterTypeSelected = false;
-    public CharacterType characterType;
+    public CharacterType selectedCharacterType;
 
     public Transform container;
     public GameObject buttonPrefab;
@@ -31,9 +31,29 @@ public class CharacterCreationScreenRefresherService : GameService<CharacterCrea
             Destroy(container.GetChild(i).gameObject);
         }
 
-        foreach (var character in GameState.Object.PlayerData.AvailableCharacters) {
+        foreach (var character in GameState.PlayerData.AvailableCharacters) {
             GameObject obj = Instantiate(buttonPrefab, container);
             obj.GetComponent<SelectCharacterTypeButton>().Setup(character);
         }
+    }
+
+    public static bool GetHasCharacterTypeSelected()
+    {
+        return Object.hasCharacterTypeSelected;
+    }
+
+    public static CharacterType GetSelectedCharacterType()
+    {
+        return Object.selectedCharacterType;
+    }
+
+    public static void SetHasCharacterTypeSelected(bool value)
+    {
+        Object.hasCharacterTypeSelected = value;
+    }
+
+    public static void SetSelectedCharacterType(CharacterType type)
+    {
+        Object.selectedCharacterType = type;
     }
 }

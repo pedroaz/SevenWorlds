@@ -20,13 +20,13 @@ public class PanelChangerButton : GameButton
     {
         switch (Type) {
             case PanelChangerButtonType.Open:
-                PanelChangerService.Object.ShowPanel(Id);
+                PanelChangerService.ShowPanel(Id);
                 break;
             case PanelChangerButtonType.Close:
-                PanelChangerService.Object.HidePanel(Id);
+                PanelChangerService.HidePanel(Id);
                 break;
             case PanelChangerButtonType.Toggle:
-                PanelChangerService.Object.TogglePanel(Id);
+                PanelChangerService.TogglePanel(Id);
                 break;
         }
 

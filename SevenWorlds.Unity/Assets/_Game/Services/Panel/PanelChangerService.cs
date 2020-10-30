@@ -13,19 +13,19 @@ public class PanelChangerService : GameService<PanelChangerService>
         panels = Resources.FindObjectsOfTypeAll<GamePanel>().ToList();
     }
 
-    public void ShowPanel(GamePanelId id)
+    public static void ShowPanel(GamePanelId id)
     {
-        panels.Find(x => x.Id == id)?.Show();
+        Object.panels.Find(x => x.Id == id)?.Show();
     }
 
-    public void HidePanel(GamePanelId id)
+    public static void HidePanel(GamePanelId id)
     {
-        panels.Find(x => x.Id == id)?.Hide();
+        Object.panels.Find(x => x.Id == id)?.Hide();
     }
 
-    public void TogglePanel(GamePanelId id)
+    public static void TogglePanel(GamePanelId id)
     {
-        var panel = panels.Find(x => x.Id == id);
+        var panel = Object.panels.Find(x => x.Id == id);
         if (panel == null) return;
         if (panel.IsOpen) {
             panel.Hide();

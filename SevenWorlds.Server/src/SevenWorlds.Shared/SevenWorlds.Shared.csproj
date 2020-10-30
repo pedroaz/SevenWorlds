@@ -56,6 +56,7 @@
     <Compile Include="Data\Gameplay\PlayerActions\MovementActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\SelectSkillActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\StartBattleActionData.cs" />
+    <Compile Include="Data\Gameplay\Players\PlayerRecord.cs" />
     <Compile Include="Data\Gameplay\Quests\QuestData.cs" />
     <Compile Include="Data\Gameplay\Quests\QuestDescription.cs" />
     <Compile Include="Data\Gameplay\Skills\SkillData.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Data\Gameplay\Equipment\EquipmentData.cs" />
     <Compile Include="Data\Gameplay\Monster\MonsterData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\PlayerActionData.cs" />
-    <Compile Include="Data\Gameplay\Universe\PlayerData.cs" />
+    <Compile Include="Data\Gameplay\Players\PlayerData.cs" />
     <Compile Include="Data\Gameplay\WorldResource\WorldResourcesData.cs" />
     <Compile Include="Data\Gameplay\Section\ArmoryData.cs" />
     <Compile Include="Data\Gameplay\Section\MonsterCampData.cs" />

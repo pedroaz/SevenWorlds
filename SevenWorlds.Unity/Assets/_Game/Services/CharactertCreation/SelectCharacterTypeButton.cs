@@ -16,8 +16,8 @@ public class SelectCharacterTypeButton : GameButton
 
     public override Task OnClick()
     {
-        CharacterCreationScreenRefresherService.Object.hasCharacterTypeSelected = true;
-        CharacterCreationScreenRefresherService.Object.characterType = type;
+        CharacterCreationScreenRefresherService.SetHasCharacterTypeSelected(true);
+        CharacterCreationScreenRefresherService.SetSelectedCharacterType(type);
         UIEvents.ChangeGameText(GameTextId.SelectedCharacterType, type.ToString());
         return base.OnClick();
     }

@@ -6,8 +6,8 @@ public class LoginButton : GameButton
     public override async Task OnClick()
     {
         try {
-            var response = await LoginService.Object.TryToLogin();
-            await LoginService.Object.ProcessLoginResponse(response);
+            var response = await LoginService.TryToLogin();
+            await LoginService.ProcessLoginResponse(response);
         }
         catch (System.Exception e) {
             LOG.Log(e);

@@ -16,12 +16,12 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
 
     public async Task Refresh()
     {
-        var universeData = await NetworkService.Object.RequestUniverseSyncData();
-        var characters = await NetworkService.Object.RequestPlayerCharacters(GameState.PlayerName);
+        var universeData = await NetworkService.RequestUniverseSyncData();
+        var characters = await NetworkService.RequestPlayerCharacters(GameState.PlayerName);
 
-        var worlds = GameState.Object.Worlds;
+        var worlds = GameState.Worlds;
 
-        var interactive = GameState.Object.PlayerData.AvailableCharacters.Any();
+        var interactive = GameState.PlayerData.AvailableCharacters.Any();
 
         for (int i = 0; i < 7; i++) {
             var btn = buttons.Find(x => x.WorldIndex == i);

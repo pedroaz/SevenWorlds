@@ -12,6 +12,6 @@ public class SendButton : GameButton
 
     public override async Task OnClick()
     {
-        await NetworkService.Object.SendChatMessage(new ChatMessageData("Unity Client", chatManager.InputField.text));
+        await NetworkService.SendChatMessage(new ChatMessageData("Unity Client", chatManager.InputField.text));
     }
 }

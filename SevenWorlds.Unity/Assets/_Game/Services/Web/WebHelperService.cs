@@ -9,7 +9,7 @@ public class WebHelperService : GameService<WebHelperService>
         Object = this;
     }
 
-    public void OpenGitHubPage()
+    public static void OpenGitHubPage()
     {
         Application.OpenURL("https://github.com/pedroaz/SevenWorlds");
     }

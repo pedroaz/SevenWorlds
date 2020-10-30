@@ -23,13 +23,13 @@ public class NetworkService : GameService<NetworkService>
         dataFactory = new ClientRequestsDataFactory();
     }
 
-    public async Task<bool> ConnectToServer()
+    public static async Task<bool> ConnectToServer()
     {
         try {
 
-            await client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
+            await Object.client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
             LOG.Log("Connection was ok!");
-            SetEventHandlers();
+            Object.SetEventHandlers();
             return true;
         }
         catch (Exception e) {
@@ -72,53 +72,47 @@ public class NetworkService : GameService<NetworkService>
         client.Dispose();
     }
 
-    public async Task<bool> SendChatMessage(ChatMessageData data)
+    public static async Task<bool> SendChatMessage(ChatMessageData data)
     {
-        return await client.SendChatMessage(data);
+        return await Object.client.SendChatMessage(data);
     }
 
-    public async Task<UniverseSyncData> RequestUniverseSyncData()
+    public static async Task<UniverseSyncData> RequestUniverseSyncData()
     {
-        return await client.RequestUniverseSync();
+        return await Object.client.RequestUniverseSync();
     }
 
-    public async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
+    public static async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
     {
-        return await client.RequestAreaSync(areaId, playerId);
+        return await Object.client.RequestAreaSync(areaId, playerId);
     }
 
-    public async Task<WorldSyncData> RequestWorldSyncData(string worldId)
+    public static async Task<WorldSyncData> RequestWorldSyncData(string worldId)
     {
-        return await client.RequestWorldSync(worldId);
+        return await Object.client.RequestWorldSync(worldId);
     }
 
-    public async Task<LoginResponseData> Login(LoginData data)
+    public static async Task<LoginResponseData> Login(LoginData data)
     {
         LOG.Log("Sending login request");
-        return await client.Login(data);
+        return await Object.client.Login(data);
     }
 
-    public async Task<RegisterAccountResponse> Register(string username, string password, string playerName)
+    public static async Task<RegisterAccountResponse> Register(string username, string password, string playerName)
     {
-        var data = dataFactory.CreateRegisterAccountData(username, password, playerName);
-        return await client.RequestRegister(data);
+        var data = Object.dataFactory.CreateRegisterAccountData(username, password, playerName);
+        return await Object.client.RequestRegister(data);
     }
 
-    public async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
+    public static async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
     {
-        var data = await  client.RequestPlayerCharacters(playerName);
+        var data = await Object.client.RequestPlayerCharacters(playerName);
         return data;
     }
 
-    public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
+    public static async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
     {
-        return await client.RequestCreateCharacter(playerName, worldId, type);
+        return await Object.client.RequestCreateCharacter(playerName, worldId, type);
     }
-
-    //public async Task<LoginResponseData> Login(LoginData data)
-    //{
-    //    return await client.Login(data);
-    //}
-
 
 }

@@ -10,8 +10,8 @@ public class GameInitializer : MonoBehaviour
     async void Start()
     {
 
-        ScreenChangerService.Object.HideAll();
-        await ScreenChangerService.Object.ChangeScreen(ScreenId.Login);
+        ScreenChangerService.HideAll();
+        await ScreenChangerService.ChangeScreen(ScreenId.Login);
 
 
         LOG.Log("Setting up all objects");
@@ -20,8 +20,8 @@ public class GameInitializer : MonoBehaviour
         }
         
         
-        UserInputService.Object.ShouldHandleUserInputs = true;
-        SoundService.Object.PlaySong(SongId.Opening);
+        UserInputService.ShouldHandleUserInputs = true;
+        SoundService.PlaySong(SongId.Opening);
 
         try {
             await ConnectToServer();
@@ -36,7 +36,7 @@ public class GameInitializer : MonoBehaviour
         UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Not Connected to the server");
 
         while (!connected && Application.isPlaying) {
-            connected = await NetworkService.Object.ConnectToServer();
+            connected = await NetworkService.ConnectToServer();
             if (connected) {
                 UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Connected to the server");
             }
