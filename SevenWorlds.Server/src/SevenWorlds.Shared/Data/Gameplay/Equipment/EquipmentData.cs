@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    public enum EquipmentId
+    {
+
+    }
+
     public enum EquipmentType
     {
-        Sword,
-        Bow,
+        MainHand,
+        OffHand,
+        Hat,
+        Feet,
+        Aura,
+        Pet
     }
 
     public class EquipmentData

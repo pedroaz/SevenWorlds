@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public CombatData CombatData;
 
         public List<SkillType> Skills;
-        public EquipmentData Equipments;
+        public EquipmentBundle Equipments;
         public TalentBundle TalentBundle;
 
         // Resources

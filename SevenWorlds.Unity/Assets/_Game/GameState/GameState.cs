@@ -41,4 +41,9 @@ public class GameState : GameService<GameState>
     {
         return Object.characters.Find(x => x.WorldId == worldId);
     }
+
+    public static void RefreshPlayerData()
+    {
+
+    }
 }
