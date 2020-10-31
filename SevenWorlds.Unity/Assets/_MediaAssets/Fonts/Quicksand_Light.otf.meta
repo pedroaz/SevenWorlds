@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe2301b0ded183e45ba990c37d31c826
+guid: 2e2d5af907dcea041b351c2890a69ac8
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Comfortaa
+  - Quicksand
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

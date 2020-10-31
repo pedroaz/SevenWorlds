@@ -30,6 +30,7 @@ namespace SevenWorlds.Shared.Network
         public const string Request_AllPlayerDatas = "RequestAllPlayerDatas";
         public const string Request_SectionBundle = "RequestSectionBundle";
         public const string Request_PlayerCharacters = "RequestPlayerCharacters";
+        public const string Request_PlayerData = "RequestPlayerData";
         // General
         public const string Event_OnPing = "OnPing";
         public const string Request_SendChatMessage = "RequestSendChatMessage";

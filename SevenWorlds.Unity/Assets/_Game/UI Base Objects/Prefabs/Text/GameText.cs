@@ -11,7 +11,8 @@ public enum GameTextId
     PlayerName,
     UniverseName,
     WorldName,
-    SelectedCharacterType
+    SelectedCharacterType,
+    ZaiChat
 }
 
 public class GameText : SetupMonoBehaviour
@@ -23,6 +24,11 @@ public class GameText : SetupMonoBehaviour
     {
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
         UIEvents.OnGameTextChanged += GameTextChanged;
+    }
+
+    public void Show(bool value)
+    {
+        textMesh.gameObject.SetActive(value);
     }
 
     private void GameTextChanged(object sender, GameTextChangedArgs e)

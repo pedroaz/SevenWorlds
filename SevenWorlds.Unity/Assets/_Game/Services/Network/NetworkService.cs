@@ -15,6 +15,9 @@ public class NetworkService : GameService<NetworkService>
 {
     private NetworkClient client;
     private ClientRequestsDataFactory dataFactory;
+    private bool isConnected;
+
+    public static bool IsConnected { get => Object.isConnected; }
 
     public void Awake()
     {
@@ -30,10 +33,12 @@ public class NetworkService : GameService<NetworkService>
             await Object.client.Connect(NetworkConstants.ServerUrl, NetworkConstants.MainHubName);
             LOG.Log("Connection was ok!");
             Object.SetEventHandlers();
+            Object.isConnected = true;
             return true;
         }
         catch (Exception e) {
 
+            Object.isConnected = false;
             LOG.Log($"Wasn't able to connect to server. Will try again - {e.Message}", LogLevel.Warning);
             return false;
         }
@@ -107,6 +112,12 @@ public class NetworkService : GameService<NetworkService>
     public static async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
     {
         var data = await Object.client.RequestPlayerCharacters(playerName);
+        return data;
+    }
+
+    public static async Task<PlayerData> RequestPlayerData(string playerName)
+    {
+        var data = await Object.client.RequestPlayerData(playerName);
         return data;
     }
 

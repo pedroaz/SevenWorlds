@@ -10,7 +10,7 @@ public class GeneralRefresherService : GameService<GeneralRefresherService>
         Object = this;
     }
 
-    public void Refresh()
+    public static void Refresh()
     {
         UIEvents.ChangeGameText(GameTextId.PlayerName, GameState.PlayerData.PlayerName);
         UIEvents.ChangeGameText(GameTextId.UniverseName, GameState.Universe.Name);

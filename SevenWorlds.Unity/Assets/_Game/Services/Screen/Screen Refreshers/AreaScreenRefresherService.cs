@@ -11,7 +11,7 @@ public class AreaScreenRefresherService : GameService<AreaScreenRefresherService
         Object = this;
     }
 
-    public async Task Refresh()
+    public static async Task Refresh()
     {
         var areaSyncData = await NetworkService.RequestAreaSync(GameState.CurrentArea.Id, GameState.PlayerData.Id);
         GameState.Sections = areaSyncData.Sections;

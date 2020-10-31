@@ -18,7 +18,7 @@ public class GameButton : SetupMonoBehaviour
     public ButtonSound buttonSound;
     private Button button;
 
-    private void Awake()
+    public override void Setup()
     {
         button = GetComponentInChildren<Button>();
         button.onClick.RemoveAllListeners();
@@ -33,11 +33,14 @@ public class GameButton : SetupMonoBehaviour
             _ = OnClick();
 
         });
-        Setup();
     }
 
     public void SetInteractable(bool value)
     {
+        if (button == null) {
+            LOG.Log($"Tryied to access null variable {gameObject.name}", LogLevel.Warning);
+            return;
+        }
         button.interactable = value;
     }
 

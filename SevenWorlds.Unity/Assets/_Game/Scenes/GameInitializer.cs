@@ -9,16 +9,14 @@ public class GameInitializer : MonoBehaviour
 
     async void Start()
     {
-
-        ScreenChangerService.HideAll();
-        await ScreenChangerService.ChangeScreen(ScreenId.Login);
-
-
+        // MUST BE THE FIRST THING
         LOG.Log("Setting up all objects");
         foreach (var item in Resources.FindObjectsOfTypeAll<SetupMonoBehaviour>()) {
             item.Setup();
         }
-        
+
+        ScreenChangerService.HideAll();
+        await ScreenChangerService.ChangeScreen(ScreenId.Login);
         
         UserInputService.ShouldHandleUserInputs = true;
         SoundService.PlaySong(SongId.Opening);
@@ -42,12 +40,9 @@ public class GameInitializer : MonoBehaviour
             }
             else {
                 UIEvents.ChangeGameText(GameTextId.IsConnectedToServer, "Not Connected to the server");
+                LOG.Log("Failed to connect to server. Waiting 3 seconds and trying again");
+                await Task.Delay(3000);
             }
-
-            LOG.Log("Failed to connect to server. Waiting 3 seconds and trying again");
-            await Task.Delay(3000);
         } 
-
-        
     }
 }

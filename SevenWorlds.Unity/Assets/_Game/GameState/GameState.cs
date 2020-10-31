@@ -1,8 +1,13 @@
-﻿using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Section;
+using SevenWorlds.Shared.Data.Sync;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameState : GameService<GameState>
@@ -31,6 +36,7 @@ public class GameState : GameService<GameState>
     public static AreaData CurrentArea { get => Object.currentArea; set => Object.currentArea = value; }
     public static SectionBundle Sections { get => Object.sections; set => Object.sections = value; }
     public static List<CharacterData> Characters { get => Object.characters; set => Object.characters = value; }
+    public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
 
     public static void SetCurrentWorldByWorldIndex(int worldIndex)
     {
@@ -42,8 +48,27 @@ public class GameState : GameService<GameState>
         return Object.characters.Find(x => x.WorldId == worldId);
     }
 
-    public static void RefreshPlayerData()
+    public static async Task RefreshPlayerData()
     {
+        PlayerData = await NetworkService.RequestPlayerData(PlayerName);
+    }
+
+    public static async Task RefreshUniverse()
+    {
+        UniverseSyncData data = await NetworkService.RequestUniverseSyncData();
 
     }
+
+    public static async Task RefreshPlayerCharacters()
+    {
+        Characters = await NetworkService.RequestPlayerCharacters(GameState.PlayerName);
+    }
+
+    public static async Task RefreshGameStateFromLoginResponse(LoginResponseData response)
+    {
+        PlayerData = response.PlayerData;
+        Universe = response.UniverseSyncData.Universe;
+        Worlds = response.UniverseSyncData.Worlds;
+        Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
+    } 
 }

@@ -159,6 +159,17 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
+        public PlayerData RequestPlayerData(string playerName)
+        {
+            try {
+                return gameStateService.PlayerCollection.FindByName(playerName);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+        }
+
         public List<WorldData> RequestAllWorlds()
         {
             try {

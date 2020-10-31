@@ -10,6 +10,7 @@ public class LoginService : GameService<LoginService>
 {
     public GameInputField usernameInputField;
     public GameInputField passwordInputField;
+    public GameText loginResponseText;
 
     private void Awake()
     {
@@ -22,7 +23,13 @@ public class LoginService : GameService<LoginService>
     public static async Task<LoginResponseData> TryToLogin()
     {
         LOG.Log("Trying to log in");
-        return await NetworkService.Login(new LoginData(Object.usernameInputField.GetValue(), Object.passwordInputField.GetValue()));
+        if (NetworkService.IsConnected) {
+            return await NetworkService.Login(new LoginData(Object.usernameInputField.GetValue(), Object.passwordInputField.GetValue()));
+        }
+        else {
+            ShowLoginResponse($"Login failed: Not Connected to server");
+            return null;
+        }
     }
 
     public static async Task ProcessLoginResponse(LoginResponseData response)
@@ -31,15 +38,24 @@ public class LoginService : GameService<LoginService>
 
         if (response.ResponseType == LoginResponseType.Success) {
             LOG.Log("Log in was success!");
-            GameState.PlayerData = response.PlayerData;
-            GameState.Universe = response.UniverseSyncData.Universe;
-            GameState.Worlds = response.UniverseSyncData.Worlds;
-            GameState.Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
-            GeneralRefresherService.Object.Refresh();
+            await GameState.RefreshGameStateFromLoginResponse(response);
+            GeneralRefresherService.Refresh();
             await ScreenChangerService.ChangeScreen(ScreenId.Universe);
         }
         else {
             LOG.Log($"Log failed {response.ResponseType}");
+            ShowLoginResponse($"Login failed: {response.ResponseType}");   
         }
+    }
+
+    public static void ShowLoginResponse(string message)
+    {
+        Object.loginResponseText.Show(true);
+        Object.loginResponseText.SetText(message);
+    }
+
+    public static void HideLoginResponse()
+    {
+        Object.loginResponseText.Show(false);
     }
 }

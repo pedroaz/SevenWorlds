@@ -97,6 +97,11 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<bool>(NetworkConstants.Request_CreateCharacter, playerName, worldId, type);
         }
 
+        public async Task<PlayerData> RequestPlayerData(string playerName)
+        {
+            return await hubProxy.Invoke<PlayerData>(NetworkConstants.Request_PlayerData, playerName);
+        }
+
 
         #endregion
 

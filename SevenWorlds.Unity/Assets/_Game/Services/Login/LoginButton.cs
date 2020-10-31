@@ -7,7 +7,9 @@ public class LoginButton : GameButton
     {
         try {
             var response = await LoginService.TryToLogin();
-            await LoginService.ProcessLoginResponse(response);
+            if(response != null) {
+               await LoginService.ProcessLoginResponse(response);
+            }
         }
         catch (System.Exception e) {
             LOG.Log(e);

@@ -14,6 +14,7 @@ public class SelectAreaButton : GameButton
         //AreaData area = GameState.GetArea(x, y);
         //GameState.SetCurrentArea(area);
         //await ScreenChangerService.ChangeScreen(ScreenId.Area);
+        await base.OnClick();
     }
 
     public void SetupPosition(int x, int y)

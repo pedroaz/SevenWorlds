@@ -10,7 +10,7 @@ public class SelectWorldButton : GameButton
     public int WorldIndex;
 
     public GameText worldNameText;
-    public GameText hasCharacterText;
+    public GameText characterText;
 
     public override async Task OnClick()
     {
@@ -33,10 +33,10 @@ public class SelectWorldButton : GameButton
     {
         worldNameText.SetText(data.Name);
         if(characterData == null) {
-            hasCharacterText.SetText("No Character");
+            characterText.SetText("No Character");
         }
         else {
-            hasCharacterText.SetText($"Character Lvl: {characterData.Level}");
+            characterText.SetText($"Character Lvl: {characterData.Level}");
         }
     }
 }

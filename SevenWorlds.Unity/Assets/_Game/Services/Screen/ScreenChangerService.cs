@@ -29,14 +29,17 @@ public class ScreenChangerService : GameService<ScreenChangerService>
         LOG.Log($"Chaning screen to: {id}");
 
         switch (id) {
+            case ScreenId.Login:
+                LoginScreenRefresherService.Refresh();
+                break;
             case ScreenId.Universe:
-                await UniverseScreenRefresherService.Object.Refresh();
+                await UniverseScreenRefresherService.Refresh();
                 break;
             case ScreenId.Area:
-                await AreaScreenRefresherService.Object.Refresh();
+                await AreaScreenRefresherService.Refresh();
                 break;
             case ScreenId.CreateCharacter:
-                CharacterCreationScreenRefresherService.Object.Refresh();
+                CharacterCreationScreenRefresherService.Refresh();
                 break;
         }
 

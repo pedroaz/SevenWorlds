@@ -22,17 +22,17 @@ public class CharacterCreationScreenRefresherService : GameService<CharacterCrea
         }
     }
 
-    public void Refresh()
+    public static void Refresh()
     {
-        hasCharacterTypeSelected = false;
+        Object.hasCharacterTypeSelected = false;
         UIEvents.ChangeGameText(GameTextId.SelectedCharacterType, "No Char Selected");
 
-        for (int i = 0; i < container.childCount; i++) {
-            Destroy(container.GetChild(i).gameObject);
+        for (int i = 0; i < Object.container.childCount; i++) {
+            Destroy(Object.container.GetChild(i).gameObject);
         }
 
         foreach (var character in GameState.PlayerData.AvailableCharacters) {
-            GameObject obj = Instantiate(buttonPrefab, container);
+            GameObject obj = Instantiate(Object.buttonPrefab, Object.container);
             obj.GetComponent<SelectCharacterTypeButton>().Setup(character);
         }
     }
