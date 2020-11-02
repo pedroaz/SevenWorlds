@@ -1,13 +1,19 @@
-﻿using SevenWorlds.GameServer.Database;
+﻿using Newtonsoft.Json;
+using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Character;
+using SevenWorlds.GameServer.Gameplay.Talent;
+using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Character;
+using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,51 +25,54 @@ namespace SevenWorlds.GameServer.Gameplay.Character
         private readonly ILogService logService;
         private readonly ISkillFactory skillFactory;
         private readonly IDatabaseService databaseService;
+        private readonly IConfigurator configurator;
+        private readonly ITalentFactory talentFactory;
+        private Dictionary<CharacterType, CharacterDescription> storage = new Dictionary<CharacterType, CharacterDescription>();
 
-        public CharacterFactory(ILogService logService, ISkillFactory skillFactory, IDatabaseService databaseService)
+        public CharacterFactory(ILogService logService, ISkillFactory skillFactory, 
+            IDatabaseService databaseService, IConfigurator configurator, ITalentFactory talentFactory)
         {
             this.logService = logService;
             this.skillFactory = skillFactory;
             this.databaseService = databaseService;
+            this.configurator = configurator;
+            this.talentFactory = talentFactory;
         }
 
         public async Task<bool> NewCharacter(string playerName, string worldId, CharacterType characterType)
         {
             logService.Log($"Creating new character for: {playerName} on world: {worldId}");
 
+            // Create
+            var characterDescription = storage[characterType];
+            var characterData = new CharacterData(playerName, characterDescription);
+
             // General
-            var characterData = new CharacterData(playerName, characterType);
-            characterData.Id = GetGUID();
+            SetDefaultValues(characterData);
             characterData.WorldId = worldId;
             characterData.Level = 1;
-            SetDefaultValues(characterData);
-
 
             // Skills
-            characterData.Skills = GetInitialMethods(characterType);
+            characterData.Skills = new List<SkillType>();
 
             // Resources
             characterData.Resources = new WorldResourcesData();
 
-            characterData.TalentBundle = new TalentBundle();
+            // Talents
+            characterData.TalentBundle = talentFactory.CreateNewBundle(characterDescription);
+
+            // Equipments
+            characterData.Equipments = new EquipmentBundle();
 
             // Refresh
             RefreshCharacter(characterData);
 
+            // Save to DB
             await databaseService.InsertCharacter(characterData);
 
-            return true;
-        }
+            logService.Log("Finished creating character");
 
-        private static List<SkillType> GetInitialMethods(CharacterType type)
-        {
-            switch (type) {
-                default:
-                    return new List<SkillType>() {
-                        SkillType.WeaponAttack
-                    };
-            }
-            
+            return true;
         }
 
         public void RefreshCharacter(CharacterData characterData)
@@ -74,13 +83,21 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             ));
 
 
-            characterData.CombatData.AddEquipmentBundle(characterData.Equipments);
+            characterData.CombatData.AddStatsFromAllEquipments(characterData.Equipments);
 
-            foreach (var talent in characterData?.TalentBundle?.AvailableTalents) {
-                if (talent.IsEnabled) {
-                    talent.ApplyTalent(characterData);
+            foreach (var row in characterData.TalentBundle.TalentRows) {
+                
+                foreach (TalentData talentData in row) {
+                    talentData.ApplyTalent(characterData);
                 }
             }
+            
+        }
+
+        public void SetupStorage()
+        {
+            var json = File.ReadAllText(configurator.Config.CharacterStorage);
+            storage = JsonConvert.DeserializeObject<Dictionary<CharacterType, CharacterDescription>>(json);
         }
     }
 }

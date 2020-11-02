@@ -36,7 +36,7 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
                     logService.Log($"Not enough resources to cast", type: LogType.Battle);
                     return;
                 }
-                resourcesData.ApplySkillCost(skillData.ResourcesCost);
+                resourcesData.ConsumeSkillCost(skillData.ResourcesCost);
             }
 
 

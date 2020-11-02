@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Character;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
 using System;
 using System.Collections.Generic;
@@ -16,25 +17,36 @@ namespace SevenWorlds.GameServer.Gameplay.Talent
     {
         private readonly IConfigurator configurator;
 
-        private Dictionary<CharacterType, List<TalentData>> storage;
+        private Dictionary<TalentId, TalentDescription> storage;
 
         public TalentFactory(IConfigurator configurator)
         {
             this.configurator = configurator;
         }
 
-        public TalentBundle CreateNewBundle(CharacterType characterType)
+        public TalentBundle CreateNewBundle(CharacterDescription characterDescription)
         {
-            TalentBundle bundle = new TalentBundle {
-                AvailableTalents = storage[characterType]
-            };
+            TalentBundle bundle = new TalentBundle();
+            List<List<TalentId>> rows = characterDescription.Talents;
+            
+            foreach (List<TalentId> row in rows) {
+
+                var talents = new List<TalentData>();
+
+                foreach (TalentId talentId in row) {
+                    var description = storage[talentId];
+                    var data = new TalentData(description);
+                    talents.Add(data);
+                }
+                bundle.TalentRows.Add(talents);
+            }
             return bundle;
         }
 
         public void SetupStorage()
         {
             var json = File.ReadAllText(configurator.Config.TalentsStoragePath);
-            storage = JsonConvert.DeserializeObject<Dictionary<CharacterType, List<TalentData>>>(json);
+            storage = JsonConvert.DeserializeObject<Dictionary<TalentId, TalentDescription>>(json);
         }
     }
 }

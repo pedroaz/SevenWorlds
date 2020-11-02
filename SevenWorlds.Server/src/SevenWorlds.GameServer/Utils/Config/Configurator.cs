@@ -44,6 +44,7 @@ namespace SevenWorlds.GameServer.Utils.Config
             Config.SkillStoragePath = Path.Combine(Config.EnvFolder, "Storage", "SkillStorage.json");
             Config.TalentsStoragePath = Path.Combine(Config.EnvFolder, "Storage", "TalentStorage.json");
             Config.QuestStoragePath = Path.Combine(Config.EnvFolder, "Storage", "QuestsStorage.json");
+            Config.CharacterStorage = Path.Combine(Config.EnvFolder, "Storage", "CharacterStorage.json");
         }
     }
 }

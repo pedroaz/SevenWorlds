@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.UnityLog;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,13 +13,21 @@ public class SelectCharacterTypeButton : GameButton
     {
         this.type = type;
         GetComponentInChildren<GameText>().SetText(type.ToString());
+        Setup();
     }
 
     public override Task OnClick()
     {
-        CharacterCreationScreenRefresherService.SetHasCharacterTypeSelected(true);
-        CharacterCreationScreenRefresherService.SetSelectedCharacterType(type);
-        UIEvents.ChangeGameText(GameTextId.SelectedCharacterType, type.ToString());
-        return base.OnClick();
+        try {
+            LOG.Log($"Selecting character {type}");
+            CharacterCreationScreenRefresherService.SetHasCharacterTypeSelected(true);
+            CharacterCreationScreenRefresherService.SetSelectedCharacterType(type);
+            UIEvents.ChangeGameText(GameTextId.SelectedCharacterType, type.ToString());
+            return base.OnClick();
+        }
+        catch (System.Exception e) {
+            LOG.Log(e);
+            throw;
+        }
     }
 }

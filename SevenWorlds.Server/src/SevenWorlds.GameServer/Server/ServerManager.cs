@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Hosting;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
+using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Quests;
@@ -31,6 +32,7 @@ namespace SevenWorlds.GameServer.Server
         private readonly IEquipmentFactory equipmentFactory;
         private readonly ITalentFactory talentFactory;
         private readonly IQuestFactory questFactory;
+        private readonly ICharacterFactory characterFactory;
 
         private ILogService logService { get; }
         private IGameFactory gameFactory { get; }
@@ -39,7 +41,8 @@ namespace SevenWorlds.GameServer.Server
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator,
             IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
-            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory, IQuestFactory questFactory)
+            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory, IQuestFactory questFactory,
+            ICharacterFactory characterFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
@@ -49,6 +52,7 @@ namespace SevenWorlds.GameServer.Server
             this.equipmentFactory = equipmentFactory;
             this.talentFactory = talentFactory;
             this.questFactory = questFactory;
+            this.characterFactory = characterFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
@@ -93,6 +97,8 @@ namespace SevenWorlds.GameServer.Server
             talentFactory.SetupStorage();
             logService.Log("Setting up Quest factory", type: LogType.Initialization);
             questFactory.SetupStorage();
+            logService.Log("Setting up Character factory", type: LogType.Initialization);
+            characterFactory.SetupStorage();
         }
 
         private async Task StartGameServer(string serverId)

@@ -30,7 +30,7 @@ namespace SevenWorlds.GameServer.Startups
             BsonSerializer.RegisterSerializer(new EnumSerializer<EquipmentType>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<CharacterType>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<BattleStatus>(BsonType.String));
-            BsonSerializer.RegisterSerializer(new EnumSerializer<TalentType>(BsonType.String));
+            BsonSerializer.RegisterSerializer(new EnumSerializer<TalentId>(BsonType.String));
         }
     }
 }

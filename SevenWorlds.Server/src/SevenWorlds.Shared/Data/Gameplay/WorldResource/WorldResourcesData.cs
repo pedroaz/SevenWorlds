@@ -26,7 +26,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
             return true;
         }
 
-        public void ApplySkillCost(Dictionary<WorldResourceType, int> cost)
+        public void ConsumeSkillCost(Dictionary<WorldResourceType, int> cost)
         {
             foreach (var kvp in cost) {
                 Resources[kvp.Key] -= cost[kvp.Key];

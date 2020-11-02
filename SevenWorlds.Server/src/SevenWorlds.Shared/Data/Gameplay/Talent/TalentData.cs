@@ -6,28 +6,40 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Talent
 {
-    public enum TalentType
+    public enum TalentId
     {
         AttackUp,
-        DefenseUp
+        DefenseUp,
+        HpUp,
+        FireUp,
     }
 
     public class TalentData
     {
-        public TalentType Type;
-        public bool IsEnabled;
-        public int Value;
+        public TalentDescription Description;
+        public int SpentPoints;
 
         public void ApplyTalent(CharacterData characterData)
         {
-            switch (Type) {
-                case TalentType.AttackUp:
-                    characterData.CombatData.Attack += Value;
+            switch (Description.TalentId) {
+                case TalentId.AttackUp:
+                    characterData.CombatData.Attack += SpentPoints * 5;
                     break;
-                case TalentType.DefenseUp:
-                    characterData.CombatData.Defense += Value;
+                case TalentId.DefenseUp:
+                    characterData.CombatData.Defense += SpentPoints * 2;
+                    break;
+                case TalentId.HpUp:
+                    characterData.CombatData.MaxHp += SpentPoints * 10;
+                    break;
+                case TalentId.FireUp:
+                    characterData.CombatData.Fire += SpentPoints * 1;
                     break;
             }
+        }
+
+        public TalentData(TalentDescription description)
+        {
+            Description = description;
         }
     }
 }

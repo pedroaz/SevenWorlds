@@ -39,7 +39,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
             TargetIds = new List<string>();
         }
 
-        public void AddEquipmentBundle(EquipmentBundle bundle)
+        public void AddStatsFromAllEquipments(EquipmentBundle bundle)
         {
             AddWeapon(bundle.Weapon);
             AddEquipmentData(bundle.Head);

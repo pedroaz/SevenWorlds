@@ -21,7 +21,7 @@ public class CreateCharacterButton : GameButton
                 GameState.CurrentWorld.Id,
                 characterType
             );
-            LOG.Log($"Character creation was a: {result}");
+            LOG.Log($"Character creation result was: {result}");
         }
         catch (System.Exception e) {
             LOG.Log(e);

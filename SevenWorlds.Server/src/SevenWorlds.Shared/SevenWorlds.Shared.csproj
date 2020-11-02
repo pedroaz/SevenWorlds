@@ -44,6 +44,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Gameplay\Character\CharacterDescription.cs" />
     <Compile Include="Data\Gameplay\Chat\ChatMessageData.cs" />
     <Compile Include="Data\Base\NetworkData.cs" />
     <Compile Include="Data\Connection\LoginData.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Data\Gameplay\Skills\SkillData.cs" />
     <Compile Include="Data\Gameplay\Talent\TalentBundle.cs" />
     <Compile Include="Data\Gameplay\Talent\TalentData.cs" />
+    <Compile Include="Data\Gameplay\Talent\TalentDescription.cs" />
     <Compile Include="Data\Gameplay\Universe\AreaData.cs" />
     <Compile Include="Data\Gameplay\Character\CharacterData.cs" />
     <Compile Include="Data\Gameplay\Battle\CombatData.cs" />

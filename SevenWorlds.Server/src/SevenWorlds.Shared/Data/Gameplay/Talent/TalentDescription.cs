@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Talent
 {
-    public class TalentBundle
+    [Serializable]
+    public class TalentDescription
     {
-        public List<List<TalentData>> TalentRows = new List<List<TalentData>>();
-
-        public TalentBundle()
-        {
-
-        }
+        public TalentId TalentId;
+        public string TextDescription;
+        public int MaxPoints;
     }
 }

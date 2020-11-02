@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Character;
 using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
@@ -44,10 +45,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
         // Resources
         public WorldResourcesData Resources;
 
-        public CharacterData(string playerName, CharacterType type)
+        public CharacterData(string playerName, CharacterDescription description)
         {
             PlayerName = playerName;
-            Type = type;
+            Type = description.CharacterType;
         }
     }
 }

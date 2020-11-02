@@ -68,7 +68,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
 
         }
@@ -83,14 +83,18 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
             }
 
         }
 
         public void AdminStopGameServer()
         {
+            try {
 
+            }
+            catch (Exception e) {
+                logService.Log(e);
+            }
         }
 
         public async Task ResetUniverseFakeData()
@@ -98,12 +102,12 @@ namespace SevenWorlds.GameServer.Hubs
             logService.Log("Recieved Admin Reset to Fake Data");
             try {
                 await serverManager.ResetFakeData();
+                logService.Log("Finished setting fake data");
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
             }
-            logService.Log("Finished setting fake data");
+            
         }
 
         #endregion
@@ -117,7 +121,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -144,14 +148,20 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
 
         public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType characterType)
         {
-            return await characterFactory.NewCharacter(playerName, worldId, characterType);
+            try {
+                return await characterFactory.NewCharacter(playerName, worldId, characterType);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                return false;
+            }
         }
 
 
@@ -166,7 +176,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -177,7 +187,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -188,7 +198,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -199,7 +209,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -210,7 +220,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -221,7 +231,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -232,7 +242,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -243,7 +253,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -254,7 +264,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -265,7 +275,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return null;
             }
         }
 
@@ -280,7 +290,7 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
+                return false;
             }
         }
 
@@ -291,7 +301,6 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
             }
         }
 
@@ -307,7 +316,6 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
             }
         }
 
@@ -319,22 +327,34 @@ namespace SevenWorlds.GameServer.Hubs
             }
             catch (Exception e) {
                 logService.Log(e);
-                throw;
             }
         }
 
         public void RequestStartQuest(string playerName, QuestId questId)
         {
-            var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
-            player.StartQuest(questId);
+            try {
+                var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
+                player.StartQuest(questId);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+            }
+            
         }
 
         public bool RequestCollectQuest(string playerName, QuestId questId)
         {
-            var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
-            var result = player.CollectQuest(questId);
-            hubService.PlayerDataSync(player);
-            return result;
+            try {
+                var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
+                var result = player.CollectQuest(questId);
+                hubService.PlayerDataSync(player);
+                return result;
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                return false;
+            }
+            
         }
         #endregion
     }

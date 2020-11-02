@@ -11,5 +11,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
     {
         Task<bool> NewCharacter(string playerName, string worldId, CharacterType characterType);
         void RefreshCharacter(CharacterData data);
+        void SetupStorage();
     }
 }
