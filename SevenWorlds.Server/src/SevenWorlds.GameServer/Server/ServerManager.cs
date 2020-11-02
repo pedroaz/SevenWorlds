@@ -2,6 +2,7 @@
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.Loop;
+using SevenWorlds.GameServer.Gameplay.Quests;
 using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
@@ -29,6 +30,7 @@ namespace SevenWorlds.GameServer.Server
         private readonly ISkillFactory skillFactory;
         private readonly IEquipmentFactory equipmentFactory;
         private readonly ITalentFactory talentFactory;
+        private readonly IQuestFactory questFactory;
 
         private ILogService logService { get; }
         private IGameFactory gameFactory { get; }
@@ -37,7 +39,7 @@ namespace SevenWorlds.GameServer.Server
 
         public ServerManager(ILogService logService, IGameLoopSimulator gameLoopSimulator,
             IGameFactory gameFactory, IConfigurator configurator, IMonsterDataFactory monsterDataFactory,
-            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory)
+            ISkillFactory skillFactory, IEquipmentFactory equipmentFactory, ITalentFactory talentFactory, IQuestFactory questFactory)
         {
             this.logService = logService;
             this.gameFactory = gameFactory;
@@ -46,6 +48,7 @@ namespace SevenWorlds.GameServer.Server
             this.skillFactory = skillFactory;
             this.equipmentFactory = equipmentFactory;
             this.talentFactory = talentFactory;
+            this.questFactory = questFactory;
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
@@ -88,8 +91,8 @@ namespace SevenWorlds.GameServer.Server
             equipmentFactory.SetupStorage();
             logService.Log("Setting up Talent factory", type: LogType.Initialization);
             talentFactory.SetupStorage();
-
-
+            logService.Log("Setting up Quest factory", type: LogType.Initialization);
+            questFactory.SetupStorage();
         }
 
         private async Task StartGameServer(string serverId)

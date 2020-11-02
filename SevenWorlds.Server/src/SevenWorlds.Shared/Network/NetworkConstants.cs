@@ -20,7 +20,6 @@ namespace SevenWorlds.Shared.Network
         public const string Request_Login = "RequestLogin";
         public const string Request_RegisterAccount = "RequestRegisterAccount";
         public const string Request_CreateCharacter = "RequestCreateCharacter";
-        
         // Syncs
         public const string Request_UniverseSync = "RequestUniverseSync";
         public const string Request_AllWorlds = "RequestAllWorlds";
@@ -31,14 +30,16 @@ namespace SevenWorlds.Shared.Network
         public const string Request_SectionBundle = "RequestSectionBundle";
         public const string Request_PlayerCharacters = "RequestPlayerCharacters";
         public const string Request_PlayerData = "RequestPlayerData";
+        public const string Request_PlayerQuests = "RequestPlayerQuests";
         // General
-        public const string Event_OnPing = "OnPing";
         public const string Request_SendChatMessage = "RequestSendChatMessage";
         // Actions
         public const string Request_MovementAction = "RequestMovementAction";
         public const string Request_StartBattleAction = "RequestStartBattleAction";
-        // Servers broadcast to clients
+        public const string Request_StartQuest = "RequestStartQuest";
+        // Servers Events to clients
         public const string Event_OnChatMessage = "OnChatMessage";
         public const string Event_OnAreaSync = "OnAreaSync";
+        public const string Event_OnPing = "OnPing";
     }
 }

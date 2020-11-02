@@ -36,7 +36,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
             return players;
         }
 
-        public PlayerData FindByName(string name)
+        public PlayerData FindByPlayerName(string name)
         {
             return players.Find(x => x.PlayerName == name);
         }

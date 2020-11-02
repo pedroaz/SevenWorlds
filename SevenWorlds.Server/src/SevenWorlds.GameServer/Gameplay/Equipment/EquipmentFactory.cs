@@ -14,7 +14,7 @@ namespace SevenWorlds.GameServer.Gameplay.Equipment
     {
         private readonly IConfigurator configurator;
 
-        private Dictionary<EquipmentType, EquipmentData> storage = new Dictionary<EquipmentType, EquipmentData>();
+        private Dictionary<EquipmentId, EquipmentData> storage = new Dictionary<EquipmentId, EquipmentData>();
 
         public EquipmentFactory(IConfigurator configurator)
         {
@@ -24,7 +24,7 @@ namespace SevenWorlds.GameServer.Gameplay.Equipment
         public void SetupStorage()
         {
             var json = File.ReadAllText(configurator.Config.EquipmentsStoragePath);
-            storage = JsonConvert.DeserializeObject<Dictionary<EquipmentType, EquipmentData>>(json);
+            storage = JsonConvert.DeserializeObject<Dictionary<EquipmentId, EquipmentData>>(json);
         }
     }
 }

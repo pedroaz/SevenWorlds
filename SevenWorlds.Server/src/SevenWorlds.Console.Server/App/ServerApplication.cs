@@ -15,6 +15,7 @@ using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
 using SevenWorlds.GameServer.Gameplay.Player;
+using SevenWorlds.GameServer.Gameplay.Quests;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Gameplay.Universe;
@@ -115,6 +116,8 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<SkillSimulator>().As<ISkillSimulator>().SingleInstance();
             builder.RegisterType<EquipmentFactory>().As<IEquipmentFactory>().SingleInstance();
             builder.RegisterType<TalentFactory>().As<ITalentFactory>().SingleInstance();
+            builder.RegisterType<QuestFactory>().As<IQuestFactory>().SingleInstance();
+            builder.RegisterType<QuestGiver>().As<IQuestGiver>().SingleInstance();
 
 
             container = builder.Build();

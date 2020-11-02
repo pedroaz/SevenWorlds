@@ -34,7 +34,7 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
 
             // Monsters
             foreach (var monsterType in startData.Monsters) {
-                MonsterData monsterData = monsterDataFactory.GetMonsterData(monsterType);
+                MonsterData monsterData = monsterDataFactory.GetMonsterData(monsterType, 1);
                 battleData.Monsters.Add(monsterData);
             }
 

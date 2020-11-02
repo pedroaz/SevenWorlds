@@ -73,7 +73,8 @@ namespace SevenWorlds.GameServer.Gameplay.Character
                 characterData.Skills
             ));
 
-            characterData.CombatData.AddEquipData(characterData.Equipments);
+
+            characterData.CombatData.AddEquipmentBundle(characterData.Equipments);
 
             foreach (var talent in characterData?.TalentBundle?.AvailableTalents) {
                 if (talent.IsEnabled) {

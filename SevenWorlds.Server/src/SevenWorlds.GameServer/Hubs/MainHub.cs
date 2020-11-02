@@ -4,12 +4,14 @@ using SevenWorlds.GameServer.Account;
 using SevenWorlds.GameServer.Gameplay.Actions.Base;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Gameplay.Quests;
 using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
@@ -29,6 +31,7 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly ILoginService loginService;
         private readonly IAccountService accountService;
         private readonly ICharacterFactory characterFactory;
+        private readonly IQuestGiver questGiver;
 
         public MainHub(
             ILogService logService,
@@ -37,7 +40,8 @@ namespace SevenWorlds.GameServer.Hubs
             IServerManager serverManager,
             ILoginService loginService,
             IAccountService accountService,
-            ICharacterFactory characterFactory)
+            ICharacterFactory characterFactory,
+            IQuestGiver questGiver)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
@@ -46,6 +50,7 @@ namespace SevenWorlds.GameServer.Hubs
             this.loginService = loginService;
             this.accountService = accountService;
             this.characterFactory = characterFactory;
+            this.questGiver = questGiver;
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -162,7 +167,7 @@ namespace SevenWorlds.GameServer.Hubs
         public PlayerData RequestPlayerData(string playerName)
         {
             try {
-                return gameStateService.PlayerCollection.FindByName(playerName);
+                return gameStateService.PlayerCollection.FindByPlayerName(playerName);
             }
             catch (Exception e) {
                 logService.Log(e);
@@ -247,6 +252,17 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
+        public List<QuestData> RequestPlayerQuests(string playerName, QuestStatus status)
+        {
+            try {
+                return questGiver.GetQuests(playerName, status);
+            }
+            catch (Exception e) {
+                logService.Log(e);
+                throw;
+            }
+        }
+
         #endregion
 
         #region General Client Requests
@@ -299,6 +315,12 @@ namespace SevenWorlds.GameServer.Hubs
                 logService.Log(e);
                 throw;
             }
+        }
+
+        public void RequestStartQuest(string playerName, QuestId questId)
+        {
+            var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
+            player.StartQuest(questId);
         }
 
 

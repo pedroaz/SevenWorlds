@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Monster;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,17 +11,21 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
     public class MonsterDataFactory : IMonsterDataFactory
     {
         private readonly IConfigurator configurator;
-        private Dictionary<MonsterType, MonsterData> storage = new Dictionary<MonsterType, MonsterData>();
+        private readonly ISkillFactory skillFactory;
+        private Dictionary<MonsterType, MonsterSeed> storage = new Dictionary<MonsterType, MonsterSeed>();
 
-        public MonsterDataFactory(IConfigurator configurator)
+        public MonsterDataFactory(IConfigurator configurator, ISkillFactory skillFactory)
         {
             this.configurator = configurator;
+            this.skillFactory = skillFactory;
         }
 
-        public MonsterData GetMonsterData(MonsterType monsterType)
+        public MonsterData GetMonsterData(MonsterType monsterType, int monsterLevel)
         {
             if (storage.ContainsKey(monsterType)) {
-                return storage[monsterType];
+                var seed = storage[monsterType];
+                MonsterData data = new MonsterData(seed, skillFactory.GetListOfSkillDatas(seed.Skills), monsterLevel);
+                return data;
             }
 
             return null;
@@ -29,7 +34,7 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
         public void SetupStorage()
         {
             var json = File.ReadAllText(configurator.Config.MonsterStoragePath);
-            storage = JsonConvert.DeserializeObject<Dictionary<MonsterType, MonsterData>>(json);
+            storage = JsonConvert.DeserializeObject<Dictionary<MonsterType, MonsterSeed>>(json);
         }
     }
 }

@@ -3,6 +3,7 @@ using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using SevenWorlds.Shared.UnityLog;
@@ -124,6 +125,16 @@ public class NetworkService : GameService<NetworkService>
     public static async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
     {
         return await Object.client.RequestCreateCharacter(playerName, worldId, type);
+    }
+
+    public static async Task<List<QuestData>> RequestPlayerQuests(string playerName, QuestStatus status)
+    {
+        return await Object.client.RequestPlayerQuests(playerName, status);
+    }
+
+    public static async Task RequestStartQuest(string playerName, QuestId questId)
+    {
+        await Object.client.RequestStartQuest(playerName, questId);
     }
 
 }

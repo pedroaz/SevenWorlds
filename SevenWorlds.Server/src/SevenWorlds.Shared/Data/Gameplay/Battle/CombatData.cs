@@ -1,4 +1,5 @@
 ﻿using SevenWorlds.Shared.Data.Base;
+using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,22 @@ namespace SevenWorlds.Shared.Data.Gameplay
             TargetIds = new List<string>();
         }
 
-        public void AddEquipData(EquipmentData equipmentData)
+        public void AddEquipmentBundle(EquipmentBundle bundle)
+        {
+            AddWeapon(bundle.Weapon);
+            AddEquipmentData(bundle.Head);
+            AddEquipmentData(bundle.Feet);
+            AddEquipmentData(bundle.OffHand);
+            AddEquipmentData(bundle.Pet);
+            AddEquipmentData(bundle.Aura);
+        }
+
+        private void AddWeapon(WeaponEquipmentData weaponData)
+        {
+            AddEquipmentData(weaponData);
+        }
+
+        private void AddEquipmentData(EquipmentData equipmentData)
         {
             if (equipmentData == null) return;
             MaxHp += equipmentData.MaxHp;

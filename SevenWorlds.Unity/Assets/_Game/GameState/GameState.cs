@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using SevenWorlds.Shared.Data.Sync;
 using System;
@@ -21,6 +22,8 @@ public class GameState : GameService<GameState>
     public SectionBundle sections;
     public List<CharacterData> characters;
     public CharacterData currentCharacter;
+    public List<QuestData> questList;
+    public QuestData currentQuest;
 
     private void Awake()
     {
@@ -37,6 +40,8 @@ public class GameState : GameService<GameState>
     public static SectionBundle Sections { get => Object.sections; set => Object.sections = value; }
     public static List<CharacterData> Characters { get => Object.characters; set => Object.characters = value; }
     public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
+    public static List<QuestData> QuestList { get => Object.questList; set => Object.questList = value;  }
+    public static QuestData CurrentQuest { get => Object.currentQuest; set => Object.currentQuest = value; }
 
     public static void SetCurrentWorldByWorldIndex(int worldIndex)
     {
@@ -70,5 +75,10 @@ public class GameState : GameService<GameState>
         Universe = response.UniverseSyncData.Universe;
         Worlds = response.UniverseSyncData.Worlds;
         Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
-    } 
+    }
+
+    public static async Task RefreshQuestList(QuestStatus status)
+    {
+        QuestList = await NetworkService.RequestPlayerQuests(PlayerName, status);
+    }
 }

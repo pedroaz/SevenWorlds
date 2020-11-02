@@ -8,5 +8,11 @@ namespace SevenWorlds.Shared.Data.Gameplay.Equipment
 {
     public class EquipmentBundle
     {
+        public WeaponEquipmentData Weapon;
+        public EquipmentData OffHand;
+        public EquipmentData Head;
+        public EquipmentData Feet;
+        public EquipmentData Aura;
+        public EquipmentData Pet;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SevenWorlds.Shared.UnityLog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,7 +13,9 @@ public enum GameTextId
     UniverseName,
     WorldName,
     SelectedCharacterType,
-    ZaiChat
+    ZaiChat,
+    SelectedQuestStatus,
+    RegisterResponse
 }
 
 public class GameText : SetupMonoBehaviour
@@ -40,7 +43,17 @@ public class GameText : SetupMonoBehaviour
 
     public void SetText(string t)
     {
-        if (textMesh == null) return;
+        if (textMesh == null) {
+            Setup();
+        }
+
+        if (textMesh == null) {
+            LOG.Log($"Tring to set text to null object {name}", LogLevel.Warning);
+            return;
+        }
+
+        
+
         textMesh.text = t;
     }
 

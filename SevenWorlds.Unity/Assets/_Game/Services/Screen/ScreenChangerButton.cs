@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,13 @@ public class ScreenChangerButton : GameButton
 
     public override async Task OnClick()
     {
-        await ScreenChangerService.ChangeScreen(screenId);
+        try {
+            await ScreenChangerService.ChangeScreen(screenId);
+        }
+        catch (System.Exception e) {
+
+            LOG.Log(e);
+        }
+        
     }
 }

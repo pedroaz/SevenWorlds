@@ -9,14 +9,14 @@ namespace SevenWorlds.Shared.Data.Gameplay
 {
     public enum EquipmentId
     {
-
+        Sword
     }
 
     public enum EquipmentType
     {
         MainHand,
         OffHand,
-        Hat,
+        Head,
         Feet,
         Aura,
         Pet
@@ -24,9 +24,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
     public class EquipmentData
     {
+        public string EquipmentName;
+        public EquipmentId EquipmentId;
         public EquipmentType Type;
         public int MaxHp;
-        public int BaseCD;
 
         public int Attack;
         public int Defense;

@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
-
-    
-
     [System.Serializable]
     public class PlayerData : NetworkData
     {
@@ -21,7 +18,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public List<QuestData> Quests;
         public PlayerRecord Record;
 
-
         public PlayerData(string playerName)
         {
             PlayerName = playerName;
@@ -33,6 +29,29 @@ namespace SevenWorlds.Shared.Data.Gameplay
             Quests = new List<QuestData>();
             AvailableCharacters = new List<CharacterType>();
             Record = new PlayerRecord();
+        }
+
+        public void KillMonster(MonsterType type, int amount)
+        {
+            foreach (var quest in Quests) {
+                quest.KillMonster(type, amount);
+            }
+        }
+
+        public void CollectResource(WorldResourceType type, int amount)
+        {
+            foreach (var quest in Quests) {
+                quest.CollectResource(type, amount);
+            }
+        }
+
+        public void StartQuest(QuestId questId)
+        {
+            var quest = Quests.Find(x => x.Description.QuestId == questId);
+            if (quest != null && quest.Status == QuestStatus.Available) {
+                quest.Status = QuestStatus.Ongoing;
+                quest.RefreshStatus();
+            }
         }
     }
 }

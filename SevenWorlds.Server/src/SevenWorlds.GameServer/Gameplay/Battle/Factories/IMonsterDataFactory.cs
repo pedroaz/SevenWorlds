@@ -10,6 +10,6 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
     public interface IMonsterDataFactory
     {
         void SetupStorage();
-        MonsterData GetMonsterData(MonsterType monsterType);
+        MonsterData GetMonsterData(MonsterType monsterType, int monsterLevel);
     }
 }

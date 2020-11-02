@@ -23,6 +23,9 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
         public List<SkillData> GetListOfSkillDatas(List<SkillType> types)
         {
             var skills = new List<SkillData>();
+
+            if (types == null) return skills;
+
             foreach (var item in types) {
                 skills.Add(storage[item]);
             }

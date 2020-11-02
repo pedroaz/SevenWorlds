@@ -29,16 +29,21 @@ public class RegistrationService : GameService<RegistrationService>
 
         var res = await NetworkService.Register(username, password, playerName);
 
+        string message = "";
+
         switch (res.response) {
             case RegisterAccountResponseType.Success:
-                LOG.Log($"Registration was ok!");
+                message = $"Registration was ok!";
                 break;
             case RegisterAccountResponseType.UserNameAlreadyExists:
-                LOG.Log($"Username already exists");
+                message = $"Username already exists";
                 break;
             case RegisterAccountResponseType.PlayerNameAlreadyExists:
-                LOG.Log($"Player name already exists");
+                message = $"Player name already exists";
                 break;
         }
+
+        LOG.Log(message);
+        UIEvents.ChangeGameText(GameTextId.RegisterResponse, message);
     }
 }

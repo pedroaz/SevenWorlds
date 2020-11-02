@@ -1,4 +1,5 @@
-﻿using SevenWorlds.Shared.UnityLog;
+﻿using SevenWorlds.Shared.Data.Gameplay.Quests;
+using SevenWorlds.Shared.UnityLog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +41,9 @@ public class ScreenChangerService : GameService<ScreenChangerService>
                 break;
             case ScreenId.CreateCharacter:
                 CharacterCreationScreenRefresherService.Refresh();
+                break;
+            case ScreenId.Quests:
+                await QuestScreenRefresherService.Refresh(QuestStatus.Available);
                 break;
         }
 

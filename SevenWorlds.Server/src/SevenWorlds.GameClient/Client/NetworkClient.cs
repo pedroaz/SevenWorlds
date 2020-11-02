@@ -4,6 +4,7 @@ using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
 using System;
@@ -100,6 +101,16 @@ namespace SevenWorlds.GameClient.Client
         public async Task<PlayerData> RequestPlayerData(string playerName)
         {
             return await hubProxy.Invoke<PlayerData>(NetworkConstants.Request_PlayerData, playerName);
+        }
+
+        public async Task<List<QuestData>> RequestPlayerQuests(string playerName, QuestStatus status)
+        {
+            return await hubProxy.Invoke<List<QuestData>>(NetworkConstants.Request_PlayerQuests, playerName, status);
+        }
+
+        public async Task RequestStartQuest(string playerName, QuestId questId)
+        {
+            await hubProxy.Invoke(NetworkConstants.Request_StartQuest, playerName, questId);
         }
 
 

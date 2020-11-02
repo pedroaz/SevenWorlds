@@ -211,6 +211,10 @@
     <Compile Include="Gameplay\Player\IPlayerCollection.cs" />
     <Compile Include="Gameplay\Actions\Base\PlayerActionCollection.cs" />
     <Compile Include="Gameplay\Player\PlayerCollection.cs" />
+    <Compile Include="Gameplay\Quests\IQuestFactory.cs" />
+    <Compile Include="Gameplay\Quests\IQuestGiver.cs" />
+    <Compile Include="Gameplay\Quests\QuestFactory.cs" />
+    <Compile Include="Gameplay\Quests\QuestGiver.cs" />
     <Compile Include="Gameplay\Section\ISectionCollection.cs" />
     <Compile Include="Gameplay\Section\SectionCollection.cs" />
     <Compile Include="Gameplay\Loop\GameLoopSimulator.cs" />

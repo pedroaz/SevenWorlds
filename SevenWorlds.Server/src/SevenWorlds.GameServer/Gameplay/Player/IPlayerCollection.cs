@@ -10,7 +10,7 @@ namespace SevenWorlds.GameServer.Gameplay.Player
 {
     public interface IPlayerCollection : IDataCollection<PlayerData>
     {
-        PlayerData FindByName(string playerName);
+        PlayerData FindByPlayerName(string playerName);
         PlayerData FindByConnectionId(string connectionId);
         void RemovePlayer(string playerName);
     }
