@@ -24,12 +24,12 @@ namespace SevenWorlds.GameServer.Gameplay.Quests
             this.questFactory = questFactory;
         }
 
-        public List<QuestData> GetQuests(string playerName, QuestStatus status)
+        public List<QuestData> GetQuests(string playerName)
         {
-            logService.Log($"Getting quest with status {status} from player: {playerName}");
+            logService.Log($"Getting quest from player: {playerName}");
             var player = RefreshPlayerQuests(playerName);
             if (player == null) return null;
-            return player.Quests.FindAll(x => x.Status == status);
+            return player.Quests;
         }
 
         public PlayerData RefreshPlayerQuests(string playerName)

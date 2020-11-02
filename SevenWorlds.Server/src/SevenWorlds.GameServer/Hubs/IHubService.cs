@@ -9,5 +9,6 @@ namespace SevenWorlds.GameServer.Hubs
         void RemovePlayerFromAreaGroup(string playerConnectionId, string areaId);
         void AddPlayerToAreaGroup(string playerConnectionId, string areaId);
         void BroadcastAreaSync(AreaSyncData data);
+        void PlayerDataSync(PlayerData data);
     }
 }

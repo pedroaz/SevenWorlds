@@ -105,7 +105,7 @@ namespace SevenWorlds.GameServer.Database
         #region Update
         public async Task UpdatePlayer(PlayerData playerData)
         {
-
+            await playersCollection.ReplaceOneAsync(x => x.Id == playerData.Id, playerData);
         }
 
         public async Task UpdateMasterData(MasterDataModel model)

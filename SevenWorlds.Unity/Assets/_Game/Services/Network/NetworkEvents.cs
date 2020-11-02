@@ -1,5 +1,6 @@
 ﻿using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
+using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 using System;
 
@@ -24,6 +25,13 @@ public static class NetworkEvents
     public static void FireAreaSyncEvent(NetworkArgs<AreaSyncData> args)
     {
         OnAreaSyncRecieved(null, args);
+    }
+
+    public delegate void PlayerDataSyncEventHandle(object sender, NetworkArgs<PlayerData> e);
+    public static event PlayerDataSyncEventHandle OnPlayerDataSyncRecieved = delegate { };
+    public static void FirePlayerDataSyncEvent(NetworkArgs<PlayerData> args)
+    {
+        OnPlayerDataSyncRecieved(null, args);
     }
 
 

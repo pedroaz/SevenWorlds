@@ -35,21 +35,28 @@ namespace SevenWorlds.GameClient.Client
 
         public void SetOnChatMessageHandler(Action<ChatMessageData> action)
         {
-            hubProxy.On<ChatMessageData>(NetworkConstants.Event_OnChatMessage, (data) => {
+            hubProxy.On<ChatMessageData>(NetworkConstants.On_ChatMessage, (data) => {
                 action(data);
             });
         }
 
         public void SetOnPingHandler(Action<bool> action)
         {
-            hubProxy.On<bool>(NetworkConstants.Event_OnPing, (data) => {
+            hubProxy.On<bool>(NetworkConstants.On_Ping, (data) => {
                 action(data);
             });
         }
 
         public void SetOnAreaSync(Action<AreaSyncData> action)
         {
-            hubProxy.On<AreaSyncData>(NetworkConstants.Event_OnAreaSync, (data) => {
+            hubProxy.On<AreaSyncData>(NetworkConstants.On_AreaSync, (data) => {
+                action(data);
+            });
+        }
+
+        public void SetOnPlayerDataSync(Action<PlayerData> action)
+        {
+            hubProxy.On<PlayerData>(NetworkConstants.On_PlayerDataSync, (data) => {
                 action(data);
             });
         }
@@ -103,15 +110,20 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<PlayerData>(NetworkConstants.Request_PlayerData, playerName);
         }
 
-        public async Task<List<QuestData>> RequestPlayerQuests(string playerName, QuestStatus status)
+        public async Task<List<QuestData>> RequestPlayerQuests(string playerName)
         {
-            return await hubProxy.Invoke<List<QuestData>>(NetworkConstants.Request_PlayerQuests, playerName, status);
+            return await hubProxy.Invoke<List<QuestData>>(NetworkConstants.Request_PlayerQuests, playerName);
         }
 
         public async Task RequestStartQuest(string playerName, QuestId questId)
         {
             await hubProxy.Invoke(NetworkConstants.Request_StartQuest, playerName, questId);
         }
+
+        public async Task RequestCollectQuest(string playerName, QuestId questId)
+        {
+            await hubProxy.Invoke(NetworkConstants.Request_CollectQuest, playerName, questId);
+        } 
 
 
         #endregion

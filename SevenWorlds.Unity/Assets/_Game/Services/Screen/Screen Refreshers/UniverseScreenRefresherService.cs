@@ -27,7 +27,7 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
         }
     }
 
-    public static async Task Refresh()
+    public static void Refresh()
     {
         SetZaiMessage();
         RefreshWorldButtons();

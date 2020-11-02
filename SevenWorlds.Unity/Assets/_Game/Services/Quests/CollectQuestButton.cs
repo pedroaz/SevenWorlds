@@ -1,18 +1,20 @@
-﻿using System.Collections;
+﻿using SevenWorlds.Shared.UnityLog;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CollectQuestButton : GameButton
 {
-    // Start is called before the first frame update
-    void Start()
+    public override async Task OnClick()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        try {
+            await NetworkService.RequestCollectQuest(GameState.PlayerName, GameState.CurrentQuest.Description.QuestId);
+            QuestScreenRefresherService.ShowQuestList();
+        }
+        catch (System.Exception e) {
+            LOG.Log(e);
+            throw;
+        }
     }
 }

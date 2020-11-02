@@ -53,5 +53,41 @@ namespace SevenWorlds.Shared.Data.Gameplay
                 quest.RefreshStatus();
             }
         }
+
+        public bool CollectQuest(QuestId questId)
+        {
+            var quest = Quests.Find(x => x.Description.QuestId == questId);
+            if (quest != null && quest.Status == QuestStatus.Completed) {
+
+                var description = quest.Description;
+
+                // Money
+                Money = description.MoneyReward;
+
+                // Character types
+                foreach (var characterType in description.CharacterTypeRewards) {
+                    if (!AvailableCharacters.Contains(characterType)) {
+                        AvailableCharacters.Add(characterType);
+                    }
+                }
+
+                // Spirit Relics
+                foreach (var relic in description.SpiritRelicIdsReward) {
+                    SpiritRelicIds.Add(relic);
+                }
+
+                // Physicas Relics
+                foreach (var relic in description.PhysicalRelicIdsReward) {
+                    PhysicalRelicsIds.Add(relic);
+                }
+
+
+                quest.Status = QuestStatus.Collected;
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

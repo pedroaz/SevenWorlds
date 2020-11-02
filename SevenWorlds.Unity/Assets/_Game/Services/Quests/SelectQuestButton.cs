@@ -17,7 +17,7 @@ public class SelectQuestButton : GameButton
 
     public override async Task OnClick()
     {
-        QuestScreenRefresherService.SelectQuest(questData);
+        QuestScreenRefresherService.RefreshSelectedQuest(questData);
         await base.OnClick();
     }
 }

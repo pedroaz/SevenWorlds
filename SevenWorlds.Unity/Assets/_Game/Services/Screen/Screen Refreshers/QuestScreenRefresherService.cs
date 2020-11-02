@@ -1,5 +1,7 @@
-﻿using SevenWorlds.Shared.Data.Gameplay.Quests;
+﻿using SevenWorlds.Shared.Data.Gameplay;
+using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.UnityLog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,31 +21,67 @@ public class QuestScreenRefresherService : GameService<QuestScreenRefresherServi
     public GameText selectedQuestName;
     public GameText selectedQuestDescription;
 
-    private QuestStatus statusView;
+    private QuestStatus status;
 
     private void Awake()
     {
         Object = this;
         startQuestButton = Resources.FindObjectsOfTypeAll<StartQuestButton>().FirstOrDefault();
         collectQuestButton = Resources.FindObjectsOfTypeAll<CollectQuestButton>().FirstOrDefault();
+        NetworkEvents.OnPlayerDataSyncRecieved += RefreshWhenPlayerDataRecieved;
+    }
+
+    private void OnDestroy()
+    {
+        NetworkEvents.OnPlayerDataSyncRecieved -= RefreshWhenPlayerDataRecieved;
+    }
+
+    private void RefreshWhenPlayerDataRecieved(object sender, NetworkArgs<PlayerData> e)
+    {
+        MainThreadHelperService.AddJob(() => {
+            try {
+                Object.RefreshQuestList(status);
+            }
+            catch (Exception ex) {
+                LOG.Log(ex);
+                throw;
+            }
+        });
+
+        
     }
 
     public static async Task Refresh(QuestStatus status)
     {
-        await GameState.RefreshQuestList(status);
+        await GameState.RefreshQuestList();
+        Object.RefreshQuestList(status);
+    }
+
+    private void RefreshQuestList(QuestStatus status)
+    {
+        LOG.Log($"Refreshing quest screen with status: {status}");
         UIEvents.ChangeGameText(GameTextId.SelectedQuestStatus, $"{status} quests");
         ShowQuestList();
 
-        Object.statusView = status;
+        Object.status = status;
 
         Object.questListScrollView.Clear();
 
-        foreach (var quest in GameState.QuestList) {
+        var filteredQuestList = GameState.QuestList.FindAll(x => x.Status == status);
+        foreach (var quest in filteredQuestList) {
             Object.CreateQuestButton(quest);
         }
     }
 
-    private static void ShowQuestList()
+    public static void RefreshSelectedQuest(QuestData questData)
+    {
+        ShowHideButtons();
+        Object.selectedQuestName.SetText(questData.Description.QuestName);
+        SetQuestText(questData);
+        ShowSelectedQuest();
+    }
+
+    public static void ShowQuestList()
     {
         Object.questListContainer.SetActive(true);
         Object.selectedQuestContainer.SetActive(false);
@@ -66,18 +104,12 @@ public class QuestScreenRefresherService : GameService<QuestScreenRefresherServi
         btn.SetQuest(data);
     }
 
-    public static void SelectQuest(QuestData questData)
-    {
-        ShowHideButtons();
-        Object.selectedQuestName.SetText(questData.Description.QuestName);
-        SetQuestText(questData);
-        ShowSelectedQuest();
-    }
+    
 
     private static void SetQuestText(QuestData questData)
     {
         string questText = "";
-        switch (Object.statusView) {
+        switch (Object.status) {
             case QuestStatus.Available:
             case QuestStatus.Ongoing:
                 questText = questData.Description.InitialDescription;
@@ -95,7 +127,7 @@ public class QuestScreenRefresherService : GameService<QuestScreenRefresherServi
         bool showStart = false;
         bool showCollect = false;
 
-        switch (Object.statusView) {
+        switch (Object.status) {
             case QuestStatus.Available:
                 showStart = true;
                 break;

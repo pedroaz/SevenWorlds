@@ -3,6 +3,7 @@ using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using SevenWorlds.Shared.Data.Sync;
+using SevenWorlds.Shared.UnityLog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,13 +23,7 @@ public class GameState : GameService<GameState>
     public SectionBundle sections;
     public List<CharacterData> characters;
     public CharacterData currentCharacter;
-    public List<QuestData> questList;
     public QuestData currentQuest;
-
-    private void Awake()
-    {
-        Object = this;
-    }
 
     public static PlayerData PlayerData { get => Object.playerData; set => Object.playerData = value; }
     public static string PlayerName { get => Object.playerData.PlayerName; }
@@ -40,8 +35,25 @@ public class GameState : GameService<GameState>
     public static SectionBundle Sections { get => Object.sections; set => Object.sections = value; }
     public static List<CharacterData> Characters { get => Object.characters; set => Object.characters = value; }
     public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
-    public static List<QuestData> QuestList { get => Object.questList; set => Object.questList = value;  }
+    public static List<QuestData> QuestList { get => Object.playerData.Quests; set => Object.playerData.Quests = value; }
     public static QuestData CurrentQuest { get => Object.currentQuest; set => Object.currentQuest = value; }
+
+    private void Awake()
+    {
+        Object = this;
+        NetworkEvents.OnPlayerDataSyncRecieved += PlayerDataSync;
+    }
+
+    private void OnDestroy()
+    {
+        NetworkEvents.OnPlayerDataSyncRecieved -= PlayerDataSync;
+    }
+
+    private void PlayerDataSync(object sender, NetworkArgs<PlayerData> e)
+    {
+        LOG.Log("Recieved player data sync");
+        PlayerData = e.Data;
+    }
 
     public static void SetCurrentWorldByWorldIndex(int worldIndex)
     {
@@ -78,8 +90,9 @@ public class GameState : GameService<GameState>
         Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
     }
 
-    public static async Task RefreshQuestList(QuestStatus status)
+    public static async Task RefreshQuestList()
     {
-        QuestList = await NetworkService.RequestPlayerQuests(PlayerName, status);
+        QuestList = await NetworkService.RequestPlayerQuests(PlayerName);
     }
+
 }

@@ -9,6 +9,6 @@ namespace SevenWorlds.GameServer.Gameplay.Quests
 {
     public interface IQuestGiver
     {
-        List<QuestData> GetQuests(string playerName, QuestStatus status);
+        List<QuestData> GetQuests(string playerName);
     }
 }

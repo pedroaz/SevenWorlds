@@ -45,6 +45,11 @@ namespace SevenWorlds.GameServer.Hubs
             hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
         }
 
+        public void PlayerDataSync(PlayerData data)
+        {
+            hubContext.Clients.Client(data.ConnectionId).OnPlayerDataSync(data);
+        }
+
         #endregion
     }
 }

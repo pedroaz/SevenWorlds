@@ -33,6 +33,7 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly ICharacterFactory characterFactory;
         private readonly IQuestGiver questGiver;
         private readonly IDisconnectService disconnectService;
+        private readonly IHubService hubService;
 
         public MainHub(
             ILogService logService,
@@ -43,7 +44,8 @@ namespace SevenWorlds.GameServer.Hubs
             IAccountService accountService,
             ICharacterFactory characterFactory,
             IQuestGiver questGiver,
-            IDisconnectService disconnectService)
+            IDisconnectService disconnectService,
+            IHubService hubService)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
@@ -54,6 +56,7 @@ namespace SevenWorlds.GameServer.Hubs
             this.characterFactory = characterFactory;
             this.questGiver = questGiver;
             this.disconnectService = disconnectService;
+            this.hubService = hubService;
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -255,10 +258,10 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
-        public List<QuestData> RequestPlayerQuests(string playerName, QuestStatus status)
+        public List<QuestData> RequestPlayerQuests(string playerName)
         {
             try {
-                return questGiver.GetQuests(playerName, status);
+                return questGiver.GetQuests(playerName);
             }
             catch (Exception e) {
                 logService.Log(e);
@@ -326,7 +329,13 @@ namespace SevenWorlds.GameServer.Hubs
             player.StartQuest(questId);
         }
 
-
+        public bool RequestCollectQuest(string playerName, QuestId questId)
+        {
+            var player = gameStateService.PlayerCollection.FindByPlayerName(playerName);
+            var result = player.CollectQuest(questId);
+            hubService.PlayerDataSync(player);
+            return result;
+        }
         #endregion
     }
 }

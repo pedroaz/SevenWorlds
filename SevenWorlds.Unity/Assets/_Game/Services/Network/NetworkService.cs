@@ -71,6 +71,14 @@ public class NetworkService : GameService<NetworkService>
                 });
             }
         );
+
+        client.SetOnPlayerDataSync(
+            (data) => {
+                NetworkEvents.FirePlayerDataSyncEvent(new NetworkArgs<PlayerData>() {
+                    Data = data
+                });
+            }
+        );
     }
 
     private void OnDestroy()
@@ -127,14 +135,19 @@ public class NetworkService : GameService<NetworkService>
         return await Object.client.RequestCreateCharacter(playerName, worldId, type);
     }
 
-    public static async Task<List<QuestData>> RequestPlayerQuests(string playerName, QuestStatus status)
+    public static async Task<List<QuestData>> RequestPlayerQuests(string playerName)
     {
-        return await Object.client.RequestPlayerQuests(playerName, status);
+        return await Object.client.RequestPlayerQuests(playerName);
     }
 
     public static async Task RequestStartQuest(string playerName, QuestId questId)
     {
         await Object.client.RequestStartQuest(playerName, questId);
+    }
+
+    public static async Task RequestCollectQuest(string playerName, QuestId questId)
+    {
+        await Object.client.RequestCollectQuest(playerName, questId);
     }
 
 }

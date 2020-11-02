@@ -14,6 +14,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Quests
         public Dictionary<WorldResourceType, int> ResourcesToCollect = new Dictionary<WorldResourceType, int>();
         public Dictionary<MonsterType, int> MonstersToKill = new Dictionary<MonsterType, int>();
 
+        // Rewards
         public List<CharacterType> CharacterTypeRewards;
         public int MoneyReward;
         public List<string> SpiritRelicIdsReward = new List<string>();

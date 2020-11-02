@@ -37,9 +37,11 @@ namespace SevenWorlds.Shared.Network
         public const string Request_MovementAction = "RequestMovementAction";
         public const string Request_StartBattleAction = "RequestStartBattleAction";
         public const string Request_StartQuest = "RequestStartQuest";
+        public const string Request_CollectQuest = "RequestCollectQuest";
         // Servers Events to clients
-        public const string Event_OnChatMessage = "OnChatMessage";
-        public const string Event_OnAreaSync = "OnAreaSync";
-        public const string Event_OnPing = "OnPing";
+        public const string On_ChatMessage = "OnChatMessage";
+        public const string On_AreaSync = "OnAreaSync";
+        public const string On_Ping = "OnPing";
+        public const string On_PlayerDataSync = "OnPlayerDataSync";
     }
 }

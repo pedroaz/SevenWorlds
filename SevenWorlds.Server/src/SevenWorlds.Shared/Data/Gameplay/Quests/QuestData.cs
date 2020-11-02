@@ -19,13 +19,11 @@ namespace SevenWorlds.Shared.Data.Gameplay.Quests
     [Serializable]
     public class QuestData
     {
+        public QuestStatus Status;
         public QuestDescription Description;
-        private QuestStatus status;
 
         private Dictionary<MonsterType, int> monstersKilled = new Dictionary<MonsterType, int>();
         private Dictionary<WorldResourceType, int> resourcesCollected = new Dictionary<WorldResourceType, int>();
-
-        public QuestStatus Status { get => status; set => status = value; }
 
         public QuestData(QuestDescription description)
         {
