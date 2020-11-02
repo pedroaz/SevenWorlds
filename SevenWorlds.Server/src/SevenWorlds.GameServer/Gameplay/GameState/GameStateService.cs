@@ -122,7 +122,6 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
                 return;
             }
 
-            // TODO Need to improve this when it crashses...
             PlayerCollection.RemovePlayer(playerData.PlayerName);
             CharacterCollection.RemovePlayerCharacters(playerData.PlayerName);
         }

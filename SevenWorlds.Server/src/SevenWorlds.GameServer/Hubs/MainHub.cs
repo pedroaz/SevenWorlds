@@ -32,6 +32,7 @@ namespace SevenWorlds.GameServer.Hubs
         private readonly IAccountService accountService;
         private readonly ICharacterFactory characterFactory;
         private readonly IQuestGiver questGiver;
+        private readonly IDisconnectService disconnectService;
 
         public MainHub(
             ILogService logService,
@@ -41,7 +42,8 @@ namespace SevenWorlds.GameServer.Hubs
             ILoginService loginService,
             IAccountService accountService,
             ICharacterFactory characterFactory,
-            IQuestGiver questGiver)
+            IQuestGiver questGiver,
+            IDisconnectService disconnectService)
         {
             this.logService = logService;
             this.gameStateService = gameStateService;
@@ -51,13 +53,14 @@ namespace SevenWorlds.GameServer.Hubs
             this.accountService = accountService;
             this.characterFactory = characterFactory;
             this.questGiver = questGiver;
+            this.disconnectService = disconnectService;
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
             try {
                 logService.Log($"Someone disconnected! {Context.ConnectionId}");
-                gameStateService.RemovePlayerFromTheGame(Context.ConnectionId);
+                disconnectService.DisconnectPlayer(Context.ConnectionId);
                 return base.OnDisconnected(stopCalled);
             }
             catch (Exception e) {

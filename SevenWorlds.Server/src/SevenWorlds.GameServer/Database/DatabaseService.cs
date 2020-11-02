@@ -128,5 +128,12 @@ namespace SevenWorlds.GameServer.Database
             var model = await playersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
             return model.Data;
         }
+
+        public async Task UpdatePlayer(PlayerData playerData)
+        {
+            var filter = Builders<PlayerModel>.Filter.Eq("PlayerName", playerData.PlayerName);
+            var update = Builders<PlayerModel>.Update.Set("Data", playerData);
+            await playersCollection.UpdateOneAsync(filter, update);
+        }
     }
 }

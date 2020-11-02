@@ -70,8 +70,24 @@ public class QuestScreenRefresherService : GameService<QuestScreenRefresherServi
     {
         ShowHideButtons();
         Object.selectedQuestName.SetText(questData.Description.QuestName);
-        Object.selectedQuestDescription.SetText(questData.Description.QuestTextDescription);
+        SetQuestText(questData);
         ShowSelectedQuest();
+    }
+
+    private static void SetQuestText(QuestData questData)
+    {
+        string questText = "";
+        switch (Object.statusView) {
+            case QuestStatus.Available:
+            case QuestStatus.Ongoing:
+                questText = questData.Description.InitialDescription;
+                break;
+            case QuestStatus.Completed:
+            case QuestStatus.Collected:
+                questText = questData.Description.CompletedDescription;
+                break;
+        }
+        Object.selectedQuestDescription.SetText(questText);
     }
 
     private static void ShowHideButtons()
@@ -86,9 +102,9 @@ public class QuestScreenRefresherService : GameService<QuestScreenRefresherServi
             case QuestStatus.Ongoing:
                 break;
             case QuestStatus.Completed:
+                showCollect = true;
                 break;
             case QuestStatus.Collected:
-                showCollect = true;
                 break;
         }
 

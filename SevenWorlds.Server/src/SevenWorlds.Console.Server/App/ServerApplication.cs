@@ -118,6 +118,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<TalentFactory>().As<ITalentFactory>().SingleInstance();
             builder.RegisterType<QuestFactory>().As<IQuestFactory>().SingleInstance();
             builder.RegisterType<QuestGiver>().As<IQuestGiver>().SingleInstance();
+            builder.RegisterType<DisconnectService>().As<IDisconnectService>().SingleInstance();
 
 
             container = builder.Build();

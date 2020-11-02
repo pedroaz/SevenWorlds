@@ -8,7 +8,8 @@ namespace SevenWorlds.Shared.Data.Gameplay.Quests
     {
         public QuestId QuestId;
         public string QuestName;
-        public string QuestTextDescription;
+        public string InitialDescription;
+        public string CompletedDescription;
         public bool IsInstant;
         public Dictionary<WorldResourceType, int> ResourcesToCollect = new Dictionary<WorldResourceType, int>();
         public Dictionary<MonsterType, int> MonstersToKill = new Dictionary<MonsterType, int>();

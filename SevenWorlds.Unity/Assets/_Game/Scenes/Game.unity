@@ -989,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5452432290070278603, guid: 533f64b71d4a3c449b2917f2991f992e, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5452432290070278603, guid: 533f64b71d4a3c449b2917f2991f992e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7369,7 +7369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9193301587807586271, guid: 533f64b71d4a3c449b2917f2991f992e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1958777641635172079, guid: 533f64b71d4a3c449b2917f2991f992e, type: 3}
@@ -14363,11 +14363,12 @@ MonoBehaviour:
       Y: 0
     Skills: 
   questList: []
-  selectedQuest:
+  currentQuest:
     Description:
       QuestId: 0
       QuestName: 
-      QuestTextDescription: 
+      InitialDescription: 
+      CompletedDescription: 
       IsInstant: 0
       CharacterTypeRewards: 
       MoneyReward: 0
