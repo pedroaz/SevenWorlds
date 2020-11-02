@@ -34,6 +34,11 @@ namespace SevenWorlds.GameServer.Gameplay.Area
             return areas.Find(x => x.Position.Equals(position));
         }
 
+        public AreaData FindCityOfWorld(string worldId)
+        {
+            return areas.Find(x => (x.WorldId == worldId && x.Type == AreaType.City));
+        }
+
         public List<AreaData> GetAll()
         {
             return areas;

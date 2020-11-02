@@ -12,5 +12,6 @@ namespace SevenWorlds.GameServer.Gameplay.Area
     {
         List<AreaData> GetAllAreasFromWorld(string worldId);
         AreaData FindByPosition(Position position);
+        AreaData FindCityOfWorld(string worldId);
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnterWorldButton : GameButton
 {
-    public override Task OnClick()
+    public override async Task OnClick()
     {
-        return base.OnClick();
+        await ScreenChangerService.ChangeScreen(ScreenId.Area);
     }
 }

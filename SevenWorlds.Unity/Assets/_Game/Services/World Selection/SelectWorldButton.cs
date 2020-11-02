@@ -26,6 +26,7 @@ public class SelectWorldButton : GameButton
             }
             else {
                 LOG.Log($"Found Character!");
+                GameState.CurrentCharacter = character;
                 await ScreenChangerService.ChangeScreen(ScreenId.SelectCharacter);
             }
         }

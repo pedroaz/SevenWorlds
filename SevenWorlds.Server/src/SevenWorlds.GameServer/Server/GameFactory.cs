@@ -5,6 +5,7 @@ using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.GameServer.Utils.Rng;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Section;
@@ -21,6 +22,7 @@ namespace SevenWorlds.GameServer.Server
         private readonly ILogService logService;
         private readonly IConfigurator configurator;
         private readonly ICharacterFactory characterFactory;
+        private readonly IRandomService randomService;
         private readonly IGameStateService gameStateService;
         private readonly UniverseDataFactory universeDataFactory = new UniverseDataFactory();
 
@@ -29,13 +31,15 @@ namespace SevenWorlds.GameServer.Server
             IDatabaseService databaseService,
             ILogService logService,
             IConfigurator configurator,
-            ICharacterFactory characterFactory)
+            ICharacterFactory characterFactory,
+            IRandomService randomService)
         {
             this.gameStateService = gameStateService;
             this.databaseService = databaseService;
             this.logService = logService;
             this.configurator = configurator;
             this.characterFactory = characterFactory;
+            this.randomService = randomService;
         }
 
         public void DumpMasterData()
@@ -90,13 +94,7 @@ namespace SevenWorlds.GameServer.Server
             gameStateService.SectionCollection.SetBundle(masterData.Sections);
         }
 
-        public string NewId()
-        {
-            return Guid.NewGuid().ToString();
-        }
-
         #region Fake
-
 
         public async Task SetFakeData()
         {
@@ -114,38 +112,18 @@ namespace SevenWorlds.GameServer.Server
             logService.Log("Finish updating databases");
         }
 
-
-
-        private List<AccountModel> GenerateFakeAccounts()
-        {
-            return new List<AccountModel>() {
-                new AccountModel() {
-                    PlayerName = "Pedro",
-                    Username = "1",
-                    Password = "1",
-                },
-                new AccountModel() {
-                    PlayerName = "Carol",
-                    Username = "2",
-                    Password = "2",
-                },
-            };
-        }
-
-        private List<PlayerData> GenerateFakePlayers()
-        {
-            return new List<PlayerData>() {
-                new PlayerData("Pedro") {
-                }
-            };
-        }
-
-
         private MasterDataModel GenerateFakeMasterData()
         {
             List<UniverseData> universes = CreateNewUniverse("First Universe");
             List<WorldData> worlds = CreateSevenWorlds(universes[0]);
-            List<AreaData> areas = CreateFakeAreas(worlds[0]);
+
+            List<AreaData> areas = new List<AreaData>();
+
+
+            foreach (var world in worlds) {
+                areas.AddRange(CreateFakeAreas(world));
+            }
+
             SectionBundle bundle = CreateFakeSectionBundle(areas[0]);
 
             MasterDataModel masterData = new MasterDataModel() {
@@ -174,12 +152,15 @@ namespace SevenWorlds.GameServer.Server
         {
             List<AreaData> areas = new List<AreaData>();
 
+            int cityX = randomService.GetRandomInt(0, 10);
+            int cityY = randomService.GetRandomInt(0, 10);
+
             for (int x = 0; x < 10; x++) {
                 for (int y = 0; y < 10; y++) {
 
                     var areaType = AreaType.Battleground;
 
-                    if (x == 0 && y == 0) {
+                    if (x == cityX && y == cityY) {
                         areaType = AreaType.City;
                     }
 

@@ -24,6 +24,7 @@ using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
+using SevenWorlds.GameServer.Utils.Rng;
 using System;
 using System.IO;
 using System.Linq;
@@ -119,6 +120,7 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<QuestFactory>().As<IQuestFactory>().SingleInstance();
             builder.RegisterType<QuestGiver>().As<IQuestGiver>().SingleInstance();
             builder.RegisterType<DisconnectService>().As<IDisconnectService>().SingleInstance();
+            builder.RegisterType<RandomService>().As<IRandomService>().SingleInstance();
 
 
             container = builder.Build();

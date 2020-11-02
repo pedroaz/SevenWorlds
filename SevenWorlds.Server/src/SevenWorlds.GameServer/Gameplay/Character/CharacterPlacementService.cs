@@ -20,7 +20,10 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 
         public void PlaceAllPlayerCharactersIntoTheGame(string playerName)
         {
-           
+            foreach (CharacterData character in gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName)) {
+                AreaData city = gameStateService.AreaCollection.FindCityOfWorld(character.WorldId);
+                gameStateService.MovePlayerToArea(character.Id, city.Id);
+            }
         }
     }
 }
