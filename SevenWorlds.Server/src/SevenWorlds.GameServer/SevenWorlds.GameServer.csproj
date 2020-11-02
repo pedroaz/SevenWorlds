@@ -174,11 +174,9 @@
     <Compile Include="Account\LoginService.cs" />
     <Compile Include="Database\Models\AccountModel.cs" />
     <Compile Include="Database\Models\BaseModel.cs" />
-    <Compile Include="Database\Models\CharacterModel.cs" />
     <Compile Include="Database\DatabaseService.cs" />
     <Compile Include="Database\IDatabaseService.cs" />
     <Compile Include="Database\Models\MasterDataModel.cs" />
-    <Compile Include="Database\Models\PlayerModel.cs" />
     <Compile Include="Gameplay\Actions\Base\PlayerActionBundle.cs" />
     <Compile Include="Gameplay\Actions\Executor\IPlayerActionExecutor.cs" />
     <Compile Include="Gameplay\Actions\Executor\PlayerActionExecutor.cs" />

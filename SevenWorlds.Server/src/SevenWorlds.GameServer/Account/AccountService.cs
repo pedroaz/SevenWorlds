@@ -42,9 +42,7 @@ namespace SevenWorlds.GameServer.Account
                 Password = password
             });
 
-            await databaseService.InsertPlayer(new PlayerModel() {
-                PlayerName = playerName,
-                Data = new PlayerData(playerName)
+            await databaseService.InsertPlayer(new PlayerData(playerName) {
             });
         }
 

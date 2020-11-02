@@ -15,8 +15,8 @@ namespace SevenWorlds.GameServer.Database
         private readonly IMongoDatabase database;
         private IMongoCollection<AccountModel> accountsCollection;
         private IMongoCollection<MasterDataModel> masterDataCollection;
-        private IMongoCollection<CharacterModel> charactersCollection;
-        private IMongoCollection<PlayerModel> playersCollection;
+        private IMongoCollection<CharacterData> charactersCollection;
+        private IMongoCollection<PlayerData> playersCollection;
 
         private const string accountsDbName = "Accounts";
         private const string masterDataDbName = "MasterDatas";
@@ -32,8 +32,8 @@ namespace SevenWorlds.GameServer.Database
 
             accountsCollection = database.GetCollection<AccountModel>(accountsDbName);
             masterDataCollection = database.GetCollection<MasterDataModel>(masterDataDbName);
-            charactersCollection = database.GetCollection<CharacterModel>(charactersDbName);
-            playersCollection = database.GetCollection<PlayerModel>(playersDbName);
+            charactersCollection = database.GetCollection<CharacterData>(charactersDbName);
+            playersCollection = database.GetCollection<PlayerData>(playersDbName);
         }
 
         #region Delete
@@ -69,20 +69,14 @@ namespace SevenWorlds.GameServer.Database
         public async Task<PlayerData> GetPlayerData(string playerName)
         {
             logService.Log($"Getting Player Data from Database with PlayerName: {playerName}", type: LogType.Database);
-            var model = await playersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
-            return model.Data;
+            return await playersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
         }
 
         public async Task<List<CharacterData>> GetAllCharactersFromPlayer(string playerName)
         {
             logService.Log($"Getting all character for player: {playerName}", type: LogType.Database);
-            var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
-            if (model == null || model.Characters == null) {
-                logService.Log($"Did not found any characters for player: {playerName}", type: LogType.Database);
-                return new List<CharacterData>();
-            }
-            logService.Log($"Found {model.Characters.Count} characters", type: LogType.Database);
-            return model.Characters;
+            var characters = await charactersCollection.FindAsync(x => x.PlayerName == playerName);
+            return characters.ToList();
         }
         #endregion
 
@@ -97,38 +91,21 @@ namespace SevenWorlds.GameServer.Database
             await accountsCollection.InsertOneAsync(model);
         }
 
-        public async Task InsertCharacter(string playerName, CharacterData data)
+        public async Task InsertCharacter(CharacterData data)
         {
-            logService.Log($"Inserting character into the database for player: {playerName}");
-            var model = await charactersCollection.Find(x => x.PlayerName == playerName).FirstOrDefaultAsync();
-            // Adding first character
-            if (model == null) {
-                model = new CharacterModel() {
-                    PlayerName = playerName,
-                    Characters = new List<CharacterData>() {
-                        data
-                    }
-                };
-                await charactersCollection.InsertOneAsync(model);
-            }
-            else {
-                model.Characters.Add(data);
-                var filter = Builders<CharacterModel>.Filter.Eq("PlayerName", playerName);
-                await charactersCollection.ReplaceOneAsync(filter, model);
-            }
+            logService.Log($"Inserting character into the database for player: {data.PlayerName}");
+            await charactersCollection.InsertOneAsync(data);
         }
-        public async Task InsertPlayer(PlayerModel model)
+        public async Task InsertPlayer(PlayerData data)
         {
-            await playersCollection.InsertOneAsync(model);
+            await playersCollection.InsertOneAsync(data);
         }
         #endregion
 
         #region Update
         public async Task UpdatePlayer(PlayerData playerData)
         {
-            var filter = Builders<PlayerModel>.Filter.Eq("PlayerName", playerData.PlayerName);
-            var update = Builders<PlayerModel>.Update.Set("Data", playerData);
-            await playersCollection.UpdateOneAsync(filter, update);
+
         }
 
         public async Task UpdateMasterData(MasterDataModel model)

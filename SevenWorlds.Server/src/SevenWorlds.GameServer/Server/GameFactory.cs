@@ -132,13 +132,10 @@ namespace SevenWorlds.GameServer.Server
             };
         }
 
-        private List<PlayerModel> GenerateFakePlayers()
+        private List<PlayerData> GenerateFakePlayers()
         {
-            return new List<PlayerModel>() {
-                new PlayerModel() {
-                    PlayerName = "Pedro",
-                    Data = new PlayerData("Pedro") {
-                    }
+            return new List<PlayerData>() {
+                new PlayerData("Pedro") {
                 }
             };
         }

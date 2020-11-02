@@ -47,12 +47,10 @@ public class GameText : SetupMonoBehaviour
             Setup();
         }
 
-        if (textMesh == null) {
+        if (textMesh == null || t == null) {
             LOG.Log($"Tring to set text to null object {name}", LogLevel.Warning);
             return;
         }
-
-        
 
         textMesh.text = t;
     }

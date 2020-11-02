@@ -15,12 +15,12 @@ namespace SevenWorlds.GameServer.Database
 
         // Player
         Task<PlayerData> GetPlayerData(string playerName);
-        Task InsertPlayer(PlayerModel model);
+        Task InsertPlayer(PlayerData model);
         Task UpdatePlayer(PlayerData playerData);
 
         // Characters
         Task<List<CharacterData>> GetAllCharactersFromPlayer(string playerName);
-        Task InsertCharacter(string playerName, CharacterData data);
+        Task InsertCharacter(CharacterData data);
 
         // Master
         Task<MasterDataModel> GetMasterData(string serverId);

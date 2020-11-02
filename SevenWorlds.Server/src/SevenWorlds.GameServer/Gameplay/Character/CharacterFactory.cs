@@ -50,7 +50,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             // Refresh
             RefreshCharacter(characterData);
 
-            await databaseService.InsertCharacter(playerName, characterData);
+            await databaseService.InsertCharacter(characterData);
 
             return true;
         }
