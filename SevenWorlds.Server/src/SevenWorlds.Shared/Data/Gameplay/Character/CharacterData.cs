@@ -50,5 +50,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
             PlayerName = playerName;
             Type = description.CharacterType;
         }
+
+        public int GetAvailableTalentPoints()
+        {
+            return Level - TalentBundle.GetAmountOfSpentTalentPoints();
+        }
     }
 }

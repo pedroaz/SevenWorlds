@@ -9,19 +9,23 @@ public class CreateCharacterButton : GameButton
 {
     public override async Task OnClick()
     {
-
         try {
             if (!CharacterCreationScreenRefresherService.GetHasCharacterTypeSelected()) return;
 
             var characterType = CharacterCreationScreenRefresherService.GetSelectedCharacterType();
 
             LOG.Log($"Sending a request to create character: {GameState.PlayerName} on {GameState.CurrentWorld.Id} and type {characterType}");
-            var result = await NetworkService.RequestCreateCharacter(
+            var characterData = await NetworkService.RequestCreateCharacter(
                 GameState.PlayerName,
                 GameState.CurrentWorld.Id,
                 characterType
             );
-            LOG.Log($"Character creation result was: {result}");
+
+            if(characterData != null) {
+                LOG.Log($"Character creation was ok");
+                GameState.CurrentCharacter = characterData;
+                await ScreenChangerService.ChangeScreen(ScreenId.Area);
+            }
         }
         catch (System.Exception e) {
             LOG.Log(e);

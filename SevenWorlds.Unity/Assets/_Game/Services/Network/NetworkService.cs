@@ -130,7 +130,7 @@ public class NetworkService : GameService<NetworkService>
         return data;
     }
 
-    public static async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
+    public static async Task<CharacterData> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
     {
         return await Object.client.RequestCreateCharacter(playerName, worldId, type);
     }

@@ -22,7 +22,7 @@ public class GameState : GameService<GameState>
     public AreaData currentArea;
     public SectionBundle sections;
     public List<CharacterData> characters;
-    public CharacterData currentCharacter;
+    private CharacterData currentCharacter;
     public QuestData currentQuest;
 
     public static PlayerData PlayerData { get => Object.playerData; set => Object.playerData = value; }
@@ -37,6 +37,7 @@ public class GameState : GameService<GameState>
     public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
     public static List<QuestData> QuestList { get => Object.playerData.Quests; set => Object.playerData.Quests = value; }
     public static QuestData CurrentQuest { get => Object.currentQuest; set => Object.currentQuest = value; }
+    public static CharacterData CurrentCharacter { get => Object.currentCharacter; set => Object.currentCharacter = value; }
 
     private void Awake()
     {
@@ -87,7 +88,8 @@ public class GameState : GameService<GameState>
         PlayerData = response.PlayerData;
         Universe = response.UniverseSyncData.Universe;
         Worlds = response.UniverseSyncData.Worlds;
-        Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
+        var c = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
+        Characters = c;
     }
 
     public static async Task RefreshQuestList()

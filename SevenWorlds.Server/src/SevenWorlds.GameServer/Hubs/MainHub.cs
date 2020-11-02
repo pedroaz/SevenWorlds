@@ -153,14 +153,14 @@ namespace SevenWorlds.GameServer.Hubs
         }
 
 
-        public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType characterType)
+        public async Task<CharacterData> RequestCreateCharacter(string playerName, string worldId, CharacterType characterType)
         {
             try {
                 return await characterFactory.NewCharacter(playerName, worldId, characterType);
             }
             catch (Exception e) {
                 logService.Log(e);
-                return false;
+                return null;
             }
         }
 
@@ -260,7 +260,8 @@ namespace SevenWorlds.GameServer.Hubs
         public List<CharacterData> RequestPlayerCharacters(string playerName)
         {
             try {
-                return gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+                var characters = gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+                return characters;
             }
             catch (Exception e) {
                 logService.Log(e);

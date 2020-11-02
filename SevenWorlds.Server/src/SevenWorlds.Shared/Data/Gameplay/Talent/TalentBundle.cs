@@ -10,6 +10,19 @@ namespace SevenWorlds.Shared.Data.Gameplay.Talent
     {
         public List<List<TalentData>> TalentRows = new List<List<TalentData>>();
 
+        public int GetAmountOfSpentTalentPoints()
+        {
+            int amount = 0;
+
+            foreach (var row in TalentRows) {
+                foreach (var data in row) {
+                    amount += data.SpentPoints;
+                }
+            }
+
+            return amount;
+        }
+
         public TalentBundle()
         {
 

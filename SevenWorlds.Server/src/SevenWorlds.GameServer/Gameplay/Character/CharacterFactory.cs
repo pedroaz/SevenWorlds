@@ -39,7 +39,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             this.talentFactory = talentFactory;
         }
 
-        public async Task<bool> NewCharacter(string playerName, string worldId, CharacterType characterType)
+        public async Task<CharacterData> NewCharacter(string playerName, string worldId, CharacterType characterType)
         {
             logService.Log($"Creating new character for: {playerName} on world: {worldId}");
 
@@ -72,7 +72,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 
             logService.Log("Finished creating character");
 
-            return true;
+            return characterData;
         }
 
         public void RefreshCharacter(CharacterData characterData)

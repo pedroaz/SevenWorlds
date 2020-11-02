@@ -100,9 +100,9 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<List<CharacterData>>(NetworkConstants.Request_PlayerCharacters, playerName);
         }
 
-        public async Task<bool> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
+        public async Task<CharacterData> RequestCreateCharacter(string playerName, string worldId, CharacterType type)
         {
-            return await hubProxy.Invoke<bool>(NetworkConstants.Request_CreateCharacter, playerName, worldId, type);
+            return await hubProxy.Invoke<CharacterData>(NetworkConstants.Request_CreateCharacter, playerName, worldId, type);
         }
 
         public async Task<PlayerData> RequestPlayerData(string playerName)
