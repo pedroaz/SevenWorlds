@@ -1,4 +1,5 @@
-﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+﻿using SevenWorlds.GameServer.Database.Models;
+using SevenWorlds.GameServer.Gameplay.Actions.Base;
 using SevenWorlds.GameServer.Gameplay.Actions.Executor;
 using SevenWorlds.GameServer.Gameplay.Battle.Executor;
 using SevenWorlds.GameServer.Gameplay.GameState;
@@ -7,6 +8,7 @@ using SevenWorlds.GameServer.Utils.Log;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Loop
 {
@@ -93,7 +95,17 @@ namespace SevenWorlds.GameServer.Gameplay.Loop
         {
             stopwatch.Stop();
             tickCount++;
+            SaveGameState();
             Thread.Sleep(1000);
+        }
+
+        private void SaveGameState()
+        {
+            if(tickCount % 60 == 0) {
+                Task.Run(() => {
+                    MasterDataModel masterDataModel = gameStateService.GetMasterData();
+                });
+            }
         }
 
         private void PingAllClients()

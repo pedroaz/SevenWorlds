@@ -25,6 +25,7 @@ namespace SevenWorlds.GameServer.Database
         // Master
         Task<MasterDataModel> GetMasterData(string serverId);
         Task InsertMasterData(MasterDataModel model);
+        Task UpdateMasterData(MasterDataModel model);
 
         // Admin
         Task DeleteAll();

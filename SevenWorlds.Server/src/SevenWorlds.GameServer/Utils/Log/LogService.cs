@@ -27,7 +27,8 @@ namespace SevenWorlds.GameServer.Utils.Log
     {
         None,
         Initialization, 
-        Battle
+        Battle,
+        Database
     }
 
     public class LogService : ILogService
@@ -82,6 +83,8 @@ namespace SevenWorlds.GameServer.Utils.Log
             switch (type) {
                 case LogType.Initialization:
                     return "[Initialization]";
+                case LogType.Database:
+                    return "[Database]";
                 case LogType.None:
                 default:
                     return "";

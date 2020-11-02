@@ -61,7 +61,8 @@ public class GameState : GameService<GameState>
     public static async Task RefreshUniverse()
     {
         UniverseSyncData data = await NetworkService.RequestUniverseSyncData();
-
+        Universe = data.Universe;
+        Worlds = data.Worlds;
     }
 
     public static async Task RefreshPlayerCharacters()
