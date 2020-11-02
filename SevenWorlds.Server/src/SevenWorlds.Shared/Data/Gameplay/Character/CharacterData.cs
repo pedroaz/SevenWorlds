@@ -48,7 +48,9 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public CharacterData(string playerName, CharacterDescription description)
         {
             PlayerName = playerName;
-            Type = description.CharacterType;
+            if(description != null) {
+                Type = description.CharacterType;
+            }
         }
 
         public int GetAvailableTalentPoints()

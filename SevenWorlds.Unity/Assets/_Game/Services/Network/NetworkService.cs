@@ -120,8 +120,15 @@ public class NetworkService : GameService<NetworkService>
 
     public static async Task<List<CharacterData>> RequestPlayerCharacters(string playerName)
     {
-        var data = await Object.client.RequestPlayerCharacters(playerName);
-        return data;
+        try {
+            var data = await Object.client.RequestPlayerCharacters(playerName);
+            return data;
+        }
+        catch (Exception e) {
+            LOG.Log(e);
+            throw;
+        }
+        
     }
 
     public static async Task<PlayerData> RequestPlayerData(string playerName)

@@ -5674,7 +5674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &691311202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8848,7 +8848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1277502744
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14306,17 +14306,6 @@ MonoBehaviour:
     Shops: []
     ProductionCamps: []
   characters: []
-  currentCharacter:
-    Id: 
-    PlayerName: 
-    Type: 0
-    Level: 0
-    WorldId: 
-    AreaId: 
-    Position:
-      X: 0
-      Y: 0
-    Skills: 
   currentQuest:
     Status: 0
     Description:

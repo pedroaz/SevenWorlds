@@ -22,7 +22,7 @@ public class GameState : GameService<GameState>
     public AreaData currentArea;
     public SectionBundle sections;
     public List<CharacterData> characters;
-    private CharacterData currentCharacter;
+    public CharacterData currentCharacter;
     public QuestData currentQuest;
 
     public static PlayerData PlayerData { get => Object.playerData; set => Object.playerData = value; }

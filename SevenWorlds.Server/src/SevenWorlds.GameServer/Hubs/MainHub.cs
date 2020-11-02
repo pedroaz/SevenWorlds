@@ -260,7 +260,7 @@ namespace SevenWorlds.GameServer.Hubs
         public List<CharacterData> RequestPlayerCharacters(string playerName)
         {
             try {
-                var characters = gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
+                List<CharacterData> characters = gameStateService.CharacterCollection.FindAllPlayerCharacters(playerName);
                 return characters;
             }
             catch (Exception e) {
