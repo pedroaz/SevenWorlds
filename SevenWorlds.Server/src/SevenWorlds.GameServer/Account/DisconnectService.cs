@@ -24,10 +24,17 @@ namespace SevenWorlds.GameServer.Account
 
         public async Task DisconnectPlayer(string connectionId)
         {
+            logService.Log($"Disconnecting connection id: {connectionId}", type: LogType.Disconnect);
+
             var playerData = gameStateService.PlayerCollection.FindByConnectionId(connectionId);
-            if(playerData != null) {
-               await databaseService.UpdatePlayer(playerData);
-               gameStateService.RemovePlayerFromTheGame(connectionId);
+
+            if (playerData != null) {
+                logService.Log($"Disconnecting player: {playerData.PlayerName}", type: LogType.Disconnect);
+                await databaseService.UpdatePlayer(playerData);
+                gameStateService.RemovePlayerFromTheGame(connectionId);
+            }
+            else {
+                logService.Log($"No player data found for connection id: {connectionId}", type: LogType.Disconnect);
             }
         }
     }

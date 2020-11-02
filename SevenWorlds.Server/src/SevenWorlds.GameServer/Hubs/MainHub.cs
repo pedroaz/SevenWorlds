@@ -62,7 +62,7 @@ namespace SevenWorlds.GameServer.Hubs
         public override Task OnDisconnected(bool stopCalled)
         {
             try {
-                logService.Log($"Someone disconnected! {Context.ConnectionId}");
+                logService.Log($"Someone disconnected! {Context.ConnectionId}", type: LogType.Disconnect);
                 disconnectService.DisconnectPlayer(Context.ConnectionId);
                 return base.OnDisconnected(stopCalled);
             }

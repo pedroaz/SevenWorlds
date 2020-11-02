@@ -10,16 +10,24 @@ public class CreateCharacterButton : GameButton
     public override async Task OnClick()
     {
 
-        if (!CharacterCreationScreenRefresherService.GetHasCharacterTypeSelected()) return;
+        try {
+            if (!CharacterCreationScreenRefresherService.GetHasCharacterTypeSelected()) return;
 
-        var characterType = CharacterCreationScreenRefresherService.GetSelectedCharacterType();
+            var characterType = CharacterCreationScreenRefresherService.GetSelectedCharacterType();
 
-        LOG.Log($"Sending a request to create character: {GameState.PlayerName} on {GameState.CurrentWorld.Id} and type {characterType}");
-        var result = await NetworkService.RequestCreateCharacter(
-            GameState.PlayerName, 
-            GameState.CurrentWorld.Id,
-            characterType
-        );
-        LOG.Log($"Character creation was a: {result}");
+            LOG.Log($"Sending a request to create character: {GameState.PlayerName} on {GameState.CurrentWorld.Id} and type {characterType}");
+            var result = await NetworkService.RequestCreateCharacter(
+                GameState.PlayerName,
+                GameState.CurrentWorld.Id,
+                characterType
+            );
+            LOG.Log($"Character creation was a: {result}");
+        }
+        catch (System.Exception e) {
+            LOG.Log(e);
+            throw;
+        }
+
+       
     }
 }

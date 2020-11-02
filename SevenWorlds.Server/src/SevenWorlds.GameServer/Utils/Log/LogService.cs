@@ -28,7 +28,8 @@ namespace SevenWorlds.GameServer.Utils.Log
         None,
         Initialization, 
         Battle,
-        Database
+        Database,
+        Disconnect
     }
 
     public class LogService : ILogService

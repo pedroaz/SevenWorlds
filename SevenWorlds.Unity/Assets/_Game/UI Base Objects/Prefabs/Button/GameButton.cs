@@ -23,14 +23,20 @@ public class GameButton : SetupMonoBehaviour
         button = GetComponentInChildren<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
-
-            LOG.Log($"[CLICK] - {this.GetType()}");
-            switch (buttonSound) {
-                case ButtonSound.Default:
-                    SoundService.PlaySound(SfxId.BUTTON_CLICK_1);
-                    break;
+            try {
+                LOG.Log($"[CLICK] - {this.GetType()}");
+                switch (buttonSound) {
+                    case ButtonSound.Default:
+                        SoundService.PlaySound(SfxId.BUTTON_CLICK_1);
+                        break;
+                }
+                _ = OnClick();
             }
-            _ = OnClick();
+            catch (System.Exception e) {
+                LOG.Log(e);
+                throw;
+            }
+            
 
         });
     }
