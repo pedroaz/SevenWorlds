@@ -15,12 +15,6 @@ namespace SevenWorlds.GameServer.Utils.Rng
             random = new Random();
         }
 
-        /// <summary>
-        /// Max Inclusive
-        /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
         public int GetRandomInt(int min, int max)
         {
             return random.Next(min, max + 1);

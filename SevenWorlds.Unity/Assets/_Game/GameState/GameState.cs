@@ -27,7 +27,7 @@ public class GameState : GameService<GameState>
 
     [Header("Current World")]
     public WorldData currentWorld;
-    private CharacterData currentCharacter;
+    public CharacterData currentCharacter;
     public AreaSyncData currentArea;
 
     public static PlayerData PlayerData { get => Object.playerData; set => Object.playerData = value; }
@@ -93,8 +93,7 @@ public class GameState : GameService<GameState>
         PlayerData = response.PlayerData;
         Universe = response.UniverseSyncData.Universe;
         Worlds = response.UniverseSyncData.Worlds;
-        var c = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
-        Characters = c;
+        Characters = await NetworkService.RequestPlayerCharacters(response.PlayerData.PlayerName);
     }
 
     public static async Task RefreshQuestList()

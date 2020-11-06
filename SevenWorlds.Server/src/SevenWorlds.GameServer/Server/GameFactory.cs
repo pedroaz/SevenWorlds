@@ -176,11 +176,11 @@ namespace SevenWorlds.GameServer.Server
         {
             List<AreaData> areas = new List<AreaData>();
 
-            int cityX = randomService.GetRandomInt(0, 10);
-            int cityY = randomService.GetRandomInt(0, 10);
+            int cityX = randomService.GetRandomInt(0, 9);
+            int cityY = randomService.GetRandomInt(0, 9);
 
-            for (int x = 0; x < 10; x++) {
-                for (int y = 0; y < 10; y++) {
+            for (int x = 0; x <= 9; x++) {
+                for (int y = 0; y <= 9; y++) {
 
                     AreaType areaType;
                     if (x == cityX && y == cityY) {
@@ -200,6 +200,13 @@ namespace SevenWorlds.GameServer.Server
                     );
                 }
             }
+
+            var city = areas.FindAll(x => x.Type == AreaType.City);
+
+            if(city.Count != 1) {
+                logService.Log("City count different from 1!", LogLevel.Error);
+            }
+
 
             return areas;
         }
