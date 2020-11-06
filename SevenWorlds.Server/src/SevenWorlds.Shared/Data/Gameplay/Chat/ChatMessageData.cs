@@ -1,8 +1,6 @@
-﻿using SevenWorlds.Shared.Data.Base;
-
-namespace SevenWorlds.Shared.Data.Chat
+﻿namespace SevenWorlds.Shared.Data.Chat
 {
-    public class ChatMessageData : NetworkData
+    public class ChatMessageData
     {
         public string PlayerName;
         public string Message;

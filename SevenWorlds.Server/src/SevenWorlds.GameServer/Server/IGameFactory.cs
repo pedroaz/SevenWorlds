@@ -10,7 +10,7 @@ namespace SevenWorlds.GameServer.Server
     public interface IGameFactory
     {
         void DumpMasterData();
-        Task SetupGameServer(string serverId);
-        Task SetFakeData();
+        Task LoadMasterDataFromDatabase(string serverId);
+        Task InsertNewMasterDataToDatabase();
     }
 }

@@ -99,15 +99,15 @@ namespace SevenWorlds.GameServer.Hubs
 
         public async Task ResetUniverseFakeData()
         {
-            logService.Log("Recieved Admin Reset to Fake Data");
+            logService.Log("Recieved Admin Reset Master Fake Data");
             try {
-                await serverManager.ResetFakeData();
-                logService.Log("Finished setting fake data");
+                await serverManager.ResetMasterData();
+                logService.Log("Finished setting Master Data");
             }
             catch (Exception e) {
                 logService.Log(e);
             }
-            
+
         }
 
         #endregion
@@ -340,7 +340,7 @@ namespace SevenWorlds.GameServer.Hubs
             catch (Exception e) {
                 logService.Log(e);
             }
-            
+
         }
 
         public bool RequestCollectQuest(string playerName, QuestId questId)
@@ -355,7 +355,7 @@ namespace SevenWorlds.GameServer.Hubs
                 logService.Log(e);
                 return false;
             }
-            
+
         }
         #endregion
     }

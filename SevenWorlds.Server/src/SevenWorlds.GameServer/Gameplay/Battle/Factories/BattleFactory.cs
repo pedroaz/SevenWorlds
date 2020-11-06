@@ -1,15 +1,12 @@
-﻿using SevenWorlds.GameServer.Gameplay.Battle.Factories;
-using SevenWorlds.GameServer.Gameplay.GameState;
+﻿using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Gameplay.Encounters;
-using System.Collections.Generic;
 
 namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
 {
-    public class BattleFactory : DataFactory, IBattleFactory
+    public class BattleFactory : IBattleFactory
     {
         private readonly ILogService logService;
         private readonly IGameStateService gameStateService;
@@ -38,7 +35,6 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
                 battleData.Monsters.Add(monsterData);
             }
 
-            SetDefaultValues(battleData);
             return battleData;
         }
     }

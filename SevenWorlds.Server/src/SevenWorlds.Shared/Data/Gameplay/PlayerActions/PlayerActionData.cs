@@ -1,6 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-
-namespace SevenWorlds.Shared.Data.Gameplay
+﻿namespace SevenWorlds.Shared.Data.Gameplay
 {
 
     public enum PlayerActionType
@@ -11,7 +9,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
         Movement
     }
 
-    public class PlayerActionData : NetworkData
+    public class PlayerActionData
     {
         public virtual PlayerActionType GetActionType { get; }
     }

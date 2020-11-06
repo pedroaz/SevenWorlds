@@ -138,7 +138,7 @@ namespace SevenWorlds.GameServer.Server
         private async Task InitializeGameServer(string serverId)
         {
             logService.Log($"Starting game server with serverId: {serverId}", type: LogType.Initialization);
-            await gameFactory.SetupGameServer(serverId);
+            await gameFactory.LoadMasterDataFromDatabase(serverId);
             gameFactory.DumpMasterData();
         }
 
@@ -157,10 +157,9 @@ namespace SevenWorlds.GameServer.Server
             serverStatus = GameServerStatus.ReadyToStart;
         }
 
-        public async Task ResetFakeData()
+        public async Task ResetMasterData()
         {
-
-            await gameFactory.SetFakeData();
+            await gameFactory.InsertNewMasterDataToDatabase();
         }
     }
 }

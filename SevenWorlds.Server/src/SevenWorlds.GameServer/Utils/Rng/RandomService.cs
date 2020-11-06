@@ -25,5 +25,10 @@ namespace SevenWorlds.GameServer.Utils.Rng
         {
             return random.Next(min, max + 1);
         }
+
+        public bool FlipCoin()
+        {
+            return (random.Next(0, 2) == 0);
+        }
     }
 }

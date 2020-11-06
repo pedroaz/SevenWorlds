@@ -1,9 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
@@ -14,7 +9,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
         Wood
     }
 
-    public class WorldResourcesData : NetworkData
+    public class WorldResourcesData
     {
         public Dictionary<WorldResourceType, int> Resources;
 

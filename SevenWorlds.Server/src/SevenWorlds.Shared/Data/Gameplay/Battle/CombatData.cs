@@ -1,10 +1,6 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using SevenWorlds.Shared.Data.Gameplay.Equipment;
+﻿using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {

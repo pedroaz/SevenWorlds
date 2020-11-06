@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Database.Models;
-using SevenWorlds.GameServer.Gameplay.Character;
+using SevenWorlds.GameServer.Gameplay.Construction.Area;
+using SevenWorlds.GameServer.Gameplay.Construction.Section;
+using SevenWorlds.GameServer.Gameplay.Construction.Universe;
+using SevenWorlds.GameServer.Gameplay.Construction.World;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.GameServer.Utils.Rng;
-using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Section;
 using System;
@@ -21,25 +23,33 @@ namespace SevenWorlds.GameServer.Server
         private readonly IDatabaseService databaseService;
         private readonly ILogService logService;
         private readonly IConfigurator configurator;
-        private readonly ICharacterFactory characterFactory;
         private readonly IRandomService randomService;
+        private readonly IUniverseFactory universeFactory;
+        private readonly IWorldFactory worldFactory;
+        private readonly IAreaFactory areaFactory;
+        private readonly ISectionFactory sectionFactory;
         private readonly IGameStateService gameStateService;
-        private readonly UniverseDataFactory universeDataFactory = new UniverseDataFactory();
 
         public GameFactory(
             IGameStateService gameStateService,
             IDatabaseService databaseService,
             ILogService logService,
             IConfigurator configurator,
-            ICharacterFactory characterFactory,
-            IRandomService randomService)
+            IRandomService randomService,
+            IUniverseFactory universeFactory,
+            IWorldFactory worldFactory,
+            IAreaFactory areaFactory,
+            ISectionFactory sectionFactory)
         {
             this.gameStateService = gameStateService;
             this.databaseService = databaseService;
             this.logService = logService;
             this.configurator = configurator;
-            this.characterFactory = characterFactory;
             this.randomService = randomService;
+            this.universeFactory = universeFactory;
+            this.worldFactory = worldFactory;
+            this.areaFactory = areaFactory;
+            this.sectionFactory = sectionFactory;
         }
 
         public void DumpMasterData()
@@ -66,7 +76,7 @@ namespace SevenWorlds.GameServer.Server
             logService.Log($"Finishded dumping to file: {fileName}");
         }
 
-        public async Task SetupGameServer(string serverId)
+        public async Task LoadMasterDataFromDatabase(string serverId)
         {
             logService.Log($"Setting up Game Server with id: {serverId}");
             MasterDataModel masterData = await databaseService.GetMasterData(serverId);
@@ -94,16 +104,16 @@ namespace SevenWorlds.GameServer.Server
             gameStateService.SectionCollection.SetBundle(masterData.Sections);
         }
 
-        #region Fake
+        #region New Universe Creation
 
-        public async Task SetFakeData()
+        public async Task InsertNewMasterDataToDatabase()
         {
-            logService.Log("Setting fake data");
+            logService.Log("Setting New Master Data");
             logService.Log("Deleting all");
             await databaseService.DeleteAll();
 
-            logService.Log("Creating master data");
-            var masterData = GenerateFakeMasterData();
+            logService.Log("Creating Master data");
+            var masterData = CreateNewMasterData();
 
             logService.Log("Updating Databases");
             logService.Log("Updating Master Data");
@@ -112,43 +122,57 @@ namespace SevenWorlds.GameServer.Server
             logService.Log("Finish updating databases");
         }
 
-        private MasterDataModel GenerateFakeMasterData()
+        private MasterDataModel CreateNewMasterData()
         {
-            List<UniverseData> universes = CreateNewUniverse("First Universe");
+            // Create Universe
+            List<UniverseData> universes = CreateNewUniverse("Test Universe");
+
+            // Create 7 worlds
             List<WorldData> worlds = CreateSevenWorlds(universes[0]);
 
+            // Create areas and populate them
             List<AreaData> areas = new List<AreaData>();
-
-
+            SectionBundle sections = sectionFactory.CreateNewSectionBundle();
             foreach (var world in worlds) {
-                areas.AddRange(CreateFakeAreas(world));
+                var worldAreas = CreateWorldAreas(world);
+                areas.AddRange(worldAreas);
+                SetSectionsIntoWorldAreas(areas, sections);
             }
-
-            SectionBundle bundle = CreateFakeSectionBundle(areas[0]);
 
             MasterDataModel masterData = new MasterDataModel() {
                 ServerId = "fake_server",
                 Universes = universes,
                 Worlds = worlds,
                 Areas = areas,
-                Sections = bundle,
+                Sections = sections,
             };
             return masterData;
         }
 
-
-        private SectionBundle CreateFakeSectionBundle(AreaData areaData)
+        private List<UniverseData> CreateNewUniverse(string universeName)
         {
-            SectionBundle bundle = universeDataFactory.CreateNewSectionBundle();
-
-            bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.Poring));
-            bundle.MonsterCamps.Add(universeDataFactory.CreateNewMonsterCamp(MonsterType.PecoPeco));
-            bundle.ProductionCamps.Add(universeDataFactory.CreateNewProductionCamp(WorldResourceType.Wood));
-
-            return bundle;
+            return new List<UniverseData>(){
+                universeFactory.CreateNewUniverse(universeName)
+            };
         }
 
-        private List<AreaData> CreateFakeAreas(WorldData world)
+        private List<WorldData> CreateSevenWorlds(UniverseData universe)
+        {
+            List<WorldData> worlds = new List<WorldData>();
+
+            for (int i = 0; i < 7; i++) {
+                worlds.Add(
+                    worldFactory.CreateNewWorld(
+                        $"World {i}",
+                        universe.Id,
+                        i
+                    )
+                );
+            }
+            return worlds;
+        }
+
+        private List<AreaData> CreateWorldAreas(WorldData world)
         {
             List<AreaData> areas = new List<AreaData>();
 
@@ -158,15 +182,16 @@ namespace SevenWorlds.GameServer.Server
             for (int x = 0; x < 10; x++) {
                 for (int y = 0; y < 10; y++) {
 
-                    var areaType = AreaType.Battleground;
-
+                    AreaType areaType;
                     if (x == cityX && y == cityY) {
                         areaType = AreaType.City;
                     }
-
+                    else {
+                        areaType = AreaType.Field;
+                    }
 
                     areas.Add(
-                        universeDataFactory.CreateNewArea(
+                        areaFactory.CreateNewArea(
                             $"Area ({x},{y})",
                             new Position(x, y),
                             world.Id,
@@ -179,30 +204,26 @@ namespace SevenWorlds.GameServer.Server
             return areas;
         }
 
-        private List<WorldData> CreateSevenWorlds(UniverseData universe)
+        private void SetSectionsIntoWorldAreas(List<AreaData> areas, SectionBundle bundle)
         {
-            List<WorldData> worlds = new List<WorldData>();
+            foreach (var area in areas) {
+                if(area.Type == AreaType.City) {
 
-            for (int i = 0; i < 7; i++) {
-                worlds.Add(
-                    universeDataFactory.CreateNewWorld(
-                        $"World {i}",
-                        universe.Id,
-                        i
-                    )
-                );
+                }
+                else {
+                    MonsterType type;
+
+                    if (randomService.FlipCoin()) {
+                        type = MonsterType.Poring;
+                    }
+                    else {
+                        type = MonsterType.PecoPeco;
+                    }
+
+                    bundle.MonsterCamps.Add(sectionFactory.CreateNewMonsterCamp(type, area.Id));
+                }
             }
-
-            return worlds;
         }
-
-        private List<UniverseData> CreateNewUniverse(string universeName)
-        {
-            return new List<UniverseData>(){
-                universeDataFactory.CreateNewUniverse(universeName)
-            };
-        }
-
         #endregion
 
 

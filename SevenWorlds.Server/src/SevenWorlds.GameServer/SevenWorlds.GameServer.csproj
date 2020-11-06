@@ -180,8 +180,9 @@
     <Compile Include="Gameplay\Actions\Base\PlayerActionBundle.cs" />
     <Compile Include="Gameplay\Actions\Executor\IPlayerActionExecutor.cs" />
     <Compile Include="Gameplay\Actions\Executor\PlayerActionExecutor.cs" />
-    <Compile Include="Gameplay\Area\AreaCollection.cs" />
-    <Compile Include="Gameplay\Area\IAreaCollection.cs" />
+    <Compile Include="Gameplay\Construction\Area\AreaCollection.cs" />
+    <Compile Include="Gameplay\Construction\Area\AreaFactory.cs" />
+    <Compile Include="Gameplay\Construction\Area\IAreaCollection.cs" />
     <Compile Include="Gameplay\Battle\AI\IMonsterAIService.cs" />
     <Compile Include="Gameplay\Battle\AI\MonsterAIService.cs" />
     <Compile Include="Gameplay\Battle\Executor\ISkillSimulator.cs" />
@@ -200,6 +201,13 @@
     <Compile Include="Gameplay\Battle\Base\IBattleCollection.cs" />
     <Compile Include="Gameplay\Battle\Executor\BattleSimulator.cs" />
     <Compile Include="Gameplay\Battle\Executor\IBattleSimulator.cs" />
+    <Compile Include="Gameplay\Construction\Area\IAreaFactory.cs" />
+    <Compile Include="Gameplay\Construction\Section\ISectionFactory.cs" />
+    <Compile Include="Gameplay\Construction\Section\SectionFactory.cs" />
+    <Compile Include="Gameplay\Construction\Universe\IUniverseFactory.cs" />
+    <Compile Include="Gameplay\Construction\Universe\UniverseFactory.cs" />
+    <Compile Include="Gameplay\Construction\World\IWorldFactory.cs" />
+    <Compile Include="Gameplay\Construction\World\WorldFactory.cs" />
     <Compile Include="Gameplay\Equipment\EquipmentFactory.cs" />
     <Compile Include="Gameplay\Equipment\IEquipmentFactory.cs" />
     <Compile Include="Gameplay\GameState\GameStateService.cs" />
@@ -215,18 +223,18 @@
     <Compile Include="Gameplay\Quests\IQuestGiver.cs" />
     <Compile Include="Gameplay\Quests\QuestFactory.cs" />
     <Compile Include="Gameplay\Quests\QuestGiver.cs" />
-    <Compile Include="Gameplay\Section\ISectionCollection.cs" />
-    <Compile Include="Gameplay\Section\SectionCollection.cs" />
+    <Compile Include="Gameplay\Construction\Section\ISectionCollection.cs" />
+    <Compile Include="Gameplay\Construction\Section\SectionCollection.cs" />
     <Compile Include="Gameplay\Loop\GameLoopSimulator.cs" />
     <Compile Include="Gameplay\Loop\IGameLoopSimulator.cs" />
     <Compile Include="Gameplay\Talent\ITalentFactory.cs" />
     <Compile Include="Gameplay\Talent\TalentFactory.cs" />
     <Compile Include="Server\IGameFactory.cs" />
     <Compile Include="Server\GameFactory.cs" />
-    <Compile Include="Gameplay\Universe\IUniverseCollection.cs" />
-    <Compile Include="Gameplay\Universe\UniverseCollection.cs" />
-    <Compile Include="Gameplay\World\IWorldCollection.cs" />
-    <Compile Include="Gameplay\World\WorldCollection.cs" />
+    <Compile Include="Gameplay\Construction\Universe\IUniverseCollection.cs" />
+    <Compile Include="Gameplay\Construction\Universe\UniverseCollection.cs" />
+    <Compile Include="Gameplay\Construction\World\IWorldCollection.cs" />
+    <Compile Include="Gameplay\Construction\World\WorldCollection.cs" />
     <Compile Include="Hubs\HubService.cs" />
     <Compile Include="Hubs\IHubService.cs" />
     <Compile Include="Hubs\MainHub.cs" />
@@ -258,7 +266,9 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Gameplay\Construction\Base\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

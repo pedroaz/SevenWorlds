@@ -1,26 +1,21 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
-using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
-using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Character;
 using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Character
 {
-    public class CharacterFactory : DataFactory, ICharacterFactory
+    public class CharacterFactory : ICharacterFactory
     {
         private readonly ILogService logService;
         private readonly ISkillFactory skillFactory;
@@ -29,7 +24,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
         private readonly ITalentFactory talentFactory;
         private Dictionary<CharacterType, CharacterDescription> storage = new Dictionary<CharacterType, CharacterDescription>();
 
-        public CharacterFactory(ILogService logService, ISkillFactory skillFactory, 
+        public CharacterFactory(ILogService logService, ISkillFactory skillFactory,
             IDatabaseService databaseService, IConfigurator configurator, ITalentFactory talentFactory)
         {
             this.logService = logService;
@@ -48,7 +43,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             var characterData = new CharacterData(playerName, characterDescription);
 
             // General
-            SetDefaultValues(characterData);
             characterData.WorldId = worldId;
             characterData.Level = 1;
 
@@ -78,7 +72,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
         public void RefreshCharacter(CharacterData characterData)
         {
             // Refresh initial combat data
-            characterData.CombatData = new CombatData(characterData.Id, skillFactory.GetListOfSkillDatas(
+            characterData.CombatData = new CombatData(characterData.Id, skillFactory.CreateListOfSkillDatas(
                 characterData.Skills
             ));
 
@@ -86,12 +80,12 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             characterData.CombatData.AddStatsFromAllEquipments(characterData.Equipments);
 
             foreach (var row in characterData.TalentBundle.TalentRows) {
-                
+
                 foreach (TalentData talentData in row) {
                     talentData.ApplyTalent(characterData);
                 }
             }
-            
+
         }
 
         public void SetupStorage()

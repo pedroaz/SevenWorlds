@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.Shared.Data.Gameplay;
-using System;
+using SevenWorlds.Shared.Data.Gameplay.Storage.Equipment;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWorlds.GameServer.Gameplay.Equipment
 {
@@ -14,7 +11,7 @@ namespace SevenWorlds.GameServer.Gameplay.Equipment
     {
         private readonly IConfigurator configurator;
 
-        private Dictionary<EquipmentId, EquipmentData> storage = new Dictionary<EquipmentId, EquipmentData>();
+        private Dictionary<EquipmentId, EquipmentDescription> storage = new Dictionary<EquipmentId, EquipmentDescription>();
 
         public EquipmentFactory(IConfigurator configurator)
         {
@@ -24,7 +21,12 @@ namespace SevenWorlds.GameServer.Gameplay.Equipment
         public void SetupStorage()
         {
             var json = File.ReadAllText(configurator.Config.EquipmentsStoragePath);
-            storage = JsonConvert.DeserializeObject<Dictionary<EquipmentId, EquipmentData>>(json);
+            storage = JsonConvert.DeserializeObject<Dictionary<EquipmentId, EquipmentDescription>>(json);
+        }
+
+        public EquipmentData CreateNewEquipment(EquipmentId id)
+        {
+            return new EquipmentData(storage[id]);
         }
     }
 }

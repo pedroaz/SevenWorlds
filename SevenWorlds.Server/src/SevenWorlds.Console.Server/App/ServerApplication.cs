@@ -11,6 +11,10 @@ using SevenWorlds.GameServer.Gameplay.Battle.Base;
 using SevenWorlds.GameServer.Gameplay.Battle.Executor;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
 using SevenWorlds.GameServer.Gameplay.Character;
+using SevenWorlds.GameServer.Gameplay.Construction.Area;
+using SevenWorlds.GameServer.Gameplay.Construction.Section;
+using SevenWorlds.GameServer.Gameplay.Construction.Universe;
+using SevenWorlds.GameServer.Gameplay.Construction.World;
 using SevenWorlds.GameServer.Gameplay.Equipment;
 using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Loop;
@@ -121,6 +125,10 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<QuestGiver>().As<IQuestGiver>().SingleInstance();
             builder.RegisterType<DisconnectService>().As<IDisconnectService>().SingleInstance();
             builder.RegisterType<RandomService>().As<IRandomService>().SingleInstance();
+            builder.RegisterType<UniverseFactory>().As<IUniverseFactory>().SingleInstance();
+            builder.RegisterType<WorldFactory>().As<IWorldFactory>().SingleInstance();
+            builder.RegisterType<AreaFactory>().As<IAreaFactory>().SingleInstance();
+            builder.RegisterType<SectionFactory>().As<ISectionFactory>().SingleInstance();
 
 
             container = builder.Build();

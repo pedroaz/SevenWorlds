@@ -1,5 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using SevenWorlds.Shared.Data.Gameplay;
+﻿using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
 
 namespace SevenWorlds.Shared.Data.Connection
@@ -11,9 +10,9 @@ namespace SevenWorlds.Shared.Data.Connection
         PasswordIncorrect
     }
 
-    public class LoginResponseData : NetworkData
+    public class LoginResponseData
     {
-        public PlayerData PlayerData{ get; set; }
+        public PlayerData PlayerData { get; set; }
         public LoginResponseType ResponseType { get; set; }
         public UniverseSyncData UniverseSyncData { get; set; }
     }

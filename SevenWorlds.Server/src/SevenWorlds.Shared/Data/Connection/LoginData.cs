@@ -1,8 +1,6 @@
-﻿using SevenWorlds.Shared.Data.Base;
-
-namespace SevenWorlds.Shared.Data.Connection
+﻿namespace SevenWorlds.Shared.Data.Connection
 {
-    public class LoginData : NetworkData
+    public class LoginData
     {
         public string Username { get; set; }
         public string Password { get; set; }

@@ -10,6 +10,6 @@ namespace SevenWorlds.GameServer.Server
     {
         Task StartServer();
         void StartServerRequest(string serverId);
-        Task ResetFakeData();
+        Task ResetMasterData();
     }
 }

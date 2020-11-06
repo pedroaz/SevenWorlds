@@ -1,5 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
+﻿using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Encounters
@@ -11,8 +10,9 @@ namespace SevenWorlds.Shared.Data.Gameplay.Encounters
         Finished
     }
 
-    public class BattleData : NetworkData
+    public class BattleData
     {
+        public string Id;
         public List<MonsterData> Monsters;
         public List<CharacterData> Characters;
         public int MaxAmountOfCharacters;

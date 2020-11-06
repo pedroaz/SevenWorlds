@@ -9,8 +9,8 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Factories
 {
     public interface ISkillFactory
     {
-        SkillData GetSkillData(SkillType type);
-        List<SkillData> GetListOfSkillDatas (List<SkillType> types);
+        SkillData CreateNewSkillData(SkillType type);
+        List<SkillData> CreateListOfSkillDatas (List<SkillType> types);
         void SetupStorage();
     }
 }

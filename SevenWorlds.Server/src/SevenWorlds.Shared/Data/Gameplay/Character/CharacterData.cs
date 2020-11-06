@@ -1,5 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using SevenWorlds.Shared.Data.Gameplay.Character;
+﻿using SevenWorlds.Shared.Data.Gameplay.Character;
 using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
@@ -21,11 +20,13 @@ namespace SevenWorlds.Shared.Data.Gameplay
     }
 
     [System.Serializable]
-    public class CharacterData : NetworkData
+    public class CharacterData
     {
+
         // Constant
         public string PlayerName;
         public CharacterType Type;
+        public string Id;
 
         // General
         public int Level;
@@ -48,7 +49,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public CharacterData(string playerName, CharacterDescription description)
         {
             PlayerName = playerName;
-            if(description != null) {
+            if (description != null) {
                 Type = description.CharacterType;
             }
         }

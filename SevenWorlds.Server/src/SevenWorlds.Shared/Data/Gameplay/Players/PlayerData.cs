@@ -1,5 +1,4 @@
-﻿using SevenWorlds.Shared.Data.Base;
-using SevenWorlds.Shared.Data.Gameplay.Players;
+﻿using SevenWorlds.Shared.Data.Gameplay.Players;
 using SevenWorlds.Shared.Data.Gameplay.Quests;
 using System;
 using System.Collections.Generic;
@@ -7,8 +6,9 @@ using System.Collections.Generic;
 namespace SevenWorlds.Shared.Data.Gameplay
 {
     [System.Serializable]
-    public class PlayerData : NetworkData
+    public class PlayerData
     {
+        public string Id;
         public string ConnectionId;
         public string PlayerName;
         public List<string> PhysicalRelicsIds;
@@ -25,7 +25,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
             SpiritRelicIds = new List<string>();
             Money = 0;
             Id = Guid.NewGuid().ToString();
-            TimeOfCreation = DateTime.Now;
             Quests = new List<QuestData>();
             AvailableCharacters = new List<CharacterType>();
             Record = new PlayerRecord();

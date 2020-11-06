@@ -3,7 +3,6 @@ using SevenWorlds.Shared.Data.Chat;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Factory;
 using SevenWorlds.Shared.Data.Gameplay;
-using SevenWorlds.Shared.Data.Gameplay.ActionDatas;
 using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Sync;
 using SevenWorlds.Shared.Network;
@@ -17,7 +16,7 @@ namespace SevenWorlds.GameClient.Client
     {
         HubConnection hubConnection;
         private IHubProxy hubProxy;
-        private ClientRequestsDataFactory dataFactory = new ClientRequestsDataFactory();
+        private ClientDataFactory dataFactory = new ClientDataFactory();
 
         public async Task Connect(string serverUrl, string hubName)
         {
@@ -123,7 +122,7 @@ namespace SevenWorlds.GameClient.Client
         public async Task RequestCollectQuest(string playerName, QuestId questId)
         {
             await hubProxy.Invoke(NetworkConstants.Request_CollectQuest, playerName, questId);
-        } 
+        }
 
 
         #endregion
@@ -137,7 +136,7 @@ namespace SevenWorlds.GameClient.Client
 
         //public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)
         //{
-            
+
         //}
 
         #endregion
