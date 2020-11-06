@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Sync
 {
-    [System.Serializable]
+    [System.Serializable ]
     public class AreaSyncData
     {
         public AreaData Area;

@@ -11,5 +11,6 @@ namespace SevenWorlds.GameServer.Server
         Task StartServer();
         void StartServerRequest(string serverId);
         Task ResetMasterData();
+        GameServerStatus GetServerStatus();
     }
 }

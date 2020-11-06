@@ -4375,11 +4375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2948590604182103024, guid: ad3e0f8c3ec0ec7458c76396e2caa52a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -320
+      value: -287
       objectReference: {fileID: 0}
     - target: {fileID: 2948590604182103024, guid: ad3e0f8c3ec0ec7458c76396e2caa52a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2948590604182103024, guid: ad3e0f8c3ec0ec7458c76396e2caa52a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4870,7 +4870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &536453833
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14308,42 +14308,6 @@ MonoBehaviour:
     Quests: []
     Record:
       HasEnteredWorld: 0
-  universe:
-    Id: 
-    Name: 
-  worlds: []
-  currentWorld:
-    Id: 
-    Name: 
-    UniverseId: 
-    WorldIndex: 0
-  areas: []
-  currentArea:
-    Id: 
-    Name: 
-    Position:
-      X: 0
-      Y: 0
-    WorldId: 
-    Type: 0
-  sections:
-    Id: 
-    MonsterCamps: []
-    Armories: []
-    Shops: []
-    ProductionCamps: []
-  characters: []
-  currentCharacter:
-    Id: 
-    PlayerName: 
-    Type: 0
-    Level: 0
-    WorldId: 
-    AreaId: 
-    Position:
-      X: 0
-      Y: 0
-    Skills: 
   currentQuest:
     Status: 0
     Description:
@@ -14356,6 +14320,48 @@ MonoBehaviour:
       MoneyReward: 0
       SpiritRelicIdsReward: []
       PhysicalRelicIdsReward: []
+  universe:
+    Id: 
+    Name: 
+  worlds: []
+  areas: []
+  sections:
+    MonsterCamps: []
+    Armories: []
+    Shops: []
+    ProductionCamps: []
+  characters: []
+  currentWorld:
+    Id: 
+    Name: 
+    UniverseId: 
+    WorldIndex: 0
+  currentCharacter:
+    PlayerName: 
+    Type: 0
+    Id: 
+    Level: 0
+    WorldId: 
+    AreaId: 
+    Position:
+      X: 0
+      Y: 0
+    Skills: 
+  currentArea:
+    Area:
+      Id: 
+      Name: 
+      Position:
+        X: 0
+        Y: 0
+      WorldId: 
+      Type: 0
+    Characters: []
+    Sections:
+      MonsterCamps: []
+      Armories: []
+      Shops: []
+      ProductionCamps: []
 --- !u!1001 &2103530000
 PrefabInstance:
   m_ObjectHideFlags: 0

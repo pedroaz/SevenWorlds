@@ -1,6 +1,7 @@
 ﻿using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Character;
 using SevenWorlds.GameServer.Gameplay.GameState;
+using SevenWorlds.GameServer.Server;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
@@ -19,23 +20,32 @@ namespace SevenWorlds.GameServer.Account
         private readonly ILogService logService;
         private readonly ICharacterPlacementService characterPlacementService;
         private readonly IDatabaseService databaseService;
+        private readonly IServerManager serverManager;
 
         public LoginService(
             IAccountService accountService, 
             IGameStateService gameStateService,
             ILogService logService,
             ICharacterPlacementService characterPlacementService,
-            IDatabaseService databaseService)
+            IDatabaseService databaseService,
+            IServerManager serverManager)
         {
             this.accountService = accountService;
             this.gameStateService = gameStateService;
             this.logService = logService;
             this.characterPlacementService = characterPlacementService;
             this.databaseService = databaseService;
+            this.serverManager = serverManager;
         }
 
         public async Task<LoginResponseData> Login(LoginData data, string connectionId)
         {
+            if(serverManager.GetServerStatus() != GameServerStatus.Started) {
+                return new LoginResponseData() {
+                    ResponseType = LoginResponseType.ServerNotStarted
+                };
+            }
+
             if (!await accountService.UsernameExists(data.Username)) {
 
                 logService.Log($"{data.Username} was not found!");

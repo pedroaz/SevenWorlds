@@ -56,6 +56,11 @@ namespace SevenWorlds.GameServer.Server
             this.gameLoopSimulator = gameLoopSimulator;
         }
 
+        public GameServerStatus GetServerStatus()
+        {
+            return serverStatus;
+        }
+
         public async Task StartServer()
         {
             try {
@@ -161,5 +166,7 @@ namespace SevenWorlds.GameServer.Server
         {
             await gameFactory.InsertNewMasterDataToDatabase();
         }
+
+        
     }
 }

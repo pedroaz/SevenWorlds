@@ -36,7 +36,8 @@ namespace SevenWorlds.GameServer.Gameplay.Area
 
         public AreaData FindCityOfWorld(string worldId)
         {
-            return areas.Find(x => (x.WorldId == worldId && x.Type == AreaType.City));
+            var areaOfWorlds = GetAllAreasFromWorld(worldId);
+            return areaOfWorlds.Find(x => x.Type == AreaType.City);
         }
 
         public List<AreaData> GetAll()

@@ -7,7 +7,8 @@ namespace SevenWorlds.Shared.Data.Connection
     {
         Success,
         UsernameNotFound,
-        PasswordIncorrect
+        PasswordIncorrect,
+        ServerNotStarted
     }
 
     public class LoginResponseData
