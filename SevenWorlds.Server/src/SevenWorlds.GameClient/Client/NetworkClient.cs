@@ -84,9 +84,9 @@ namespace SevenWorlds.GameClient.Client
             return await hubProxy.Invoke<WorldSyncData>(NetworkConstants.Request_WorldSync, worldId);
         }
 
-        public async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
+        public async Task<AreaSyncData> RequestAreaSync(string areaId, string playerName)
         {
-            return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Request_AreaSync, areaId, playerId);
+            return await hubProxy.Invoke<AreaSyncData>(NetworkConstants.Request_AreaSync, areaId, playerName);
         }
 
         public async Task<RegisterAccountResponse> RequestRegister(RegisterAccountData data)

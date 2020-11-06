@@ -15,7 +15,7 @@ using UnityEngine;
 public class NetworkService : GameService<NetworkService>
 {
     private NetworkClient client;
-    private ClientRequestsDataFactory dataFactory;
+    private ClientDataFactory dataFactory;
     private bool isConnected;
 
     public static bool IsConnected { get => Object.isConnected; }
@@ -24,7 +24,7 @@ public class NetworkService : GameService<NetworkService>
     {
         Object = this;
         client = new NetworkClient();
-        dataFactory = new ClientRequestsDataFactory();
+        dataFactory = new ClientDataFactory();
     }
 
     public static async Task<bool> ConnectToServer()

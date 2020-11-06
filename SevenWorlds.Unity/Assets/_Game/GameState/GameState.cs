@@ -14,16 +14,21 @@ using UnityEngine;
 
 public class GameState : GameService<GameState>
 {
+    [Header("Player")]
     public PlayerData playerData;
+    public QuestData currentQuest;
+
+    [Header("Universe")]
     public UniverseData universe;
     public List<WorldData> worlds;
-    public WorldData currentWorld;
     public List<AreaData> areas;
-    public AreaData currentArea;
     public SectionBundle sections;
     public List<CharacterData> characters;
-    public CharacterData currentCharacter;
-    public QuestData currentQuest;
+
+    [Header("Current World")]
+    public WorldData currentWorld;
+    private CharacterData currentCharacter;
+    public AreaSyncData currentArea;
 
     public static PlayerData PlayerData { get => Object.playerData; set => Object.playerData = value; }
     public static string PlayerName { get => Object.playerData.PlayerName; }
@@ -31,7 +36,7 @@ public class GameState : GameService<GameState>
     public static List<WorldData> Worlds { get => Object.worlds; set => Object.worlds = value; }
     public static WorldData CurrentWorld { get => Object.currentWorld; set => Object.currentWorld = value; }
     public static List<AreaData> Areas { get => Object.areas; set => Object.areas = value; }
-    public static AreaData CurrentArea { get => Object.currentArea; set => Object.currentArea = value; }
+    public static AreaSyncData CurrentArea { get => Object.currentArea; set => Object.currentArea = value; }
     public static SectionBundle Sections { get => Object.sections; set => Object.sections = value; }
     public static List<CharacterData> Characters { get => Object.characters; set => Object.characters = value; }
     public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
@@ -95,6 +100,11 @@ public class GameState : GameService<GameState>
     public static async Task RefreshQuestList()
     {
         QuestList = await NetworkService.RequestPlayerQuests(PlayerName);
+    }
+
+    public static async Task RefreshCurrentArea()
+    {
+        CurrentArea = await NetworkService.RequestAreaSync(CurrentCharacter.AreaId, PlayerName);
     }
 
 }
