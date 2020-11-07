@@ -36,7 +36,7 @@ public class GameState : GameService<GameState>
     public static List<WorldData> Worlds { get => Object.worlds; set => Object.worlds = value; }
     public static WorldData CurrentWorld { get => Object.currentWorld; set => Object.currentWorld = value; }
     public static List<AreaData> Areas { get => Object.areas; set => Object.areas = value; }
-    public static AreaSyncData CurrentArea { get => Object.currentArea; set => Object.currentArea = value; }
+    public static AreaSyncData CurrentArea { get => Object.currentArea; private set => Object.currentArea = value; }
     public static SectionBundle Sections { get => Object.sections; set => Object.sections = value; }
     public static List<CharacterData> Characters { get => Object.characters; set => Object.characters = value; }
     public static bool HasAnyCharacterType { get => PlayerData.AvailableCharacters.Any(); }
@@ -48,17 +48,29 @@ public class GameState : GameService<GameState>
     {
         Object = this;
         NetworkEvents.OnPlayerDataSyncRecieved += PlayerDataSync;
+        NetworkEvents.OnAreaSyncRecieved += AreaDataSync;
     }
 
     private void OnDestroy()
     {
         NetworkEvents.OnPlayerDataSyncRecieved -= PlayerDataSync;
+        NetworkEvents.OnAreaSyncRecieved -= AreaDataSync;
     }
 
     private void PlayerDataSync(object sender, NetworkArgs<PlayerData> e)
     {
         LOG.Log("Recieved player data sync");
         PlayerData = e.Data;
+    }
+
+    private void AreaDataSync(object sender, NetworkArgs<AreaSyncData> e)
+    {
+        if (e.Data.Area.Id == currentCharacter.AreaId) {
+            LOG.Log("*** AREA SYNC ***");
+            CurrentArea = e.Data;
+
+            UIEvents.ChangeGameText(GameTextId.AreaName, CurrentArea.Area.Name);
+        }
     }
 
     public static void SetCurrentWorldByWorldIndex(int worldIndex)
@@ -103,7 +115,10 @@ public class GameState : GameService<GameState>
 
     public static async Task RefreshCurrentArea()
     {
-        CurrentArea = await NetworkService.RequestAreaSync(CurrentCharacter.AreaId, PlayerName);
+        var data = await NetworkService.RequestAreaSync(CurrentCharacter.AreaId, PlayerName);
+        NetworkEvents.FireAreaSyncEvent(new NetworkArgs<AreaSyncData>() {
+            Data = data
+        });
     }
 
 }

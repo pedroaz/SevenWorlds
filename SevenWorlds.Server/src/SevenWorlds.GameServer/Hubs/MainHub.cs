@@ -216,6 +216,7 @@ namespace SevenWorlds.GameServer.Hubs
         public AreaSyncData RequestAreaSync(string areaId, string playerName)
         {
             try {
+                logService.Log("Requesting area sync");
                 return gameStateService.GetAreaSyncData(areaId);
             }
             catch (Exception e) {

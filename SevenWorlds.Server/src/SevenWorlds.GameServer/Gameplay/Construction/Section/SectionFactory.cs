@@ -8,13 +8,7 @@ namespace SevenWorlds.GameServer.Gameplay.Construction.Section
     {
         public SectionBundle CreateNewSectionBundle()
         {
-            var data = new SectionBundle() {
-                Armories = new List<ArmoryData>(),
-                MonsterCamps = new List<MonsterCampData>(),
-                ProductionCamps = new List<ProductionCampData>(),
-                Shops = new List<ShopData>()
-            };
-            return data;
+            return new SectionBundle();
         }
 
         public MonsterCampData CreateNewMonsterCamp(MonsterType monsterType, string areaId)

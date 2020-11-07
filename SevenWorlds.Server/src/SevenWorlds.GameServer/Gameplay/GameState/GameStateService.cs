@@ -72,7 +72,9 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public AreaSyncData GetAreaSyncData(string areaId)
         {
             return new AreaSyncData() {
-
+                Area = AreaCollection.FindById(areaId),
+                Characters = CharacterCollection.FindCharacterOnArea(areaId),
+                Sections = SectionCollection.FindAllSectionsByArea(areaId)
             };
         }
 

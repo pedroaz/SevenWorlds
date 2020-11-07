@@ -19,7 +19,12 @@ namespace SevenWorlds.GameServer.Gameplay.Section
 
         public SectionBundle FindAllSectionsByArea(string areaId)
         {
-            return bundle;
+            return new SectionBundle() {
+                Armories = bundle.Armories.FindAll(x => x.AreaId == areaId),
+                MonsterCamps = bundle.MonsterCamps.FindAll(x => x.AreaId == areaId),
+                ProductionCamps = bundle.ProductionCamps.FindAll(x => x.AreaId == areaId),
+                Shops = bundle.Shops.FindAll(x => x.AreaId == areaId),
+            };
         }
 
         public void SetBundle(SectionBundle bundle)

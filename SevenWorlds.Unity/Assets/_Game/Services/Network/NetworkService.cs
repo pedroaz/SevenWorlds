@@ -98,7 +98,14 @@ public class NetworkService : GameService<NetworkService>
 
     public static async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
     {
-        return await Object.client.RequestAreaSync(areaId, playerId);
+        try {
+            return await Object.client.RequestAreaSync(areaId, playerId);
+        }
+        catch (Exception e) {
+            LOG.Log(e);
+            throw;
+        }
+        
     }
 
     public static async Task<WorldSyncData> RequestWorldSyncData(string worldId)

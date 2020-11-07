@@ -29,6 +29,11 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             return characters.Find(x => x.Id == id);
         }
 
+        public List<CharacterData> FindCharacterOnArea(string areaId)
+        {
+            return characters.FindAll(x => x.AreaId == areaId);
+        }
+
         public List<CharacterData> GetAll()
         {
             return characters;

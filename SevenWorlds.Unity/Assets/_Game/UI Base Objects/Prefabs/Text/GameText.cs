@@ -15,7 +15,8 @@ public enum GameTextId
     SelectedCharacterType,
     ZaiChat,
     SelectedQuestStatus,
-    RegisterResponse
+    RegisterResponse,
+    AreaName
 }
 
 public class GameText : SetupMonoBehaviour

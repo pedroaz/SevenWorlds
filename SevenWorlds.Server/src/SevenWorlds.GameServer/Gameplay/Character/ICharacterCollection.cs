@@ -8,5 +8,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
     {
         List<CharacterData> FindAllPlayerCharacters(string playerName);
         void RemovePlayerCharacters(string playerId);
+        List<CharacterData> FindCharacterOnArea(string areaId);
     }
 }

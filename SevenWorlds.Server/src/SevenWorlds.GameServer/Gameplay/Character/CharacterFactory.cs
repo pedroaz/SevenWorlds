@@ -9,6 +9,7 @@ using SevenWorlds.Shared.Data.Gameplay.Character;
 using SevenWorlds.Shared.Data.Gameplay.Equipment;
 using SevenWorlds.Shared.Data.Gameplay.Skills;
 using SevenWorlds.Shared.Data.Gameplay.Talent;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace SevenWorlds.GameServer.Gameplay.Character
             // General
             characterData.WorldId = worldId;
             characterData.Level = 1;
+            characterData.Id = Guid.NewGuid().ToString();
 
             // Skills
             characterData.Skills = new List<SkillType>();

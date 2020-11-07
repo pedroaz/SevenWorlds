@@ -42,7 +42,7 @@ public class ScreenChangerService : GameService<ScreenChangerService>
             case ScreenId.CreateCharacter:
                 CharacterCreationScreenRefresherService.Refresh();
                 break;
-            case ScreenId.Quests:
+            case ScreenId.Temp:
                 await QuestScreenRefresherService.Refresh(QuestStatus.Available);
                 break;
         }

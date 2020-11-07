@@ -14,7 +14,7 @@ public enum ScreenId
     SelectCharacter,
     CreateCharacter,
     SpiritShop,
-    Quests,
+    Temp,
     SpiritActionHouse,
     Raids,
     PlayerInfo
