@@ -13,16 +13,14 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
         private readonly IGameStateService gameStateService;
         private readonly ILogService logService;
         private readonly IMonsterDataFactory monsterDataFactory;
-        private readonly IBattleFactory battleFactory;
         private SyncCoordinator syncCoordinator;
         private PlayerActionBundle actionBundle;
 
-        public PlayerActionExecutor(IGameStateService gameStateService, ILogService logService, IMonsterDataFactory monsterDataFactory, IBattleFactory battleFactory)
+        public PlayerActionExecutor(IGameStateService gameStateService, ILogService logService, IMonsterDataFactory monsterDataFactory)
         {
             this.gameStateService = gameStateService;
             this.logService = logService;
             this.monsterDataFactory = monsterDataFactory;
-            this.battleFactory = battleFactory;
         }
 
         public void SetSyncCoordinator(SyncCoordinator syncCoordinator)
@@ -49,18 +47,7 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Executor
 
         public void ExecuteStartBattleActions()
         {
-            foreach (StartBattleActionData startData in actionBundle.StartBattle) {
-                var data = battleFactory.CreateNewBattle(startData);
-
-                // data.Monsters = 
-
-                // data.
-
-
-
-
-                gameStateService.BattleCollection.Add(data);
-            }
+            
         }
     }
 }

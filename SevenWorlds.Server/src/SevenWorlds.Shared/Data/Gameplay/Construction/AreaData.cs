@@ -5,7 +5,8 @@ namespace SevenWorlds.Shared.Data.Gameplay
     public enum AreaType
     {
         City,
-        Field
+        Field,
+        Blocked
     }
 
     [System.Serializable]

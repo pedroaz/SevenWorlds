@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SevenWorlds.GameServer.Database;
 using SevenWorlds.GameServer.Gameplay.Battle.Factories;
+using SevenWorlds.GameServer.Gameplay.GameState;
 using SevenWorlds.GameServer.Gameplay.Talent;
 using SevenWorlds.GameServer.Utils.Config;
 using SevenWorlds.GameServer.Utils.Log;
@@ -23,16 +24,21 @@ namespace SevenWorlds.GameServer.Gameplay.Character
         private readonly IDatabaseService databaseService;
         private readonly IConfigurator configurator;
         private readonly ITalentFactory talentFactory;
+        private readonly ICharacterPlacementService characterPlacementService;
+        private readonly IGameStateService gameStateService;
         private Dictionary<CharacterType, CharacterDescription> storage = new Dictionary<CharacterType, CharacterDescription>();
 
         public CharacterFactory(ILogService logService, ISkillFactory skillFactory,
-            IDatabaseService databaseService, IConfigurator configurator, ITalentFactory talentFactory)
+            IDatabaseService databaseService, IConfigurator configurator, ITalentFactory talentFactory, 
+            ICharacterPlacementService characterPlacementService, IGameStateService gameStateService)
         {
             this.logService = logService;
             this.skillFactory = skillFactory;
             this.databaseService = databaseService;
             this.configurator = configurator;
             this.talentFactory = talentFactory;
+            this.characterPlacementService = characterPlacementService;
+            this.gameStateService = gameStateService;
         }
 
         public async Task<CharacterData> NewCharacter(string playerName, string worldId, CharacterType characterType)
@@ -62,6 +68,11 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 
             // Refresh
             RefreshCharacter(characterData);
+
+            // Add to game
+            gameStateService.AddCharacterToGame(characterData);
+            characterPlacementService.PlaceCharacterOnCity(characterData.Id);
+
 
             // Save to DB
             await databaseService.InsertCharacter(characterData);

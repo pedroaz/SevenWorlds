@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum GamePanelId
 {
-    EscMenu
+    EscMenu,
+    Map
 }
 
 public class GamePanel : MonoBehaviour

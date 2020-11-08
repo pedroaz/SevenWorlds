@@ -26,15 +26,7 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
         public void SimulateBattles()
         {
             foreach (BattleData battleData in gameStateService.BattleCollection.GetAll()) {
-                switch (battleData.Status) {
-                    case BattleStatus.BeforeStart:
-                        break;
-                    case BattleStatus.InProgress:
-                        Simulate(battleData);
-                        break;
-                    case BattleStatus.Finished:
-                        break;
-                }
+                
             }
         }
 

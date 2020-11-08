@@ -49,7 +49,7 @@ public class UniverseScreenRefresherService : GameService<UniverseScreenRefreshe
         for (int i = 0; i < 7; i++) {
             var btn = Object.buttons.Find(x => x.WorldIndex == i);
             var worldData = GameState.Worlds?.Find(x => x.WorldIndex == i);
-            var characterData = GameState.Characters.Find(x => x.WorldId == worldData.Id);
+            var characterData = GameState.PlayerCharacters.Find(x => x.WorldId == worldData.Id);
             btn?.Refresh(worldData, characterData);
             btn.SetInteractable(GameState.HasAnyCharacterType);
         }

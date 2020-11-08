@@ -19,7 +19,7 @@ public class RegistrationService : GameService<RegistrationService>
         }
     }
 
-    public static async Task TryToRegister()
+    public static async Task<RegisterAccountResponse> TryToRegister()
     {
         var username = Object.usernameInputField.GetValue();
         var playerName = Object.playerNameInputField.GetValue();
@@ -45,5 +45,7 @@ public class RegistrationService : GameService<RegistrationService>
 
         LOG.Log(message);
         UIEvents.ChangeGameText(GameTextId.RegisterResponse, message);
+
+        return res;
     }
 }

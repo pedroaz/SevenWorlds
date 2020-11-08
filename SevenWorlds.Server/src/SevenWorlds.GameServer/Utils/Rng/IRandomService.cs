@@ -10,5 +10,6 @@
         /// <returns></returns>
         int GetRandomInt(int min, int max);
         bool FlipCoin();
+        bool OneInX(int x);
     }
 }

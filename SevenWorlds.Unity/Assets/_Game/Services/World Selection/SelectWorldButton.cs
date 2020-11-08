@@ -15,13 +15,13 @@ public class SelectWorldButton : GameButton
     public override async Task OnClick()
     {
         try {
-            GameState.SetCurrentWorldByWorldIndex(WorldIndex);
-            UIEvents.ChangeGameText(GameTextId.WorldName, GameState.CurrentWorld.Name);
+            await GameState.SetCurrentWorldByWorldIndex(WorldIndex);
+            UIEvents.ChangeGameText(GameTextId.WorldName, GameState.CurrentWorld.World.Name);
 
-            var character = GameState.GetCharacterByWorldId(GameState.CurrentWorld.Id);
+            var character = GameState.GetCharacterByWorldId(GameState.CurrentWorld.World.Id);
 
             if (character == null) {
-                LOG.Log($"Player does not have a character on world: {GameState.CurrentWorld.Id}");
+                LOG.Log($"Player does not have a character on world: {GameState.CurrentWorld.World.Id}");
                 await ScreenChangerService.ChangeScreen(ScreenId.CreateCharacter);
             }
             else {

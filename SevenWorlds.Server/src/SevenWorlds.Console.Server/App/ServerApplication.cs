@@ -114,7 +114,6 @@ namespace SevenWorlds.Console.Server.App
             builder.RegisterType<PlayerActionExecutor>().As<IPlayerActionExecutor>().SingleInstance();
             builder.RegisterType<BattleSimulator>().As<IBattleSimulator>().SingleInstance();
             builder.RegisterType<MonsterDataFactory>().As<IMonsterDataFactory>().SingleInstance();
-            builder.RegisterType<BattleFactory>().As<IBattleFactory>().SingleInstance();
             builder.RegisterType<CharacterFactory>().As<ICharacterFactory>().SingleInstance();
             builder.RegisterType<SkillFactory>().As<ISkillFactory>().SingleInstance();
             builder.RegisterType<MonsterAIService>().As<IMonsterAIService>().SingleInstance();

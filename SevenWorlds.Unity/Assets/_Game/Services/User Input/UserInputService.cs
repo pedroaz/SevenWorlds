@@ -12,6 +12,8 @@ public class UserInputService : GameService<UserInputService>
 
     public bool shouldHandleUserInputs = false;
 
+    public static bool ShouldHandleUserInputs { get { return Object.shouldHandleUserInputs; } set { Object.shouldHandleUserInputs = value; } }
+
     private void Update()
     {
         HandleUserInputs();
@@ -24,7 +26,10 @@ public class UserInputService : GameService<UserInputService>
         if (Input.GetKeyDown(KeyCode.Escape)) {
             PanelChangerService.TogglePanel(GamePanelId.EscMenu);
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            PanelChangerService.TogglePanel(GamePanelId.Map);
+        }
     }
 
-    public static bool ShouldHandleUserInputs { get { return Object.shouldHandleUserInputs; } set{ Object.shouldHandleUserInputs = value; } }
 }

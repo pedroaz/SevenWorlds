@@ -99,7 +99,8 @@ public class NetworkService : GameService<NetworkService>
     public static async Task<AreaSyncData> RequestAreaSync(string areaId, string playerId)
     {
         try {
-            return await Object.client.RequestAreaSync(areaId, playerId);
+            var data = await Object.client.RequestAreaSync(areaId, playerId);
+            return data;
         }
         catch (Exception e) {
             LOG.Log(e);
@@ -162,6 +163,11 @@ public class NetworkService : GameService<NetworkService>
     public static async Task RequestCollectQuest(string playerName, QuestId questId)
     {
         await Object.client.RequestCollectQuest(playerName, questId);
+    }
+
+    public static async Task RequestMoveCurrentCharacter(string destinationAreaId)
+    {
+        await Object.client.RequestMovementAction(GameState.CurrentCharacter.Id, GameState.CurrentCharacter.AreaId, destinationAreaId);
     }
 
 }

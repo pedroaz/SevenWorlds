@@ -187,12 +187,18 @@ namespace SevenWorlds.GameServer.Server
                         areaType = AreaType.City;
                     }
                     else {
-                        areaType = AreaType.Field;
+
+                        if (randomService.OneInX(10)){
+                            areaType = AreaType.Blocked;
+                        }
+                        else {
+                            areaType = AreaType.Field;
+                        }
                     }
 
                     areas.Add(
                         areaFactory.CreateNewArea(
-                            $"Area ({x},{y})",
+                            $"Area ({x},{y}) - {areaType}",
                             new Position(x, y),
                             world.Id,
                             areaType
@@ -200,6 +206,8 @@ namespace SevenWorlds.GameServer.Server
                     );
                 }
             }
+
+
 
             var city = areas.FindAll(x => x.Type == AreaType.City);
 

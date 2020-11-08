@@ -25,5 +25,12 @@ namespace SevenWorlds.GameServer.Gameplay.Character
                 gameStateService.MovePlayerToArea(character.Id, city.Id);
             }
         }
+
+        public void PlaceCharacterOnCity(string characterId)
+        {
+            CharacterData character = gameStateService.CharacterCollection.FindById(characterId);
+            AreaData city = gameStateService.AreaCollection.FindCityOfWorld(character.WorldId);
+            gameStateService.MovePlayerToArea(character.Id, city.Id);
+        }
     }
 }

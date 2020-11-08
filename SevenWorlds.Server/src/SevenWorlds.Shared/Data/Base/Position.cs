@@ -17,5 +17,10 @@ namespace SevenWorlds.Shared.Data.Gameplay
             X = x;
             Y = y;
         }
+
+        public bool IsEqual(int x, int y)
+        {
+            return (x == X && y == Y);
+        }
     }
 }

@@ -57,7 +57,6 @@
     <Compile Include="Data\Gameplay\Storage\Monster\MonsterDescription.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\MovementActionData.cs" />
     <Compile Include="Data\Gameplay\PlayerActions\SelectSkillActionData.cs" />
-    <Compile Include="Data\Gameplay\PlayerActions\StartBattleActionData.cs" />
     <Compile Include="Data\Gameplay\Players\PlayerRecord.cs" />
     <Compile Include="Data\Gameplay\Storage\Quests\QuestData.cs" />
     <Compile Include="Data\Gameplay\Storage\Quests\QuestDescription.cs" />

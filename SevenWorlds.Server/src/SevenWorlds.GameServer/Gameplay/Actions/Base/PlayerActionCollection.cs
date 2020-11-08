@@ -31,21 +31,12 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Base
             }
         }
 
-        public void AddToBundle(StartBattleActionData action)
-        {
-            logService.Log($"Adding StartBattle Action to queue");
-            lock (queueLock) {
-                bundle.StartBattle.Add(action);
-            }
-        }
-
         public PlayerActionBundle CopyActionCollection()
         {
             lock (queueLock) {
 
                 PlayerActionBundle bundleCopy = new PlayerActionBundle(){ 
                     Movement = bundle.Movement,
-                    StartBattle = bundle.StartBattle
                 };
 
                 bundle = new PlayerActionBundle();

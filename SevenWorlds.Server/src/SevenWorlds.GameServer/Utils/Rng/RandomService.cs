@@ -24,5 +24,11 @@ namespace SevenWorlds.GameServer.Utils.Rng
         {
             return (random.Next(0, 2) == 0);
         }
+
+        public bool OneInX(int x)
+        {
+            int number = random.Next(0, x);
+            return number == 0;
+        }
     }
 }

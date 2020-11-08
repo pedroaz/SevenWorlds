@@ -16,6 +16,7 @@ public class GameInitializer : MonoBehaviour
         }
 
         ScreenChangerService.HideAll();
+        PanelChangerService.HideAllPanels();
         await ScreenChangerService.ChangeScreen(ScreenId.Login);
         
         UserInputService.ShouldHandleUserInputs = true;

@@ -12,7 +12,7 @@ public class WorldScreenRefresherService : GameService<WorldScreenRefresherServi
 
     public async Task Refresh()
     {
-        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.CurrentWorld.Name);
-        await NetworkService.RequestWorldSyncData(GameState.CurrentWorld.Id);
+        UIEvents.ChangeGameText(GameTextId.WorldName, GameState.CurrentWorld.World.Name);
+        await NetworkService.RequestWorldSyncData(GameState.CurrentWorld.World.Id);
     }
 }

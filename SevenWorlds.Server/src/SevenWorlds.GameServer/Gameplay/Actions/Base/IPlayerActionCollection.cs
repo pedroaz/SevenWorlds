@@ -8,7 +8,6 @@ namespace SevenWorlds.GameServer.Gameplay.Actions.Base
     public interface IPlayerActionCollection
     {
         void AddToBundle(MovementActionData action);
-        void AddToBundle(StartBattleActionData action);
         PlayerActionBundle CopyActionCollection();
     }
 }

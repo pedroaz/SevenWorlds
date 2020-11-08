@@ -187,8 +187,6 @@
     <Compile Include="Gameplay\Battle\AI\MonsterAIService.cs" />
     <Compile Include="Gameplay\Battle\Executor\ISkillSimulator.cs" />
     <Compile Include="Gameplay\Battle\Executor\SkillSimulator.cs" />
-    <Compile Include="Gameplay\Battle\Factories\BattleFactory.cs" />
-    <Compile Include="Gameplay\Battle\Factories\IBattleFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\ISkillFactory.cs" />
     <Compile Include="Gameplay\Battle\Factories\SkillFactory.cs" />
     <Compile Include="Gameplay\Character\CharacterCollection.cs" />

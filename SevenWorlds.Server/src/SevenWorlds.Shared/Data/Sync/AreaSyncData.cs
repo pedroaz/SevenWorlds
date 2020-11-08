@@ -10,5 +10,6 @@ namespace SevenWorlds.Shared.Data.Sync
         public AreaData Area;
         public List<CharacterData> Characters;
         public SectionBundle Sections;
+        public List<string> AreaIds;
     }
 }

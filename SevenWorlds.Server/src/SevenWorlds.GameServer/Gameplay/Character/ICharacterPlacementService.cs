@@ -9,5 +9,6 @@ namespace SevenWorlds.GameServer.Gameplay.Character
     public interface ICharacterPlacementService
     {
         void PlaceAllPlayerCharactersIntoTheGame(string playerName);
+        void PlaceCharacterOnCity(string characterId);
     }
 }

@@ -321,17 +321,6 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
-        public void RequestStartBattleAction(StartBattleActionData data)
-        {
-            try {
-                playerActionQueue.AddToBundle(data);
-
-            }
-            catch (Exception e) {
-                logService.Log(e);
-            }
-        }
-
         public void RequestStartQuest(string playerName, QuestId questId)
         {
             try {

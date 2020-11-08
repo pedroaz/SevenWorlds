@@ -14,10 +14,10 @@ public class CreateCharacterButton : GameButton
 
             var characterType = CharacterCreationScreenRefresherService.GetSelectedCharacterType();
 
-            LOG.Log($"Sending a request to create character: {GameState.PlayerName} on {GameState.CurrentWorld.Id} and type {characterType}");
+            LOG.Log($"Sending a request to create character: {GameState.PlayerName} on {GameState.CurrentWorld.World.Id} and type {characterType}");
             var characterData = await NetworkService.RequestCreateCharacter(
                 GameState.PlayerName,
-                GameState.CurrentWorld.Id,
+                GameState.CurrentWorld.World.Id,
                 characterType
             );
 
