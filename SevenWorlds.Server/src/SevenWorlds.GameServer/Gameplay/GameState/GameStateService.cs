@@ -68,13 +68,20 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
         public void MovePlayerToArea(string characterId, string destinationAreaId)
         {
             logService.Log($"Moving character on the game state: {characterId}");
+
+            // Find Objects
             var character = CharacterCollection.FindById(characterId);
             var player = PlayerCollection.FindByPlayerName(character.PlayerName);
-            hubService.AddPlayerToAreaGroup(player.ConnectionId, character?.AreaId);
             var area = AreaCollection.FindById(destinationAreaId);
+
+            // Manage area groups of hub service
+            hubService.RemovePlayerFromAreaGroup(player.ConnectionId, character?.AreaId);
             hubService.AddPlayerToAreaGroup(player.ConnectionId, destinationAreaId);
+
+            // Change variables
             character.Position = area.Position;
             character.AreaId = area.Id;
+            character.AreaName = area.Name;
             character.movementStatus = CharacterMovementStatus.InPlace;
         }
 

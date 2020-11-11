@@ -63,12 +63,20 @@ public class GameState : GameService<GameState>
 
     private void AreaDataSync(object sender, NetworkArgs<AreaSyncData> e)
     {
-        if (e.Data.Area.Id == currentCharacter.AreaId) {
-            LOG.Log("*** AREA SYNC ***");
-            CurrentArea = e.Data;
-            CurrentCharacter = e.Data.Characters.Find(x => x.Id == CurrentCharacter.Id);
-            UIEvents.ChangeGameText(GameTextId.AreaName, CurrentArea.Area.Name);
+        try {
+            LOG.Log($"AREA SYNC from area {e.Data.Area.Name}");
+            MainThreadHelperService.AddJob(() => {
+                CurrentArea = e.Data;
+                CurrentCharacter = e.Data.Characters.Find(x => x.Id == CurrentCharacter.Id);
+                UIEvents.ChangeGameText(GameTextId.AreaName, CurrentArea.Area.Name);
+            });
         }
+        catch (Exception ex) {
+            LOG.Log(ex);
+            throw;
+        }
+
+        
     }
 
     public static async Task SetCurrentWorldByWorldIndex(int worldIndex)

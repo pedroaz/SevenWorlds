@@ -22,11 +22,13 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void AddPlayerToAreaGroup(string playerConnectionId, string areaId)
         {
+            if (playerConnectionId == null || areaId == null) return;
             hubContext.Groups.Add(playerConnectionId, areaId);
         }
 
         public void RemovePlayerFromAreaGroup(string playerConnectionId, string areaId)
         {
+            if (playerConnectionId == null || areaId == null) return;
             hubContext.Groups.Remove(playerConnectionId, areaId);
         }
 
