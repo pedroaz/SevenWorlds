@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenWorlds.Shared.Data.Gameplay.ActionDatas
 {
+    [System.Serializable]
     public class MovementActionData : PlayerActionData
     {
         public string CharacterId;

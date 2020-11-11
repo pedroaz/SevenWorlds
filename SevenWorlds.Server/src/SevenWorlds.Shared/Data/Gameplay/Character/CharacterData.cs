@@ -19,6 +19,12 @@ namespace SevenWorlds.Shared.Data.Gameplay
         BloodWarrior
     }
 
+    public enum CharacterMovementStatus
+    {
+        InPlace,
+        Moving
+    }
+
     [System.Serializable]
     public class CharacterData
     {
@@ -32,13 +38,15 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public int Level;
         public string WorldId;
 
+        // Status
+        public CharacterMovementStatus movementStatus;
+
         // Position - Needs to be set by [CharacterPlacementService]
         public string AreaId;
         public Position Position;
 
         // Combat
         public CombatData CombatData;
-
         public List<SkillType> Skills;
         public EquipmentBundle Equipments;
         public TalentBundle TalentBundle;

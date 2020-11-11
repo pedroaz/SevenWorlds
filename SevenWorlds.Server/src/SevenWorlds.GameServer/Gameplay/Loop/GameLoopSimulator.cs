@@ -66,27 +66,9 @@ namespace SevenWorlds.GameServer.Gameplay.Loop
             }
         }
 
-        private void SendSyncMessages()
-        {
-            syncCoordinator.AreasToSync = syncCoordinator.AreasToSync.Distinct().ToList();
-            foreach (var area in syncCoordinator.AreasToSync) {
-                var areaSyncData = gameStateService.GetAreaSyncData(area);
-                hubService.BroadcastAreaSync(areaSyncData);
-            }
-
-        }
-
-        private void SimulateUniverse()
-        {
-            // Copy Action Collection (First thing)
-            playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
-            playerActionExecutor.ExecuteMovementActions();
-            playerActionExecutor.ExecuteStartBattleActions();
-            battleSimulator.SimulateBattles();
-        }
-
         private Stopwatch BeforeStart()
         {
+            syncCoordinator.Clear();
             stopwatch = Stopwatch.StartNew();
             return stopwatch;
         }
@@ -99,18 +81,44 @@ namespace SevenWorlds.GameServer.Gameplay.Loop
             Thread.Sleep(1000);
         }
 
+        private void PingAllClients()
+        {
+            hubService.BroadcastPing();
+        }
+
+
         private void SaveGameState()
         {
-            if(tickCount % 60 == 0) {
+            if (tickCount % 60 == 0) {
                 Task.Run(() => {
                     MasterDataModel masterDataModel = gameStateService.GetMasterData();
                 });
             }
         }
 
-        private void PingAllClients()
+        private void SimulateUniverse()
         {
-            hubService.BroadcastPing();
+            // Copy Action Collection (First thing)
+            playerActionExecutor.SetActionCollection(playerActionQueue.CopyActionCollection());
+            playerActionExecutor.ExecuteMovementActions();
+            playerActionExecutor.ExecuteStartBattleActions();
+            battleSimulator.SimulateBattles();
         }
+
+        private void SendSyncMessages()
+        {
+            syncCoordinator.AreasToSync = syncCoordinator.AreasToSync.Distinct().ToList();
+            foreach (var area in syncCoordinator.AreasToSync) {
+                var areaSyncData = gameStateService.GetAreaSyncData(area);
+                hubService.BroadcastAreaSync(areaSyncData);
+            }
+        }
+
+        
+
+       
+
+
+       
     }
 }

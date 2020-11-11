@@ -6,6 +6,7 @@ using SevenWorlds.GameServer.Gameplay.Player;
 using SevenWorlds.GameServer.Gameplay.Section;
 using SevenWorlds.GameServer.Gameplay.Universe;
 using SevenWorlds.GameServer.Gameplay.World;
+using SevenWorlds.GameServer.Hubs;
 using SevenWorlds.GameServer.Utils.Log;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Sync;
@@ -17,6 +18,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
     public class GameStateService : IGameStateService
     {
         private readonly ILogService logService;
+        private readonly IHubService hubService;
 
         public IUniverseCollection UniverseCollection { get; }
         public IWorldCollection WorldCollection { get; }
@@ -34,7 +36,8 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             IPlayerCollection playerCollection,
             ICharacterCollection characterCollection,
             IBattleCollection battleCollection,
-            ILogService logService)
+            ILogService logService,
+            IHubService hubService)
         {
             UniverseCollection = universeCollection;
             WorldCollection = worldCollection;
@@ -43,7 +46,9 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             PlayerCollection = playerCollection;
             CharacterCollection = characterCollection;
             BattleCollection = battleCollection;
+
             this.logService = logService;
+            this.hubService = hubService;
         }
 
 
@@ -60,13 +65,17 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             CharacterCollection.Add(characterData);
         }
 
-        public void MovePlayerToArea(string characterId, string areaId)
+        public void MovePlayerToArea(string characterId, string destinationAreaId)
         {
             logService.Log($"Moving character on the game state: {characterId}");
             var character = CharacterCollection.FindById(characterId);
-            var area = AreaCollection.FindById(areaId);
+            var player = PlayerCollection.FindByPlayerName(character.PlayerName);
+            hubService.AddPlayerToAreaGroup(player.ConnectionId, character?.AreaId);
+            var area = AreaCollection.FindById(destinationAreaId);
+            hubService.AddPlayerToAreaGroup(player.ConnectionId, destinationAreaId);
             character.Position = area.Position;
             character.AreaId = area.Id;
+            character.movementStatus = CharacterMovementStatus.InPlace;
         }
 
         public AreaSyncData GetAreaSyncData(string areaId)

@@ -31,6 +31,7 @@ namespace SevenWorlds.Shared.Network
         public const string Request_PlayerCharacters = "RequestPlayerCharacters";
         public const string Request_PlayerData = "RequestPlayerData";
         public const string Request_PlayerQuests = "RequestPlayerQuests";
+        public const string Request_CharacterSync = "RequestCharacterSync";
         // General
         public const string Request_SendChatMessage = "RequestSendChatMessage";
         // Actions

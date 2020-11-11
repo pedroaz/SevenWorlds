@@ -1,4 +1,5 @@
-﻿using SevenWorlds.Shared.Data.Connection;
+﻿using SevenWorlds.GameServer.Gameplay.Actions.Base;
+using SevenWorlds.Shared.Data.Connection;
 using SevenWorlds.Shared.Data.Gameplay;
 using SevenWorlds.Shared.Data.Gameplay.Quests;
 using SevenWorlds.Shared.Data.Gameplay.Section;
@@ -39,6 +40,7 @@ public class GameState : GameService<GameState>
     public static List<QuestData> QuestList { get => Object.playerData.Quests; set => Object.playerData.Quests = value; }
     public static QuestData CurrentQuest { get => Object.currentQuest; set => Object.currentQuest = value; }
     public static CharacterData CurrentCharacter { get => Object.currentCharacter; set => Object.currentCharacter = value; }
+    public static bool IsCurrentCharacterMoving { get => Object.currentCharacter.movementStatus == CharacterMovementStatus.Moving; }
 
     private void Awake()
     {
@@ -64,7 +66,7 @@ public class GameState : GameService<GameState>
         if (e.Data.Area.Id == currentCharacter.AreaId) {
             LOG.Log("*** AREA SYNC ***");
             CurrentArea = e.Data;
-
+            CurrentCharacter = e.Data.Characters.Find(x => x.Id == CurrentCharacter.Id);
             UIEvents.ChangeGameText(GameTextId.AreaName, CurrentArea.Area.Name);
         }
     }
@@ -126,6 +128,7 @@ public class GameState : GameService<GameState>
 
     public static async Task RefreshCurrentCharacter()
     {
+        CurrentCharacter = await NetworkService.RequestCharacterData(CurrentCharacter.Id);
     }
 
 }

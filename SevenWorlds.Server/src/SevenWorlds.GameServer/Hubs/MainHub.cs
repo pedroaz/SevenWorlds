@@ -281,6 +281,18 @@ namespace SevenWorlds.GameServer.Hubs
             }
         }
 
+        public CharacterData RequestCharacterSync(string characterId)
+        {
+            try {
+                return gameStateService.CharacterCollection.FindById(characterId);
+            }
+            catch (Exception e) {
+
+                logService.Log(e);
+                return null;
+            }
+        }
+
         #endregion
 
         #region General Client Requests
@@ -310,14 +322,16 @@ namespace SevenWorlds.GameServer.Hubs
         #endregion
 
         #region Actions
-        public void RequestMovementAction(MovementActionData data)
+        public bool RequestMovementAction(MovementActionData data)
         {
             try {
                 logService.Log($"Recieved Movement Request {data.CharacterId}");
                 playerActionQueue.AddToBundle(data);
+                return true;
             }
             catch (Exception e) {
                 logService.Log(e);
+                return false;
             }
         }
 

@@ -125,13 +125,18 @@ namespace SevenWorlds.GameClient.Client
         }
 
 
+        public async Task<CharacterData> RequestCharacterData(string characterId)
+        {
+            return await hubProxy.Invoke<CharacterData>(NetworkConstants.Request_CharacterSync, characterId);
+        }
+
         #endregion
 
         #region Actions
-        public async Task RequestMovementAction(string characterId, string fromAreaId, string toAreaId)
+        public async Task<bool> RequestMovementAction(string characterId, string fromAreaId, string toAreaId)
         {
             var data = dataFactory.CreateMovementActionData(characterId, fromAreaId, toAreaId);
-            await hubProxy.Invoke(NetworkConstants.Request_MovementAction, data);
+            return await hubProxy.Invoke<bool>(NetworkConstants.Request_MovementAction, data);
         }
 
         //public async Task RequestMovementAction(string characterId, WorldPosition areaPosition)

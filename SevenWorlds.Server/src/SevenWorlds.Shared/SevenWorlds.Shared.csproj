@@ -51,6 +51,7 @@
     <Compile Include="Data\Connection\RegisterAccountData.cs" />
     <Compile Include="Data\Connection\RegisterAccountResponse.cs" />
     <Compile Include="Data\Gameplay\Construction\BaseConstructionData.cs" />
+    <Compile Include="Data\Gameplay\PlayerActions\PlayerActionBundle.cs" />
     <Compile Include="Data\Gameplay\Storage\Equipment\EquipmentBundle.cs" />
     <Compile Include="Data\Gameplay\Storage\Equipment\EquipmentDescription.cs" />
     <Compile Include="Data\Gameplay\Storage\Equipment\WeaponEquipmentData.cs" />

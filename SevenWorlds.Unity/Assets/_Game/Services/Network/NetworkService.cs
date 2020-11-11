@@ -165,9 +165,14 @@ public class NetworkService : GameService<NetworkService>
         await Object.client.RequestCollectQuest(playerName, questId);
     }
 
-    public static async Task RequestMoveCurrentCharacter(string destinationAreaId)
+    public static async Task<bool> RequestMoveCurrentCharacter(string destinationAreaId)
     {
-        await Object.client.RequestMovementAction(GameState.CurrentCharacter.Id, GameState.CurrentCharacter.AreaId, destinationAreaId);
+        return await Object.client.RequestMovementAction(GameState.CurrentCharacter.Id, GameState.CurrentCharacter.AreaId, destinationAreaId);
+    }
+
+    public static async Task<CharacterData> RequestCharacterData(string characterId)
+    {
+        return await Object.client.RequestCharacterData(characterId);
     }
 
 }

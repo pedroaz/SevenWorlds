@@ -7,7 +7,14 @@ public class MoveToAreaButton : GameButton
 {
     public override async Task OnClick()
     {
-        await NetworkService.RequestMoveCurrentCharacter(MapService.SelectedArea.Id);
-        await GameState.RefreshCurrentArea();
+        var res = await NetworkService.RequestMoveCurrentCharacter(MapService.SelectedArea.Id);
+        if (res) {
+            await GameState.RefreshCurrentCharacter();
+            while (GameState.IsCurrentCharacterMoving) {
+                await Task.Delay(1000);
+            }
+        }
+        
+        await PanelChangerService.HidePanel(GamePanelId.Map);
     }
 }

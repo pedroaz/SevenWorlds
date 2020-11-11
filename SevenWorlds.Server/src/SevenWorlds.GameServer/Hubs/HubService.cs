@@ -41,7 +41,7 @@ namespace SevenWorlds.GameServer.Hubs
 
         public void BroadcastAreaSync(AreaSyncData data)
         {
-            logService.Log($"Broadcasting Area sync to clints on group: {data.Area.Id}");
+            logService.Log($"Broadcasting Area sync to clients on group: {data.Area.Id}");
             hubContext.Clients.Group(data.Area.Id).OnAreaSync(data);
         }
 
