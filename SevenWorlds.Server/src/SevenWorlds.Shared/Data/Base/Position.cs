@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
@@ -21,6 +22,11 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public bool IsEqual(int x, int y)
         {
             return (x == X && y == Y);
+        }
+
+        public Vector2 ToVector2()
+        {
+            return new Vector2(X, Y);
         }
     }
 }

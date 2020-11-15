@@ -8,6 +8,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 {
     public enum CharacterType
     {
+        None,
         Warrior,
         ElementalWarrior,
         Merchant,
@@ -35,7 +36,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
         public string Id;
 
         // General
-        public int Level;
         public string WorldId;
 
         // Status
@@ -44,11 +44,11 @@ namespace SevenWorlds.Shared.Data.Gameplay
         // Position - Needs to be set by [CharacterPlacementService]
         public string AreaId;
         public string AreaName;
-        public Position Position;
+        public Position CharacterAreaPosition;
 
         // Combat
         public CombatData CombatData;
-        public List<SkillType> Skills;
+        public List<SkillId> Skills;
         public EquipmentBundle Equipments;
         public TalentBundle TalentBundle;
 
@@ -65,7 +65,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 
         public int GetAvailableTalentPoints()
         {
-            return Level - TalentBundle.GetAmountOfSpentTalentPoints();
+            return CombatData.Level - TalentBundle.GetAmountOfSpentTalentPoints();
         }
     }
 }

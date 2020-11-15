@@ -12,7 +12,6 @@ namespace SevenWorlds.Shared.Data.Gameplay.Equipment
         public EquipmentData OffHand;
         public EquipmentData Head;
         public EquipmentData Feet;
-        public EquipmentData Aura;
         public EquipmentData Pet;
     }
 }

@@ -5,7 +5,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Storage.Skills
 {
     public class SkillDescription
     {
-        public SkillType Type;
+        public SkillId SkillId;
         public SkillTargetType TargetType;
         public string Description;
         public string DamageDescription;

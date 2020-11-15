@@ -68,7 +68,7 @@ public class GameState : GameService<GameState>
             MainThreadHelperService.AddJob(() => {
                 CurrentArea = e.Data;
                 CurrentCharacter = e.Data.Characters.Find(x => x.Id == CurrentCharacter.Id);
-                UIEvents.ChangeGameText(GameTextId.AreaName, CurrentArea.Area.Name);
+                BattlegroundService.SyncArea(e.Data);
             });
         }
         catch (Exception ex) {

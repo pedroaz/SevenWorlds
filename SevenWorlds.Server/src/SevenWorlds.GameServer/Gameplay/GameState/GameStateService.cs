@@ -79,7 +79,7 @@ namespace SevenWorlds.GameServer.Gameplay.GameState
             hubService.AddPlayerToAreaGroup(player.ConnectionId, destinationAreaId);
 
             // Change variables
-            character.Position = area.Position;
+            character.CharacterAreaPosition = area.Position;
             character.AreaId = area.Id;
             character.AreaName = area.Name;
             character.movementStatus = CharacterMovementStatus.InPlace;

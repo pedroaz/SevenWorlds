@@ -4,27 +4,43 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay
 {
+    [System.Serializable]
     public class CombatData
     {
+
+        // General
+        public int Level;
+        public string UnitName;
+        public Position BattlegroundPosition;
+
+        // Hp
         public int MaxHp;
         public int CurrentHp;
 
+        // Ids
         public string UnitId;
         public List<string> TargetIds;
 
+        // Skills
+        public List<SkillData> Skills;
         public SkillData SelectedSkill;
+        public int SkillCooldown;
+
+        // Stats
         public int Attack;
         public int Defense;
         public int Speed;
         public bool IsAlive;
-
         public int Fire;
         public int Water;
         public int Earth;
         public int Air;
 
-        // List of skills
-        public List<SkillData> Skills;
+        // Tick
+        public int HealOfTick;
+        public int DamageOfTick;
+        public List<SkillId> SkillsOfTick;
+
 
         public CombatData(string unitId, List<SkillData> skills)
         {
@@ -42,7 +58,6 @@ namespace SevenWorlds.Shared.Data.Gameplay
             AddEquipmentData(bundle.Feet);
             AddEquipmentData(bundle.OffHand);
             AddEquipmentData(bundle.Pet);
-            AddEquipmentData(bundle.Aura);
         }
 
         private void AddWeapon(WeaponEquipmentData weaponData)

@@ -9,7 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 753659383271591872, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
       propertyPath: m_Name
-      value: Unit Body
+      value: Warrior Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458533666745991483, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 97fe7b2e64790624eb0e2f3420627275, type: 3}
+    - target: {fileID: 3458533666745991483, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5275432341133931057, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,6 +62,10 @@ PrefabInstance:
     - target: {fileID: 5275432341133931057, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789570989484349245, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}
+      propertyPath: characterType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74403ee1559e18a4d9d9766937a04c17, type: 3}

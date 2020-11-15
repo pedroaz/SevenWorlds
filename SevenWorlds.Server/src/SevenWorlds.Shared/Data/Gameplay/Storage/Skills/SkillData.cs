@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SevenWorlds.Shared.Data.Gameplay.Skills
 {
-    public enum SkillType
+    public enum SkillId
     {
         WeaponAttack,
         GoldStrike,
@@ -21,7 +21,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
     public class SkillData
     {
         // Description
-        public SkillType Type;
+        public SkillId SkillId;
         public SkillTargetType TargetType;
         public string Description;
         public string DamageDescription;
@@ -32,7 +32,7 @@ namespace SevenWorlds.Shared.Data.Gameplay.Skills
 
         public SkillData(SkillDescription description)
         {
-            Type = description.Type;
+            SkillId = description.SkillId;
             TargetType = description.TargetType;
             Description = description.Description;
             DamageDescription = description.DamageDescription;

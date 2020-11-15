@@ -53,7 +53,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6933683400880436336, guid: 1bfb14e32954048429294c2983d7d824, type: 3}
       propertyPath: m_Name
-      value: Unit Weapon
+      value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062016505583356188, guid: 1bfb14e32954048429294c2983d7d824, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 858faa33b5755b14f85f335b98f2fd5f, type: 3}
+    - target: {fileID: 7062016505583356188, guid: 1bfb14e32954048429294c2983d7d824, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543706003960049683, guid: 1bfb14e32954048429294c2983d7d824, type: 3}
+      propertyPath: equipmentId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bfb14e32954048429294c2983d7d824, type: 3}

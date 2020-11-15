@@ -79,6 +79,8 @@
     <Compile Include="Assets\Plugins\FMOD\src\Editor\BankRefDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -294,6 +296,12 @@
     </Reference>
     <Reference Include="SevenWorlds.Shared">
       <HintPath>Assets\ExternalDLLs\SevenWorlds.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll</HintPath>

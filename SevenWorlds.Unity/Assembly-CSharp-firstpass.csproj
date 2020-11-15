@@ -78,6 +78,13 @@
     <Compile Include="Assets\Plugins\FMOD\src\Runtime\RuntimeManager.cs" />
     <Compile Include="Assets\Plugins\FMOD\src\Runtime\StudioBankLoader.cs" />
     <Compile Include="Assets\Plugins\FMOD\src\Runtime\wrapper\fmod_android.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Plugins\FMOD\lib\uwp\arm\fmod.dll" />
@@ -87,17 +94,20 @@
      <None Include="Assets\Plugins\FMOD\lib\win\x86\resonanceaudio.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x86\fmodstudioL.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x86\fmodL.dll" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\arm\fmodstudioL.dll" />
      <None Include="Assets\Plugins\FMOD\lib\win\x86\fmodstudio.dll" />
      <None Include="Assets\Plugins\FMOD\lib\win\x86_64\fmodstudiol.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\arm\fmodstudio.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x64\fmod.dll" />
      <None Include="Assets\Plugins\FMOD\lib\win\x86_64\fmodstudio.dll" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.dll" />
      <None Include="Assets\Plugins\FMOD\LICENSE.TXT" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x64\fmodstudio.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x86\fmod.dll" />
      <None Include="Assets\Plugins\FMOD\lib\win\x86_64\resonanceaudio.dll" />
      <None Include="Assets\Plugins\FMOD\lib\uwp\x86\fmodstudio.dll" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Plugins\FMOD\lib\win\x86\fmodstudiol.dll" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -299,6 +309,9 @@
     </Reference>
     <Reference Include="SevenWorlds.Shared">
       <HintPath>Assets\ExternalDLLs\SevenWorlds.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

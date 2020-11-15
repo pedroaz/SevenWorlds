@@ -7,6 +7,6 @@ namespace SevenWorlds.Shared.Data.Gameplay.Monster
     {
         public MonsterType MonsterType;
         public int MaxHp;
-        public List<SkillType> Skills;
+        public List<SkillId> Skills;
     }
 }

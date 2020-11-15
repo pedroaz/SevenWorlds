@@ -46,7 +46,7 @@ public class SelectWorldButton : GameButton
             characterText.SetText("No Character");
         }
         else {
-            characterText.SetText($"Character Lvl: {characterData.Level}");
+            characterText.SetText($"Character Lvl: {characterData.CombatData.Level}");
         }
     }
 }

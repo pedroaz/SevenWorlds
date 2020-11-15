@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91abc1878795bc54994c4fd950b8c746, type: 3}
-  m_Name: EquipmentPrefabStorage
+  m_Script: {fileID: 11500000, guid: 8844d89d3005baa4b81d8d6e024d1974, type: 3}
+  m_Name: SpriteStorage
   m_EditorClassIdentifier: 
-  Equipments:
-  - {fileID: 11400000, guid: 99f18a90ea188f440801d371e67c5320, type: 2}

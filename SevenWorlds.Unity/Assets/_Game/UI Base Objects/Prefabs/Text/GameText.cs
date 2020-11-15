@@ -42,6 +42,11 @@ public class GameText : SetupMonoBehaviour
         }
     }
 
+    public void SetText(object obj)
+    {
+        SetText(obj.ToString());
+    }
+
     public void SetText(string t)
     {
         if (textMesh == null) {

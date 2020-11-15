@@ -4,6 +4,7 @@ namespace SevenWorlds.Shared.Data.Gameplay
 {
     public enum EquipmentId
     {
+        None,
         Sword
     }
 

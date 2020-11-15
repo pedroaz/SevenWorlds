@@ -26,7 +26,7 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
             }
 
             SkillData skillData = caster.SelectedSkill;
-            SkillType skillType = skillData.Type;
+            SkillId skillType = skillData.SkillId;
             
             logService.Log($"Casting skill type: {skillType}", type: LogType.Battle);
 
@@ -42,10 +42,10 @@ namespace SevenWorlds.GameServer.Gameplay.Battle.Executor
 
             // Apply the skill
             switch (skillType) {
-                case SkillType.WeaponAttack:
+                case SkillId.WeaponAttack:
                     WeaponAttack(caster, targets);
                     break;
-                case SkillType.GoldStrike:
+                case SkillId.GoldStrike:
                     GoldStrike(caster, targets);
                     break;
                 default:

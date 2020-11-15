@@ -23,7 +23,7 @@ namespace SevenWorlds.GameServer.Startups
         {
             BsonSerializer.RegisterSerializer(new EnumSerializer<WorldResourceType>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<SkillTargetType>(BsonType.String));
-            BsonSerializer.RegisterSerializer(new EnumSerializer<SkillType>(BsonType.String));
+            BsonSerializer.RegisterSerializer(new EnumSerializer<SkillId>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<SectionType>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<PlayerActionType>(BsonType.String));
             BsonSerializer.RegisterSerializer(new EnumSerializer<MonsterType>(BsonType.String));

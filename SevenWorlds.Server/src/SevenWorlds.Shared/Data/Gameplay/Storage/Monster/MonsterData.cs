@@ -15,13 +15,16 @@ namespace SevenWorlds.Shared.Data.Gameplay
     {
         public string Id;
         public MonsterType MonsterType;
-        public CombatData CombatData { get; set; }
+        public CombatData CombatData;
 
         public MonsterData(MonsterDescription description, List<SkillData> skills, int level)
         {
             Id = Guid.NewGuid().ToString();
-            CombatData = new CombatData(Id, skills);
-            CombatData.MaxHp = description.MaxHp;
+            CombatData = new CombatData(Id, skills) {
+                MaxHp = description.MaxHp,
+                Level = level,
+                UnitName = MonsterType.ToString()
+            };
         }
     }
 }

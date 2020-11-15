@@ -51,11 +51,12 @@ namespace SevenWorlds.GameServer.Gameplay.Character
 
             // General
             characterData.WorldId = worldId;
-            characterData.Level = 1;
+            characterData.CombatData.Level = 1;
+            characterData.CombatData.UnitName = playerName;
             characterData.Id = Guid.NewGuid().ToString();
 
             // Skills
-            characterData.Skills = new List<SkillType>();
+            characterData.Skills = new List<SkillId>();
 
             // Resources
             characterData.Resources = new WorldResourcesData();
